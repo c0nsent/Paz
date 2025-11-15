@@ -33,26 +33,25 @@ namespace paz::backend
 		[[nodiscard]] quint16 getCurrentCyclePomodoroCount() const;
 		[[nodiscard]] State getState() const;
 
-		void setWorkTime(quint16 workTime);
-		void setShortBreakTime(quint16 shortBreakTime);
-		void setLongBreakTime(quint16 longBreakTime);
-		void setPomodorosInCycle(quint16 pomodorosInCycle);
-		void setCurrentTime(quint16 currentTime);
-		void setCurrentCyclePomodoroCount(quint16 currentCyclePomodoroCount);
-		void setState(State state);
+		PomodoroTimerBackend & setWorkTime(quint16 workTime);
+		PomodoroTimerBackend &setShortBreakTime(quint16 shortBreakTime);
+		PomodoroTimerBackend &setLongBreakTime(quint16 longBreakTime);
+		PomodoroTimerBackend &setPomodorosInCycle(quint16 pomodorosInCycle);
+		PomodoroTimerBackend &setCurrentTime(quint16 currentTime);
+		PomodoroTimerBackend &setCurrentCyclePomodoroCount(quint16 currentCyclePomodoroCount);
+		PomodoroTimerBackend &setState(State state);
 
 	public slots:
 
-		void start();
-		void stop();
-		void resume();
-		void pause();
-		void reset();
+		PomodoroTimerBackend &start();
+		PomodoroTimerBackend &stop();
+		PomodoroTimerBackend &reset();
+		PomodoroTimerBackend &skip();
 
 	signals:
 
-		void timerTicked();
-		void timerFinished();
+		PomodoroTimerBackend &timerTicked();
+		PomodoroTimerBackend &timerFinished();
 
 	private:
 

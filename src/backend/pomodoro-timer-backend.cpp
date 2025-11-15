@@ -27,80 +27,83 @@ namespace paz::backend
 
 	quint16 PomodoroTimerBackend::getLongBreakTime() const { return m_longBreakTime; }
 
-
 	quint16 PomodoroTimerBackend::getPomodorosInCycle() const { return m_pomodorosInCycle; }
 
+	quint16 PomodoroTimerBackend::getCurrentTime() const { return m_currentTime; }
 
 	quint16 PomodoroTimerBackend::getCurrentCyclePomodoroCount() const { return m_currentCyclePomodoroCount; }
 
+	PomodoroTimerBackend::State PomodoroTimerBackend::getState() const { return m_state; }
 
-	void PomodoroTimerBackend::setPomodorosInCycle( const quint16 pomodorosInCycle )
+
+	PomodoroTimerBackend &PomodoroTimerBackend::setWorkTime( const quint16 workTime )
+	{
+		this->m_workTime = workTime;
+		return *this;
+	}
+
+	PomodoroTimerBackend &PomodoroTimerBackend::setShortBreakTime( const quint16 shortBreakTime )
+	{
+		this->m_shortBreakTime = shortBreakTime;
+	}
+
+	PomodoroTimerBackend &PomodoroTimerBackend::setLongBreakTime( const quint16 longBreakTime )
+	{
+		this->m_longBreakTime = longBreakTime;
+	}
+
+	PomodoroTimerBackend &PomodoroTimerBackend::setPomodorosInCycle( const quint16 pomodorosInCycle )
 	{
 		this->m_pomodorosInCycle = pomodorosInCycle;
 	}
 
+	PomodoroTimerBackend &PomodoroTimerBackend::setCurrentTime( const quint16 currentTime )
+	{
+		this->m_currentTime = currentTime;
+	}
 
-	void PomodoroTimerBackend::setCurrentCyclePomodoroCount(const quint16 currentCyclePomodoroCount )
+	PomodoroTimerBackend &PomodoroTimerBackend::setCurrentCyclePomodoroCount(const quint16 currentCyclePomodoroCount )
 	{
 		this->m_currentCyclePomodoroCount = currentCyclePomodoroCount;
 	}
 
 
-	PomodoroTimerBackend::State PomodoroTimerBackend::getState() const { return m_state; }
-
-
-	quint16 PomodoroTimerBackend::getCurrentTime() const
+	PomodoroTimerBackend &PomodoroTimerBackend::setState( const State state )
 	{
+		this->m_state = state;
 	}
 
 
-	void PomodoroTimerBackend::setWorkTime( quint16 workTime )
+	PomodoroTimerBackend &PomodoroTimerBackend::start()
 	{
+		m_timer.start();
 	}
 
 
-	void PomodoroTimerBackend::setShortBreakTime( quint16 shortBreakTime )
+	PomodoroTimerBackend &PomodoroTimerBackend::resume()
 	{
+		this->start();
 	}
 
 
-	void PomodoroTimerBackend::setLongBreakTime( quint16 longBreakTime )
+	PomodoroTimerBackend &PomodoroTimerBackend::stop()
 	{
+		this->m_timer.stop();
 	}
 
 
-	void PomodoroTimerBackend::setState( State state )
+	PomodoroTimerBackend &PomodoroTimerBackend::reset()
 	{
+		this->m_currentTime = 0;
+		this->m_currentCyclePomodoroCount = 0;
+		this->m_state = State::paused;
+		this->m_timer.stop();
 	}
 
 
-	void PomodoroTimerBackend::setCurrentTime( quint16 currentTime )
+	PomodoroTimerBackend &PomodoroTimerBackend::skip()
 	{
-	}
 
-
-	void PomodoroTimerBackend::start()
-	{
-	}
-
-
-	void PomodoroTimerBackend::stop()
-	{
-	}
-
-
-	void PomodoroTimerBackend::resume()
-	{
-	}
-
-
-	void PomodoroTimerBackend::pause()
-	{
-	}
-
-
-	void PomodoroTimerBackend::reset()
-	{
 	}
 
 
