@@ -21,6 +21,8 @@ qt_add_executable( Paz
 									 src/main.cxx
 									 src/backend/pomodoro-timer-backend.hpp
                    src/backend/pomodoro-timer-backend.cpp
+                   src/backend/timer-phase.hpp
+                   src/backend/timer-phase.cpp
 )
 
 target_link_libraries( ${PROJECT_NAME} PRIVATE

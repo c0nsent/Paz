@@ -1,5 +1,5 @@
 #include <QtWidgets>
-#include "implementation/PomodoroTimer.hpp"
+#include "backend/pomodoro-timer-backend.hpp"
 
 int main(int argc, char *argv[])
 {

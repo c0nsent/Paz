@@ -21,7 +21,7 @@ namespace paz::backend
 
 	public:
 
-		enum class State : quint8 { work, shortBreak, longBreak, paused };
+		enum class Phase : quint8 { work, shortBreak, longBreak, paused };
 
 		PomodoroTimerBackend(quint16 workTime, quint16 shortBreakTime, quint16 longBreakTime, quint16 pomodorosInCycle, QObject* parent = nullptr);
 
@@ -31,7 +31,7 @@ namespace paz::backend
 		[[nodiscard]] quint16 getPomodorosInCycle() const;
 		[[nodiscard]] quint16 getCurrentTime() const;
 		[[nodiscard]] quint16 getCurrentCyclePomodoroCount() const;
-		[[nodiscard]] State getState() const;
+		[[nodiscard]] Phase getState() const;
 
 		PomodoroTimerBackend & setWorkTime(quint16 workTime);
 		PomodoroTimerBackend &setShortBreakTime(quint16 shortBreakTime);
@@ -39,19 +39,24 @@ namespace paz::backend
 		PomodoroTimerBackend &setPomodorosInCycle(quint16 pomodorosInCycle);
 		PomodoroTimerBackend &setCurrentTime(quint16 currentTime);
 		PomodoroTimerBackend &setCurrentCyclePomodoroCount(quint16 currentCyclePomodoroCount);
-		PomodoroTimerBackend &setState(State state);
+		PomodoroTimerBackend &setState(Phase state);
 
 	public slots:
 
-		PomodoroTimerBackend &start();
-		PomodoroTimerBackend &stop();
-		PomodoroTimerBackend &reset();
-		PomodoroTimerBackend &skip();
+		void start();
+		void stop();
+		void reset();
+		void skipCurrentPhase();
+
+	private slots:
+
+		void handleTimerTick();
+		void handlePhaseChange();
 
 	signals:
 
-		PomodoroTimerBackend &timerTicked();
-		PomodoroTimerBackend &timerFinished();
+		void timerTicked();
+		void phaseChanged();
 
 	private:
 
@@ -64,6 +69,6 @@ namespace paz::backend
 
 		quint16 m_currentTime{0};
 		quint16 m_currentCyclePomodoroCount{0};
-		State m_state{State::paused};
+		Phase m_phase{Phase::paused};
 	};
 }

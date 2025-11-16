@@ -15,7 +15,8 @@ namespace paz::backend
 	{
 		m_timer.setInterval(1000);
 
-		QObject::connect(&m_timer, &QTimer::timeout, this, &PomodoroTimerBackend::timerTicked);
+		QObject::connect(&m_timer, &QTimer::timeout, this, &PomodoroTimerBackend::handleTimerTick);
+
 	}
 
 
@@ -33,7 +34,7 @@ namespace paz::backend
 
 	quint16 PomodoroTimerBackend::getCurrentCyclePomodoroCount() const { return m_currentCyclePomodoroCount; }
 
-	PomodoroTimerBackend::State PomodoroTimerBackend::getState() const { return m_state; }
+	PomodoroTimerBackend::Phase PomodoroTimerBackend::getState() const { return m_phase; }
 
 
 	PomodoroTimerBackend &PomodoroTimerBackend::setWorkTime( const quint16 workTime )
@@ -45,101 +46,118 @@ namespace paz::backend
 	PomodoroTimerBackend &PomodoroTimerBackend::setShortBreakTime( const quint16 shortBreakTime )
 	{
 		this->m_shortBreakTime = shortBreakTime;
+		return *this;
 	}
 
 	PomodoroTimerBackend &PomodoroTimerBackend::setLongBreakTime( const quint16 longBreakTime )
 	{
 		this->m_longBreakTime = longBreakTime;
+		return *this;
 	}
 
 	PomodoroTimerBackend &PomodoroTimerBackend::setPomodorosInCycle( const quint16 pomodorosInCycle )
 	{
 		this->m_pomodorosInCycle = pomodorosInCycle;
+		return *this;
 	}
 
 	PomodoroTimerBackend &PomodoroTimerBackend::setCurrentTime( const quint16 currentTime )
 	{
 		this->m_currentTime = currentTime;
+		return *this;
 	}
 
 	PomodoroTimerBackend &PomodoroTimerBackend::setCurrentCyclePomodoroCount(const quint16 currentCyclePomodoroCount )
 	{
 		this->m_currentCyclePomodoroCount = currentCyclePomodoroCount;
+		return *this;
 	}
 
 
-	PomodoroTimerBackend &PomodoroTimerBackend::setState( const State state )
+	PomodoroTimerBackend &PomodoroTimerBackend::setState( const Phase state )
 	{
-		this->m_state = state;
+		this->m_phase = state;
+		return *this;
 	}
 
 
-	PomodoroTimerBackend &PomodoroTimerBackend::start()
+	void PomodoroTimerBackend::start()
 	{
 		m_timer.start();
 	}
 
 
-	PomodoroTimerBackend &PomodoroTimerBackend::resume()
-	{
-		this->start();
-	}
-
-
-	PomodoroTimerBackend &PomodoroTimerBackend::stop()
+	void PomodoroTimerBackend::stop()
 	{
 		this->m_timer.stop();
 	}
 
 
-	PomodoroTimerBackend &PomodoroTimerBackend::reset()
+	void PomodoroTimerBackend::reset()
 	{
 		this->m_currentTime = 0;
 		this->m_currentCyclePomodoroCount = 0;
-		this->m_state = State::paused;
+		this->m_phase = Phase::paused;
 		this->m_timer.stop();
 	}
 
 
-	PomodoroTimerBackend &PomodoroTimerBackend::skip()
+	void PomodoroTimerBackend::skipCurrentPhase()
 	{
 
+	}
+
+
+	void PomodoroTimerBackend::handleTimerTick()
+	{
+		m_currentTime++;
+
+		if (m_phase == Phase::work and m_currentTime >= m_workTime)
+
+
+		emit timerTicked();
+	}
+
+
+	void PomodoroTimerBackend::handlePhaseChange()
+	{
 	}
 
 
 	void PomodoroTimerBackend::timerTicked()
 	{
-		if (m_state == State::paused) return;
+		if (m_phase == Phase::paused)
+			return;
 
 		m_currentTime++;
 
-		if (m_state == State::work and m_currentTime >= m_workTime)
+		if (m_phase == Phase::work and m_currentTime >= m_workTime)
 		{
 			if (m_currentCyclePomodoroCount < m_pomodorosInCycle)
 			{
 				m_currentCyclePomodoroCount++;
-				m_state = State::shortBreak;
+				m_phase = Phase::shortBreak;
 			}
 			else
 			{
 				m_currentCyclePomodoroCount = 0;
-				m_state = State::longBreak;
+				m_phase = Phase::longBreak;
 			}
 
-			emit timerFinished();
+			emit phaseChanged();
 		}
 		else if (m_currentTime >= m_shortBreakTime or m_currentTime >= m_longBreakTime)
 		{
-			m_state = State::work;
+			m_phase = Phase::work;
 
-			emit timerFinished();
+			emit phaseChanged();
 		}
+
 	}
 
 
-	void PomodoroTimerBackend::timerFinished()
+	void PomodoroTimerBackend::phaseChanged()
 	{
-		m_currentTime = 0;
 	}
 
 }
