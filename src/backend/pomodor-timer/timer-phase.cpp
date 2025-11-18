@@ -8,9 +8,6 @@
 
 namespace paz::backend
 {
-	TimerPhase::TimerPhase( QObject *parent ) : QObject{parent}, m_phase{Phase::paused} {}
-
-
 	TimerPhase::TimerPhase( const Phase phase, QObject *parent ) : QObject{parent}, m_phase{phase} {}
 
 
@@ -25,5 +22,6 @@ namespace paz::backend
 		m_phase = phase;
 		emit phaseChanged();
 	}
+
 }
 

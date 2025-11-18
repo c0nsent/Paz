@@ -10,15 +10,14 @@
 
 namespace paz::backend
 {
-	class TimerPhase : public QObject
+	class TimerPhase final : public QObject
 	{
 		Q_OBJECT
 
 	public:
 
 		enum class Phase : quint8 { work, shortBreak, longBreak, paused };
-
-		explicit TimerPhase(QObject *parent = nullptr);
+		Q_ENUM(Phase)
 
 		explicit TimerPhase(Phase phase, QObject *parent = nullptr);
 

@@ -19,10 +19,11 @@ qt_standard_project_setup()
 
 qt_add_executable( Paz
 									 src/main.cxx
-									 src/backend/pomodoro-timer-backend.hpp
-                   src/backend/pomodoro-timer-backend.cpp
-                   src/backend/timer-phase.hpp
-                   src/backend/timer-phase.cpp
+									 src/backend/pomodor-timer/timer-engine.hpp
+									 src/backend/pomodor-timer/timer-engine.cpp
+									 src/backend/pomodor-timer/timer-phase.hpp
+									 src/backend/pomodor-timer/timer-phase.cpp
+                   src/core/enums.cpp
 )
 
 target_link_libraries( ${PROJECT_NAME} PRIVATE
