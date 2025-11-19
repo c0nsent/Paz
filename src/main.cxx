@@ -1,6 +1,6 @@
 #include <QtWidgets>
 //#include "backend/pomodoro-timer-backend.hpp"
-#include "backend/pomodor-timer/timer-phase.hpp"
+#include "backend/pomodoro-timer/timer-phase.hpp"
 #include <QDebug>
 
 int main(int argc, char *argv[])

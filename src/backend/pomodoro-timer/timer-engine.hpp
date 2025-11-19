@@ -12,7 +12,7 @@
 #include <QTimer>
 
 
-namespace paz::backend
+namespace paz::backend::pomodoro
 {
 	class TimerEngine final : public QObject
 	{
