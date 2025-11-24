@@ -1,18 +1,32 @@
 #include <QtWidgets>
-//#include "backend/pomodoro-timer-backend.hpp"
+
 #include "backend/pomodoro-timer/timer-phase.hpp"
+#include "backend/pomodoro-timer/timer-engine.hpp"
 #include <QDebug>
+
+void test(paz::backend::pt::TimerEngine &engine)
+{
+	qInfo() << "timer finished";
+
+	//engine.;
+}
 
 int main(int argc, char *argv[])
 {
-	/*QApplication app{argc, argv};
-	QWidget window{};
-	window.resize(800, 600);
-	window.show();
-	window.setWindowTitle( "Paz" );
-	return QApplication::exec();*/
-	const paz::backend::TimerPhase *const phase = new paz::backend::TimerPhase(paz::backend::TimerPhase::Phase::work);
+	QApplication app{argc, argv};
+	using namespace paz::backend::pt;
+	TimerEngine engine;
 
+	auto startNewTimer = [&engine]()
+	{
+		qInfo() << "Timer finished";
+		engine.start(3);
 
-	qInfo() << phase->getPhase();
+		qInfo() << "Timer started";
+	};
+	engine.start(3);
+	QObject::connect( &engine, &TimerEngine::timerTicked, []() { qInfo() <<  "tick";});
+	QObject::connect( &engine, &TimerEngine::timerFinished, startNewTimer);
+
+	return app.exec();
 }

@@ -1,6 +1,6 @@
 #include "timer-engine.hpp"
 
-namespace paz::backend
+namespace paz::backend::pt
 {
 	TimerEngine::TimerEngine( QObject *parent ) : QObject {parent}
 	{
@@ -9,29 +9,29 @@ namespace paz::backend
 	}
 
 
-	quint16 TimerEngine::getDuration() const { return m_duration; }
+	quint16 TimerEngine::getTotalDuration() const { return m_totalDuration; }
 
 
-	quint16 TimerEngine::getCurrentTime() const { return m_currentTime; }
+	//quint16 TimerEngine::getCurrentTime() const { return m_currentTime; }
 
 
-	TimerEngine &TimerEngine::setDuration( const quint16 duration )
+	TimerEngine &TimerEngine::setDuration( const quint16 seconds )
 	{
-		m_duration = duration;
+		m_totalDuration = seconds;
 		return *this;
 	}
 
 
-	TimerEngine &TimerEngine::setCurrentTime( const quint16 currentTime )
+	/*TimerEngine &TimerEngine::setCurrentTime( const quint16 currentTime )
 	{
 		m_currentTime = currentTime;
 		return *this;
-	}
+	}*/
 
 
-	bool TimerEngine::isPaused() const
+	bool TimerEngine::isActive() const
 	{
-		return not m_timer.isActive();
+		return m_timer.isActive();
 	}
 
 
@@ -41,15 +41,23 @@ namespace paz::backend
 	}
 
 
-	void TimerEngine::pause()
+	void TimerEngine::start( const quint16 seconds )
+	{
+		m_totalDuration = seconds;
+		m_timer.start();
+	}
+
+
+	void TimerEngine::stop()
 	{
 		m_timer.stop();
 	}
 
 
-	void TimerEngine::reset()
+	void TimerEngine::resetAndStop()
 	{
 		m_currentTime = 0;
+		m_timer.stop();
 	}
 
 
@@ -58,7 +66,10 @@ namespace paz::backend
 		++m_currentTime;
 		emit timerTicked();
 
-		if (m_currentTime >= m_duration)
+		if (m_currentTime >= m_totalDuration)
+		{
+			this->resetAndStop();
 			emit timerFinished();
+		}
 	}
 }

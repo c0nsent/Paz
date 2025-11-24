@@ -12,7 +12,7 @@
 #include <QTimer>
 
 
-namespace paz::backend::pomodoro
+namespace paz::backend::pt
 {
 	class TimerEngine final : public QObject
 	{
@@ -22,19 +22,21 @@ namespace paz::backend::pomodoro
 
 		explicit TimerEngine(QObject* parent = nullptr);
 
-		[[nodiscard]] quint16 getDuration() const;
-		[[nodiscard]] quint16 getCurrentTime() const;
+		[[nodiscard]] quint16 getTotalDuration() const;
+		//[[nodiscard]] quint16 getCurrentTime() const;
 
-		TimerEngine &setDuration(quint16 duration);
-		TimerEngine &setCurrentTime(quint16 currentTime);
+		//duration в секундах
+		TimerEngine &setDuration(quint16 seconds);
+		//TimerEngine &setCurrentTime(quint16 currentTime);
 
-		bool isPaused() const;
+		bool isActive() const;
 
 	public slots:
 
 		void start();
-		void pause();
-		void reset();
+		void start(quint16 seconds);
+		void stop();
+		void resetAndStop();
 
 	private slots:
 
@@ -49,7 +51,7 @@ namespace paz::backend::pomodoro
 
 		QTimer m_timer;
 
-		quint16 m_duration{ 0 };
+		quint16 m_totalDuration{ 0 };
 		quint16 m_currentTime{ 0 };
 	};
 }
