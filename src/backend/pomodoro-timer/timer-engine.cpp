@@ -2,31 +2,31 @@
 
 namespace paz::backend::pt
 {
-	TimerEngine::TimerEngine( QObject *parent ) : QObject {parent}
+	TimerEngine::TimerEngine( const qint16 totalDuration, const qint16 currentTime, QObject *parent )
+		: QObject {parent}, m_currentTime{ currentTime }, m_totalDuration{ totalDuration }
 	{
 		m_timer.setInterval(1000);
 		connect(&m_timer, &QTimer::timeout, this, &TimerEngine::handleTick);
 	}
 
 
-	quint16 TimerEngine::getTotalDuration() const { return m_totalDuration; }
+	qint16 TimerEngine::getTotalDuration() const { return m_totalDuration; }
+
+	qint16 TimerEngine::getCurrentTime() const { return m_currentTime; }
 
 
-	//quint16 TimerEngine::getCurrentTime() const { return m_currentTime; }
-
-
-	TimerEngine &TimerEngine::setDuration( const quint16 seconds )
+	TimerEngine &TimerEngine::setDuration( const qint16 seconds )
 	{
 		m_totalDuration = seconds;
 		return *this;
 	}
 
 
-	/*TimerEngine &TimerEngine::setCurrentTime( const quint16 currentTime )
+	TimerEngine &TimerEngine::setCurrentTime( const qint16 seconds )
 	{
-		m_currentTime = currentTime;
+		m_currentTime = seconds;
 		return *this;
-	}*/
+	}
 
 
 	bool TimerEngine::isActive() const
@@ -41,7 +41,7 @@ namespace paz::backend::pt
 	}
 
 
-	void TimerEngine::start( const quint16 seconds )
+	void TimerEngine::start( const qint16 seconds )
 	{
 		m_totalDuration = seconds;
 		m_timer.start();

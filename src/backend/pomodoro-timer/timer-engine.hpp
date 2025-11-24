@@ -20,21 +20,20 @@ namespace paz::backend::pt
 
 	public:
 
-		explicit TimerEngine(QObject* parent = nullptr);
+		explicit TimerEngine(qint16 totalDuration, qint16 currentTime = 0, QObject *parent = nullptr);
 
-		[[nodiscard]] quint16 getTotalDuration() const;
-		//[[nodiscard]] quint16 getCurrentTime() const;
+		[[nodiscard]] qint16 getTotalDuration() const;
+		[[nodiscard]] qint16 getCurrentTime() const;
 
-		//duration в секундах
-		TimerEngine &setDuration(quint16 seconds);
-		//TimerEngine &setCurrentTime(quint16 currentTime);
+		[[nodiscard]] bool isActive() const;
 
-		bool isActive() const;
+		TimerEngine &setDuration(qint16 seconds);
+		TimerEngine &setCurrentTime(qint16 seconds);
 
 	public slots:
 
 		void start();
-		void start(quint16 seconds);
+		void start(qint16 seconds);
 		void stop();
 		void resetAndStop();
 
@@ -51,7 +50,7 @@ namespace paz::backend::pt
 
 		QTimer m_timer;
 
-		quint16 m_totalDuration{ 0 };
-		quint16 m_currentTime{ 0 };
+		qint16 m_currentTime;
+		qint16 m_totalDuration;
 	};
 }
