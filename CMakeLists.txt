@@ -21,8 +21,10 @@ qt_add_executable( Paz
 									 src/main.cxx
 									 src/backend/pomodoro-timer/timer-engine.hpp
 									 src/backend/pomodoro-timer/timer-engine.cpp
-									 src/backend/pomodoro-timer/timer-phase.hpp
-									 src/backend/pomodoro-timer/timer-phase.cpp
+									 src/backend/pomodoro-timer/pomodoro-phase.hpp
+									 src/backend/pomodoro-timer/pomodoro-phase.cpp
+									 src/backend/pomodoro-timer/pomodoro-manager.hpp
+									 src/backend/pomodoro-timer/pomodoro-manager.cpp
                    src/core/enums.cpp
 )
 
