@@ -4,6 +4,3 @@
  * @author amitayus_
  */
 
-int main()
-{
-}
