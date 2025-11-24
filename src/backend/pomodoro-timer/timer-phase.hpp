@@ -8,7 +8,7 @@
 
 #include <QObject>
 
-namespace paz::backend::pomodoro
+namespace paz::backend::pt
 {
 	class TimerPhase final : public QObject
 	{

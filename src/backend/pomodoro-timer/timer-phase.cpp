@@ -6,7 +6,7 @@
 
 #include "timer-phase.hpp"
 
-namespace paz::backend
+namespace paz::backend::pt
 {
 	TimerPhase::TimerPhase( const Phase phase, QObject *parent ) : QObject{parent}, m_phase{phase} {}
 

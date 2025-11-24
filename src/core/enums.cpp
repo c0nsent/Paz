@@ -10,10 +10,8 @@ namespace paz
 {
 	namespace backend
 	{
-		namespace pomodoro
+		namespace pt
 		{
-			enum Phase : quint8 { work, shortBreak, longBreak, paused };
-			Q_ENUM(Phase);
 		}
 	}
 }
