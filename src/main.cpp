@@ -1,6 +1,6 @@
 #include <QtWidgets>
 
-#include "backend/pomodoro-timer/timer-phase.hpp"
+#include "backend/pomodoro-timer/pomodoro-phase.hpp"
 #include "backend/pomodoro-timer/timer-engine.hpp"
 #include <QDebug>
 
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
 	QApplication app{argc, argv};
 	using namespace paz::backend::pt;
-	TimerEngine engine;
+	TimerEngine engine(25);
 
 	auto startNewTimer = [&engine]()
 	{

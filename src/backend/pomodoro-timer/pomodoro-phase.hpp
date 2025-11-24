@@ -16,7 +16,7 @@ namespace paz::backend::pt
 	{
 	public:
 
-		enum class Phs : quint8 { work, shortBreak, longBreak, null = 255 };
+		enum class Phs : quint8 { Work, ShortBreak, LongBreak};
 		Q_ENUM(Phs)
 
 	private:
@@ -29,7 +29,8 @@ namespace paz::backend::pt
 		static constexpr quint8 c_phaseCount{ 3 };
 		static constexpr qint16 c_invalidDuration{ -1 };
 
-		PomodoroPhase(Phs phase, qint16 work, qint16 shortBreak, qint16 longBreak, QObject *parent = nullptr);
+		PomodoroPhase(Phs phase,
+			qint16 workInSecs, qint16 shortBreakInSecs, qint16 longBreakInSecs, QObject *parent = nullptr);
 
 		[[nodiscard]] Phs getCurrentPhase() const;
 		[[nodiscard]] quint16 getCurrentPhaseDuration() const;

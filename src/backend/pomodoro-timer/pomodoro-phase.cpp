@@ -12,8 +12,8 @@ namespace paz::backend::pt
 
 
 	PomodoroPhase::PomodoroPhase( const Phs phase,
-		const qint16 work, const qint16 shortBreak, const qint16 longBreak, QObject *parent )
-		: QObject{parent}, m_currentPhase{phase}, m_phasesDuration{ work, shortBreak, longBreak } {}
+		const qint16 workInSecs, const qint16 shortBreakInSecs, const qint16 longBreakInSecs, QObject *parent )
+		: QObject{parent}, m_currentPhase{phase}, m_phasesDuration{ workInSecs, shortBreakInSecs, longBreakInSecs } {}
 
 
 	PomodoroPhase::Phs PomodoroPhase::getCurrentPhase() const { return m_currentPhase; }
@@ -39,9 +39,9 @@ namespace paz::backend::pt
 
 	void PomodoroPhase::setPhaseDuration( const qint16 work, const qint16 shortBreak, const qint16 longBreak )
 	{
-		m_phasesDuration[toQint16( Phs::work )] = work;
-		m_phasesDuration[toQint16( Phs::shortBreak )] = shortBreak;
-		m_phasesDuration[toQint16( Phs::longBreak )] = longBreak;
+		m_phasesDuration[toQint16( Phs::Work )] = work;
+		m_phasesDuration[toQint16( Phs::ShortBreak )] = shortBreak;
+		m_phasesDuration[toQint16( Phs::LongBreak )] = longBreak;
 
 		emit phaseDurationChanged();
 	}

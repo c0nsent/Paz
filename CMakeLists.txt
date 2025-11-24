@@ -18,7 +18,7 @@ find_package( Qt6 6.9.2 REQUIRED COMPONENTS
 qt_standard_project_setup()
 
 qt_add_executable( Paz
-									 src/main.cxx
+                   src/main.cpp
 									 src/backend/pomodoro-timer/timer-engine.hpp
 									 src/backend/pomodoro-timer/timer-engine.cpp
 									 src/backend/pomodoro-timer/pomodoro-phase.hpp
