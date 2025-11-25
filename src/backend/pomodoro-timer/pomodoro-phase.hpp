@@ -14,20 +14,15 @@ namespace paz::backend::pt
 {
 	class PomodoroPhase final : public QObject
 	{
+		Q_OBJECT
+		//Q_PROPERTY(Phs currentPhase READ getCurrentPhase WRITE setCurrentPhase NOTIFY phaseChanged)
 	public:
 
 		enum class Phs : quint8 { Work, ShortBreak, LongBreak};
 		Q_ENUM(Phs)
 
-	private:
-		Q_OBJECT
-
-		static qint16 toQint16( Phs phase );
-
-	public:
-
 		static constexpr quint8 c_phaseCount{ 3 };
-		static constexpr qint16 c_invalidDuration{ -1 };
+		//static constexpr qint16 c_invalidDuration{ -1 };
 
 		PomodoroPhase(Phs phase,
 			qint16 workInSecs, qint16 shortBreakInSecs, qint16 longBreakInSecs, QObject *parent = nullptr);
@@ -46,6 +41,9 @@ namespace paz::backend::pt
 
 		void phaseChanged();
 		void phaseDurationChanged();
+		void workDurationChanged();
+		void shortBreakDurationChanged();
+		void longBreakDurationChanged();
 
 	private:
 
