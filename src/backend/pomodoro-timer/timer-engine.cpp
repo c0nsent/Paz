@@ -15,6 +15,12 @@ namespace paz::backend::pt
 	qint16 TimerEngine::getCurrentTime() const { return m_currentTime; }
 
 
+	bool TimerEngine::isActive() const
+	{
+		return m_timer.isActive();
+	}
+
+
 	TimerEngine &TimerEngine::setDuration( const qint16 seconds )
 	{
 		m_totalDuration = seconds;
@@ -26,12 +32,6 @@ namespace paz::backend::pt
 	{
 		m_currentTime = seconds;
 		return *this;
-	}
-
-
-	bool TimerEngine::isActive() const
-	{
-		return m_timer.isActive();
 	}
 
 

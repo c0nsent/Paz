@@ -4,3 +4,7 @@
  * @author amitayus_
  */
 
+namespace core
+{
+	constexpr bool c_Debug{ true };
+}

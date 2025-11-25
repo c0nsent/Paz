@@ -2,20 +2,19 @@
 
 #include "backend/pomodoro-timer/pomodoro-phase.hpp"
 #include "backend/pomodoro-timer/timer-engine.hpp"
+
 #include <QDebug>
 
-void test(paz::backend::pt::TimerEngine &engine)
-{
-	qInfo() << "timer finished";
+constexpr bool timerTest{ true };
 
-	//engine.;
-}
 
-int main(int argc, char *argv[])
+
+int timerTestFunction( int argc, char *argv[] )
 {
-	QApplication app{argc, argv};
 	using namespace paz::backend::pt;
-	TimerEngine engine(25);
+	QApplication app{argc, argv};
+
+	paz::backend::pt::TimerEngine engine(25);
 
 	auto startNewTimer = [&engine]()
 	{
@@ -24,9 +23,28 @@ int main(int argc, char *argv[])
 
 		qInfo() << "Timer started";
 	};
+
 	engine.start(3);
 	QObject::connect( &engine, &TimerEngine::timerTicked, []() { qInfo() <<  "tick";});
 	QObject::connect( &engine, &TimerEngine::timerFinished, startNewTimer);
 
-	return app.exec();
+	return QApplication::exec();
+}
+
+int pomodoroPhaseTestFunction( int argc, char *argv[] )
+{
+	QApplication app{argc, argv};
+  PomodoroPhase aboba{PomodoroPhase::Phs::Work, 25, 5, 15};
+	QObject::connect(aboba, &PomodoroPhase::phaseChanged, []() { qInfo() << "phase changed";});
+
+	aboba.setCurrentPhase(PomodoroPhase::Phs::LongBreak);
+
+	return QApplication::exec();
+}
+
+int main(int argc, char *argv[])
+{
+	//timerTestFunction( argc, argv );
+
+	pomodoroPhaseTestFunction( argc, argv );
 }
