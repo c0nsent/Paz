@@ -1,0 +1,16 @@
+add_subdirectory(core)
+add_subdirectory(backend)
+#add_subdirectory(ui)
+
+qt_add_executable(Paz
+	main.cpp
+)
+
+target_link_libraries( Paz PRIVATE
+		PazBackend
+		PazCore
+		Qt6::Core
+		Qt6::Widgets
+)
+
+target_compile_features(Paz PUBLIC cxx_std_23)
