@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.1.1)
-project(Paz VERSION 0.0.1 LANGUAGES CXX)
+project(Paz VERSION 0.0.2 LANGUAGES CXX)
 
 
 set(CMAKE_CXX_STANDARD 23
@@ -9,10 +9,9 @@ set(CMAKE_CXX_STANDARD 23
 set(QT_FORCE_CMP0156_TO_VALUE NEW) #Чтобы убрать warning о CMP0156
 
 
-find_package( Qt6 6.9.2 REQUIRED COMPONENTS
+find_package( Qt6 6.10.0 REQUIRED COMPONENTS
 							Core
 							Widgets
-              Sql
 )
 
 qt_standard_project_setup()
@@ -31,5 +30,4 @@ qt_add_executable( Paz
 target_link_libraries( ${PROJECT_NAME} PRIVATE
 											 Qt6::Core
 											 Qt6::Widgets
-                       Qt6::Sql
 )
