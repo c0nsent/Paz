@@ -8,57 +8,82 @@
 
 namespace paz::backend::pt
 {
-	PomodoroPhase::PomodoroPhase( const Phs phase,
-		const qint16 workInSecs, const qint16 shortBreakInSecs, const qint16 longBreakInSecs, QObject *parent )
-		: QObject{parent}, m_currentPhase{phase}, m_phasesDuration{ workInSecs, shortBreakInSecs, longBreakInSecs } {}
-
-
-	PomodoroPhase::Phs PomodoroPhase::getCurrentPhase() const { return m_currentPhase; }
-
-	quint16 PomodoroPhase::getCurrentPhaseDuration() const { return m_phasesDuration[qToUnderlying(m_currentPhase)]; }
-
-	quint16 PomodoroPhase::getPhaseDuration( const Phs obj ) const { return m_phasesDuration[qToUnderlying(obj)]; }
-
-
-	void PomodoroPhase::setCurrentPhase( const Phs phase )
+	State::State(
+		const bool isPaused ,
+		const Phase phase,
+		const qint16 workInSecs,
+		const qint16 shortBreakInSecs,
+		const qint16 longBreakInSecs,
+		QObject *parent
+		)
+		: QObject{parent}
+		, m_isPaused{isPaused}
+		, m_currentPhase{phase}
+		, m_phasesDuration{workInSecs, shortBreakInSecs, longBreakInSecs}
 	{
-		if (m_currentPhase != phase) return;
-
-		m_currentPhase = phase;
-		emit phaseChanged();
 	}
 
 
-	void PomodoroPhase::setPhaseDuration( const Phs phase, const qint16 seconds )
+	bool State::isPaused() const { return m_isPaused; }
+
+	State::Phase State::currentPhase() const { return m_currentPhase; }
+
+	quint16 State::currentPhaseDuration() const { return m_phasesDuration[qToUnderlying(m_currentPhase)]; }
+
+	quint16 State::phaseDuration(const Phase obj) const { return m_phasesDuration[qToUnderlying(obj)]; }
+
+
+	void State::setIsPaused( const bool paused )
 	{
-		auto &duration = m_phasesDuration[qToUnderlying(phase)];
-
-		if (seconds < 0 or seconds == duration) return;
-
-		duration = seconds;
-
-		switch (phase)
+		if (m_isPaused != paused) // Чет я сразу недопер что можно проверять изменен ли был проект с помощью сигнала
 		{
-			case Phs::Work:
-				emit workDurationChanged();
-				break;
-			case Phs::ShortBreak:
-				emit shortBreakDurationChanged();
-				break;
-			case Phs::LongBreak:
-				emit longBreakDurationChanged();
-				break;
+			m_isPaused = paused;
+			emit isPausedChanged();
 		}
-
-		emit phaseDurationChanged();
 	}
 
 
-	void PomodoroPhase::setPhaseDuration( const qint16 work, const qint16 shortBreak, const qint16 longBreak )
+	void State::setCurrentPhase(const Phase phase)
 	{
-		setPhaseDuration(Phs::Work , work);
-		setPhaseDuration(Phs::ShortBreak, shortBreak);
-		setPhaseDuration(Phs::LongBreak, longBreak);
+		if (m_currentPhase != phase)
+		{
+			m_currentPhase = phase;
+			emit phaseChanged();
+		}
+	}
+
+
+	void State::setPhaseDuration( const Phase phase, const qint16 seconds )
+	{
+		auto &phaseDuration{m_phasesDuration[qToUnderlying(phase)]};
+
+		if (seconds > 0 and phaseDuration != seconds)
+		{
+			phaseDuration = seconds;
+
+			switch (phase)
+			{
+				case Phase::Work:
+					emit workDurationChanged();
+					break;
+				case Phase::ShortBreak:
+					emit shortBreakDurationChanged();
+					break;
+				case Phase::LongBreak:
+					emit longBreakDurationChanged();
+					break;
+			}
+
+			emit phaseDurationChanged();
+		}
+	}
+
+
+	void State::setPhaseDuration( const qint16 work, const qint16 shortBreak, const qint16 longBreak )
+	{
+		setPhaseDuration(Phase::Work , work);
+		setPhaseDuration(Phase::ShortBreak, shortBreak);
+		setPhaseDuration(Phase::LongBreak, longBreak);
 	}
 }
 
