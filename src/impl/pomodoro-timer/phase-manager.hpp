@@ -8,7 +8,7 @@
 
 #include <cstdint> //Работает и без инклюда, но все равно добавил для большей ясности
 #include <QObject>
-
+#include <../core/constants.cpp>
 
 
 namespace paz::impl::pt
@@ -18,8 +18,6 @@ namespace paz::impl::pt
 		Q_OBJECT
 
 	public:
-
-		static constexpr std::size_t PHASE_COUNT{3}; /// TODO: Удалить если будет не нужен
 
 		enum class Phase : quint8 {Work, ShortBreak, LongBreak};
 		Q_ENUM(Phase)
@@ -53,7 +51,7 @@ namespace paz::impl::pt
 	private:
 
 		Phase m_currentPhase;
-		quint16 m_arrPhaseDurations[PHASE_COUNT]; // 32767 секунд или 546 минут должно быть достаточно
+		quint16 m_arrPhaseDurations[c_phaseCount]; // 32767 секунд или 546 минут должно быть достаточно
 	};
 
 	using Phase = PhaseManager::Phase; /// Чтобы можно было по-нормальному обращаться к `enum class`

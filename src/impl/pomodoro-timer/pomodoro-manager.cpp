@@ -6,6 +6,7 @@
 
 #include "pomodoro-manager.hpp"
 
-namespace pt
+namespace paz::impl::pt
 {
-} // pt
+
+}
