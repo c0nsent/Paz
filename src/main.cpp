@@ -1,17 +1,17 @@
 #include <QtWidgets>
 
-#include "backend/pomodoro-timer/pomodoro-phase.hpp"
+#include "backend/pomodoro-timer/phase-manager.hpp"
 #include "backend/pomodoro-timer/timer-engine.hpp"
 
 #include <QDebug>
 
-constexpr bool timerTest{ true };
+constexpr bool timerTest{ false };
 
-
+using namespace paz::backend::pt;
 
 int timerTestFunction( int argc, char *argv[] )
 {
-	using namespace paz::backend::pt;
+
 	QApplication app{argc, argv};
 
 	paz::backend::pt::TimerEngine engine(25);
@@ -34,17 +34,17 @@ int timerTestFunction( int argc, char *argv[] )
 int pomodoroPhaseTestFunction( int argc, char *argv[] )
 {
 	QApplication app{argc, argv};
-  PomodoroPhase aboba{PomodoroPhase::Phs::Work, 25, 5, 15};
-	QObject::connect(aboba, &PomodoroPhase::phaseChanged, []() { qInfo() << "phase changed";});
+  PhaseManager aboba{PhaseManager::Phase::Work, 25, 5, 15};
+	QObject::connect(&aboba, &PhaseManager::phaseChanged, []() { qInfo() << "phase changed";});
 
-	aboba.setCurrentPhase(PomodoroPhase::Phs::LongBreak);
+	aboba.setCurrentPhase(PhaseManager::Phase::LongBreak);
 
 	return QApplication::exec();
 }
 
 int main(int argc, char *argv[])
 {
-	//timerTestFunction( argc, argv );
+	timerTestFunction( argc, argv );
 
-	pomodoroPhaseTestFunction( argc, argv );
+	//pomodoroPhaseTestFunction( argc, argv );
 }
