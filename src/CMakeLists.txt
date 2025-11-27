@@ -1,5 +1,5 @@
 add_subdirectory(core)
-add_subdirectory(backend)
+add_subdirectory(impl)
 #add_subdirectory(ui)
 
 qt_add_executable(Paz
