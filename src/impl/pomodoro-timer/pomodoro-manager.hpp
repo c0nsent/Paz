@@ -6,10 +6,10 @@
 
 #pragma once
 
+#include "phase-manager.hpp"
 #include "timer-engine.hpp"
-#include "pomodoro-phase.hpp"
 
-namespace paz::backend::pt
+namespace paz::impl::pt
 {
 	class PomodoroManager final : public QObject
 	{
@@ -17,9 +17,9 @@ namespace paz::backend::pt
 
 	public:
 
-		explicit PomodoroManager(PomodoroPhase::Phs phase,
-			qint16 workInSecs, qint16 shortBreakInSecs, qint16 longBreakInSecs,  QObject *parent = nullptr);
+		static constexpr qint16 INVALID_POMODORO_COUNT{-1};
 
+		//PomodoroManager(QObject* parent = nullptr);
 
 	public slots:
 
@@ -34,8 +34,6 @@ namespace paz::backend::pt
 
 	private slots:
 
-
-
 	signals:
 
 		void timerTicked();
@@ -44,18 +42,18 @@ namespace paz::backend::pt
 		void timerStopped();
 		void timerWasReset();
 
-
-
 		void phaseChanged();
 		void roundFinished();
 
-
 	private:
 
-		TimerEngine m_timerEngine;
-		PomodoroPhase m_phase;
+		bool m_isPaused;
 
 		qint16 m_pomodorosInRound;
-		qint16 m_pomodoroCount;
+		qint16 m_pomodorosTillRoundEnd;
+		qint16 m_pomodoroInCurrentSession;
+
+		TimerEngine m_timerEngine;
+		PhaseManager m_phase;
 	};
 }

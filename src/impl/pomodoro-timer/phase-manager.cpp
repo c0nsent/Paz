@@ -6,13 +6,15 @@
 
 #include "phase-manager.hpp"
 
-namespace paz::backend::pt
+
+
+namespace paz::impl::pt
 {
 	PhaseManager::PhaseManager(
 		const Phase phase,
-		const qint16 workInSec,
-		const qint16 shortBreakInSec,
-		const qint16 longBreakInSec,
+		const quint16 workInSec,
+		const quint16 shortBreakInSec,
+		const quint16 longBreakInSec,
 		QObject *parent
 	)
 		: QObject{parent}
@@ -27,7 +29,7 @@ namespace paz::backend::pt
 		return m_currentPhase;
 	}
 
-	qint16 PhaseManager::phaseDuration(const Phase rhs) const
+	quint16 PhaseManager::phaseDuration(const Phase rhs) const
 	{
 		return m_arrPhaseDurations[qToUnderlying(rhs)];
 	}
@@ -44,7 +46,7 @@ namespace paz::backend::pt
 	}
 
 
-	void PhaseManager::setPhaseDuration(const Phase phase, const qint16 phaseDuration)
+	void PhaseManager::setPhaseDuration(const Phase phase, const quint16 phaseDuration)
 	{
 		auto &duration = m_arrPhaseDurations[qToUnderlying(phase)];
 
@@ -68,7 +70,7 @@ namespace paz::backend::pt
 	}
 
 
-	void PhaseManager::setPhaseDuration(const qint16 work, const qint16 shortBreak, const qint16 longBreak)
+	void PhaseManager::setPhaseDuration(const quint16 work, const quint16 shortBreak, const quint16 longBreak)
 	{
 		setPhaseDuration(Phase::Work, work);
 		setPhaseDuration(Phase::ShortBreak, shortBreak);
