@@ -11,26 +11,36 @@
 
 namespace paz::impl::pt
 {
-	class PomodoroManager final : public QObject
+	///TODO Возможно стоит PomodoroPhase интегрировать в PomodoroTimer
+	class PomodoroTimer final : public QObject
 	{
 		Q_OBJECT
 
+		void setupConnections();
+
 	public:
 
-		PomodoroManager(
-			quint16 m_pomodorosInRound,
-			const TimerEngine &timerEngine,
-			const PhaseManager &phase,
+		PomodoroTimer(
+			bool isPaused,
+			quint16 roundCount,
+			quint16 roundLength,
+			quint16 inTotal,
+			quint16 startTime,
+			quint16 timeLeft,
+			Phase phase,
+			quint16 workInSec,
+			quint16 shortBreakInSec,
+			quint16 longBreakInSec,
 			QObject* parent = nullptr
 		);
 
 		[[nodiscard]] bool isPaused() const;
 
-		[[nodiscard]] quint16 pomodorosTillRoundEnd() const;
-		[[nodiscard]] quint16 pomodorosInRound() const;
-		[[nodiscard]] quint16 pomodorosInTotal() const;
+		[[nodiscard]] quint16 roundCount() const;
+		[[nodiscard]] quint16 roundLength() const;
+		[[nodiscard]] quint16 inTotal() const;
 
-		[[nodiscard]] quint16 currentPhase() const;
+		[[nodiscard]] Phase currentPhase() const;
 		[[nodiscard]] quint16 currentPhaseDuration() const;
 		[[nodiscard]] quint16 phaseDuration(Phase phase) const;
 
@@ -40,14 +50,26 @@ namespace paz::impl::pt
 
 	public slots:
 
+		void setRoundCount(quint16 roundCount);
+		void setRoundLength(quint16 roundLength);
+		void setInTotal(quint16 inTotal);
+
+		void setCurrentPhase(Phase phase);
+		void setPhaseDuration(Phase phase, quint16 phaseDuration);
+		void setPhaseDuration(quint16 work, quint16 shortBreak, quint16 longBreak);
+
+
 		void start();
-		void start(quint16 startTime);
+		//void start(quint16 startTime);
 		void stop();
 		void resetAndStop();
 
-		void skipToNextPhase();
+		void skipPhase();
 
 	private slots:
+
+		void handleTimerEngineTicked();
+		void handleTimerEngineFinished();
 
 	signals:
 
@@ -60,19 +82,19 @@ namespace paz::impl::pt
 		void phaseDurationChanged();
 
 		void roundFinished();
-		void pomodorosInRoundChanged();
-		void pomodorosTillRoundEndChanged();
-		void pomodorosInTotalChanged();
+		void roundCountChanged();
+		void roundLengthChanged();
+		void inTotalChanged();
 
 	private:
 
 		bool m_isPaused;
 
-		quint16 m_pomodorosTillRoundEnd;
-		quint16 m_pomodorosInRound;
-		quint16 m_pomodorosInTotal;//Максимально количество помидорок за один день
+		quint16 m_roundCount;
+		quint16 m_roundLength;
+		quint16 m_inTotal;//Максимально количество помидорок за один день
 
 		TimerEngine m_timerEngine;
-		PhaseManager m_phase;
+		PhaseManager m_phaseManager;
 	};
 }
