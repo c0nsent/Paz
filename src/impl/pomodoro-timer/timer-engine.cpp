@@ -23,7 +23,7 @@ namespace paz::impl::pt
 			emit timeLeftChanged();
 		}
 
-		m_timer.setTimerType(Qt::CoarseTimer);
+		m_timer.setTimerType(Qt::PreciseTimer); ///Я ебал аллайнмент в 5% у CoarseTimer
 		m_timer.setInterval(1000);
 		connect(&m_timer, &QTimer::timeout, this, &TimerEngine::handleTick);
 	}
@@ -73,12 +73,14 @@ namespace paz::impl::pt
 	}
 
 
+	/*
 	void TimerEngine::start( const quint16 seconds )
 	{
 		setStartTime(seconds);
 		setTimeLeft(seconds);
 		m_timer.start();
 	}
+	*/
 
 
 	void TimerEngine::stop()

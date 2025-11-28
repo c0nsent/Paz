@@ -29,6 +29,10 @@ namespace paz::impl::pt
 		return m_currentPhase;
 	}
 
+
+	quint16 PhaseManager::currentPhaseDuration() const { return phaseDuration(m_currentPhase); }
+
+
 	quint16 PhaseManager::phaseDuration(const Phase rhs) const
 	{
 		return m_arrPhaseDurations[qToUnderlying(rhs)];

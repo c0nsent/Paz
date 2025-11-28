@@ -31,6 +31,7 @@ namespace paz::impl::pt
 		);
 
 		[[nodiscard]] Phase currentPhase() const;
+		[[nodiscard]] quint16 currentPhaseDuration() const;
 		[[nodiscard]] quint16 phaseDuration(Phase rhs) const;
 
 	public slots:

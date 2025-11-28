@@ -34,7 +34,7 @@ namespace paz::impl::pt
 	public slots:
 
 		void start();
-		void start(quint16 seconds);
+		//void start(quint16 seconds);
 		void stop();
 		void resetAndStop();
 
@@ -46,12 +46,12 @@ namespace paz::impl::pt
 
 		void timerTicked();
 		void timerFinished();
-		void timerReset();
+		//void timerReset();
 
 		void startTimeChanged();
 		void timeLeftChanged();
 
-		void timeExceeded(); ///TODO: Важно этот сигнал обрабатывать
+		void timeExceeded(); //TODO Удали когда реализуешь проверку в родителе
 
 	private:
 
