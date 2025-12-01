@@ -12,14 +12,14 @@ namespace paz::impl::pt
 {
 	PhaseManager::PhaseManager(
 		const Phase phase,
-		const quint16 workInSec,
-		const quint16 shortBreakInSec,
-		const quint16 longBreakInSec,
+		const std::chrono::seconds work,
+		const std::chrono::seconds shortBreak,
+		const std::chrono::seconds longBreak,
 		QObject *parent
 	)
 		: QObject{parent}
 		, m_currentPhase{phase}
-		, m_arrPhaseDurations{workInSec, shortBreakInSec, longBreakInSec}
+		, m_arrPhaseDurations{work, shortBreak, longBreak}
 	{
 	}
 
@@ -30,12 +30,12 @@ namespace paz::impl::pt
 	}
 
 
-	quint16 PhaseManager::currentPhaseDuration() const { return phaseDuration(m_currentPhase); }
+	std::chrono::seconds PhaseManager::currentPhaseDuration() const { return phaseDuration(m_currentPhase); }
 
 
-	quint16 PhaseManager::phaseDuration(const Phase rhs) const
+	std::chrono::seconds PhaseManager::phaseDuration(const Phase phase) const
 	{
-		return m_arrPhaseDurations[qToUnderlying(rhs)];
+		return m_arrPhaseDurations[qToUnderlying(phase)];
 	}
 
 
@@ -50,7 +50,7 @@ namespace paz::impl::pt
 	}
 
 
-	void PhaseManager::setPhaseDuration(const Phase phase, const quint16 phaseDuration)
+	void PhaseManager::setPhaseDuration(const Phase phase, const std::chrono::seconds phaseDuration)
 	{
 		auto &duration = m_arrPhaseDurations[qToUnderlying(phase)];
 
@@ -74,7 +74,11 @@ namespace paz::impl::pt
 	}
 
 
-	void PhaseManager::setPhaseDuration(const quint16 work, const quint16 shortBreak, const quint16 longBreak)
+	void PhaseManager::setPhaseDuration(
+		const std::chrono::seconds work,
+		const std::chrono::seconds shortBreak,
+		const std::chrono::seconds longBreak
+	)
 	{
 		setPhaseDuration(Phase::Work, work);
 		setPhaseDuration(Phase::ShortBreak, shortBreak);

@@ -5,15 +5,16 @@
  */
 
 #include "timer-engine.hpp"
+#include "../core/constants.cpp"
 
 
 namespace paz::impl::pt
 {
-	TimerEngine::TimerEngine(const quint16 startTime, QObject *parent)
+	TimerEngine::TimerEngine(const std::chrono::seconds startTime, QObject *parent)
 		: TimerEngine{startTime, startTime, parent}
 	{
 	}
-	TimerEngine::TimerEngine(const quint16 startTime, const quint16 timeLeft, QObject *parent)
+	TimerEngine::TimerEngine(const std::chrono::seconds startTime, const std::chrono::seconds timeLeft, QObject *parent)
 		: QObject {parent}, m_startTime{startTime}, m_timeLeft{timeLeft}
 	{
 		if (m_timeLeft > m_startTime)
@@ -24,23 +25,23 @@ namespace paz::impl::pt
 		}
 
 		m_timer.setTimerType(Qt::PreciseTimer); ///Я ебал аллайнмент в 5% у CoarseTimer
-		m_timer.setInterval(1000);
+		m_timer.setInterval({defaults::c_TimerInterval});
 		connect(&m_timer, &QTimer::timeout, this, &TimerEngine::handleTick);
 	}
 
 
-	quint16 TimerEngine::startTime() const { return m_startTime; }
+	auto TimerEngine::startTime() const -> std::chrono::seconds { return m_startTime; }
 
-	quint16 TimerEngine::timeLeft() const { return m_timeLeft; }
+	auto TimerEngine::timeLeft() const -> std::chrono::seconds { return m_timeLeft; }
 
 	bool TimerEngine::isActive() const { return m_timer.isActive(); }
 
 
-	TimerEngine &TimerEngine::setStartTime(const quint16 seconds)
+	void TimerEngine::setStartTime( const std::chrono::seconds duration )
 	{
-		if (m_startTime != seconds)
+		if (m_startTime != duration)
 		{
-			m_startTime = seconds;
+			m_startTime = duration;
 			emit startTimeChanged();
 		};
 
@@ -50,20 +51,16 @@ namespace paz::impl::pt
 			emit timeExceeded();
 			emit timeLeftChanged();
 		}
-
-		return *this;
 	}
 
 
-	TimerEngine &TimerEngine::setTimeLeft(const quint16 seconds)
+	void TimerEngine::setTimeLeft(const std::chrono::seconds duration)
 	{
-		if (m_timeLeft != seconds)
+		if (m_timeLeft != duration)
 		{
-			m_timeLeft = seconds;
+			m_timeLeft = duration;
 			emit timeLeftChanged();
 		}
-
-		return *this;
 	}
 
 
@@ -74,7 +71,7 @@ namespace paz::impl::pt
 
 
 	/*
-	void TimerEngine::start( const quint16 seconds )
+	void TimerEngine::start( const std::chrono::seconds seconds )
 	{
 		setStartTime(seconds);
 		setTimeLeft(seconds);
@@ -98,7 +95,7 @@ namespace paz::impl::pt
 
 	void TimerEngine::handleTick()
 	{
-		if (m_timeLeft == 0)
+		if (m_timeLeft == std::chrono::seconds::zero())
 		{
 			this->resetAndStop();
 			emit timerFinished();

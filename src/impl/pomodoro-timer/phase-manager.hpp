@@ -6,9 +6,13 @@
 
 #pragma once
 
-#include <cstdint> //Работает и без инклюда, но все равно добавил для большей ясности
-#include <QObject>
 #include <../core/constants.cpp>
+
+#include <QObject>
+
+#include <chrono>
+#include <cstdint> //Работает и без инклюда, но все равно добавил для большей ясности
+
 
 
 namespace paz::impl::pt
@@ -24,21 +28,21 @@ namespace paz::impl::pt
 
 		PhaseManager(
 			Phase phase,
-			quint16 workInSec,
-			quint16 shortBreakInSec,
-			quint16 longBreakInSec,
+			std::chrono::seconds work,
+			std::chrono::seconds shortBreak,
+			std::chrono::seconds longBreak,
 			QObject *parent = nullptr
 		);
 
 		[[nodiscard]] Phase currentPhase() const;
-		[[nodiscard]] quint16 currentPhaseDuration() const;
-		[[nodiscard]] quint16 phaseDuration(Phase rhs) const;
+		[[nodiscard]] std::chrono::seconds currentPhaseDuration() const;
+		[[nodiscard]] std::chrono::seconds phaseDuration(Phase phase) const;
 
 	public slots:
 
 		void setCurrentPhase(Phase phase);
-		void setPhaseDuration(Phase phase, quint16 phaseDuration);
-		void setPhaseDuration(quint16 work, quint16 shortBreak, quint16 longBreak);
+		void setPhaseDuration(Phase phase, std::chrono::seconds phaseDuration);
+		void setPhaseDuration(std::chrono::seconds work, std::chrono::seconds shortBreak, std::chrono::seconds longBreak);
 
 	signals: //Возможно стоит добавить еще сигналов в будущем
 
@@ -52,7 +56,7 @@ namespace paz::impl::pt
 	private:
 
 		Phase m_currentPhase;
-		quint16 m_arrPhaseDurations[c_phaseCount]; // 32767 секунд или 546 минут должно быть достаточно
+		std::chrono::seconds m_arrPhaseDurations[c_phaseCount]; // 32767 секунд или 546 минут должно быть достаточно
 	};
 
 	using Phase = PhaseManager::Phase; /// Чтобы можно было по-нормальному обращаться к `enum class`

@@ -11,6 +11,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include <chrono>
+
 
 namespace paz::impl::pt
 {
@@ -20,21 +22,21 @@ namespace paz::impl::pt
 
 	public:
 
-		explicit TimerEngine(quint16 startTime, QObject* parent = nullptr);
-		TimerEngine(quint16 startTime, quint16 timeLeft, QObject *parent = nullptr);
+		explicit TimerEngine(std::chrono::seconds startTime, QObject* parent = nullptr);
+		TimerEngine(std::chrono::seconds startTime, std::chrono::seconds timeLeft, QObject *parent = nullptr);
 
-		[[nodiscard]] quint16 startTime() const;
-		[[nodiscard]] quint16 timeLeft() const;
+		[[nodiscard]] auto startTime() const -> std::chrono::seconds;
+		[[nodiscard]] auto timeLeft() const -> std::chrono::seconds;
 
 		[[nodiscard]] bool isActive() const;
 
-		TimerEngine &setStartTime(quint16 seconds);
-		TimerEngine &setTimeLeft(quint16 seconds);
-
 	public slots:
 
+		void setStartTime(std::chrono::seconds duration);
+		void setTimeLeft(std::chrono::seconds duration);
+
 		void start();
-		//void start(quint16 seconds);
+		//void start(std::chrono::seconds seconds);
 		void stop();
 		void resetAndStop();
 
@@ -57,7 +59,7 @@ namespace paz::impl::pt
 
 		QTimer m_timer;
 
-		quint16 m_startTime;
-		quint16 m_timeLeft;
+		std::chrono::seconds m_startTime;
+		std::chrono::seconds m_timeLeft;
 	};
 }

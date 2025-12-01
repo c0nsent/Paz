@@ -4,8 +4,9 @@
  * @author amitayus_
  */
 
-#include <QtTypes>
+#include <chrono>
 #include <limits>
+#include <QtTypes>
 
 namespace paz
 {
@@ -13,6 +14,7 @@ namespace paz
 
 	namespace impl::pt
 	{
+
 		static constexpr std::size_t c_phaseCount{3};
 
 		static constexpr quint16 c_MaxPhaseDuration{99 * 60}; // 99 минут
@@ -24,6 +26,9 @@ namespace paz
 
 		namespace defaults
 		{
+			using namespace std::literals;
+			static constexpr auto c_TimerInterval{1000ms};
+
 			static constexpr quint16 c_workDuration{25 * 60};       // 25 минут
 			static constexpr quint16 c_shortBreakDuration{5 * 60};  // 5 минут
 			static constexpr quint16 c_longBreakDuration{45 * 60};  // 45 минут
