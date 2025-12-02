@@ -10,4 +10,7 @@ target_link_libraries(PazBackend PRIVATE
 		Qt6::Core
 )
 
-target_include_directories(PazBackend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(PazBackend PUBLIC cxx_std_23)
+
+#target_include_directories(PazBackend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+

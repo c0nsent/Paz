@@ -6,7 +6,27 @@
 
 #pragma once
 
+#include "pomodoro-timer/pomodoro-timer-widget.hpp"
 
-class Mainwindow
+#include <QMainWindow>
+
+namespace paz::ui
 {
-};
+	class MainWindow final : public QMainWindow
+	{
+		Q_OBJECT
+
+	public:
+
+		explicit MainWindow(QWidget* parent = nullptr);
+
+	public slots:
+
+	private slots:
+
+	signals:
+
+	private:
+
+	};
+}

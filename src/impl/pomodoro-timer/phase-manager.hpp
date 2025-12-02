@@ -11,8 +11,6 @@
 #include <QObject>
 
 #include <chrono>
-#include <cstdint> //Работает и без инклюда, но все равно добавил для большей ясности
-
 
 
 namespace paz::impl::pt
@@ -42,13 +40,13 @@ namespace paz::impl::pt
 
 		void setCurrentPhase(Phase phase);
 		void setPhaseDuration(Phase phase, std::chrono::seconds phaseDuration);
-		void setPhaseDuration(std::chrono::seconds work, std::chrono::seconds shortBreak, std::chrono::seconds longBreak);
 
-	signals: //Возможно стоит добавить еще сигналов в будущем
+	signals:
 
 		void phaseChanged();
 		void phaseDurationChanged();
 
+		///TODO Удали если не понадобится
 		void workDurationChanged();
 		void shortBreakDurationChanged();
 		void longBreakDurationChanged();
@@ -56,7 +54,7 @@ namespace paz::impl::pt
 	private:
 
 		Phase m_currentPhase;
-		std::chrono::seconds m_arrPhaseDurations[c_phaseCount];
+		std::chrono::seconds m_arrPhaseDurations[defaults::c_phaseCount];
 	};
 
 	using Phase = PhaseManager::Phase; /// Чтобы можно было по-нормальному обращаться к `enum class`

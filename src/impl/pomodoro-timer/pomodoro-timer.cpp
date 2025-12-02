@@ -6,6 +6,7 @@
 
 #include "pomodoro-timer.hpp"
 
+
 namespace paz::impl::pt
 {
 	void PomodoroTimer::setupConnections()
@@ -40,7 +41,6 @@ namespace paz::impl::pt
 		const bool isPaused,
 		const quint16 roundCount,
 		const quint16 roundLength,
-		const quint16 inTotal,
 		const Phase phase,
 		const std::chrono::seconds work,
 		const std::chrono::seconds shortBreak,
@@ -51,9 +51,8 @@ namespace paz::impl::pt
 		  , m_isPaused{ isPaused }
 		  , m_roundCount{ roundCount } ///TODO Добавить валидацию входных параметров в родительском классе
 		  , m_roundLength{ roundLength }
-		  , m_inTotal{ inTotal }
-			, m_phaseManager{ phase, work, shortBreak, longBreak }
-			, m_timerEngine{}
+		  , m_timerEngine{nullptr}
+		  , m_phaseManager{ phase, work, shortBreak, longBreak }
 	{
 		m_timerEngine.setStartTime(m_phaseManager.currentPhaseDuration());
 		m_timerEngine.setTimeLeft(m_phaseManager.currentPhaseDuration());
@@ -76,12 +75,6 @@ namespace paz::impl::pt
 	quint16 PomodoroTimer::roundLength() const
 	{
 		return m_roundLength;
-	}
-
-
-	quint16 PomodoroTimer::inTotal() const
-	{
-		return m_inTotal;
 	}
 
 
@@ -139,16 +132,6 @@ namespace paz::impl::pt
 	}
 
 
-	void PomodoroTimer::setInTotal(const quint16 inTotal)
-	{
-		if (m_inTotal != inTotal)
-		{
-			m_inTotal = inTotal;
-			emit inTotalChanged();
-		}
-	}
-
-
 	void PomodoroTimer::setCurrentPhase(const Phase phase)
 	{
 		if (m_phaseManager.currentPhase() != phase)
@@ -165,16 +148,6 @@ namespace paz::impl::pt
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(
-		const std::chrono::seconds work,
-		const std::chrono::seconds shortBreak,
-		const std::chrono::seconds longBreak
-	)
-	{
-		m_phaseManager.setPhaseDuration(work, shortBreak, longBreak);
-	}
-
-
 	void PomodoroTimer::start()
 	{
 		setIsPaused(false);
@@ -185,39 +158,6 @@ namespace paz::impl::pt
 	{
 		setIsPaused(true);
 	}
-
-
-	void PomodoroTimer::handleTimerEngineTicked()
-	{
-		emit timerTicked();
-	}
-
-
-	void PomodoroTimer::handleTimerEngineFinished()
-	{
-		if (m_phaseManager.currentPhase() != Phase::Work)
-		{
-			m_phaseManager.setCurrentPhase(Phase::Work);
-		}
-		else
-		{
-			if (m_roundCount == m_roundLength)
-				m_phaseManager.setCurrentPhase(Phase::LongBreak);
-			else
-				m_phaseManager.setCurrentPhase(Phase::ShortBreak);
-
-			++m_roundCount;
-			++m_inTotal;
-		}
-
-		emit timerFinished();
-	}
-
-
-	/*void PomodoroManager::start( const quint16 startTime )
-	{
-		m_timerEngine.start(startTime);
-	}*/
 
 
 	void PomodoroTimer::resetAndStop()
@@ -255,5 +195,31 @@ namespace paz::impl::pt
 			m_timerEngine.start();
 			emit timerStarted();
 		}
+	}
+
+
+	void PomodoroTimer::handleTimerEngineTicked()
+	{
+		emit timerTicked();
+	}
+
+
+	void PomodoroTimer::handleTimerEngineFinished()
+	{
+		if (m_phaseManager.currentPhase() != Phase::Work)
+		{
+			m_phaseManager.setCurrentPhase(Phase::Work);
+		}
+		else
+		{
+			if (m_roundCount == m_roundLength)
+				m_phaseManager.setCurrentPhase(Phase::LongBreak);
+			else
+				m_phaseManager.setCurrentPhase(Phase::ShortBreak);
+
+			++m_roundCount;
+		}
+
+		emit timerFinished();
 	}
 }

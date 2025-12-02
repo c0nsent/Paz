@@ -74,16 +74,4 @@ namespace paz::impl::pt
 				break;
 		}
 	}
-
-
-	void PhaseManager::setPhaseDuration(
-		const std::chrono::seconds work,
-		const std::chrono::seconds shortBreak,
-		const std::chrono::seconds longBreak
-	)
-	{
-		setPhaseDuration(Phase::Work, work);
-		setPhaseDuration(Phase::ShortBreak, shortBreak);
-		setPhaseDuration(Phase::LongBreak, longBreak);
-	}
 }

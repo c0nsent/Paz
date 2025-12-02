@@ -5,3 +5,9 @@
  */
 
 #include "main-window.hpp"
+
+namespace paz::ui
+{
+	MainWindow::MainWindow(QWidget *parent) : QMainWindow{parent} {}\
+
+}

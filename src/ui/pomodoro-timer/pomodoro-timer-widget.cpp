@@ -5,3 +5,9 @@
  */
 
 #include "pomodoro-timer-widget.hpp"
+
+
+namespace paz::ui::pt
+{
+
+}

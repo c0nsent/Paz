@@ -5,8 +5,11 @@ qt_add_library(PazUI STATIC
 
 target_link_libraries(PazUI PRIVATE
 		PazBackend
+		PazCore
 		Qt6::Core
 		Qt6::Widgets
 )
 
-target_include_directories(PazUI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(PazUI PUBLIC cxx_std_23)
+
+# target_include_directories(PazUI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
