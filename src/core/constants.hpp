@@ -29,9 +29,9 @@ namespace paz
 			using namespace std::literals;
 			static constexpr auto c_TimerInterval{1000ms};
 
-			static constexpr quint16 c_workDuration{25 * 60};       // 25 минут
-			static constexpr quint16 c_shortBreakDuration{5 * 60};  // 5 минут
-			static constexpr quint16 c_longBreakDuration{45 * 60};  // 45 минут
+			static constexpr std::chrono::seconds c_workDuration{25min};       // 25 минут
+			static constexpr std::chrono::seconds c_shortBreakDuration{5min};  // 5 минут
+			static constexpr std::chrono::seconds c_longBreakDuration{45min};  // 45 минут
 
 			static constexpr quint16 c_pomodorosInRound{6};
 		}
