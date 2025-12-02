@@ -7,7 +7,6 @@
 #include "phase-manager.hpp"
 
 
-
 namespace paz::impl::pt
 {
 	PhaseManager::PhaseManager(
@@ -30,10 +29,13 @@ namespace paz::impl::pt
 	}
 
 
-	std::chrono::seconds PhaseManager::currentPhaseDuration() const { return phaseDuration(m_currentPhase); }
+	auto PhaseManager::currentPhaseDuration() const -> std::chrono::seconds
+	{
+		return phaseDuration(m_currentPhase);
+	}
 
 
-	std::chrono::seconds PhaseManager::phaseDuration(const Phase phase) const
+	auto PhaseManager::phaseDuration(const Phase phase) const -> std::chrono::seconds
 	{
 		return m_arrPhaseDurations[qToUnderlying(phase)];
 	}

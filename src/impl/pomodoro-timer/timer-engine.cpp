@@ -5,11 +5,18 @@
  */
 
 #include "timer-engine.hpp"
-#include "../core/constants.cpp"
+
+#include "../core/constants.hpp"
 
 
 namespace paz::impl::pt
 {
+	TimerEngine::TimerEngine( QObject *parent )
+	: TimerEngine{defaults::c_workDuration, defaults::c_workDuration}
+	{
+	}
+
+
 	TimerEngine::TimerEngine(const std::chrono::seconds startTime, QObject *parent)
 		: TimerEngine{startTime, startTime, parent}
 	{

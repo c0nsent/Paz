@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <../core/constants.cpp>
+#include <../core/constants.hpp>
 
 #include <QObject>
 
@@ -35,8 +35,8 @@ namespace paz::impl::pt
 		);
 
 		[[nodiscard]] Phase currentPhase() const;
-		[[nodiscard]] std::chrono::seconds currentPhaseDuration() const;
-		[[nodiscard]] std::chrono::seconds phaseDuration(Phase phase) const;
+		[[nodiscard]] auto currentPhaseDuration() const -> std::chrono::seconds;
+		[[nodiscard]] auto phaseDuration(Phase phase) const -> std::chrono::seconds;
 
 	public slots:
 
@@ -56,7 +56,7 @@ namespace paz::impl::pt
 	private:
 
 		Phase m_currentPhase;
-		std::chrono::seconds m_arrPhaseDurations[c_phaseCount]; // 32767 секунд или 546 минут должно быть достаточно
+		std::chrono::seconds m_arrPhaseDurations[c_phaseCount];
 	};
 
 	using Phase = PhaseManager::Phase; /// Чтобы можно было по-нормальному обращаться к `enum class`

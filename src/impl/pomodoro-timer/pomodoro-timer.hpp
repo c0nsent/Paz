@@ -9,6 +9,8 @@
 #include "phase-manager.hpp"
 #include "timer-engine.hpp"
 
+#include <chrono>
+
 namespace paz::impl::pt
 {
 	///TODO Возможно стоит PomodoroPhase интегрировать в PomodoroTimer
@@ -25,12 +27,10 @@ namespace paz::impl::pt
 			quint16 roundCount,
 			quint16 roundLength,
 			quint16 inTotal,
-			quint16 startTime,
-			quint16 timeLeft,
 			Phase phase,
-			quint16 workInSec,
-			quint16 shortBreakInSec,
-			quint16 longBreakInSec,
+			std::chrono::seconds work,
+			std::chrono::seconds shortBreak,
+			std::chrono::seconds longBreak,
 			QObject* parent = nullptr
 		);
 
@@ -41,22 +41,32 @@ namespace paz::impl::pt
 		[[nodiscard]] quint16 inTotal() const;
 
 		[[nodiscard]] Phase currentPhase() const;
-		[[nodiscard]] quint16 currentPhaseDuration() const;
-		[[nodiscard]] quint16 phaseDuration(Phase phase) const;
+		[[nodiscard]] auto currentPhaseDuration() const -> std::chrono::seconds;
+		[[nodiscard]] auto phaseDuration(Phase phase) const -> std::chrono::seconds;
 
-		[[nodiscard]] quint16 timeLeft() const;
+		[[nodiscard]] auto timeLeft() const -> std::chrono::seconds;
 
 
 
 	public slots:
+
+		void setIsPaused(bool isPaused);
 
 		void setRoundCount(quint16 roundCount);
 		void setRoundLength(quint16 roundLength);
 		void setInTotal(quint16 inTotal);
 
 		void setCurrentPhase(Phase phase);
-		void setPhaseDuration(Phase phase, quint16 phaseDuration);
-		void setPhaseDuration(quint16 work, quint16 shortBreak, quint16 longBreak);
+		void setPhaseDuration(Phase phase, std::chrono::seconds phaseDuration);
+
+		/**
+		 * @brief Устанавливает длительности всех фаз сразу
+		 * @note Возможно стоит удалить этот метод, т.к. он не особо нужен
+		 * @param work Длительность рабочей фазы
+		 * @param shortBreak Длительность короткого перерыва
+		 * @param longBreak Длительность длинного перерыва
+		 */
+		[[deprecated]] void setPhaseDuration(std::chrono::seconds work, std::chrono::seconds shortBreak, std::chrono::seconds longBreak);
 
 
 		void start();
@@ -68,10 +78,14 @@ namespace paz::impl::pt
 
 	private slots:
 
+		void handleIsPausedChanged();
+
 		void handleTimerEngineTicked();
 		void handleTimerEngineFinished();
 
 	signals:
+
+		void isPausedChanged();
 
 		void timerTicked();
 		void timerFinished();

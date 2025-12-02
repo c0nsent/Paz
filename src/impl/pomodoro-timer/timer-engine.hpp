@@ -22,7 +22,8 @@ namespace paz::impl::pt
 
 	public:
 
-		explicit TimerEngine(std::chrono::seconds startTime, QObject* parent = nullptr);
+		explicit TimerEngine(QObject* parent = nullptr);
+		explicit TimerEngine(std::chrono::seconds		startTime, QObject* parent = nullptr);
 		TimerEngine(std::chrono::seconds startTime, std::chrono::seconds timeLeft, QObject *parent = nullptr);
 
 		[[nodiscard]] auto startTime() const -> std::chrono::seconds;
