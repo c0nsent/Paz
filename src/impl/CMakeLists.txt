@@ -1,7 +1,6 @@
 qt_add_library(PazBackend STATIC
-		utility.cpp
+		#utility.cpp
 		pomodoro-timer/pomodoro-timer.cpp pomodoro-timer/pomodoro-timer.hpp
-		# pomodoro-timer/state.cpp pomodoro-timer/state.hpp
 		pomodoro-timer/timer-engine.cpp pomodoro-timer/timer-engine.hpp
 		pomodoro-timer/phase-manager.cpp pomodoro-timer/phase-manager.hpp
 )

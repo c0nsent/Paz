@@ -1,6 +1,6 @@
 add_subdirectory(core)
 add_subdirectory(impl)
-#add_subdirectory(ui)
+add_subdirectory(ui)
 
 qt_add_executable(Paz
 	main.cpp
@@ -9,6 +9,7 @@ qt_add_executable(Paz
 target_link_libraries( Paz PRIVATE
 		PazBackend
 		PazCore
+		PazUI
 		Qt6::Core
 		Qt6::Widgets
 )
