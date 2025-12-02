@@ -1,6 +1,6 @@
 qt_add_library(PazCore STATIC
-		enums.cpp
-		constants.cpp
+		enums.hpp
+		constants.hpp
 )
 
 #target_compile_features(Core PUBLIC cxx_std_23)
