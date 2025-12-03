@@ -43,12 +43,10 @@ namespace paz::impl::pt
 
 	void PhaseManager::setCurrentPhase(const Phase phase)
 	{
-		//проверка делается только ради сигнала
-		if (phase != m_currentPhase)
-		{
-			m_currentPhase = phase;
-			emit phaseChanged();
-		}
+		if (phase == m_currentPhase) return;
+
+		m_currentPhase = phase;
+		emit phaseChanged(phase);
 	}
 
 
@@ -59,19 +57,6 @@ namespace paz::impl::pt
 		if (phaseDuration == duration) return;
 
 		duration = phaseDuration;
-		emit phaseDurationChanged();
-
-		switch(phase)
-		{
-			case Phase::Work:
-				emit workDurationChanged();
-				break;
-			case Phase::ShortBreak:
-				emit shortBreakDurationChanged();
-				break;
-			case Phase::LongBreak:
-				emit longBreakDurationChanged();
-				break;
-		}
+		emit phaseDurationChanged(phase, phaseDuration);
 	}
 }

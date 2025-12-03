@@ -8,11 +8,14 @@
 
 #include "../../core/constants.hpp"
 
+#include <algorithm>
+
 
 namespace paz::impl::pt
 {
-	TimerEngine::TimerEngine( QObject *parent )
-	: TimerEngine{defaults::c_workDuration, defaults::c_workDuration}
+	using namespace std::literals::chrono_literals;
+	TimerEngine::TimerEngine(QObject *parent)
+	: TimerEngine{0s, 0s, parent}
 	{
 	}
 
@@ -27,13 +30,14 @@ namespace paz::impl::pt
 		if (m_timeLeft > m_startTime)
 		{
 			m_timeLeft = m_startTime;
-			emit timeExceeded();
-			emit timeLeftChanged();
+			emit timeLeftChanged(m_timeLeft);
 		}
 
 		m_timer.setTimerType(Qt::PreciseTimer); ///Я ебал аллайнмент в 5% у CoarseTimer
 		m_timer.setInterval({defaults::c_TimerInterval});
+
 		connect(&m_timer, &QTimer::timeout, this, &TimerEngine::handleTick);
+		connect(this, &TimerEngine::startTimeChanged, this, &TimerEngine::setTimeLeft);
 	}
 
 
@@ -44,29 +48,36 @@ namespace paz::impl::pt
 	bool TimerEngine::isActive() const { return m_timer.isActive(); }
 
 
-	void TimerEngine::setStartTime( const std::chrono::seconds duration )
+	void TimerEngine::setStartTime(const std::chrono::seconds duration)
 	{
-		if (m_startTime != duration)
-		{
-			m_startTime = duration;
-			emit startTimeChanged();
-		};
+		if (m_startTime == duration) return;
 
-		if (m_startTime < m_timeLeft)
-		{
-			m_timeLeft = m_startTime;
-			emit timeExceeded();
-			emit timeLeftChanged();
-		}
+		m_startTime = duration;
+		emit startTimeChanged(m_startTime);
 	}
 
 
 	void TimerEngine::setTimeLeft(const std::chrono::seconds duration)
 	{
+		if (m_timeLeft == duration) return;
+
+		m_timeLeft = std::min(m_timeLeft, duration);
+		emit timeLeftChanged(m_timeLeft);
+	}
+
+
+	void TimerEngine::setNewTimer(const std::chrono::seconds duration)
+	{
+		if (m_startTime != duration)
+		{
+			m_startTime = duration;
+			emit startTimeChanged(duration);
+		}
+
 		if (m_timeLeft != duration)
 		{
 			m_timeLeft = duration;
-			emit timeLeftChanged();
+			emit timeLeftChanged(duration);
 		}
 	}
 
@@ -74,22 +85,14 @@ namespace paz::impl::pt
 	void TimerEngine::start()
 	{
 		m_timer.start();
+		emit timerStarted();
 	}
-
-
-	/*
-	void TimerEngine::start( const std::chrono::seconds seconds )
-	{
-		setStartTime(seconds);
-		setTimeLeft(seconds);
-		m_timer.start();
-	}
-	*/
 
 
 	void TimerEngine::stop()
 	{
 		m_timer.stop();
+		emit timerStopped();
 	}
 
 
@@ -110,6 +113,6 @@ namespace paz::impl::pt
 		}
 
 		--m_timeLeft; //Перенес вниз, потому иначе был бы underflow при m_timeLeft = 0
-		emit timerTicked();
+		emit timerTicked(m_timeLeft);
 	}
 }
