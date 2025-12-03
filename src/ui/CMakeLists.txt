@@ -4,7 +4,7 @@ qt_add_library(PazUI STATIC
 )
 
 target_link_libraries(PazUI PRIVATE
-		PazBackend
+		PazImplementation
 		PazCore
 		Qt6::Core
 		Qt6::Widgets

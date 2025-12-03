@@ -7,6 +7,7 @@ qt_add_executable(Paz
 )
 
 target_link_libraries( Paz PRIVATE
+		PazImplementation
 		PazUI
 		Qt6::Core
 		Qt6::Widgets
