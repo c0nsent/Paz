@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <../core/constants.hpp>
+#include "../../core/constants.hpp"
 
 #include <QObject>
 
