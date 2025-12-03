@@ -1,0 +1,83 @@
+\doxysection{timer-\/engine.hpp}
+\hypertarget{timer-engine_8hpp_source}{}\label{timer-engine_8hpp_source}\index{src/impl/pomodoro-\/timer/timer-\/engine.hpp@{src/impl/pomodoro-\/timer/timer-\/engine.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacepaz_1_1impl_1_1pt}{paz::impl::pt}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{TimerEngine}}\ final\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{TimerEngine}}(QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{TimerEngine}}(std::chrono::seconds\ \ \ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f}{startTime}},\ QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{TimerEngine}}(std::chrono::seconds\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f}{startTime}},\ std::chrono::seconds\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}{timeLeft}},\ QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f}{startTime}}()\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}{timeLeft}}()\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac38b15c10f2a1f2ddfa34aa21a0e06f2}{isActive}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ab0d2e9cbd6b7df0666359d9729b974cc}{setStartTime}}(std::chrono::seconds\ duration);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_af24deedd7694371b1e32ec5780b76f98}{setTimeLeft}}(std::chrono::seconds\ duration);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3bc8cf6f6dd656fb01d80b890ea85f6b}{setNewTimer}}(std::chrono::seconds\ duration);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3ce9872595112ad82aeb023128ec524e}{start}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a0f3a0f8aa05b7ed5bd39869989d92bf7}{stop}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a047fc22e448b45e2ae105f03da7405b7}{resetAndStop}}();}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleTick();}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ signals:}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerTicked(std::chrono::seconds\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}{timeLeft}});}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerFinished();}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ startTimeChanged(std::chrono::seconds\ newStartTime);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timeLeftChanged(std::chrono::seconds\ newTimeLeft);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ QTimer\ m\_timer;\ }
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ std::chrono::seconds\ m\_startTime;\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ std::chrono::seconds\ m\_timeLeft;\ }
+\DoxyCodeLine{00158\ \ \ \ \ \};}
+\DoxyCodeLine{00159\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Paz: Исходный файл src/impl/pomodoro-timer/timer-engine.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Paz<span id="projectnumber">&#160;0.0.3</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('timer-engine_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">timer-engine.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;QTimer&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1pt.html">paz::impl::pt</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">   25</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">TimerEngine</a> final : <span class="keyword">public</span> QObject</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        Q_OBJECT</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">TimerEngine</a>(QObject* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">explicit</span> <a class="code hl_class" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">TimerEngine</a>(std::chrono::seconds   <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac2e464ecbd8e348c06e0cb462a97670f">startTime</a>, QObject* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_class" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">TimerEngine</a>(std::chrono::seconds <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac2e464ecbd8e348c06e0cb462a97670f">startTime</a>, std::chrono::seconds <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a370e9390a4692715a8103669112eb248">timeLeft</a>, QObject *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac2e464ecbd8e348c06e0cb462a97670f">startTime</a>() <span class="keyword">const</span> -&gt; std::chrono::seconds;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a370e9390a4692715a8103669112eb248">timeLeft</a>() <span class="keyword">const</span> -&gt; std::chrono::seconds;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac38b15c10f2a1f2ddfa34aa21a0e06f2">isActive</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">public</span> slots:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ab0d2e9cbd6b7df0666359d9729b974cc">setStartTime</a>(std::chrono::seconds duration);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#af24deedd7694371b1e32ec5780b76f98">setTimeLeft</a>(std::chrono::seconds duration);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a3bc8cf6f6dd656fb01d80b890ea85f6b">setNewTimer</a>(std::chrono::seconds duration);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a3ce9872595112ad82aeb023128ec524e">start</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a0f3a0f8aa05b7ed5bd39869989d92bf7">stop</a>();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a047fc22e448b45e2ae105f03da7405b7">resetAndStop</a>();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">private</span> slots:</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordtype">void</span> handleTick();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    signals:</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordtype">void</span> timerTicked(std::chrono::seconds <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a370e9390a4692715a8103669112eb248">timeLeft</a>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordtype">void</span> timerFinished();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">void</span> startTimeChanged(std::chrono::seconds newStartTime);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keywordtype">void</span> timeLeftChanged(std::chrono::seconds newTimeLeft);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        QTimer m_timer; </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        std::chrono::seconds m_startTime; </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        std::chrono::seconds m_timeLeft; </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    };</div>
+</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">paz::impl::pt::TimerEngine</a></div><div class="ttdoc">Враппер над QTimer для реализации логики таймера помодоро</div><div class="ttdef"><b>Определения</b> timer-engine.hpp:26</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_a047fc22e448b45e2ae105f03da7405b7"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a047fc22e448b45e2ae105f03da7405b7">paz::impl::pt::TimerEngine::resetAndStop</a></div><div class="ttdeci">void resetAndStop()</div><div class="ttdoc">Сбрасывает таймер и останавливает его</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:96</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_a0f3a0f8aa05b7ed5bd39869989d92bf7"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a0f3a0f8aa05b7ed5bd39869989d92bf7">paz::impl::pt::TimerEngine::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Останавливает таймер</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:90</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_a370e9390a4692715a8103669112eb248"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a370e9390a4692715a8103669112eb248">paz::impl::pt::TimerEngine::timeLeft</a></div><div class="ttdeci">auto timeLeft() const -&gt; std::chrono::seconds</div><div class="ttdoc">Геттер для получения оставшегося времени таймера</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:45</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_a3bc8cf6f6dd656fb01d80b890ea85f6b"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a3bc8cf6f6dd656fb01d80b890ea85f6b">paz::impl::pt::TimerEngine::setNewTimer</a></div><div class="ttdeci">void setNewTimer(std::chrono::seconds duration)</div><div class="ttdoc">Сеттер для установки нового времени таймера</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:68</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_a3ce9872595112ad82aeb023128ec524e"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#a3ce9872595112ad82aeb023128ec524e">paz::impl::pt::TimerEngine::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">Запускает таймер</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:84</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_ab0d2e9cbd6b7df0666359d9729b974cc"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ab0d2e9cbd6b7df0666359d9729b974cc">paz::impl::pt::TimerEngine::setStartTime</a></div><div class="ttdeci">void setStartTime(std::chrono::seconds duration)</div><div class="ttdoc">Сеттер для установки времени начала отсчета таймера</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:50</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_ac2e464ecbd8e348c06e0cb462a97670f"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac2e464ecbd8e348c06e0cb462a97670f">paz::impl::pt::TimerEngine::startTime</a></div><div class="ttdeci">auto startTime() const -&gt; std::chrono::seconds</div><div class="ttdoc">Дефолтный конструктор</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:43</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_ac38b15c10f2a1f2ddfa34aa21a0e06f2"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#ac38b15c10f2a1f2ddfa34aa21a0e06f2">paz::impl::pt::TimerEngine::isActive</a></div><div class="ttdeci">bool isActive() const</div><div class="ttdoc">Проверяет, активен ли таймер</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:47</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1TimerEngine_html_af24deedd7694371b1e32ec5780b76f98"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html#af24deedd7694371b1e32ec5780b76f98">paz::impl::pt::TimerEngine::setTimeLeft</a></div><div class="ttdeci">void setTimeLeft(std::chrono::seconds duration)</div><div class="ttdoc">Сеттер для установки оставшегося времени таймера</div><div class="ttdef"><b>Определения</b> timer-engine.cpp:59</div></div>
+<div class="ttc" id="anamespacepaz_1_1impl_1_1pt_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1pt.html">paz::impl::pt</a></div><div class="ttdoc">TODO Задумайся об удаление namespace pt. Возможно стоит перенести все в paz::impl.</div><div class="ttdef"><b>Определения</b> constants.hpp:22</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>src</b></li><li class="navelem"><b>impl</b></li><li class="navelem"><b>pomodoro-timer</b></li><li class="navelem"><b>timer-engine.hpp</b></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

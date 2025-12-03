@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Paz: Исходный файл src/impl/pomodoro-timer/phase-manager.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Paz<span id="projectnumber">&#160;0.0.3</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('phase-manager_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">phase-manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;../../core/constants.hpp&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1pt.html">paz::impl::pt</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html">   28</a></span>    <span class="keyword">class </span><a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aff0691eb78e97206f0fb80455f48fc20">PhaseManager</a> final : <span class="keyword">public</span> QObject</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        Q_OBJECT</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">enum class</span> Phase : quint8 {Work, ShortBreak, LongBreak};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        Q_ENUM(Phase) <span class="comment">// Для поддержки инфраструктуры Qt (например, в QML)</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aff0691eb78e97206f0fb80455f48fc20">PhaseManager</a>(</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            Phase phase,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            std::chrono::seconds work,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            std::chrono::seconds shortBreak,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            std::chrono::seconds longBreak,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            QObject *parent = <span class="keyword">nullptr</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        );</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        [[nodiscard]] Phase <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a5643b9635a552ea1b9f3108a737ed863">currentPhase</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a549be89102600980bfa247583e0a9479">currentPhaseDuration</a>() <span class="keyword">const</span> -&gt; std::chrono::seconds;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#ae3448876ce4bef714b13136159dc07f8">phaseDuration</a>(Phase phase) <span class="keyword">const</span> -&gt; std::chrono::seconds;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">public</span> slots:</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a69e28ff520f5baa1c4341b05cc50304c">setCurrentPhase</a>(Phase phase);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> <a class="code hl_slot" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a6e5a4078c51ff718c0f98be159a35027">setPhaseDuration</a>(Phase phase, std::chrono::seconds <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#ae3448876ce4bef714b13136159dc07f8">phaseDuration</a>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    signals:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aa88fd663b84d1c1a6d5821dc4d60f60d">  105</a></span>        <span class="keywordtype">void</span> <a class="code hl_signal" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aa88fd663b84d1c1a6d5821dc4d60f60d">phaseChanged</a>(Phase <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a5643b9635a552ea1b9f3108a737ed863">currentPhase</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a3d88b02c1c4d0b58a0d12dea6d2c41c7">  116</a></span>        <span class="keywordtype">void</span> <a class="code hl_signal" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a3d88b02c1c4d0b58a0d12dea6d2c41c7">phaseDurationChanged</a>(Phase phase, std::chrono::seconds <a class="code hl_function" href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#ae3448876ce4bef714b13136159dc07f8">phaseDuration</a>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        Phase m_currentPhase; </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        std::chrono::seconds m_arrPhaseDurations[defaults::c_phaseCount]; </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    };</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">using </span>Phase = PhaseManager::Phase; </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_a3d88b02c1c4d0b58a0d12dea6d2c41c7"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a3d88b02c1c4d0b58a0d12dea6d2c41c7">paz::impl::pt::PhaseManager::phaseDurationChanged</a></div><div class="ttdeci">void phaseDurationChanged(Phase phase, std::chrono::seconds phaseDuration)</div><div class="ttdoc">Сигнал, испускаемый при изменении длительности указанной фазы</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_a549be89102600980bfa247583e0a9479"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a549be89102600980bfa247583e0a9479">paz::impl::pt::PhaseManager::currentPhaseDuration</a></div><div class="ttdeci">auto currentPhaseDuration() const -&gt; std::chrono::seconds</div><div class="ttdoc">Геттер для получения длительности текущей фазы</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:32</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_a5643b9635a552ea1b9f3108a737ed863"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a5643b9635a552ea1b9f3108a737ed863">paz::impl::pt::PhaseManager::currentPhase</a></div><div class="ttdeci">Phase currentPhase() const</div><div class="ttdoc">Геттер для получения текущей фазы</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:26</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_a69e28ff520f5baa1c4341b05cc50304c"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a69e28ff520f5baa1c4341b05cc50304c">paz::impl::pt::PhaseManager::setCurrentPhase</a></div><div class="ttdeci">void setCurrentPhase(Phase phase)</div><div class="ttdoc">Сеттер для установки текущей фазы</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:44</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_a6e5a4078c51ff718c0f98be159a35027"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#a6e5a4078c51ff718c0f98be159a35027">paz::impl::pt::PhaseManager::setPhaseDuration</a></div><div class="ttdeci">void setPhaseDuration(Phase phase, std::chrono::seconds phaseDuration)</div><div class="ttdoc">Сеттер для установки длительности указанной фазы</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:53</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_aa88fd663b84d1c1a6d5821dc4d60f60d"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aa88fd663b84d1c1a6d5821dc4d60f60d">paz::impl::pt::PhaseManager::phaseChanged</a></div><div class="ttdeci">void phaseChanged(Phase currentPhase)</div><div class="ttdoc">Сигнал, испускаемый при изменении текущей фазы</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_ae3448876ce4bef714b13136159dc07f8"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#ae3448876ce4bef714b13136159dc07f8">paz::impl::pt::PhaseManager::phaseDuration</a></div><div class="ttdeci">auto phaseDuration(Phase phase) const -&gt; std::chrono::seconds</div><div class="ttdoc">Геттер для получения длительности указанной фазы</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:38</div></div>
+<div class="ttc" id="aclasspaz_1_1impl_1_1pt_1_1PhaseManager_html_aff0691eb78e97206f0fb80455f48fc20"><div class="ttname"><a href="classpaz_1_1impl_1_1pt_1_1PhaseManager.html#aff0691eb78e97206f0fb80455f48fc20">paz::impl::pt::PhaseManager::PhaseManager</a></div><div class="ttdeci">PhaseManager(Phase phase, std::chrono::seconds work, std::chrono::seconds shortBreak, std::chrono::seconds longBreak, QObject *parent=nullptr)</div><div class="ttdoc">Единственный конструктор класса</div><div class="ttdef"><b>Определения</b> phase-manager.cpp:12</div></div>
+<div class="ttc" id="anamespacepaz_1_1impl_1_1pt_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1pt.html">paz::impl::pt</a></div><div class="ttdoc">TODO Задумайся об удаление namespace pt. Возможно стоит перенести все в paz::impl.</div><div class="ttdef"><b>Определения</b> constants.hpp:22</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>src</b></li><li class="navelem"><b>impl</b></li><li class="navelem"><b>pomodoro-timer</b></li><li class="navelem"><b>phase-manager.hpp</b></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

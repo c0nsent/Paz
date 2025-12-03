@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Paz: Класс paz::impl::pt::TimerEngine</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Paz<span id="projectnumber">&#160;0.0.3</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classpaz_1_1impl_1_1pt_1_1TimerEngine.html','','classpaz_1_1impl_1_1pt_1_1TimerEngine-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс paz::impl::pt::TimerEngine<span class="mlabels"><span class="mlabel final">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Враппер над QTimer для реализации логики таймера помодоро  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="timer-engine_8hpp_source.html">timer-engine.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:paz::impl::pt::TimerEngine:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classpaz_1_1impl_1_1pt_1_1TimerEngine.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-slots" class="groupheader"><a id="pub-slots" name="pub-slots"></a>
+Открытые слоты</h2></td></tr>
+<tr class="memitem:ab0d2e9cbd6b7df0666359d9729b974cc" id="r_ab0d2e9cbd6b7df0666359d9729b974cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0d2e9cbd6b7df0666359d9729b974cc">setStartTime</a> (std::chrono::seconds duration)</td></tr>
+<tr class="memdesc:ab0d2e9cbd6b7df0666359d9729b974cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сеттер для установки времени начала отсчета таймера  <br /></td></tr>
+<tr class="memitem:af24deedd7694371b1e32ec5780b76f98" id="r_af24deedd7694371b1e32ec5780b76f98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af24deedd7694371b1e32ec5780b76f98">setTimeLeft</a> (std::chrono::seconds duration)</td></tr>
+<tr class="memdesc:af24deedd7694371b1e32ec5780b76f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сеттер для установки оставшегося времени таймера  <br /></td></tr>
+<tr class="memitem:a3bc8cf6f6dd656fb01d80b890ea85f6b" id="r_a3bc8cf6f6dd656fb01d80b890ea85f6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3bc8cf6f6dd656fb01d80b890ea85f6b">setNewTimer</a> (std::chrono::seconds duration)</td></tr>
+<tr class="memdesc:a3bc8cf6f6dd656fb01d80b890ea85f6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сеттер для установки нового времени таймера  <br /></td></tr>
+<tr class="memitem:a3ce9872595112ad82aeb023128ec524e" id="r_a3ce9872595112ad82aeb023128ec524e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ce9872595112ad82aeb023128ec524e">start</a> ()</td></tr>
+<tr class="memdesc:a3ce9872595112ad82aeb023128ec524e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запускает таймер  <br /></td></tr>
+<tr class="memitem:a0f3a0f8aa05b7ed5bd39869989d92bf7" id="r_a0f3a0f8aa05b7ed5bd39869989d92bf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f3a0f8aa05b7ed5bd39869989d92bf7">stop</a> ()</td></tr>
+<tr class="memdesc:a0f3a0f8aa05b7ed5bd39869989d92bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Останавливает таймер  <br /></td></tr>
+<tr class="memitem:a047fc22e448b45e2ae105f03da7405b7" id="r_a047fc22e448b45e2ae105f03da7405b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a047fc22e448b45e2ae105f03da7405b7">resetAndStop</a> ()</td></tr>
+<tr class="memdesc:a047fc22e448b45e2ae105f03da7405b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сбрасывает таймер и останавливает его  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-signals" class="groupheader"><a id="signals" name="signals"></a>
+Сигналы</h2></td></tr>
+<tr class="memitem:a902a73fa94a62dbf90070b17a3fb4721" id="r_a902a73fa94a62dbf90070b17a3fb4721"><td class="memItemLeft" align="right" valign="top"><a id="a902a73fa94a62dbf90070b17a3fb4721" name="a902a73fa94a62dbf90070b17a3fb4721"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerTicked</b> (std::chrono::seconds <a class="el" href="#a370e9390a4692715a8103669112eb248">timeLeft</a>)</td></tr>
+<tr class="memitem:a106d7d0d85cd2f4a3e0ab36a3c06f7ff" id="r_a106d7d0d85cd2f4a3e0ab36a3c06f7ff"><td class="memItemLeft" align="right" valign="top"><a id="a106d7d0d85cd2f4a3e0ab36a3c06f7ff" name="a106d7d0d85cd2f4a3e0ab36a3c06f7ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerFinished</b> ()</td></tr>
+<tr class="memitem:a85a1329bd63f2ba364e6bbae20682a93" id="r_a85a1329bd63f2ba364e6bbae20682a93"><td class="memItemLeft" align="right" valign="top"><a id="a85a1329bd63f2ba364e6bbae20682a93" name="a85a1329bd63f2ba364e6bbae20682a93"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>startTimeChanged</b> (std::chrono::seconds newStartTime)</td></tr>
+<tr class="memitem:afab31b6a0c4e715e483802bb05487670" id="r_afab31b6a0c4e715e483802bb05487670"><td class="memItemLeft" align="right" valign="top"><a id="afab31b6a0c4e715e483802bb05487670" name="afab31b6a0c4e715e483802bb05487670"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timeLeftChanged</b> (std::chrono::seconds newTimeLeft)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:ac2e464ecbd8e348c06e0cb462a97670f" id="r_ac2e464ecbd8e348c06e0cb462a97670f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2e464ecbd8e348c06e0cb462a97670f">startTime</a> () const -&gt; std::chrono::seconds</td></tr>
+<tr class="memdesc:ac2e464ecbd8e348c06e0cb462a97670f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Дефолтный конструктор  <br /></td></tr>
+<tr class="memitem:a370e9390a4692715a8103669112eb248" id="r_a370e9390a4692715a8103669112eb248"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a370e9390a4692715a8103669112eb248">timeLeft</a> () const -&gt; std::chrono::seconds</td></tr>
+<tr class="memdesc:a370e9390a4692715a8103669112eb248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Геттер для получения оставшегося времени таймера  <br /></td></tr>
+<tr class="memitem:ac38b15c10f2a1f2ddfa34aa21a0e06f2" id="r_ac38b15c10f2a1f2ddfa34aa21a0e06f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac38b15c10f2a1f2ddfa34aa21a0e06f2">isActive</a> () const</td></tr>
+<tr class="memdesc:ac38b15c10f2a1f2ddfa34aa21a0e06f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, активен ли таймер  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Враппер над QTimer для реализации логики таймера помодоро </p>
+<p>Хранит время начала отсчета и оставшееся время таймера. И возвращает сигналы по тикам и окончанию таймера. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="ac38b15c10f2a1f2ddfa34aa21a0e06f2" name="ac38b15c10f2a1f2ddfa34aa21a0e06f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac38b15c10f2a1f2ddfa34aa21a0e06f2">&#9670;&#160;</a></span>isActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool paz::impl::pt::TimerEngine::isActive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Проверяет, активен ли таймер </p>
+<p>Враппер над QTimer::isActive()</p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает true, если таймер активен </dd></dl>
+
+</div>
+</div>
+<a id="a047fc22e448b45e2ae105f03da7405b7" name="a047fc22e448b45e2ae105f03da7405b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a047fc22e448b45e2ae105f03da7405b7">&#9670;&#160;</a></span>resetAndStop</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::resetAndStop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Сбрасывает таймер и останавливает его </p>
+<p>Присваивает <span class="tt">m_timeLeft</span> значение <span class="tt">m_startTime</span> и останавливает внутренний QTimer <span class="tt">m_timer</span> </p>
+
+</div>
+</div>
+<a id="a3bc8cf6f6dd656fb01d80b890ea85f6b" name="a3bc8cf6f6dd656fb01d80b890ea85f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc8cf6f6dd656fb01d80b890ea85f6b">&#9670;&#160;</a></span>setNewTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::setNewTimer </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::seconds</td>          <td class="paramname"><span class="paramname"><em>duration</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Сеттер для установки нового времени таймера </p>
+<p>Присваивает к <span class="tt">m_startTime</span> и <span class="tt">m_timeLeft</span> новое значение.</p>
+<dl class="section note"><dt>Заметки</dt><dd>Название метода - кал, стоит поменять. Да и существование метода под вопросом.</dd></dl>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Новое значение в std::chrono::seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0d2e9cbd6b7df0666359d9729b974cc" name="ab0d2e9cbd6b7df0666359d9729b974cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d2e9cbd6b7df0666359d9729b974cc">&#9670;&#160;</a></span>setStartTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::setStartTime </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::seconds</td>          <td class="paramname"><span class="paramname"><em>duration</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Сеттер для установки времени начала отсчета таймера </p>
+<p>Если новое значение меньше <span class="tt">m_startTime</span>, то к <span class="tt">m_timeLeft</span> также присваивается новое значение.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Новое значение в std::chrono::seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af24deedd7694371b1e32ec5780b76f98" name="af24deedd7694371b1e32ec5780b76f98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24deedd7694371b1e32ec5780b76f98">&#9670;&#160;</a></span>setTimeLeft</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::setTimeLeft </td>
+          <td>(</td>
+          <td class="paramtype">std::chrono::seconds</td>          <td class="paramname"><span class="paramname"><em>duration</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Сеттер для установки оставшегося времени таймера </p>
+<p>Если новое значение больше <span class="tt">m_timeLeft</span>, то присваивается текущее значение <span class="tt">m_timeLeft</span>.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>Новое значение в std::chrono::seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3ce9872595112ad82aeb023128ec524e" name="a3ce9872595112ad82aeb023128ec524e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ce9872595112ad82aeb023128ec524e">&#9670;&#160;</a></span>start</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::start </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Запускает таймер </p>
+<p>Запускает внутренний QTimer <span class="tt">m_timer</span> </p>
+
+</div>
+</div>
+<a id="ac2e464ecbd8e348c06e0cb462a97670f" name="ac2e464ecbd8e348c06e0cb462a97670f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2e464ecbd8e348c06e0cb462a97670f">&#9670;&#160;</a></span>startTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto paz::impl::pt::TimerEngine::startTime </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const-&gt;std::chrono::seconds</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Дефолтный конструктор </p>
+<p>Вызывает конструктор <span class="tt">TimerEngine::TimerEngine(std::chrono::seconds startTime, std::chrono::seconds timeLeft, QObject* parent)</span>. Значения <span class="tt">m_startTime</span> и <span class="tt">m_timeLeft</span> задаются константой ``</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>Указатель на родительский QObject */</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>explicit <a class="el" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html" title="Враппер над QTimer для реализации логики таймера помодоро">TimerEngine</a>(QObject* parent = nullptr);</p>
+<p>explicit <a class="el" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html" title="Враппер над QTimer для реализации логики таймера помодоро">TimerEngine</a>(std::chrono::seconds startTime, QObject* parent = nullptr); <a class="el" href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html" title="Враппер над QTimer для реализации логики таймера помодоро">TimerEngine</a>(std::chrono::seconds startTime, std::chrono::seconds timeLeft, QObject *parent = nullptr);</p>
+<p>/**</p>
+<p>Геттер для получения времени начала отсчета таймера</p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает время начала отсчета таймера в std::chrono::seconds </dd></dl>
+
+</div>
+</div>
+<a id="a0f3a0f8aa05b7ed5bd39869989d92bf7" name="a0f3a0f8aa05b7ed5bd39869989d92bf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f3a0f8aa05b7ed5bd39869989d92bf7">&#9670;&#160;</a></span>stop</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void paz::impl::pt::TimerEngine::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Останавливает таймер </p>
+<p>Останавливает внутренний QTimer <span class="tt">m_timer</span> </p>
+
+</div>
+</div>
+<a id="a370e9390a4692715a8103669112eb248" name="a370e9390a4692715a8103669112eb248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370e9390a4692715a8103669112eb248">&#9670;&#160;</a></span>timeLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto paz::impl::pt::TimerEngine::timeLeft </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const-&gt;std::chrono::seconds</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Геттер для получения оставшегося времени таймера </p>
+<dl class="section return"><dt>Возвращает</dt><dd>Возвращает оставшееся время таймера в std::chrono::seconds </dd></dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>src/impl/pomodoro-timer/<a class="el" href="timer-engine_8hpp_source.html">timer-engine.hpp</a></li>
+<li>src/impl/pomodoro-timer/<b>timer-engine.cpp</b></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacepaz.html">paz</a></li><li class="navelem"><b>impl</b></li><li class="navelem"><a href="namespacepaz_1_1impl_1_1pt.html">pt</a></li><li class="navelem"><a href="classpaz_1_1impl_1_1pt_1_1TimerEngine.html">TimerEngine</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

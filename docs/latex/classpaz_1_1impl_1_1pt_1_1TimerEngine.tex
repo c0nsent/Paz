@@ -1,0 +1,212 @@
+\doxysection{Класс paz\+::impl\+::pt\+::Timer\+Engine}
+\hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine}{}\label{classpaz_1_1impl_1_1pt_1_1TimerEngine}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+
+
+Враппер над QTimer для реализации логики таймера помодоро  
+
+
+
+
+{\ttfamily \#include $<$timer-\/engine.\+hpp$>$}
+
+Граф наследования\+:paz\+::impl\+::pt\+::Timer\+Engine\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpaz_1_1impl_1_1pt_1_1TimerEngine}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ab0d2e9cbd6b7df0666359d9729b974cc}{set\+Start\+Time}} (std\+::chrono\+::seconds duration)
+\begin{DoxyCompactList}\small\item\em Сеттер для установки времени начала отсчета таймера \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_af24deedd7694371b1e32ec5780b76f98}{set\+Time\+Left}} (std\+::chrono\+::seconds duration)
+\begin{DoxyCompactList}\small\item\em Сеттер для установки оставшегося времени таймера \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3bc8cf6f6dd656fb01d80b890ea85f6b}{set\+New\+Timer}} (std\+::chrono\+::seconds duration)
+\begin{DoxyCompactList}\small\item\em Сеттер для установки нового времени таймера \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3ce9872595112ad82aeb023128ec524e}{start}} ()
+\begin{DoxyCompactList}\small\item\em Запускает таймер \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a0f3a0f8aa05b7ed5bd39869989d92bf7}{stop}} ()
+\begin{DoxyCompactList}\small\item\em Останавливает таймер \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a047fc22e448b45e2ae105f03da7405b7}{reset\+And\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Сбрасывает таймер и останавливает его \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a902a73fa94a62dbf90070b17a3fb4721}\label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a902a73fa94a62dbf90070b17a3fb4721} 
+void {\bfseries timer\+Ticked} (std\+::chrono\+::seconds \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}{time\+Left}})
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a106d7d0d85cd2f4a3e0ab36a3c06f7ff}\label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a106d7d0d85cd2f4a3e0ab36a3c06f7ff} 
+void {\bfseries timer\+Finished} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a85a1329bd63f2ba364e6bbae20682a93}\label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a85a1329bd63f2ba364e6bbae20682a93} 
+void {\bfseries start\+Time\+Changed} (std\+::chrono\+::seconds new\+Start\+Time)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_afab31b6a0c4e715e483802bb05487670}\label{classpaz_1_1impl_1_1pt_1_1TimerEngine_afab31b6a0c4e715e483802bb05487670} 
+void {\bfseries time\+Left\+Changed} (std\+::chrono\+::seconds new\+Time\+Left)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f}{start\+Time}} () const -\/$>$ std\+::chrono\+::seconds
+\begin{DoxyCompactList}\small\item\em Дефолтный конструктор \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}{time\+Left}} () const -\/$>$ std\+::chrono\+::seconds
+\begin{DoxyCompactList}\small\item\em Геттер для получения оставшегося времени таймера \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac38b15c10f2a1f2ddfa34aa21a0e06f2}{is\+Active}} () const
+\begin{DoxyCompactList}\small\item\em Проверяет, активен ли таймер \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Враппер над QTimer для реализации логики таймера помодоро 
+
+Хранит время начала отсчета и оставшееся время таймера. И возвращает сигналы по тикам и окончанию таймера. 
+
+\label{doc-func-members}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_doc-func-members}
+\doxysubsection{Методы}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac38b15c10f2a1f2ddfa34aa21a0e06f2}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!isActive@{isActive}}
+\index{isActive@{isActive}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{isActive()}{isActive()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac38b15c10f2a1f2ddfa34aa21a0e06f2} 
+bool paz\+::impl\+::pt\+::\+Timer\+Engine\+::is\+Active (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Проверяет, активен ли таймер 
+
+Враппер над QTimer\+::is\+Active()
+
+\begin{DoxyReturn}{Возвращает}
+Возвращает true, если таймер активен 
+\end{DoxyReturn}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a047fc22e448b45e2ae105f03da7405b7}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!resetAndStop@{resetAndStop}}
+\index{resetAndStop@{resetAndStop}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{resetAndStop}{resetAndStop}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a047fc22e448b45e2ae105f03da7405b7} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::reset\+And\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сбрасывает таймер и останавливает его 
+
+Присваивает {\ttfamily m\+\_\+time\+Left} значение {\ttfamily m\+\_\+start\+Time} и останавливает внутренний QTimer {\ttfamily m\+\_\+timer} \Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3bc8cf6f6dd656fb01d80b890ea85f6b}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!setNewTimer@{setNewTimer}}
+\index{setNewTimer@{setNewTimer}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{setNewTimer}{setNewTimer}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3bc8cf6f6dd656fb01d80b890ea85f6b} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::set\+New\+Timer (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сеттер для установки нового времени таймера 
+
+Присваивает к {\ttfamily m\+\_\+start\+Time} и {\ttfamily m\+\_\+time\+Left} новое значение.
+
+\begin{DoxyNote}{Заметки}
+Название метода -\/ кал, стоит поменять. Да и существование метода под вопросом.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Аргументы}
+{\em duration} & Новое значение в std\+::chrono\+::seconds \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_ab0d2e9cbd6b7df0666359d9729b974cc}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!setStartTime@{setStartTime}}
+\index{setStartTime@{setStartTime}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{setStartTime}{setStartTime}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_ab0d2e9cbd6b7df0666359d9729b974cc} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::set\+Start\+Time (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сеттер для установки времени начала отсчета таймера 
+
+Если новое значение меньше {\ttfamily m\+\_\+start\+Time}, то к {\ttfamily m\+\_\+time\+Left} также присваивается новое значение.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em duration} & Новое значение в std\+::chrono\+::seconds \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_af24deedd7694371b1e32ec5780b76f98}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!setTimeLeft@{setTimeLeft}}
+\index{setTimeLeft@{setTimeLeft}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{setTimeLeft}{setTimeLeft}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_af24deedd7694371b1e32ec5780b76f98} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::set\+Time\+Left (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сеттер для установки оставшегося времени таймера 
+
+Если новое значение больше {\ttfamily m\+\_\+time\+Left}, то присваивается текущее значение {\ttfamily m\+\_\+time\+Left}.
+
+
+\begin{DoxyParams}{Аргументы}
+{\em duration} & Новое значение в std\+::chrono\+::seconds \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3ce9872595112ad82aeb023128ec524e}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!start@{start}}
+\index{start@{start}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{start}{start}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a3ce9872595112ad82aeb023128ec524e} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Запускает таймер 
+
+Запускает внутренний QTimer {\ttfamily m\+\_\+timer} \Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!startTime@{startTime}}
+\index{startTime@{startTime}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{startTime()}{startTime()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_ac2e464ecbd8e348c06e0cb462a97670f} 
+auto paz\+::impl\+::pt\+::\+Timer\+Engine\+::start\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const-\/$>$std\+::chrono\+::seconds\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Дефолтный конструктор 
+
+Вызывает конструктор {\ttfamily Timer\+Engine\+::\+Timer\+Engine(std\+::chrono\+::seconds start\+Time, std\+::chrono\+::seconds time\+Left, QObject\texorpdfstring{$\ast$}{*} parent)}. Значения {\ttfamily m\+\_\+start\+Time} и {\ttfamily m\+\_\+time\+Left} задаются константой \`{}\`{}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em parent} & Указатель на родительский QObject \texorpdfstring{$\ast$}{*}/\\
+\hline
+\end{DoxyParams}
+explicit \doxylink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{Timer\+Engine}(QObject\texorpdfstring{$\ast$}{*} parent = nullptr);
+
+explicit \doxylink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{Timer\+Engine}(std\+::chrono\+::seconds start\+Time, QObject\texorpdfstring{$\ast$}{*} parent = nullptr); \doxylink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{Timer\+Engine}(std\+::chrono\+::seconds start\+Time, std\+::chrono\+::seconds time\+Left, QObject \texorpdfstring{$\ast$}{*}parent = nullptr);
+
+/\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}
+
+Геттер для получения времени начала отсчета таймера
+
+\begin{DoxyReturn}{Возвращает}
+Возвращает время начала отсчета таймера в std\+::chrono\+::seconds 
+\end{DoxyReturn}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a0f3a0f8aa05b7ed5bd39869989d92bf7}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!stop@{stop}}
+\index{stop@{stop}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{stop}{stop}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a0f3a0f8aa05b7ed5bd39869989d92bf7} 
+void paz\+::impl\+::pt\+::\+Timer\+Engine\+::stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Останавливает таймер 
+
+Останавливает внутренний QTimer {\ttfamily m\+\_\+timer} \Hypertarget{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248}\index{paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}!timeLeft@{timeLeft}}
+\index{timeLeft@{timeLeft}!paz::impl::pt::TimerEngine@{paz::impl::pt::TimerEngine}}
+\doxysubsubsection{\texorpdfstring{timeLeft()}{timeLeft()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1TimerEngine_a370e9390a4692715a8103669112eb248} 
+auto paz\+::impl\+::pt\+::\+Timer\+Engine\+::time\+Left (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const-\/$>$std\+::chrono\+::seconds\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Геттер для получения оставшегося времени таймера 
+
+\begin{DoxyReturn}{Возвращает}
+Возвращает оставшееся время таймера в std\+::chrono\+::seconds 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/impl/pomodoro-\/timer/timer-\/engine.\+hpp\item 
+src/impl/pomodoro-\/timer/timer-\/engine.\+cpp\end{DoxyCompactItemize}

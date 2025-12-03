@@ -1,0 +1,73 @@
+\doxysection{phase-\/manager.hpp}
+\hypertarget{phase-manager_8hpp_source}{}\label{phase-manager_8hpp_source}\index{src/impl/pomodoro-\/timer/phase-\/manager.hpp@{src/impl/pomodoro-\/timer/phase-\/manager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../../core/constants.hpp"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacepaz_1_1impl_1_1pt}{paz::impl::pt}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_aff0691eb78e97206f0fb80455f48fc20}{PhaseManager}}\ final\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00029\ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ Phase\ :\ quint8\ \{Work,\ ShortBreak,\ LongBreak\};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ Q\_ENUM(Phase)\ \textcolor{comment}{//\ Для\ поддержки\ инфраструктуры\ Qt\ (например,\ в\ QML)}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_aff0691eb78e97206f0fb80455f48fc20}{PhaseManager}}(}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ Phase\ phase,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ work,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ shortBreak,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ longBreak,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ QObject\ *parent\ =\ \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ [[nodiscard]]\ Phase\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863}{currentPhase}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a549be89102600980bfa247583e0a9479}{currentPhaseDuration}}()\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phaseDuration}}(Phase\ phase)\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a69e28ff520f5baa1c4341b05cc50304c}{setCurrentPhase}}(Phase\ phase);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a6e5a4078c51ff718c0f98be159a35027}{setPhaseDuration}}(Phase\ phase,\ std::chrono::seconds\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phaseDuration}});}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ signals:}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa88fd663b84d1c1a6d5821dc4d60f60d}{phaseChanged}}(Phase\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863}{currentPhase}});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a3d88b02c1c4d0b58a0d12dea6d2c41c7}{phaseDurationChanged}}(Phase\ phase,\ std::chrono::seconds\ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phaseDuration}});}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ Phase\ m\_currentPhase;\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ std::chrono::seconds\ m\_arrPhaseDurations[defaults::c\_phaseCount];\ }
+\DoxyCodeLine{00122\ \ \ \ \ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{using\ }Phase\ =\ PhaseManager::Phase;\ }
+\DoxyCodeLine{00125\ \}}
+
+\end{DoxyCode}

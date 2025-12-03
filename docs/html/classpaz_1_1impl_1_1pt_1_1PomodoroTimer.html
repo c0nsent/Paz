@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Paz: Класс paz::impl::pt::PomodoroTimer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Paz<span id="projectnumber">&#160;0.0.3</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classpaz_1_1impl_1_1pt_1_1PomodoroTimer.html','','classpaz_1_1impl_1_1pt_1_1PomodoroTimer-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс paz::impl::pt::PomodoroTimer<span class="mlabels"><span class="mlabel final">final</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>TODO Возможно стоит PomodoroPhase интегрировать в <a class="el" href="classpaz_1_1impl_1_1pt_1_1PomodoroTimer.html" title="TODO Возможно стоит PomodoroPhase интегрировать в PomodoroTimer.">PomodoroTimer</a>.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="pomodoro-timer_8hpp_source.html">pomodoro-timer.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Граф наследования:paz::impl::pt::PomodoroTimer:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classpaz_1_1impl_1_1pt_1_1PomodoroTimer.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-slots" class="groupheader"><a id="pub-slots" name="pub-slots"></a>
+Открытые слоты</h2></td></tr>
+<tr class="memitem:ac1b1f6c9d670cf106c30f6437d4af2f7" id="r_ac1b1f6c9d670cf106c30f6437d4af2f7"><td class="memItemLeft" align="right" valign="top"><a id="ac1b1f6c9d670cf106c30f6437d4af2f7" name="ac1b1f6c9d670cf106c30f6437d4af2f7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setIsPaused</b> (bool isPaused)</td></tr>
+<tr class="memitem:a0516425087cc803d9a03e33d3f920bdf" id="r_a0516425087cc803d9a03e33d3f920bdf"><td class="memItemLeft" align="right" valign="top"><a id="a0516425087cc803d9a03e33d3f920bdf" name="a0516425087cc803d9a03e33d3f920bdf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setRoundCount</b> (quint16 roundCount)</td></tr>
+<tr class="memitem:aa7d628db3d6e85dd568703aa596656a3" id="r_aa7d628db3d6e85dd568703aa596656a3"><td class="memItemLeft" align="right" valign="top"><a id="aa7d628db3d6e85dd568703aa596656a3" name="aa7d628db3d6e85dd568703aa596656a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setRoundLength</b> (quint16 roundLength)</td></tr>
+<tr class="memitem:a51c0c781561ff63ee493def77cd4a53c" id="r_a51c0c781561ff63ee493def77cd4a53c"><td class="memItemLeft" align="right" valign="top"><a id="a51c0c781561ff63ee493def77cd4a53c" name="a51c0c781561ff63ee493def77cd4a53c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCurrentPhase</b> (Phase phase)</td></tr>
+<tr class="memitem:ae72a9680aa99fbc6397ef7d7f97259d1" id="r_ae72a9680aa99fbc6397ef7d7f97259d1"><td class="memItemLeft" align="right" valign="top"><a id="ae72a9680aa99fbc6397ef7d7f97259d1" name="ae72a9680aa99fbc6397ef7d7f97259d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPhaseDuration</b> (Phase phase, std::chrono::seconds phaseDuration)</td></tr>
+<tr class="memitem:ae0640aa2cb292520374c462630f6d3ae" id="r_ae0640aa2cb292520374c462630f6d3ae"><td class="memItemLeft" align="right" valign="top"><a id="ae0640aa2cb292520374c462630f6d3ae" name="ae0640aa2cb292520374c462630f6d3ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="memitem:a172eae1ca363c12d639701c3a2e9b0dc" id="r_a172eae1ca363c12d639701c3a2e9b0dc"><td class="memItemLeft" align="right" valign="top"><a id="a172eae1ca363c12d639701c3a2e9b0dc" name="a172eae1ca363c12d639701c3a2e9b0dc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
+<tr class="memitem:aae86cac0e61deadad0abbcb1ad9d3165" id="r_aae86cac0e61deadad0abbcb1ad9d3165"><td class="memItemLeft" align="right" valign="top"><a id="aae86cac0e61deadad0abbcb1ad9d3165" name="aae86cac0e61deadad0abbcb1ad9d3165"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>resetAndStop</b> ()</td></tr>
+<tr class="memitem:a522f00df3177e145ddac7667ce87aee3" id="r_a522f00df3177e145ddac7667ce87aee3"><td class="memItemLeft" align="right" valign="top"><a id="a522f00df3177e145ddac7667ce87aee3" name="a522f00df3177e145ddac7667ce87aee3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>skipPhase</b> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-signals" class="groupheader"><a id="signals" name="signals"></a>
+Сигналы</h2></td></tr>
+<tr class="memitem:a9f4c16c2196e5720658203655e05e6c0" id="r_a9f4c16c2196e5720658203655e05e6c0"><td class="memItemLeft" align="right" valign="top"><a id="a9f4c16c2196e5720658203655e05e6c0" name="a9f4c16c2196e5720658203655e05e6c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>isPausedChanged</b> ()</td></tr>
+<tr class="memitem:ab4c79f3458815d71a66d859fa8d8100a" id="r_ab4c79f3458815d71a66d859fa8d8100a"><td class="memItemLeft" align="right" valign="top"><a id="ab4c79f3458815d71a66d859fa8d8100a" name="ab4c79f3458815d71a66d859fa8d8100a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerTicked</b> ()</td></tr>
+<tr class="memitem:aa669f724c36e5b76c769c9fa3beeca50" id="r_aa669f724c36e5b76c769c9fa3beeca50"><td class="memItemLeft" align="right" valign="top"><a id="aa669f724c36e5b76c769c9fa3beeca50" name="aa669f724c36e5b76c769c9fa3beeca50"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerFinished</b> ()</td></tr>
+<tr class="memitem:ad0639ba255e313a64e843d16f5cdbb4c" id="r_ad0639ba255e313a64e843d16f5cdbb4c"><td class="memItemLeft" align="right" valign="top"><a id="ad0639ba255e313a64e843d16f5cdbb4c" name="ad0639ba255e313a64e843d16f5cdbb4c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerStarted</b> ()</td></tr>
+<tr class="memitem:a951d793f153c7acc4c85e3806b10038f" id="r_a951d793f153c7acc4c85e3806b10038f"><td class="memItemLeft" align="right" valign="top"><a id="a951d793f153c7acc4c85e3806b10038f" name="a951d793f153c7acc4c85e3806b10038f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timerStopped</b> ()</td></tr>
+<tr class="memitem:a3e1799ba8b3d9e6951ad6118c0111427" id="r_a3e1799ba8b3d9e6951ad6118c0111427"><td class="memItemLeft" align="right" valign="top"><a id="a3e1799ba8b3d9e6951ad6118c0111427" name="a3e1799ba8b3d9e6951ad6118c0111427"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>phaseChanged</b> ()</td></tr>
+<tr class="memitem:afd59f6358fc2df2e098977a3bdd74f84" id="r_afd59f6358fc2df2e098977a3bdd74f84"><td class="memItemLeft" align="right" valign="top"><a id="afd59f6358fc2df2e098977a3bdd74f84" name="afd59f6358fc2df2e098977a3bdd74f84"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>phaseDurationChanged</b> ()</td></tr>
+<tr class="memitem:abc8e10699b1d75387b05d7b418ebd4ab" id="r_abc8e10699b1d75387b05d7b418ebd4ab"><td class="memItemLeft" align="right" valign="top"><a id="abc8e10699b1d75387b05d7b418ebd4ab" name="abc8e10699b1d75387b05d7b418ebd4ab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>roundFinished</b> ()</td></tr>
+<tr class="memitem:afcf25242b3ba83e236fe88c462139af2" id="r_afcf25242b3ba83e236fe88c462139af2"><td class="memItemLeft" align="right" valign="top"><a id="afcf25242b3ba83e236fe88c462139af2" name="afcf25242b3ba83e236fe88c462139af2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>roundCountChanged</b> ()</td></tr>
+<tr class="memitem:a29db43df6af2f531b35a759dcb4f03d1" id="r_a29db43df6af2f531b35a759dcb4f03d1"><td class="memItemLeft" align="right" valign="top"><a id="a29db43df6af2f531b35a759dcb4f03d1" name="a29db43df6af2f531b35a759dcb4f03d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>roundLengthChanged</b> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:adcc03ea59ca1523c134d8e244fc9a60f" id="r_adcc03ea59ca1523c134d8e244fc9a60f"><td class="memItemLeft" align="right" valign="top"><a id="adcc03ea59ca1523c134d8e244fc9a60f" name="adcc03ea59ca1523c134d8e244fc9a60f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>PomodoroTimer</b> (bool isPaused, quint16 roundCount, quint16 roundLength, Phase phase, std::chrono::seconds work, std::chrono::seconds shortBreak, std::chrono::seconds longBreak, QObject *parent=nullptr)</td></tr>
+<tr class="memitem:ad38e223da0230dbcd384c8abc27d2e33" id="r_ad38e223da0230dbcd384c8abc27d2e33"><td class="memItemLeft" align="right" valign="top"><a id="ad38e223da0230dbcd384c8abc27d2e33" name="ad38e223da0230dbcd384c8abc27d2e33"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPaused</b> () const</td></tr>
+<tr class="memitem:aea4174a1fd75bfbf8dd4aafd5cdc2820" id="r_aea4174a1fd75bfbf8dd4aafd5cdc2820"><td class="memItemLeft" align="right" valign="top"><a id="aea4174a1fd75bfbf8dd4aafd5cdc2820" name="aea4174a1fd75bfbf8dd4aafd5cdc2820"></a>
+quint16&#160;</td><td class="memItemRight" valign="bottom"><b>roundCount</b> () const</td></tr>
+<tr class="memitem:a7c5ed67db8af5cd5d746952039214d75" id="r_a7c5ed67db8af5cd5d746952039214d75"><td class="memItemLeft" align="right" valign="top"><a id="a7c5ed67db8af5cd5d746952039214d75" name="a7c5ed67db8af5cd5d746952039214d75"></a>
+quint16&#160;</td><td class="memItemRight" valign="bottom"><b>roundLength</b> () const</td></tr>
+<tr class="memitem:a4ab70c3c7dce009290f7a16b7b3747be" id="r_a4ab70c3c7dce009290f7a16b7b3747be"><td class="memItemLeft" align="right" valign="top"><a id="a4ab70c3c7dce009290f7a16b7b3747be" name="a4ab70c3c7dce009290f7a16b7b3747be"></a>
+Phase&#160;</td><td class="memItemRight" valign="bottom"><b>currentPhase</b> () const</td></tr>
+<tr class="memitem:ada3bdbbcc9915d653926e743df759b14" id="r_ada3bdbbcc9915d653926e743df759b14"><td class="memItemLeft" align="right" valign="top"><a id="ada3bdbbcc9915d653926e743df759b14" name="ada3bdbbcc9915d653926e743df759b14"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>currentPhaseDuration</b> () const -&gt; std::chrono::seconds</td></tr>
+<tr class="memitem:ae2ea8a4d26bf29e66d49425b298ba042" id="r_ae2ea8a4d26bf29e66d49425b298ba042"><td class="memItemLeft" align="right" valign="top"><a id="ae2ea8a4d26bf29e66d49425b298ba042" name="ae2ea8a4d26bf29e66d49425b298ba042"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>phaseDuration</b> (Phase phase) const -&gt; std::chrono::seconds</td></tr>
+<tr class="memitem:a4602c2d3fd67fe1de83a83ccd58d2705" id="r_a4602c2d3fd67fe1de83a83ccd58d2705"><td class="memItemLeft" align="right" valign="top"><a id="a4602c2d3fd67fe1de83a83ccd58d2705" name="a4602c2d3fd67fe1de83a83ccd58d2705"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>timeLeft</b> () const -&gt; std::chrono::seconds</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>TODO Возможно стоит PomodoroPhase интегрировать в <a class="el" href="classpaz_1_1impl_1_1pt_1_1PomodoroTimer.html" title="TODO Возможно стоит PomodoroPhase интегрировать в PomodoroTimer.">PomodoroTimer</a>. </p>
+</div><hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>src/impl/pomodoro-timer/<a class="el" href="pomodoro-timer_8hpp_source.html">pomodoro-timer.hpp</a></li>
+<li>src/impl/pomodoro-timer/<b>pomodoro-timer.cpp</b></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacepaz.html">paz</a></li><li class="navelem"><b>impl</b></li><li class="navelem"><a href="namespacepaz_1_1impl_1_1pt.html">pt</a></li><li class="navelem"><a href="classpaz_1_1impl_1_1pt_1_1PomodoroTimer.html">PomodoroTimer</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

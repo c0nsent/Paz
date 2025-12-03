@@ -1,0 +1,187 @@
+\doxysection{Класс paz\+::impl\+::pt\+::Phase\+Manager}
+\hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager}{}\label{classpaz_1_1impl_1_1pt_1_1PhaseManager}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+
+
+Менеджер фаз помодоро-\/таймера  
+
+
+
+
+{\ttfamily \#include $<$phase-\/manager.\+hpp$>$}
+
+Граф наследования\+:paz\+::impl\+::pt\+::Phase\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpaz_1_1impl_1_1pt_1_1PhaseManager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые типы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa99a5c5d79e731bc48527d401811e4f2}\label{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa99a5c5d79e731bc48527d401811e4f2} 
+enum class {\bfseries Phase} \+: quint8 \{ {\bfseries Work}
+, {\bfseries Short\+Break}
+, {\bfseries Long\+Break}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a69e28ff520f5baa1c4341b05cc50304c}{set\+Current\+Phase}} (Phase phase)
+\begin{DoxyCompactList}\small\item\em Сеттер для установки текущей фазы \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a6e5a4078c51ff718c0f98be159a35027}{set\+Phase\+Duration}} (Phase phase, std\+::chrono\+::seconds \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phase\+Duration}})
+\begin{DoxyCompactList}\small\item\em Сеттер для установки длительности указанной фазы \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa88fd663b84d1c1a6d5821dc4d60f60d}{phase\+Changed}} (Phase \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863}{current\+Phase}})
+\begin{DoxyCompactList}\small\item\em Сигнал, испускаемый при изменении текущей фазы \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a3d88b02c1c4d0b58a0d12dea6d2c41c7}{phase\+Duration\+Changed}} (Phase phase, std\+::chrono\+::seconds \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phase\+Duration}})
+\begin{DoxyCompactList}\small\item\em Сигнал, испускаемый при изменении длительности указанной фазы \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_aff0691eb78e97206f0fb80455f48fc20}\label{classpaz_1_1impl_1_1pt_1_1PhaseManager_aff0691eb78e97206f0fb80455f48fc20} 
+{\bfseries Phase\+Manager} (Phase phase, std\+::chrono\+::seconds work, std\+::chrono\+::seconds short\+Break, std\+::chrono\+::seconds long\+Break, QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Единственный конструктор класса \end{DoxyCompactList}\item 
+Phase \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863}{current\+Phase}} () const
+\begin{DoxyCompactList}\small\item\em Геттер для получения текущей фазы \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a549be89102600980bfa247583e0a9479}{current\+Phase\+Duration}} () const -\/$>$ std\+::chrono\+::seconds
+\begin{DoxyCompactList}\small\item\em Геттер для получения длительности текущей фазы \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}{phase\+Duration}} (Phase phase) const -\/$>$ std\+::chrono\+::seconds
+\begin{DoxyCompactList}\small\item\em Геттер для получения длительности указанной фазы \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Менеджер фаз помодоро-\/таймера 
+
+Хранит текущую фазу и длительности всех фаз в массиве
+
+\begin{DoxyNote}{Заметки}
+Класс довольно простой, стоит задуматься об объединении его с \doxylink{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}{Pomodoro\+Timer} 
+\end{DoxyNote}
+
+
+\label{doc-func-members}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_doc-func-members}
+\doxysubsection{Методы}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!currentPhase@{currentPhase}}
+\index{currentPhase@{currentPhase}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{currentPhase()}{currentPhase()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_a5643b9635a552ea1b9f3108a737ed863} 
+Phase paz\+::impl\+::pt\+::\+Phase\+Manager\+::current\+Phase (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Геттер для получения текущей фазы 
+
+\begin{DoxyReturn}{Возвращает}
+Текущая фаза в виде {\ttfamily Phase\+Manager\+::\+Phase} 
+\end{DoxyReturn}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_a549be89102600980bfa247583e0a9479}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!currentPhaseDuration@{currentPhaseDuration}}
+\index{currentPhaseDuration@{currentPhaseDuration}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{currentPhaseDuration()}{currentPhaseDuration()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_a549be89102600980bfa247583e0a9479} 
+auto paz\+::impl\+::pt\+::\+Phase\+Manager\+::current\+Phase\+Duration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const-\/$>$std\+::chrono\+::seconds\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Геттер для получения длительности текущей фазы 
+
+\begin{DoxyReturn}{Возвращает}
+Длительность текущей фазы в {\ttfamily std\+::chrono\+::seconds} 
+\end{DoxyReturn}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa88fd663b84d1c1a6d5821dc4d60f60d}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!phaseChanged@{phaseChanged}}
+\index{phaseChanged@{phaseChanged}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{phaseChanged}{phaseChanged}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa88fd663b84d1c1a6d5821dc4d60f60d} 
+void paz\+::impl\+::pt\+::\+Phase\+Manager\+::phase\+Changed (\begin{DoxyParamCaption}\item[{Phase}]{current\+Phase}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал, испускаемый при изменении текущей фазы 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em current\+Phase} & Новая текущая фаза в виде {\ttfamily Phase\+Manager\+::\+Phase}\\
+\hline
+\end{DoxyParams}
+Сигнал испускается при изменении текущей фазы в {\ttfamily \doxylink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a69e28ff520f5baa1c4341b05cc50304c}{set\+Current\+Phase()}} \Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!phaseDuration@{phaseDuration}}
+\index{phaseDuration@{phaseDuration}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{phaseDuration()}{phaseDuration()}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_ae3448876ce4bef714b13136159dc07f8} 
+auto paz\+::impl\+::pt\+::\+Phase\+Manager\+::phase\+Duration (\begin{DoxyParamCaption}\item[{Phase}]{phase}{}\end{DoxyParamCaption}) const-\/$>$std\+::chrono\+::seconds\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Геттер для получения длительности указанной фазы 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em phase} & Фаза, длительность которой нужно получить\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Длительность указанной фазы в {\ttfamily std\+::chrono\+::seconds} 
+\end{DoxyReturn}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_a3d88b02c1c4d0b58a0d12dea6d2c41c7}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!phaseDurationChanged@{phaseDurationChanged}}
+\index{phaseDurationChanged@{phaseDurationChanged}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{phaseDurationChanged}{phaseDurationChanged}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_a3d88b02c1c4d0b58a0d12dea6d2c41c7} 
+void paz\+::impl\+::pt\+::\+Phase\+Manager\+::phase\+Duration\+Changed (\begin{DoxyParamCaption}\item[{Phase}]{phase}{, }\item[{std\+::chrono\+::seconds}]{phase\+Duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Сигнал, испускаемый при изменении длительности указанной фазы 
+
+Сигнал испускается при изменении длительности фазы в {\ttfamily \doxylink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a6e5a4078c51ff718c0f98be159a35027}{set\+Phase\+Duration()}}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em phase} & Фаза, длительность которой была изменена \\
+\hline
+{\em phase\+Duration} & Новая длительность фазы в std\+::chrono\+::seconds \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_a69e28ff520f5baa1c4341b05cc50304c}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!setCurrentPhase@{setCurrentPhase}}
+\index{setCurrentPhase@{setCurrentPhase}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{setCurrentPhase}{setCurrentPhase}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_a69e28ff520f5baa1c4341b05cc50304c} 
+void paz\+::impl\+::pt\+::\+Phase\+Manager\+::set\+Current\+Phase (\begin{DoxyParamCaption}\item[{Phase}]{phase}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сеттер для установки текущей фазы 
+
+При изменении фазы испускается сигнал {\ttfamily \doxylink{classpaz_1_1impl_1_1pt_1_1PhaseManager_aa88fd663b84d1c1a6d5821dc4d60f60d}{phase\+Changed()}}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em phase} & Фаза, которую нужно установить \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PhaseManager_a6e5a4078c51ff718c0f98be159a35027}\index{paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}!setPhaseDuration@{setPhaseDuration}}
+\index{setPhaseDuration@{setPhaseDuration}!paz::impl::pt::PhaseManager@{paz::impl::pt::PhaseManager}}
+\doxysubsubsection{\texorpdfstring{setPhaseDuration}{setPhaseDuration}}
+{\footnotesize\ttfamily \label{classpaz_1_1impl_1_1pt_1_1PhaseManager_a6e5a4078c51ff718c0f98be159a35027} 
+void paz\+::impl\+::pt\+::\+Phase\+Manager\+::set\+Phase\+Duration (\begin{DoxyParamCaption}\item[{Phase}]{phase}{, }\item[{std\+::chrono\+::seconds}]{phase\+Duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Сеттер для установки длительности указанной фазы 
+
+При изменении длительности фазы испускается сигнал \doxylink{classpaz_1_1impl_1_1pt_1_1PhaseManager_a3d88b02c1c4d0b58a0d12dea6d2c41c7}{phase\+Duration\+Changed()}
+
+
+\begin{DoxyParams}{Аргументы}
+{\em phase} & Фаза, длительность которой нужно установить \\
+\hline
+{\em phase\+Duration} & передаваемая длительность в std\+::chrono\+::seconds \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/impl/pomodoro-\/timer/phase-\/manager.\+hpp\item 
+src/impl/pomodoro-\/timer/phase-\/manager.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,47 @@
+\doxysection{utility.\+hpp}
+\hypertarget{utility_8hpp_source}{}\label{utility_8hpp_source}\index{src/impl/utility.hpp@{src/impl/utility.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacepaz_1_1impl_1_1utils}{paz::impl::utils}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::chrono\_literals;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{namespace\ }chr\ =\ std::chrono;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{/*///\ TODO\ Удалить\ если\ не\ найдешь\ применение,\ т.к.\ в\ текущем\ проекте\ не\ используется}}
+\DoxyCodeLine{00021\ \ \ \ \ template\ <typename\ T>}
+\DoxyCodeLine{00022\ \ \ \ \ T\ clamp(const\ T\ value,\ const\ T\ min,\ const\ T\ max,\ void(signal)())}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ if\ (value\ <\ min)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ emit\ signal();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ return\ min;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ if\ (value\ >\ max)}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ emit\ signal();}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ return\ max;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ return\ value;}
+\DoxyCodeLine{00036\ \ \ \ \ \}*/}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ splitToMinutesAndSeconds(\textcolor{keyword}{const}\ chr::seconds\ totalSeconds)}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{noexcept}\ -\/>\ std::pair<chr::seconds,\ chr::seconds>}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ totalSeconds\ /\ 60,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ totalSeconds\ \%\ 60}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,116 @@
+\doxysection{Класс paz\+::impl\+::pt\+::Pomodoro\+Timer}
+\hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}{}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}\index{paz::impl::pt::PomodoroTimer@{paz::impl::pt::PomodoroTimer}}
+
+
+TODO Возможно стоит Pomodoro\+Phase интегрировать в \doxylink{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}{Pomodoro\+Timer}.  
+
+
+
+
+{\ttfamily \#include $<$pomodoro-\/timer.\+hpp$>$}
+
+Граф наследования\+:paz\+::impl\+::pt\+::Pomodoro\+Timer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ac1b1f6c9d670cf106c30f6437d4af2f7}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ac1b1f6c9d670cf106c30f6437d4af2f7} 
+void {\bfseries set\+Is\+Paused} (bool is\+Paused)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a0516425087cc803d9a03e33d3f920bdf}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a0516425087cc803d9a03e33d3f920bdf} 
+void {\bfseries set\+Round\+Count} (quint16 round\+Count)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aa7d628db3d6e85dd568703aa596656a3}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aa7d628db3d6e85dd568703aa596656a3} 
+void {\bfseries set\+Round\+Length} (quint16 round\+Length)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a51c0c781561ff63ee493def77cd4a53c}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a51c0c781561ff63ee493def77cd4a53c} 
+void {\bfseries set\+Current\+Phase} (Phase phase)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae72a9680aa99fbc6397ef7d7f97259d1}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae72a9680aa99fbc6397ef7d7f97259d1} 
+void {\bfseries set\+Phase\+Duration} (Phase phase, std\+::chrono\+::seconds phase\+Duration)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae0640aa2cb292520374c462630f6d3ae}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae0640aa2cb292520374c462630f6d3ae} 
+void {\bfseries start} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a172eae1ca363c12d639701c3a2e9b0dc}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a172eae1ca363c12d639701c3a2e9b0dc} 
+void {\bfseries stop} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aae86cac0e61deadad0abbcb1ad9d3165}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aae86cac0e61deadad0abbcb1ad9d3165} 
+void {\bfseries reset\+And\+Stop} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a522f00df3177e145ddac7667ce87aee3}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a522f00df3177e145ddac7667ce87aee3} 
+void {\bfseries skip\+Phase} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a9f4c16c2196e5720658203655e05e6c0}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a9f4c16c2196e5720658203655e05e6c0} 
+void {\bfseries is\+Paused\+Changed} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ab4c79f3458815d71a66d859fa8d8100a}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ab4c79f3458815d71a66d859fa8d8100a} 
+void {\bfseries timer\+Ticked} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aa669f724c36e5b76c769c9fa3beeca50}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aa669f724c36e5b76c769c9fa3beeca50} 
+void {\bfseries timer\+Finished} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ad0639ba255e313a64e843d16f5cdbb4c}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ad0639ba255e313a64e843d16f5cdbb4c} 
+void {\bfseries timer\+Started} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a951d793f153c7acc4c85e3806b10038f}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a951d793f153c7acc4c85e3806b10038f} 
+void {\bfseries timer\+Stopped} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a3e1799ba8b3d9e6951ad6118c0111427}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a3e1799ba8b3d9e6951ad6118c0111427} 
+void {\bfseries phase\+Changed} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_afd59f6358fc2df2e098977a3bdd74f84}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_afd59f6358fc2df2e098977a3bdd74f84} 
+void {\bfseries phase\+Duration\+Changed} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_abc8e10699b1d75387b05d7b418ebd4ab}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_abc8e10699b1d75387b05d7b418ebd4ab} 
+void {\bfseries round\+Finished} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_afcf25242b3ba83e236fe88c462139af2}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_afcf25242b3ba83e236fe88c462139af2} 
+void {\bfseries round\+Count\+Changed} ()
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a29db43df6af2f531b35a759dcb4f03d1}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a29db43df6af2f531b35a759dcb4f03d1} 
+void {\bfseries round\+Length\+Changed} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_adcc03ea59ca1523c134d8e244fc9a60f}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_adcc03ea59ca1523c134d8e244fc9a60f} 
+{\bfseries Pomodoro\+Timer} (bool is\+Paused, quint16 round\+Count, quint16 round\+Length, Phase phase, std\+::chrono\+::seconds work, std\+::chrono\+::seconds short\+Break, std\+::chrono\+::seconds long\+Break, QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ad38e223da0230dbcd384c8abc27d2e33}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ad38e223da0230dbcd384c8abc27d2e33} 
+bool {\bfseries is\+Paused} () const
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aea4174a1fd75bfbf8dd4aafd5cdc2820}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_aea4174a1fd75bfbf8dd4aafd5cdc2820} 
+quint16 {\bfseries round\+Count} () const
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a7c5ed67db8af5cd5d746952039214d75}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a7c5ed67db8af5cd5d746952039214d75} 
+quint16 {\bfseries round\+Length} () const
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a4ab70c3c7dce009290f7a16b7b3747be}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a4ab70c3c7dce009290f7a16b7b3747be} 
+Phase {\bfseries current\+Phase} () const
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ada3bdbbcc9915d653926e743df759b14}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ada3bdbbcc9915d653926e743df759b14} 
+auto {\bfseries current\+Phase\+Duration} () const -\/$>$ std\+::chrono\+::seconds
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae2ea8a4d26bf29e66d49425b298ba042}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_ae2ea8a4d26bf29e66d49425b298ba042} 
+auto {\bfseries phase\+Duration} (Phase phase) const -\/$>$ std\+::chrono\+::seconds
+\item 
+\Hypertarget{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a4602c2d3fd67fe1de83a83ccd58d2705}\label{classpaz_1_1impl_1_1pt_1_1PomodoroTimer_a4602c2d3fd67fe1de83a83ccd58d2705} 
+auto {\bfseries time\+Left} () const -\/$>$ std\+::chrono\+::seconds
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+TODO Возможно стоит Pomodoro\+Phase интегрировать в \doxylink{classpaz_1_1impl_1_1pt_1_1PomodoroTimer}{Pomodoro\+Timer}. 
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/impl/pomodoro-\/timer/pomodoro-\/timer.\+hpp\item 
+src/impl/pomodoro-\/timer/pomodoro-\/timer.\+cpp\end{DoxyCompactItemize}
