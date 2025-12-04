@@ -27,16 +27,9 @@ namespace paz::impl
 
 		explicit PomodoroTimer(QObject *parent = nullptr);
 
-		explicit PomodoroTimer(
-			Phase currentPhase,
-			std::chrono::seconds workPhase,
-			std::chrono::seconds shortBreakPhase,
-			std::chrono::seconds longBreakPhase,
-			qint64 sessionLength,
-			QObject *parent = nullptr
-		);
-
 		bool isActive() const;
+
+		auto currentPhaseDuration() const -> std::chrono::seconds;
 
 	public slots:
 
@@ -47,6 +40,13 @@ namespace paz::impl
 		void toNextPhase();
 
 		void setPhaseDuration(Phase phase, std::chrono::seconds duration);
+
+
+		void setAllPhaseDurations(
+			std::chrono::seconds work,
+			std::chrono::seconds shortBreak,
+			std::chrono::seconds longBreak
+		);
 		void setSessionLength(qint64 pomodoros);
 
 	private slots:

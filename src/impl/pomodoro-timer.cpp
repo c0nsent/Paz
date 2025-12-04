@@ -12,42 +12,25 @@ namespace paz::impl
 {
 	PomodoroTimer::PomodoroTimer(QObject *parent)
 		: QObject{parent}
-		, m_currentPhase{Phase::Work}
-		, m_phaseDurations{defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration}
-		, m_sessionLength{6}
-		, m_remainingTime{m_phaseDurations[qToUnderlying(m_currentPhase)]}
-		, m_currentSessionCount{0}
+		  , m_currentPhase{Phase::Work}
+		  , m_phaseDurations{defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration}
+		  , m_sessionLength{6}
+		  , m_remainingTime{currentPhaseDuration()}
+		  , m_currentSessionCount{0}
 	{
 		m_timer.setTimerType(Qt::PreciseTimer);
 		m_timer.setInterval(defaults::c_TimerInterval);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::handleQTimerTimeout);
 	}
-
-
-	PomodoroTimer::PomodoroTimer(
-		const Phase currentPhase,
-		const std::chrono::seconds workPhase,
-		const std::chrono::seconds shortBreakPhase,
-		const std::chrono::seconds longBreakPhase,
-		const qint64 sessionLength,
-		QObject *parent
-	)
-		: QObject{parent}
-		, m_currentPhase{currentPhase}
-		, m_phaseDurations{ workPhase, shortBreakPhase, longBreakPhase }
-		, m_sessionLength{sessionLength}
-		, m_remainingTime{m_phaseDurations[qToUnderlying(m_currentPhase)]}
-		, m_currentSessionCount{0}
-	{
-		m_timer.setTimerType(Qt::PreciseTimer);
-		m_timer.setInterval(defaults::c_TimerInterval);
-
-		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::handleQTimerTimeout);
-	}
-
 
 	bool PomodoroTimer::isActive() const {return m_timer.isActive();}
+
+
+	auto PomodoroTimer::currentPhaseDuration() const -> std::chrono::seconds
+	{
+		return m_phaseDurations[qToUnderlying(m_currentPhase)];
+	}
 
 
 	void PomodoroTimer::start()
@@ -59,7 +42,7 @@ namespace paz::impl
 
 	void PomodoroTimer::start(const std::chrono::seconds duration)
 	{
-		m_remainingTime = qMin(duration, m_phaseDurations[qToUnderlying(m_currentPhase)]);
+		m_remainingTime = qMin(duration, currentPhaseDuration());
 		emit remainingTimeChanged(m_remainingTime);
 		start();
 	}
@@ -111,6 +94,18 @@ namespace paz::impl
 	}
 
 
+	void PomodoroTimer::setAllPhaseDurations(
+		const std::chrono::seconds work,
+		const std::chrono::seconds shortBreak,
+		const std::chrono::seconds longBreak
+	)
+	{
+		setPhaseDuration(Phase::Work, work);
+		setPhaseDuration(Phase::ShortBreak, shortBreak);
+		setPhaseDuration(Phase::LongBreak, longBreak);
+	}
+
+
 	void PomodoroTimer::setSessionLength(const qint64 pomodoros)
 	{
 		if (m_sessionLength == pomodoros) return;
@@ -128,14 +123,14 @@ namespace paz::impl
 			emit remainingTimeChanged(m_remainingTime);
 			return;
 		}
-
-		toNextPhase();
-		m_remainingTime = m_phaseDurations[qToUnderlying(m_currentPhase)];
+		m_remainingTime = currentPhaseDuration();
 		emit remainingTimeChanged(m_remainingTime);
 
 		m_currentSessionCount = (m_currentPhase == Phase::LongBreak) ? 0 : ++m_currentSessionCount;
 		emit pomodoroFinished(m_currentSessionCount);
 
+		toNextPhase();
+		
 		reset();
 		emit finished();
 	}
