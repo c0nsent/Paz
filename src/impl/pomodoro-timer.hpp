@@ -40,8 +40,6 @@ namespace paz::impl
 		void toNextPhase();
 
 		void setPhaseDuration(Phase phase, std::chrono::seconds duration);
-
-
 		void setAllPhaseDurations(
 			std::chrono::seconds work,
 			std::chrono::seconds shortBreak,
@@ -59,7 +57,7 @@ namespace paz::impl
 		void paused();
 		void finished();
 
-		void remainingTimeChanged(std::chrono::seconds remainingTime);
+		void remainingTimeChanged(std::chrono::seconds);
 		
 		void phaseChanged(Phase);
 		void phaseDurationChanged(Phase, std::chrono::seconds);

@@ -57,7 +57,7 @@ namespace paz
 			/// Длительности фазы `PhaseManager::Phase::LongBreak` по-умолчанию
 			static constexpr std::chrono::seconds c_longBreakDuration{45min};
 
-			static constexpr quint16 c_pomodorosInRound{6};
+			static constexpr qint64 c_sessionLength{6};
 		}
 
 	}
