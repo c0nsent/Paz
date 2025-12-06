@@ -103,55 +103,51 @@ $(function(){initNavTree('constants_8hpp_source.html','',''); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespacepaz.html">   13</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz.html">paz</a></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="comment">//TODO Стоит поискать альтернативы</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> c_isDebug{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> c_debug{<span class="keyword">true</span>};</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">namespace </span>impl</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl.html">   19</a></span>    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl.html">impl</a></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    {</div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl_1_1pt.html">   21</a></span>        <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1pt.html">pt</a></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        {</div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl_1_1pt_1_1limits.html">   24</a></span>            <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1pt_1_1limits.html">limits</a></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                <span class="keyword">using namespace </span>std::chrono_literals;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::chrono::seconds c_MaxPhaseDuration{99min};</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::chrono::seconds c_MinPhaseDuration{1min};</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                <span class="comment">//TODO Переделать</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                <span class="comment">//static constexpr quint16 c_invalidPhaseDuration{};        // 0 секунд</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_maxPomodoro{std::numeric_limits&lt;quint16&gt;::max() - 1};</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_invalidPomodoro{std::numeric_limits&lt;quint16&gt;::max()};</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_maxRoundLength{99};</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_minRoundLength{1};</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl_1_1limits.html">   22</a></span>        <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1limits.html">limits</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_MaxPhaseDuration{99};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_MinPhaseDuration{1};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            <span class="comment">//TODO Переделать</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="comment">//static constexpr quint16 c_invalidPhaseDuration{};        // 0 секунд</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_maxPomodoro{std::numeric_limits&lt;quint16&gt;::max() - 1};</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="comment">//static constexpr quint16 c_invalidPomodoro{std::numeric_limits&lt;quint16&gt;::max()}; //Есть же std::optional</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_maxRoundLength{99};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_minRoundLength{1};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        }</div>
 </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl_1_1pt_1_1defaults.html">   45</a></span>            <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1pt_1_1defaults.html">defaults</a></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="keyword">using namespace </span>std::chrono_literals;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::size_t c_phaseCount{3};</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> c_TimerInterval{1000ms};</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::chrono::seconds c_workDuration{25min};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::chrono::seconds c_shortBreakDuration{5min};</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> std::chrono::seconds c_longBreakDuration{45min};</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_pomodorosInRound{6};</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespacepaz_1_1impl_1_1defaults.html">   41</a></span>        <span class="keyword">namespace </span><a class="code hl_namespace" href="namespacepaz_1_1impl_1_1defaults.html">defaults</a></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keyword">using namespace </span>std::chrono_literals;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> std::size_t c_phaseCount{3};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> c_TimerInterval{1000ms};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_workDuration{25};</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_shortBreakDuration{5};</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> quint16 c_longBreakDuration{45};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keyword">static</span> <span class="keyword">constexpr</span> qint64 c_sessionLength{6};</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
 </div>
-<div class="ttc" id="anamespacepaz_1_1impl_1_1pt_1_1defaults_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1pt_1_1defaults.html">paz::impl::pt::defaults</a></div><div class="ttdoc">Неймспейс с константами, задающими значение по-умолчанию</div><div class="ttdef"><b>Определения</b> constants.hpp:46</div></div>
-<div class="ttc" id="anamespacepaz_1_1impl_1_1pt_1_1limits_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1pt_1_1limits.html">paz::impl::pt::limits</a></div><div class="ttdoc">Неймспейс с константами, задающими ограничения для значений</div><div class="ttdef"><b>Определения</b> constants.hpp:25</div></div>
-<div class="ttc" id="anamespacepaz_1_1impl_1_1pt_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1pt.html">paz::impl::pt</a></div><div class="ttdoc">TODO Задумайся об удаление namespace pt. Возможно стоит перенести все в paz::impl.</div><div class="ttdef"><b>Определения</b> constants.hpp:22</div></div>
+<div class="ttc" id="anamespacepaz_1_1impl_1_1defaults_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1defaults.html">paz::impl::defaults</a></div><div class="ttdoc">Неймспейс с константами, задающими значение по-умолчанию</div><div class="ttdef"><b>Определения</b> constants.hpp:42</div></div>
+<div class="ttc" id="anamespacepaz_1_1impl_1_1limits_html"><div class="ttname"><a href="namespacepaz_1_1impl_1_1limits.html">paz::impl::limits</a></div><div class="ttdoc">Неймспейс с константами, задающими ограничения для значений</div><div class="ttdef"><b>Определения</b> constants.hpp:23</div></div>
+<div class="ttc" id="anamespacepaz_1_1impl_html"><div class="ttname"><a href="namespacepaz_1_1impl.html">paz::impl</a></div><div class="ttdef"><b>Определения</b> constants.hpp:20</div></div>
 <div class="ttc" id="anamespacepaz_html"><div class="ttname"><a href="namespacepaz.html">paz</a></div><div class="ttdef"><b>Определения</b> constants.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

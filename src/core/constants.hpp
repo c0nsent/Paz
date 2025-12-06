@@ -21,19 +21,17 @@ namespace paz
 		///Неймспейс с константами, задающими ограничения для значений
 		namespace limits
 		{
-			using namespace std::chrono_literals;
-
 			/// Максимальная длительность фазы - 99 минут
-			static constexpr std::chrono::seconds c_MaxPhaseDuration{99min};
+			static constexpr quint16 c_MaxPhaseDuration{99};
 			/// Минимальная длительность фазы - 1 минута
-			static constexpr std::chrono::seconds c_MinPhaseDuration{1min};
+			static constexpr quint16 c_MinPhaseDuration{1};
 			//TODO Переделать
 			//static constexpr quint16 c_invalidPhaseDuration{};		// 0 секунд
 
 			/// Максимальное количество помодоро за сессию
 			static constexpr quint16 c_maxPomodoro{std::numeric_limits<quint16>::max() - 1};
 			/// Значение, обозначающее невалидное количество помодоро
-			static constexpr quint16 c_invalidPomodoro{std::numeric_limits<quint16>::max()};
+			//static constexpr quint16 c_invalidPomodoro{std::numeric_limits<quint16>::max()}; //Есть же std::optional
 
 			static constexpr quint16 c_maxRoundLength{99};
 			static constexpr quint16 c_minRoundLength{1};
@@ -51,11 +49,11 @@ namespace paz
 			static constexpr auto c_TimerInterval{1000ms};
 
 			/// Длительности фазы `PhaseManager::Phase::Work` по-умолчанию
-			static constexpr std::chrono::seconds c_workDuration{25min};
+			static constexpr quint16 c_workDuration{25};
 			/// Длительности фазы `PhaseManager::Phase::ShortBreak` по-умолчанию
-			static constexpr std::chrono::seconds c_shortBreakDuration{5min};
+			static constexpr quint16 c_shortBreakDuration{5};
 			/// Длительности фазы `PhaseManager::Phase::LongBreak` по-умолчанию
-			static constexpr std::chrono::seconds c_longBreakDuration{45min};
+			static constexpr quint16 c_longBreakDuration{45};
 
 			static constexpr qint64 c_sessionLength{6};
 		}

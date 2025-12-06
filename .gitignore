@@ -81,3 +81,5 @@ compile_commands.json
 
 !.idea
 
+!/test/*
+!/test/CMakeLists.txt

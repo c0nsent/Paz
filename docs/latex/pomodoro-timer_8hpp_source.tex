@@ -1,99 +1,83 @@
 \doxysection{pomodoro-\/timer.hpp}
-\hypertarget{pomodoro-timer_8hpp_source}{}\label{pomodoro-timer_8hpp_source}\index{src/impl/pomodoro-\/timer/pomodoro-\/timer.hpp@{src/impl/pomodoro-\/timer/pomodoro-\/timer.hpp}}
+\hypertarget{pomodoro-timer_8hpp_source}{}\label{pomodoro-timer_8hpp_source}\index{src/impl/pomodoro-\/timer.hpp@{src/impl/pomodoro-\/timer.hpp}}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00006\ }
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}phase-\/manager.hpp"{}}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}timer-\/engine.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../core/constants.hpp"{}}}
 \DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QObject>}}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <chrono>}}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacepaz_1_1impl_1_1pt}{paz::impl::pt}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacepaz_1_1impl}{paz::impl}}}
 \DoxyCodeLine{00018\ \{}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{class\ }PomodoroTimer\ final\ :\ \textcolor{keyword}{public}\ QObject}
-\DoxyCodeLine{00021\ \ \ \ \ \{}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ Q\_OBJECT}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setupConnections();}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ PomodoroTimer(}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isPaused,}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ quint16\ roundCount,}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ quint16\ roundLength,}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ Phase\ phase,}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ work,}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ shortBreak,}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ longBreak,}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ QObject*\ parent\ =\ \textcolor{keyword}{nullptr}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ );}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ isPaused()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ [[nodiscard]]\ quint16\ roundCount()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ [[nodiscard]]\ quint16\ roundLength()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{class\ }PomodoroTimer\ final\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ quint16\ c\_timeIsOut\{0\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ Phase\ :\ quint8\ \{\ Work,\ ShortBreak,\ LongBreak\ \};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ Q\_ENUM(Phase)}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ PomodoroTimer(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ isActive()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ [[nodiscard]]\ quint16\ currentPhaseDuration()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ start();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ start(quint16\ duration);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ pause();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ reset();}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ toNextPhase();}
 \DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ [[nodiscard]]\ Phase\ currentPhase()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ currentPhaseDuration()\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ phaseDuration(Phase\ phase)\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ timeLeft()\ \textcolor{keyword}{const}\ -\/>\ std::chrono::seconds;}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setPhaseDuration(Phase\ phase,\ quint16\ duration);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setAllPhaseDurations(}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ quint16\ work,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ quint16\ shortBreak,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ quint16\ longBreak}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setSessionLength(quint16\ pomodoros);}
 \DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setIsPaused(\textcolor{keywordtype}{bool}\ isPaused);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{private}\ slots:}
 \DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setRoundCount(quint16\ roundCount);}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setRoundLength(quint16\ roundLength);}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentPhase(Phase\ phase);}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setPhaseDuration(Phase\ phase,\ std::chrono::seconds\ phaseDuration);}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ start();}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ stop();}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ resetAndStop();}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ skipPhase();}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{private}\ slots:}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleIsPausedChanged();}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleTimerEngineTicked();}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleTimerEngineFinished();}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \ \ signals:}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ isPausedChanged();}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerTicked();}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerFinished();}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerStarted();}
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ timerStopped();}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ phaseChanged();}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ phaseDurationChanged();}
-\DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ roundFinished();}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ roundCountChanged();}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ roundLengthChanged();}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00090\ }
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_isPaused;}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ quint16\ m\_roundCount;}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ quint16\ m\_roundLength;}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1TimerEngine}{TimerEngine}}\ m\_timerEngine;}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classpaz_1_1impl_1_1pt_1_1PhaseManager}{PhaseManager}}\ m\_phaseManager;}
-\DoxyCodeLine{00098\ \ \ \ \ \};}
-\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleQTimerTimeout();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ updatePomodoroCount();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ signals:}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ started();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ paused();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ finished();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ remainingTimeChanged(quint16);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ phaseChanged(Phase);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ phaseDurationChanged(Phase,\ quint16);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ sessionLengthChanged(quint16);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ pomodoroFinished(quint16\ currentSessionCount);}
+\DoxyCodeLine{00069\ \ \ \ \ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ Phase\ m\_currentPhase;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ quint16\ m\_phaseDurations[defaults::c\_phaseCount];}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ quint16\ m\_sessionLength;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ quint16\ m\_remainingTime;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ quint16\ m\_currentSessionCount;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ QTimer\ m\_timer;}
+\DoxyCodeLine{00080\ \ \ \ \ \};}
+\DoxyCodeLine{00081\ \}}
 
 \end{DoxyCode}

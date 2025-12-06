@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainwindow_0',['MainWindow',['../classpaz_1_1ui_1_1MainWindow.html',1,'paz::ui']]]
+  ['logging_0',['Logging',['../structpaz_1_1impl_1_1Logging.html',1,'paz::impl']]]
 ];
