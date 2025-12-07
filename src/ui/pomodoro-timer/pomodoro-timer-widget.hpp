@@ -26,36 +26,37 @@ namespace paz::ui::pt
 	{
 		Q_OBJECT
 
-		static auto toString(impl::PomodoroTimer::Phase phase) -> const char *;
-		static auto toSecondsAndMinutes(qint16 seconds) -> QPair<qint16, qint16>;
-
-		[[nodiscard]] QString formatRemainingTime() const;
+		static auto toSecondsAndMinutes(quint16 seconds) -> QPair<qint16, qint16>;
 
 	public:
 
+		enum class startPauseLabel : quint8 { Start, Pause, Resume };
+
 		explicit PomodoroTimerWidget(QWidget *parent = nullptr);
 
-		auto getTimer() -> impl::PomodoroTimer & { return *m_timerBackend; }
+		//auto getTimer() -> impl::PomodoroTimer & { return *m_timerBackend; }
 
+	private slots:
 
+		void updatePhase(impl::PomodoroTimer::Phase phase);
+		void setStartPauseLabel(startPauseLabel label);
+
+		void updateRemainingTimeLabel(quint16 remainingTime);
+		void updateStartPauseButtonLabel();
 
 	private:
 
-		impl::PomodoroTimer *m_timerBackend;
+		impl::PomodoroTimer *m_timer;
+
+		QFont m_font;
 
 		QVBoxLayout *m_mainLayout;
 
-		QLabel *m_currentPhase;
-
-		QHBoxLayout *m_timeLayout;
+		QLabel *m_phase;
 		QLabel *m_remainingTime;
-		/*QLabel *m_remainingMinutes;
-		QLabel *m_remainingSeconds;*/
-
 		QProgressBar *m_phaseProgress;
-
 		QPushButton *m_skip;
-		QPushButton *m_startPause;
+		QPushButton *m_startPauseButton;
 		QPushButton *m_reset;
 	};
 }
