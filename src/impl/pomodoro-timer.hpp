@@ -20,6 +20,8 @@ namespace paz::impl
 	{
 		Q_OBJECT
 
+		static constexpr quint16 c_timeIsOut{0};
+
 	public:
 
 		enum class Phase : quint8 { Work, ShortBreak, LongBreak };
@@ -27,25 +29,27 @@ namespace paz::impl
 
 		explicit PomodoroTimer(QObject *parent = nullptr);
 
-		bool isActive() const;
+		[[nodiscard]] bool isActive() const;
 
-		auto currentPhaseDuration() const -> std::chrono::seconds;
+		[[nodiscard]] quint16 currentPhaseDuration() const;
+
+		[[nodiscard]] quint16 remainingTime() const;
 
 	public slots:
 
 		void start();
-		void start(std::chrono::seconds duration);
+		void start(quint16 duration);
 		void pause();
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(Phase phase, std::chrono::seconds duration);
+		void setPhaseDuration(Phase phase, quint16 duration);
 		void setAllPhaseDurations(
-			std::chrono::seconds work,
-			std::chrono::seconds shortBreak,
-			std::chrono::seconds longBreak
+			quint16 work,
+			quint16 shortBreak,
+			quint16 longBreak
 		);
-		void setSessionLength(qint64 pomodoros);
+		void setSessionLength(quint16 pomodoros);
 
 	private slots:
 
@@ -57,21 +61,22 @@ namespace paz::impl
 		void paused();
 		void finished();
 
-		void remainingTimeChanged(std::chrono::seconds);
+		void remainingTimeChanged(quint16);
 		
 		void phaseChanged(Phase);
-		void phaseDurationChanged(Phase, std::chrono::seconds);
-		void sessionLengthChanged(qint64);
-		void pomodoroFinished(qint64 currentSessionCount);
+		void phaseDurationChanged(Phase, quint16);
+		void sessionLengthChanged(quint16);
+		void pomodoroFinished(quint16 currentSessionCount);
+		//void breakFinished(Phase);
 	
 	private:
 
 		Phase m_currentPhase;
-		std::chrono::seconds m_phaseDurations[defaults::c_phaseCount];
-		qint64 m_sessionLength;
+		quint16 m_phaseDurations[defaults::c_phaseCount];
+		quint16 m_sessionLength;
 
-		std::chrono::seconds m_remainingTime;
-		qint64 m_currentSessionCount;
+		quint16 m_remainingTime;
+		quint16 m_currentSessionCount;
 
 		QTimer m_timer;
 	};

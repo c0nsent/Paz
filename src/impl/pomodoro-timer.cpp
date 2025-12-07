@@ -22,7 +22,7 @@ namespace paz::impl
 		m_timer.setInterval(defaults::c_TimerInterval);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::handleQTimerTimeout);
-		connect(this, &PomodoroTimer::pomodoroFinished, [this] (const qint64)
+		connect(this, &PomodoroTimer::pomodoroFinished, [this] (const quint16)
 		{
 			m_currentSessionCount = (m_currentPhase == Phase::LongBreak) ? 0 : ++m_currentSessionCount;
 			start();
@@ -32,9 +32,15 @@ namespace paz::impl
 	bool PomodoroTimer::isActive() const {return m_timer.isActive();}
 
 
-	auto PomodoroTimer::currentPhaseDuration() const -> std::chrono::seconds
+	quint16 PomodoroTimer::currentPhaseDuration() const
 	{
 		return m_phaseDurations[qToUnderlying(m_currentPhase)];
+	}
+
+
+	quint16 PomodoroTimer::remainingTime() const
+	{
+		return m_remainingTime;
 	}
 
 
@@ -45,10 +51,11 @@ namespace paz::impl
 	}
 
 
-	void PomodoroTimer::start(const std::chrono::seconds duration)
+	void PomodoroTimer::start(const quint16 duration)
 	{
 		m_remainingTime = qMin(duration, currentPhaseDuration());
 		emit remainingTimeChanged(m_remainingTime);
+
 		start();
 	}
 
@@ -74,7 +81,11 @@ namespace paz::impl
 
 		if (m_currentPhase == Work)
 		{
-			emit pomodoroFinished(m_currentSessionCount);
+			//Метод публичный, поэтому надо обрабатывать вышло ли время,
+			//чтобы корректно помидорки считать
+			if (m_remainingTime == c_timeIsOut) [[unlikely]]
+				emit pomodoroFinished(m_currentSessionCount);
+
 			m_currentPhase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
 		}
 		else
@@ -84,11 +95,11 @@ namespace paz::impl
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const Phase phase, const std::chrono::seconds duration)
+	void PomodoroTimer::setPhaseDuration(const Phase phase, const quint16 duration)
 	{
 		auto &currentPhaseDuration{m_phaseDurations[qToUnderlying(phase)]};
 
-		if (currentPhaseDuration != duration)
+		if (currentPhaseDuration != duration) [[likely]]
 		{
 			currentPhaseDuration = duration;
 			emit phaseDurationChanged(phase, duration);
@@ -103,9 +114,9 @@ namespace paz::impl
 
 
 	void PomodoroTimer::setAllPhaseDurations(
-		const std::chrono::seconds work,
-		const std::chrono::seconds shortBreak,
-		const std::chrono::seconds longBreak
+		const quint16 work,
+		const quint16 shortBreak,
+		const quint16 longBreak
 	)
 	{
 		setPhaseDuration(Phase::Work, work);
@@ -114,9 +125,9 @@ namespace paz::impl
 	}
 
 
-	void PomodoroTimer::setSessionLength(const qint64 pomodoros)
+	void PomodoroTimer::setSessionLength(const quint16 pomodoros)
 	{
-		if (m_sessionLength == pomodoros) return;
+		if (m_sessionLength == pomodoros) [[unlikely]] return;
 
 		m_sessionLength = pomodoros;
 		emit sessionLengthChanged(pomodoros);
@@ -125,18 +136,18 @@ namespace paz::impl
 
 	void PomodoroTimer::handleQTimerTimeout()
 	{
-		if (m_remainingTime != std::chrono::seconds::zero())
+		if (m_remainingTime != c_timeIsOut) [[likely]]
 		{
 			--m_remainingTime;
 			emit remainingTimeChanged(m_remainingTime);
-			return;
+		}
+		else [[unlikely]]
+		{
+			toNextPhase();
+			reset();
+
+			emit finished();
 		}
 
-
-
-		toNextPhase();
-		reset();
-
-		emit finished();
 	}
 }
