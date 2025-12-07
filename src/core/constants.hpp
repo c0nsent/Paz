@@ -22,9 +22,9 @@ namespace paz
 		namespace limits
 		{
 			/// Максимальная длительность фазы - 99 минут
-			static constexpr quint16 c_MaxPhaseDuration{99};
+			static constexpr quint16 c_MaxPhaseDuration{99 * 60};
 			/// Минимальная длительность фазы - 1 минута
-			static constexpr quint16 c_MinPhaseDuration{1};
+			static constexpr quint16 c_MinPhaseDuration{1 * 60};
 			//TODO Переделать
 			//static constexpr quint16 c_invalidPhaseDuration{};		// 0 секунд
 
@@ -49,11 +49,11 @@ namespace paz
 			static constexpr auto c_TimerInterval{1000ms};
 
 			/// Длительности фазы `PhaseManager::Phase::Work` по-умолчанию
-			static constexpr quint16 c_workDuration{25};
+			static constexpr quint16 c_workDuration{25 * 60};
 			/// Длительности фазы `PhaseManager::Phase::ShortBreak` по-умолчанию
-			static constexpr quint16 c_shortBreakDuration{5};
+			static constexpr quint16 c_shortBreakDuration{5 * 60};
 			/// Длительности фазы `PhaseManager::Phase::LongBreak` по-умолчанию
-			static constexpr quint16 c_longBreakDuration{45};
+			static constexpr quint16 c_longBreakDuration{45 * 60};
 
 			static constexpr qint64 c_sessionLength{6};
 		}

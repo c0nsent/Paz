@@ -18,7 +18,7 @@ namespace paz::ui
 
 	public:
 
-		explicit MainWindow(QWidget* parent = nullptr);
+		//explicit MainWindow(QMainWindow* parent = nullptr);
 
 	public slots:
 
