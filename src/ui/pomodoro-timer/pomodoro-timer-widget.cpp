@@ -9,31 +9,14 @@
 
 namespace paz::ui::pt
 {
-	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent)
-		: QWidget{parent}
-		, m_timer{new impl::PomodoroTimer{this}}
-		, m_font{"Noto Serif", 24}
-		, m_mainLayout{new QVBoxLayout{this}}
-		, m_phase{new QLabel{ this}}
-		, m_remainingTime{new QLabel{this}}
-		, m_phaseProgress{new QProgressBar{this}}
-		, m_pomodoroCount{new QLabel{this}}
-		, m_skipButton{new QPushButton{this}}
-		, m_startPauseButton{new QPushButton{this}}
-		, m_reset{new QPushButton{this}}
-	{
-		setupWidget();
-		setupConnections();
-	}
-
-
 	void PomodoroTimerWidget::setupWidget()
 	{
+		m_timer->setAllPhaseDurations(5, 5, 5);
 		m_font.setBold(true);
 
 		updatePhaseLabelText();
 		updateRemainingTimeText(m_timer->phaseDuration());
-		updatePhaseLabelText();
+		updatePhaseProgress();
 		updatePomodoroCountText();
 
 		m_skipButton->setText("Skip");
@@ -53,10 +36,10 @@ namespace paz::ui::pt
 			button->setFont(m_font);
 		}
 
-		m_mainLayout->addWidget(m_phase);
-		m_mainLayout->addWidget(m_remainingTime);
+		m_mainLayout->addWidget(m_phaseLabel);
+		m_mainLayout->addWidget(m_remainingTimeLabel);
 		m_mainLayout->addWidget(m_phaseProgress);
-		m_mainLayout->addWidget(m_pomodoroCount);
+		m_mainLayout->addWidget(m_completedPomodorosLabel);
 		m_mainLayout->addWidget(m_skipButton);
 		m_mainLayout->addWidget(m_startPauseButton);
 		m_mainLayout->addWidget(m_reset);
@@ -94,9 +77,28 @@ namespace paz::ui::pt
 	}
 
 
+	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent)
+		: QWidget{parent}
+		, m_timer{new impl::PomodoroTimer{this}}
+		, m_completedPomodoros{0}
+		, m_font{"Noto Serif", 24}
+		, m_mainLayout{new QVBoxLayout{this}}
+		, m_phaseLabel{new QLabel{ this}}
+		, m_remainingTimeLabel{new QLabel{this}}
+		, m_phaseProgress{new QProgressBar{this}}
+		, m_completedPomodorosLabel{new QLabel{this}}
+		, m_skipButton{new QPushButton{this}}
+		, m_startPauseButton{new QPushButton{this}}
+		, m_reset{new QPushButton{this}}
+	{
+		setupWidget();
+		setupConnections();
+	}
+
+
 	void PomodoroTimerWidget::updatePhaseLabelText()
 	{
-		m_phase->setText(c_phaseStrings[qToUnderlying(m_timer->phase())]);
+		m_phaseLabel->setText(c_phaseStrings[qToUnderlying(m_timer->phase())]);
 	}
 
 
@@ -111,7 +113,7 @@ namespace paz::ui::pt
 		const auto minutes { current / 60 };
 		const auto seconds { current % 60 };
 
-		m_remainingTime->setText(QString::asprintf("%d:%02d", minutes, seconds));
+		m_remainingTimeLabel->setText(QString::asprintf("%d:%02d", minutes, seconds));
 	}
 
 
@@ -125,13 +127,11 @@ namespace paz::ui::pt
 
 	void PomodoroTimerWidget::updatePomodoroCountText()
 	{
-		static qint16 pomodoroCount{-1};
-		pomodoroCount++;
+		const auto suffix{ (m_completedPomodoros > 1 ) ? QStringLiteral("s") : QString{} };
 
-		auto text{QString{"%1 pomodoro"}.arg(pomodoroCount)};
+		m_completedPomodorosLabel->setText(QStringLiteral("%1 pomodoro%2")
+			.arg(QString::number(m_completedPomodoros++), suffix));
 
-		if ( pomodoroCount > 2) text + 's';
-
-		m_pomodoroCount->setText(text);
+		//m_completedPomodorosLabel->setText(tr("%n pomodoro(s)", nullptr, m_completedPomodoros++));
 	}
 }
