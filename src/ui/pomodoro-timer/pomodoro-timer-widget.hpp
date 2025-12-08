@@ -29,13 +29,9 @@ namespace paz::ui::pt
 		static constexpr const char *c_phaseStrings[impl::defaults::c_phaseCount] {"Working", "Short Break", "Long Break"};
 		static constexpr const char *c_timerStateStrings[3]{"Start", "Pause", "Resume"};
 
-
-		static auto toSecondsAndMinutes(quint16 seconds) -> QPair<qint16, qint16>;
-
 	public:
 
 		explicit PomodoroTimerWidget(QWidget *parent = nullptr);
-
 
 	public slots:
 
@@ -45,10 +41,11 @@ namespace paz::ui::pt
 
 	private slots:
 
-		void setText(impl::PomodoroTimer::Phase phase);
-		void setText(impl::PomodoroTimer::State state);
-
-		void updateRemainingTimeText(quint16 remainingTime);
+		void updatePhaseLabelText();
+		void updateStartPauseButtonText(impl::PomodoroTimer::State current);
+		void updateRemainingTimeText(quint16 current);
+		void updatePhaseProgress();
+		void updatePomodoroCountText();
 
 	private:
 
@@ -61,6 +58,7 @@ namespace paz::ui::pt
 		QLabel *m_phase;
 		QLabel *m_remainingTime;
 		QProgressBar *m_phaseProgress;
+		QLabel *m_pomodoroCount;
 		QPushButton *m_skipButton;
 		QPushButton *m_startPauseButton;
 		QPushButton *m_reset;
