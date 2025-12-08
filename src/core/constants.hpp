@@ -45,6 +45,8 @@ namespace paz
 			///Количество фаз в помодоро таймере
 			static constexpr std::size_t c_phaseCount{3};
 
+			static constexpr std::size_t c_timerStateCount{3};
+
 			/// Интервал тика QTimer в миллисекундах
 			static constexpr auto c_TimerInterval{1000ms};
 

@@ -26,23 +26,29 @@ namespace paz::ui::pt
 	{
 		Q_OBJECT
 
+		static constexpr const char *c_phaseStrings[impl::defaults::c_phaseCount] {"Working", "Short Break", "Long Break"};
+		static constexpr const char *c_timerStateStrings[3]{"Start", "Pause", "Resume"};
+
+
 		static auto toSecondsAndMinutes(quint16 seconds) -> QPair<qint16, qint16>;
 
 	public:
 
-		enum class startPauseLabel : quint8 { Start, Pause, Resume };
-
 		explicit PomodoroTimerWidget(QWidget *parent = nullptr);
 
-		//auto getTimer() -> impl::PomodoroTimer & { return *m_timerBackend; }
+
+	public slots:
+
+		void setupWidget();
+		//Soviet Connection
+		void setupConnections();
 
 	private slots:
 
-		void updatePhase(impl::PomodoroTimer::Phase phase);
-		void setStartPauseLabel(startPauseLabel label);
+		void setText(impl::PomodoroTimer::Phase phase);
+		void setText(impl::PomodoroTimer::State state);
 
-		void updateRemainingTimeLabel(quint16 remainingTime);
-		void updateStartPauseButtonLabel();
+		void updateRemainingTimeText(quint16 remainingTime);
 
 	private:
 
@@ -55,7 +61,7 @@ namespace paz::ui::pt
 		QLabel *m_phase;
 		QLabel *m_remainingTime;
 		QProgressBar *m_phaseProgress;
-		QPushButton *m_skip;
+		QPushButton *m_skipButton;
 		QPushButton *m_startPauseButton;
 		QPushButton *m_reset;
 	};

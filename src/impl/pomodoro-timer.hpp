@@ -27,27 +27,34 @@ namespace paz::impl
 		enum class Phase : quint8 { Work, ShortBreak, LongBreak };
 		Q_ENUM(Phase)
 
+		enum class State : quint8 { Idle, Running, Paused };
+		Q_ENUM(State)
+
 		explicit PomodoroTimer(QObject *parent = nullptr);
 
 		[[nodiscard]] bool isActive() const;
 
-		[[nodiscard]] quint16 currentPhaseDuration() const;
-
+		[[nodiscard]] State state() const;
+		[[nodiscard]] Phase phase() const;
+		[[nodiscard]] quint16 phaseDuration() const;
+		[[nodiscard]] quint16 phaseDuration(Phase phase) const;
+		[[nodiscard]] quint16 sessionLength() const;
 		[[nodiscard]] quint16 remainingTime() const;
+		[[nodiscard]] quint16 currentSessionCount() const;
 
 	public slots:
 
 		void start();
-		void start(quint16 duration);
+		void start(quint16 seconds);
 		void pause();
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(Phase phase, quint16 duration);
+		void setPhaseDuration(Phase phase, quint16 seconds);
 		void setAllPhaseDurations(
-			quint16 work,
-			quint16 shortBreak,
-			quint16 longBreak
+			quint16 workSec,
+			quint16 shortBreakSec,
+			quint16 longBreakSec
 		);
 		void setSessionLength(quint16 pomodoros);
 
@@ -57,21 +64,17 @@ namespace paz::impl
 		
 	signals:
 
-		void started();
-		void paused();
-		void finished();
-
-		void remainingTimeChanged(quint16);
-		
+		void timerStateChanged(State);
 		void phaseChanged(Phase);
 		void phaseDurationChanged(Phase, quint16);
 		void sessionLengthChanged(quint16);
+		void remainingTimeChanged(quint16);
 		void pomodoroFinished(quint16 currentSessionCount);
-		//void breakFinished(Phase);
 	
 	private:
 
-		Phase m_currentPhase;
+		State m_state;
+		Phase m_phase;
 		quint16 m_phaseDurations[defaults::c_phaseCount];
 		quint16 m_sessionLength;
 
