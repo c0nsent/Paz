@@ -13,7 +13,7 @@ namespace ui
 {
 	void PomodoroTimerWidget::setupWidget()
 	{
-		m_font.setPointSize(18);
+		m_font.setPointSize(24);
 
 		updatePhaseLabelText();
 		updateRemainingTimeText(m_timer->phaseDuration());
@@ -85,6 +85,12 @@ namespace ui
 			&PomodoroTimerWidget::updatePomodoroCountText
 		);
 
+		connect(m_timer,
+			&impl::PomodoroTimer::timerStateChanged,
+			this,
+			&PomodoroTimerWidget::updateStartPauseButtonText
+		);
+
 		connect(m_skipButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::toNextPhase);
 
 		connect(m_startPauseButton, &QPushButton::clicked, [this]
@@ -141,7 +147,7 @@ namespace ui
 		using enum impl::PomodoroTimer::Phase;
 		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
 
-		auto writeValue = [&] (const QString &key, const quint16 current)
+		auto writeValue = [&](const QString &key, const quint16 current)
 		{
 			if (not m_settings->contains(key))
 				m_settings->setValue(key, current);
