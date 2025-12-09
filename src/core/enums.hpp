@@ -6,12 +6,10 @@
 
 
 
-namespace paz
+
+namespace impl
 {
-	namespace impl
+	namespace pt
 	{
-		namespace pt
-		{
-		}
 	}
 }

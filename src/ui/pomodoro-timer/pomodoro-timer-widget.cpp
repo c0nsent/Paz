@@ -6,17 +6,19 @@
 
 #include "pomodoro-timer-widget.hpp"
 
+#include <QtMinMax>
+#include <QString>
 
-namespace paz::ui::pt
+namespace ui
 {
 	void PomodoroTimerWidget::setupWidget()
 	{
-		m_timer->setAllPhaseDurations(5, 5, 5);
-		m_font.setBold(true);
+		m_font.setPointSize(18);
 
 		updatePhaseLabelText();
 		updateRemainingTimeText(m_timer->phaseDuration());
 		updatePhaseProgress();
+		m_phaseProgress->setTextVisible(false);
 		updatePomodoroCountText();
 
 		m_skipButton->setText("Skip");
@@ -63,9 +65,26 @@ namespace paz::ui::pt
 		);
 
 
-		connect(m_timer, &impl::PomodoroTimer::remainingTimeChanged, m_phaseProgress, &QProgressBar::setValue);
-		connect(m_timer, &impl::PomodoroTimer::phaseChanged, this, &PomodoroTimerWidget::updatePhaseProgress);
-		connect(m_timer, &impl::PomodoroTimer::pomodoroFinished, this, &PomodoroTimerWidget::updatePomodoroCountText);
+		connect(
+			m_timer,
+			&impl::PomodoroTimer::remainingTimeChanged,
+			m_phaseProgress,
+			&QProgressBar::setValue
+		);
+		connect(
+			m_timer,
+			&impl::PomodoroTimer::phaseChanged,
+			this,
+			&PomodoroTimerWidget::updatePhaseProgress
+		);
+
+		connect(
+			m_timer,
+			&impl::PomodoroTimer::pomodoroFinished,
+			this,
+			&PomodoroTimerWidget::updatePomodoroCountText
+		);
+
 		connect(m_skipButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::toNextPhase);
 
 		connect(m_startPauseButton, &QPushButton::clicked, [this]
@@ -77,11 +96,75 @@ namespace paz::ui::pt
 	}
 
 
+	void PomodoroTimerWidget::readSettings()
+	{
+		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
+
+		auto validate = [&](const QString &key, const quint16 defaultDuration)
+		{
+			const quint16 configValue{static_cast<quint16>(m_settings->value(key).toUInt())};
+
+			if (limits::c_minPhaseDuration < configValue and configValue > limits::c_maxPhaseDuration)
+				return configValue;
+
+			return defaultDuration;
+		};
+
+		m_timer->setAllPhaseDurations(
+			validate(settings::keys::c_workDuration, defaults::c_workDuration),
+			validate(settings::keys::c_shortBreakDuration, defaults::c_shortBreakDuration),
+			validate(settings::keys::c_longBreakDuration, defaults::c_longBreakDuration)
+		);
+
+		auto sessionLength{static_cast<quint16>(m_settings->value(settings::keys::c_sessionLength).toUInt())};
+
+		if (limits::c_minSessionLength > sessionLength or sessionLength < limits::c_maxSessionLength)
+			sessionLength = defaults::c_sessionLength;
+
+		m_timer->setSessionLength(sessionLength);
+
+		m_settings->endGroup();
+
+		m_settings->beginGroup(settings::groups::c_style);
+
+		m_font.setFamily(m_settings->value(settings::keys::c_fontFamily).toString());
+
+		if (not m_font.exactMatch())
+			m_font.setFamily(defaults::c_fontFamily);
+
+		m_settings->endGroup();
+	}
+
+
+	void PomodoroTimerWidget::writeSettings()
+	{
+		using enum impl::PomodoroTimer::Phase;
+		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
+
+		auto writeValue = [&] (const QString &key, const quint16 current)
+		{
+			if (not m_settings->contains(key))
+				m_settings->setValue(key, current);
+		};
+
+		writeValue(settings::keys::c_workDuration, m_timer->phaseDuration(Work));
+		writeValue(settings::keys::c_shortBreakDuration, m_timer->phaseDuration(ShortBreak));
+		writeValue(settings::keys::c_longBreakDuration, m_timer->phaseDuration(LongBreak));
+		writeValue(settings::keys::c_sessionLength, m_timer->sessionLength());
+
+		m_settings->endGroup();
+
+		m_settings->beginGroup(settings::groups::c_style);
+		m_settings->setValue(settings::keys::c_fontFamily, m_font.family());
+		m_settings->endGroup();
+	}
+
+
 	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent)
 		: QWidget{parent}
+		, m_settings{new QSettings{QSettings::UserScope,"consent_", "Paz"}}
 		, m_timer{new impl::PomodoroTimer{this}}
 		, m_completedPomodoros{0}
-		, m_font{"Noto Serif", 24}
 		, m_mainLayout{new QVBoxLayout{this}}
 		, m_phaseLabel{new QLabel{ this}}
 		, m_remainingTimeLabel{new QLabel{this}}
@@ -93,6 +176,9 @@ namespace paz::ui::pt
 	{
 		setupWidget();
 		setupConnections();
+
+		readSettings();
+		writeSettings();
 	}
 
 
@@ -127,7 +213,7 @@ namespace paz::ui::pt
 
 	void PomodoroTimerWidget::updatePomodoroCountText()
 	{
-		const auto suffix{ (m_completedPomodoros > 1 ) ? QStringLiteral("s") : QString{} };
+		const auto suffix{m_completedPomodoros > 1 ? QChar{'s'} : QChar{}};
 
 		m_completedPomodorosLabel->setText(QStringLiteral("%1 pomodoro%2")
 			.arg(QString::number(m_completedPomodoros++), suffix));

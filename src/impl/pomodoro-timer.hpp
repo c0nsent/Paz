@@ -12,9 +12,8 @@
 #include <QObject>
 #include <QTimer>
 
-#include <chrono>
 
-namespace paz::impl
+namespace impl
 {
 	class PomodoroTimer final : public QObject
 	{
@@ -45,7 +44,7 @@ namespace paz::impl
 	public slots:
 
 		void start();
-		void start(quint16 seconds);
+		void start(quint16 seconds, Phase phase);
 		void pause();
 		void reset();
 		void toNextPhase();
@@ -82,5 +81,5 @@ namespace paz::impl
 		quint16 m_currentSessionCount;
 
 		QTimer m_timer;
-	};
+};
 }

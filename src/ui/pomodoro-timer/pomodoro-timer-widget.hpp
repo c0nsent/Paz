@@ -8,21 +8,21 @@
 
 #include "../../impl/pomodoro-timer.hpp"
 
-#include <QWidget>
 #include <QLabel>
-#include <QPushButton>
 #include <QProgressBar>
+#include <QPushButton>
 #include <QVBoxLayout>
-#include <QLabel>
+#include <QWidget>
+#include <QSettings>
 
 
-namespace paz::ui::pt
+namespace ui
 {
 	class PomodoroTimerWidget final : public QWidget
 	{
 		Q_OBJECT
 
-		static constexpr const char *c_phaseStrings[impl::defaults::c_phaseCount] {"Working", "Short Break", "Long Break"};
+		static constexpr const char *c_phaseStrings[defaults::c_phaseCount] {"Working", "Short Break", "Long Break"};
 		static constexpr const char *c_timerStateStrings[3]{"Start", "Pause", "Resume"};
 
 
@@ -30,11 +30,16 @@ namespace paz::ui::pt
 		//Soviet Connection
 		void setupConnections();
 
+		void readSettings();
+		void writeSettings();
+
 	public:
 
 		explicit PomodoroTimerWidget(QWidget *parent = nullptr);
 
 	public slots:
+
+
 
 	private slots:
 
@@ -45,6 +50,8 @@ namespace paz::ui::pt
 		void updatePomodoroCountText();
 
 	private:
+
+		QSettings *m_settings;
 
 		impl::PomodoroTimer *m_timer;
 		quint16 m_completedPomodoros;

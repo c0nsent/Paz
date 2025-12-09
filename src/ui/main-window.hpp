@@ -10,7 +10,7 @@
 
 #include <QMainWindow>
 
-namespace paz::ui
+namespace ui
 {
 	class MainWindow final : public QMainWindow
 	{

@@ -8,7 +8,7 @@
 
 #include <QtMinMax>
 
-namespace paz::impl
+namespace impl
 {
 	PomodoroTimer::PomodoroTimer(QObject *parent)
 		: QObject{parent}
@@ -20,7 +20,7 @@ namespace paz::impl
 		, m_currentSessionCount{0}
 	{
 		m_timer.setTimerType(Qt::PreciseTimer);
-		m_timer.setInterval(defaults::c_TimerInterval);
+		m_timer.setInterval(defaults::c_timerInterval);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::handleQTimerTimeout);
 		connect(this, &PomodoroTimer::pomodoroFinished, [this] (const quint16)
@@ -58,8 +58,11 @@ namespace paz::impl
 	}
 
 
-	void PomodoroTimer::start(const quint16 seconds)
+	void PomodoroTimer::start(const quint16 seconds, const Phase phase)
 	{
+		m_phase = phase;
+		emit phaseChanged(m_phase);
+
 		m_remainingTime = qMin(seconds, phaseDuration());
 		emit remainingTimeChanged(m_remainingTime);
 
