@@ -11,9 +11,9 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QSettings>
 #include <QVBoxLayout>
 #include <QWidget>
-#include <QSettings>
 
 
 namespace ui
@@ -39,8 +39,6 @@ namespace ui
 
 	public slots:
 
-
-
 	private slots:
 
 		void updatePhaseLabelText();
@@ -48,24 +46,25 @@ namespace ui
 		void updateRemainingTimeText(quint16 current);
 		void updatePhaseProgress();
 		void updatePomodoroCountText();
+		void updateSkipBreakButtonVisibility(impl::PomodoroTimer::Phase current);
 
 	private:
 
-		QSettings *m_settings;
+		QSettings *m_settings{new QSettings{QSettings::UserScope, "consent_", "Paz"}};
 
-		impl::PomodoroTimer *m_timer;
-		quint16 m_completedPomodoros;
+		impl::PomodoroTimer *m_timer{new impl::PomodoroTimer{this}};
+		quint16 m_completedPomodoros{0};
 
 		QFont m_font;
 
-		QVBoxLayout *m_mainLayout;
+		QVBoxLayout *m_mainLayout{new QVBoxLayout{this}};
 
-		QLabel *m_phaseLabel;
-		QLabel *m_remainingTimeLabel;
-		QProgressBar *m_phaseProgress;
-		QLabel *m_completedPomodorosLabel;
-		QPushButton *m_skipButton;
-		QPushButton *m_startPauseButton;
-		QPushButton *m_reset;
+		QLabel *m_phaseLabel{new QLabel{this}};
+		QLabel *m_remainingTimeLabel{new QLabel{this}};
+		QProgressBar *m_phaseProgress{new QProgressBar{this}};
+		QLabel *m_completedPomodorosLabel{new QLabel{this}};
+		QPushButton *m_startPauseButton{new QPushButton{this}};
+		QPushButton *m_skipBreakButton{new QPushButton{this}};
+		QPushButton *m_resetButton{new QPushButton{this}};
 	};
 }

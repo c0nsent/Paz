@@ -13,7 +13,7 @@ namespace ui
 {
 	void PomodoroTimerWidget::setupWidget()
 	{
-		m_font.setPointSize(24);
+		m_font.setPointSize(20);
 
 		updatePhaseLabelText();
 		updateRemainingTimeText(m_timer->phaseDuration());
@@ -21,9 +21,10 @@ namespace ui
 		m_phaseProgress->setTextVisible(false);
 		updatePomodoroCountText();
 
-		m_skipButton->setText("Skip");
 		updateStartPauseButtonText(m_timer->state());
-		m_reset->setText("Reset");
+		m_resetButton->setText(tr("Reset"));
+		m_skipBreakButton->setText(tr("Skip Break"));
+		updateSkipBreakButtonVisibility(m_timer->phase());
 
 		const auto labels{this->findChildren<QLabel *>()};
 		for (const auto label : labels)
@@ -42,9 +43,9 @@ namespace ui
 		m_mainLayout->addWidget(m_remainingTimeLabel);
 		m_mainLayout->addWidget(m_phaseProgress);
 		m_mainLayout->addWidget(m_completedPomodorosLabel);
-		m_mainLayout->addWidget(m_skipButton);
 		m_mainLayout->addWidget(m_startPauseButton);
-		m_mainLayout->addWidget(m_reset);
+		m_mainLayout->addWidget(m_resetButton);
+		m_mainLayout->addWidget(m_skipBreakButton);
 	}
 
 
@@ -91,14 +92,15 @@ namespace ui
 			&PomodoroTimerWidget::updateStartPauseButtonText
 		);
 
-		connect(m_skipButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::toNextPhase);
-
 		connect(m_startPauseButton, &QPushButton::clicked, [this]
 		{
 			m_timer->isActive() ? m_timer->pause() : m_timer->start();
 		});
 
-		connect(m_reset, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::reset);
+		connect(m_resetButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::reset);
+
+		connect(m_skipBreakButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::toNextPhase);
+		connect(m_timer, &impl::PomodoroTimer::phaseChanged, this, &PomodoroTimerWidget::updateSkipBreakButtonVisibility);
 	}
 
 
@@ -166,25 +168,16 @@ namespace ui
 	}
 
 
-	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent)
-		: QWidget{parent}
-		, m_settings{new QSettings{QSettings::UserScope,"consent_", "Paz"}}
-		, m_timer{new impl::PomodoroTimer{this}}
-		, m_completedPomodoros{0}
-		, m_mainLayout{new QVBoxLayout{this}}
-		, m_phaseLabel{new QLabel{ this}}
-		, m_remainingTimeLabel{new QLabel{this}}
-		, m_phaseProgress{new QProgressBar{this}}
-		, m_completedPomodorosLabel{new QLabel{this}}
-		, m_skipButton{new QPushButton{this}}
-		, m_startPauseButton{new QPushButton{this}}
-		, m_reset{new QPushButton{this}}
+	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent) : QWidget{parent}
 	{
+		setLayout(m_mainLayout);
 		setupWidget();
 		setupConnections();
 
 		readSettings();
 		writeSettings();
+
+		m_timer->setAllPhaseDurations(3, 3 ,3 );
 	}
 
 
@@ -225,5 +218,18 @@ namespace ui
 			.arg(QString::number(m_completedPomodoros++), suffix));
 
 		//m_completedPomodorosLabel->setText(tr("%n pomodoro(s)", nullptr, m_completedPomodoros++));
+	}
+
+
+	void PomodoroTimerWidget::updateSkipBreakButtonVisibility(const impl::PomodoroTimer::Phase current)
+	{
+		using enum impl::PomodoroTimer::Phase;
+
+		if (current == Work)
+		{
+			m_skipBreakButton->setHidden(true);
+		}
+		else
+			m_skipBreakButton->setHidden(false);
 	}
 }
