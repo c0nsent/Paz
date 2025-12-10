@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "../../impl/pomodoro-timer.hpp"
+#include "../impl/pomodoro-timer.hpp"
 
 #include <QLabel>
 #include <QProgressBar>

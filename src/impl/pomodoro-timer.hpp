@@ -44,7 +44,8 @@ namespace impl
 	public slots:
 
 		void start();
-		void start(quint16 seconds, Phase phase);
+		void start(Phase phase);
+		void start(Phase phase, quint16 seconds);
 		void pause();
 		void reset();
 		void toNextPhase();

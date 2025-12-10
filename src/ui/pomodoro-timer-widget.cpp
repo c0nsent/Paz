@@ -29,8 +29,8 @@ namespace ui
 		const auto labels{this->findChildren<QLabel *>()};
 		for (const auto label : labels)
 		{
-			label->setFont(m_font);
 			label->setAlignment(Qt::AlignCenter);
+			label->setFont(m_font);
 		}
 
 		const auto buttons{this->findChildren<QPushButton *>()};
@@ -46,6 +46,20 @@ namespace ui
 		m_mainLayout->addWidget(m_startPauseButton);
 		m_mainLayout->addWidget(m_resetButton);
 		m_mainLayout->addWidget(m_skipBreakButton);
+
+		m_mainLayout->setAlignment(Qt::AlignCenter);
+		m_mainLayout->setContentsMargins(24, 24, 24, 24);
+		m_mainLayout->setSpacing(16);
+
+		m_mainLayout->setObjectName("mainLayout");
+		m_phaseLabel->setObjectName("phaseLabel");
+		m_remainingTimeLabel->setObjectName("remainingTimeLabel");
+		m_phaseProgress->setObjectName("phaseProgress");
+		m_completedPomodorosLabel->setObjectName("completedPomodoroLabel");
+		m_startPauseButton->setObjectName("startPauseButton");
+		m_resetButton->setObjectName("resetButton");
+		m_skipBreakButton->setObjectName("skipBreakButton");
+
 	}
 
 
@@ -175,12 +189,19 @@ namespace ui
 
 	PomodoroTimerWidget::PomodoroTimerWidget(QWidget *parent) : QWidget{parent}
 	{
-		setLayout(m_mainLayout);
-		setupWidget();
-		setupConnections();
+		setObjectName("PomodoroTimerWidget");
+	    setLayout(m_mainLayout);
+        setFont(m_font);
 
-		readSettings();
-		writeSettings();
+
+
+        setupWidget();
+        setupConnections();
+
+        readSettings();
+        writeSettings();
+
+		m_timer->setPhaseDuration(3, 3, 3);
 	}
 
 

@@ -1,0 +1,62 @@
+QWidget#PomodoroTimerWidget {
+    background-color: #0b132b;
+    color: #f5f5f5;
+
+}
+
+QLabel {
+    font-weight: 500;
+}
+
+QLabel#phaseLabel {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+QLabel#remainingTimeLabel {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+QProgressBar {
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    background-color: #2b2b2b;
+}
+
+QProgressBar::chunk {
+    background-color: #4caf50;
+    border-radius: 12px;
+}
+
+QPushButton {
+    background-color: #3a3d41;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 6px 14px;
+    border: 1px solid #555555;
+}
+
+QPushButton:hover {
+    background-color: #50545a;
+}
+
+QPushButton:pressed {
+    background-color: #2f3236;
+}
+
+QPushButton#startPauseButton {
+    background-color: #4caf50;
+    border-color: #3e8e41;
+    font-weight: 600;
+}
+
+QPushButton#resetButton {
+    background-color: #f44336;
+    border-color: #c62828;
+}
+
+QPushButton#skipBreakButton {
+    background-color: #2196f3;
+    border-color: #1976d2;
+}

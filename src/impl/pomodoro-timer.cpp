@@ -16,18 +16,13 @@ namespace impl
 		, m_phase{Phase::Work}
 		, m_phaseDurations{defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration}
 		, m_sessionLength{defaults::c_sessionLength}
-		, m_remainingTime{phaseDuration()}
+		, m_remainingTime{defaults::c_workDuration}
 		, m_currentSessionCount{0}
 	{
 		m_timer.setTimerType(Qt::PreciseTimer);
 		m_timer.setInterval(defaults::c_timerInterval);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::updateRemainingTime);
-		connect(this, &PomodoroTimer::pomodoroFinished, [this] (const quint16)
-		{
-			m_currentSessionCount = (m_phase == Phase::LongBreak) ? 0 : ++m_currentSessionCount;
-			start();
-		});
 	}
 
 	bool PomodoroTimer::isActive() const {return m_timer.isActive();}
@@ -56,7 +51,19 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::start(const quint16 seconds, const Phase phase)
+	void PomodoroTimer::start(const Phase phase)
+	{
+		m_phase = phase;
+		emit phaseChanged(m_phase);
+
+		m_remainingTime = phaseDuration();
+		emit remainingTimeChanged(m_remainingTime);
+
+		start();
+	}
+
+
+	void PomodoroTimer::start(const Phase phase, const quint16 seconds)
 	{
 		m_phase = phase;
 		emit phaseChanged(m_phase);
@@ -93,21 +100,27 @@ namespace impl
 	{
 		using enum Phase;
 
-		if (m_phase == Work)
+		if (m_phase == ShortBreak or m_phase == LongBreak)
+		{
+			m_phase = Work;
+			reset();
+		}
+		else
 		{
 			//Метод публичный, поэтому надо обрабатывать вышло ли время,
 			//чтобы корректно помидорки считать
 			if (m_remainingTime == c_timeIsOut) [[unlikely]]
-					emit pomodoroFinished(m_currentSessionCount);
+			{
+				m_currentSessionCount = (m_phase == LongBreak) ? 0 : ++m_currentSessionCount;
+				emit pomodoroFinished(m_currentSessionCount);
+			}
 
 			m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
+
+			start(m_phase);
 		}
-		else
-			m_phase = Work;
 
 		emit phaseChanged(m_phase);
-
-		reset();
 	}
 
 

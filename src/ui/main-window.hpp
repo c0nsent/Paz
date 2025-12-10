@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "pomodoro-timer/pomodoro-timer-widget.hpp"
 
 #include <QMainWindow>
 
