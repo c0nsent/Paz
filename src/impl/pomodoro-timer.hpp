@@ -49,8 +49,9 @@ namespace impl
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(Phase phase, quint16 seconds);
-		void setAllPhaseDurations(
+		void setPhaseDuration(quint16 seconds);
+		void setPhaseDuration(quint16 seconds, Phase phase);
+		void setPhaseDuration(
 			quint16 workSec,
 			quint16 shortBreakSec,
 			quint16 longBreakSec
@@ -59,15 +60,15 @@ namespace impl
 
 	private slots:
 
-		void handleQTimerTimeout();
+		void updateRemainingTime();
 		
 	signals:
 
-		void timerStateChanged(State);
+		void stateChanged(State);
 		void phaseChanged(Phase);
-		void phaseDurationChanged(Phase, quint16);
-		void sessionLengthChanged(quint16);
-		void remainingTimeChanged(quint16);
+		void phaseDurationChanged(quint16 seconds, Phase);
+		void sessionLengthChanged(quint16 pomodoros);
+		void remainingTimeChanged(quint16 seconds);
 		void pomodoroFinished(quint16 currentSessionCount);
 	
 	private:

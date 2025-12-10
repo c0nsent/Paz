@@ -22,12 +22,11 @@ namespace ui
 	{
 		Q_OBJECT
 
-		static constexpr const char *c_phaseStrings[defaults::c_phaseCount] {"Working", "Short Break", "Long Break"};
-		static constexpr const char *c_timerStateStrings[3]{"Start", "Pause", "Resume"};
-
+		static constexpr const char *c_phaseStrings[defaults::c_phaseCount] { "Working", "Short Break", "Long Break" };
+		static constexpr const char *c_timerStateStrings[defaults::c_timerStateCount] { "Start", "Pause", "Resume" };
 
 		void setupWidget();
-		//Soviet Connection
+
 		void setupConnections();
 
 		void readSettings();
@@ -41,7 +40,7 @@ namespace ui
 
 	private slots:
 
-		void updatePhaseLabelText();
+		void updatePhaseLabelText(impl::PomodoroTimer::Phase current);
 		void updateStartPauseButtonText(impl::PomodoroTimer::State current);
 		void updateRemainingTimeText(quint16 current);
 		void updatePhaseProgress();

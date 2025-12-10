@@ -6,8 +6,8 @@
 
 #include "pomodoro-timer-widget.hpp"
 
-#include <QtMinMax>
 #include <QString>
+#include <QtMinMax>
 
 namespace ui
 {
@@ -15,7 +15,7 @@ namespace ui
 	{
 		m_font.setPointSize(20);
 
-		updatePhaseLabelText();
+		updatePhaseLabelText(m_timer->phase());
 		updateRemainingTimeText(m_timer->phaseDuration());
 		updatePhaseProgress();
 		m_phaseProgress->setTextVisible(false);
@@ -87,7 +87,7 @@ namespace ui
 		);
 
 		connect(m_timer,
-			&impl::PomodoroTimer::timerStateChanged,
+			&impl::PomodoroTimer::stateChanged,
 			this,
 			&PomodoroTimerWidget::updateStartPauseButtonText
 		);
@@ -100,7 +100,12 @@ namespace ui
 		connect(m_resetButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::reset);
 
 		connect(m_skipBreakButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::toNextPhase);
-		connect(m_timer, &impl::PomodoroTimer::phaseChanged, this, &PomodoroTimerWidget::updateSkipBreakButtonVisibility);
+		connect(
+			m_timer,
+			&impl::PomodoroTimer::phaseChanged,
+			this,
+			&PomodoroTimerWidget::updateSkipBreakButtonVisibility
+		);
 	}
 
 
@@ -118,7 +123,7 @@ namespace ui
 			return defaultDuration;
 		};
 
-		m_timer->setAllPhaseDurations(
+		m_timer->setPhaseDuration(
 			validate(settings::keys::c_workDuration, defaults::c_workDuration),
 			validate(settings::keys::c_shortBreakDuration, defaults::c_shortBreakDuration),
 			validate(settings::keys::c_longBreakDuration, defaults::c_longBreakDuration)
@@ -176,14 +181,12 @@ namespace ui
 
 		readSettings();
 		writeSettings();
-
-		m_timer->setAllPhaseDurations(3, 3 ,3 );
 	}
 
 
-	void PomodoroTimerWidget::updatePhaseLabelText()
+	void PomodoroTimerWidget::updatePhaseLabelText(const impl::PomodoroTimer::Phase current)
 	{
-		m_phaseLabel->setText(c_phaseStrings[qToUnderlying(m_timer->phase())]);
+		m_phaseLabel->setText(c_phaseStrings[qToUnderlying(current)]);
 	}
 
 
@@ -204,9 +207,10 @@ namespace ui
 
 	void PomodoroTimerWidget::updatePhaseProgress()
 	{
-		m_phaseProgress->setMinimum(0);
-		m_phaseProgress->setMaximum(m_timer->phaseDuration());
-		m_phaseProgress->setValue(m_timer->phaseDuration());
+		const auto currentPhaseDuration{m_timer->phaseDuration()};
+
+		m_phaseProgress->setMaximum(currentPhaseDuration);
+		m_phaseProgress->setValue(currentPhaseDuration);
 	}
 
 
@@ -223,13 +227,6 @@ namespace ui
 
 	void PomodoroTimerWidget::updateSkipBreakButtonVisibility(const impl::PomodoroTimer::Phase current)
 	{
-		using enum impl::PomodoroTimer::Phase;
-
-		if (current == Work)
-		{
-			m_skipBreakButton->setHidden(true);
-		}
-		else
-			m_skipBreakButton->setHidden(false);
+		m_skipBreakButton->setHidden(current == impl::PomodoroTimer::Phase::Work);
 	}
 }

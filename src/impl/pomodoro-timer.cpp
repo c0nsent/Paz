@@ -22,15 +22,11 @@ namespace impl
 		m_timer.setTimerType(Qt::PreciseTimer);
 		m_timer.setInterval(defaults::c_timerInterval);
 
-		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::handleQTimerTimeout);
+		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::updateRemainingTime);
 		connect(this, &PomodoroTimer::pomodoroFinished, [this] (const quint16)
 		{
 			m_currentSessionCount = (m_phase == Phase::LongBreak) ? 0 : ++m_currentSessionCount;
 			start();
-		});
-		connect(this, &PomodoroTimer::timerStateChanged, [this] (const State state)
-		{
-			m_state = state;
 		});
 	}
 
@@ -46,15 +42,17 @@ namespace impl
 
 	quint16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
 
-	quint16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
-
 	quint16 PomodoroTimer::remainingTime() const {return m_remainingTime;}
+
+	quint16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
 
 
 	void PomodoroTimer::start()
 	{
 		m_timer.start();
-		emit timerStateChanged(State::Running);
+
+		m_state = State::Running;
+		emit stateChanged(m_state);
 	}
 
 
@@ -73,17 +71,21 @@ namespace impl
 	void PomodoroTimer::pause()
 	{
 		m_timer.stop();
-		emit timerStateChanged(State::Paused);
+
+		m_state = State::Paused;
+		emit stateChanged(m_state);
 	}
 
 
 	void PomodoroTimer::reset()
 	{
+		m_timer.stop();
+
 		m_remainingTime = phaseDuration();
 		emit remainingTimeChanged(m_remainingTime);
 
-		m_timer.stop();
-		emit timerStateChanged(State::Idle);
+		m_state = State::Idle;
+		emit stateChanged(m_state);
 	}
 
 
@@ -96,7 +98,7 @@ namespace impl
 			//Метод публичный, поэтому надо обрабатывать вышло ли время,
 			//чтобы корректно помидорки считать
 			if (m_remainingTime == c_timeIsOut) [[unlikely]]
-				emit pomodoroFinished(m_currentSessionCount);
+					emit pomodoroFinished(m_currentSessionCount);
 
 			m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
 		}
@@ -109,14 +111,20 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const Phase phase, const quint16 seconds)
+	void PomodoroTimer::setPhaseDuration(const quint16 seconds)
+	{
+		setPhaseDuration(seconds, m_phase);
+	}
+
+
+	void PomodoroTimer::setPhaseDuration(const quint16 seconds, const Phase phase)
 	{
 		auto &currentPhaseDuration{m_phaseDurations[qToUnderlying(phase)]};
 
 		if (currentPhaseDuration != seconds) [[likely]]
 		{
 			currentPhaseDuration = seconds;
-			emit phaseDurationChanged(phase, seconds);
+			emit phaseDurationChanged(seconds, phase);
 		};
 
 		if (m_phase == phase )
@@ -127,15 +135,15 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::setAllPhaseDurations(
+	void PomodoroTimer::setPhaseDuration(
 		const quint16 workSec,
 		const quint16 shortBreakSec,
 		const quint16 longBreakSec
 	)
 	{
-		setPhaseDuration(Phase::Work, workSec);
-		setPhaseDuration(Phase::ShortBreak, shortBreakSec);
-		setPhaseDuration(Phase::LongBreak, longBreakSec);
+		setPhaseDuration(workSec, Phase::Work);
+		setPhaseDuration(shortBreakSec, Phase::ShortBreak);
+		setPhaseDuration(longBreakSec, Phase::LongBreak);
 	}
 
 
@@ -148,14 +156,14 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::handleQTimerTimeout()
+	void PomodoroTimer::updateRemainingTime()
 	{
 		if (m_remainingTime == c_timeIsOut) [[unlikely]]
-			toNextPhase();
-		else
 		{
-			--m_remainingTime;
-			emit remainingTimeChanged(m_remainingTime);
+			toNextPhase();
+			return;
 		}
+
+		emit remainingTimeChanged(--m_remainingTime);
 	}
 }
