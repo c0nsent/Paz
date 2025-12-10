@@ -7,6 +7,8 @@ qt_add_executable(Paz
 	main.cpp
 )
 
+add_dependencies(Paz CopyStyleFile)
+
 target_link_libraries( Paz PRIVATE
 		PazImplementation
 		PazUI

@@ -1,4 +1,4 @@
-qt_add_library(PazImplementation STATIC
+qt_add_library(PazImplementation SHARED
 		pomodoro-timer.cpp pomodoro-timer.hpp
 )
 

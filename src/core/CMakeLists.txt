@@ -1,7 +1,6 @@
-qt_add_library(PazCore STATIC
+qt_add_library(PazCore SHARED
 		enums.hpp
 		constants.hpp
-		#main.cpp
 )
 
 target_link_libraries(PazCore PRIVATE

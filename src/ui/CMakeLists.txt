@@ -1,6 +1,6 @@
-qt_add_library(PazUI STATIC
+qt_add_library(PazUI SHARED
 		main-window.cpp main-window.hpp
-		pomodoro-timer/pomodoro-timer-widget.cpp pomodoro-timer/pomodoro-timer-widget.hpp
+		pomodoro-timer-widget.cpp pomodoro-timer-widget.hpp
 )
 
 target_link_libraries(PazUI PRIVATE
@@ -11,5 +11,3 @@ target_link_libraries(PazUI PRIVATE
 )
 
 target_compile_features(PazUI PUBLIC cxx_std_23)
-
-# target_include_directories(PazUI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
