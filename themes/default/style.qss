@@ -1,62 +1,49 @@
 QWidget#PomodoroTimerWidget {
-    background-color: #0b132b;
-    color: #f5f5f5;
-
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #2b0506, stop:1 #150203);
+    color: #f2dfdd;
 }
 
 QLabel {
-    font-weight: 500;
+    color: #f5e8e7;
+
+    border: 1px solid rgba(255,255,255,0.00);
 }
 
 QLabel#phaseLabel {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 QLabel#remainingTimeLabel {
-    font-size: 50px;
-    font-weight: 700;
+    font-size: 60px;
+    font-weight: 800;
 }
 
 QProgressBar {
-    border: 1px solid #3c3c3c;
-    border-radius: 6px;
-    background-color: #2b2b2b;
+    border: 2px solid #1B121D;
+    border-radius: 14px;
+    background-color: rgba(255,255,255,0.05);
+    padding: 2px;
 }
 
 QProgressBar::chunk {
-    background-color: #4caf50;
+    background-color: #e6bcbc;
     border-radius: 12px;
 }
 
 QPushButton {
-    background-color: #3a3d41;
-    color: #ffffff;
-    border-radius: 8px;
-    padding: 6px 14px;
-    border: 1px solid #555555;
+    background-color: #7a5d59;
+    color: #f2dfdd;
+    border-radius: 14px;
+    padding: 8px 18px;
+    border: 1px solid rgba(0,0,0,0.35);
 }
 
 QPushButton:hover {
-    background-color: #50545a;
+    background-color: #8b6c68;
 }
 
 QPushButton:pressed {
-    background-color: #2f3236;
-}
-
-QPushButton#startPauseButton {
-    background-color: #4caf50;
-    border-color: #3e8e41;
-    font-weight: 600;
-}
-
-QPushButton#resetButton {
-    background-color: #f44336;
-    border-color: #c62828;
-}
-
-QPushButton#skipBreakButton {
-    background-color: #2196f3;
-    border-color: #1976d2;
+    background-color: #3a3e41;
 }
