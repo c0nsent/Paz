@@ -44,55 +44,37 @@ namespace impl
 
 	void PomodoroTimer::start()
 	{
-		m_timer.start();
-
-		m_state = State::Running;
-		emit stateChanged(m_state);
+		if (trySetState(State::Running)) [[likely]]
+			m_timer.start();
 	}
 
 
 	void PomodoroTimer::start(const Phase phase)
 	{
-		m_phase = phase;
-		emit phaseChanged(m_phase);
-
-		m_remainingTime = phaseDuration();
-		emit remainingTimeChanged(m_remainingTime);
-
-		start();
+		start(phase, phaseDuration());
 	}
 
 
 	void PomodoroTimer::start(const Phase phase, const quint16 seconds)
 	{
-		m_phase = phase;
-		emit phaseChanged(m_phase);
-
-		m_remainingTime = qMin(seconds, phaseDuration());
-		emit remainingTimeChanged(m_remainingTime);
-
-		start();
+		if (trySetPhase(phase)) [[likely]]
+			if (trySetRemainingTime(seconds)) [[unlikely]]
+				start();
 	}
 
 
 	void PomodoroTimer::pause()
 	{
-		m_timer.stop();
-
-		m_state = State::Paused;
-		emit stateChanged(m_state);
+		if (trySetState(State::Paused)) [[likely]]
+			m_timer.stop();
 	}
 
 
 	void PomodoroTimer::reset()
 	{
-		m_timer.stop();
-
-		m_remainingTime = phaseDuration();
-		emit remainingTimeChanged(m_remainingTime);
-
-		m_state = State::Idle;
-		emit stateChanged(m_state);
+		if (trySetState(State::Idle)) [[likely]]
+			if (trySetRemainingTime(phaseDuration())) [[likely]]
+				m_timer.stop();
 	}
 
 
@@ -178,5 +160,41 @@ namespace impl
 		}
 
 		emit remainingTimeChanged(--m_remainingTime);
+	}
+
+
+	bool PomodoroTimer::trySetPhase(const Phase phase)
+	{
+		if (m_phase == phase) [[unlikely]]
+			return false;
+
+		m_phase = phase;
+		emit phaseChanged(m_phase);
+
+		return true;
+	}
+
+
+	bool PomodoroTimer::trySetRemainingTime(const quint16 remainingTime)
+	{
+		if (m_remainingTime == remainingTime) [[unlikely]]
+			return false;
+
+		m_remainingTime = remainingTime;
+		emit remainingTimeChanged(m_remainingTime);
+
+		return true;
+	}
+
+
+	bool PomodoroTimer::trySetState(const State state)
+	{
+		if (m_state == state) [[unlikely]]
+			return false;
+
+		m_state = state;
+		emit stateChanged(m_state);
+
+		return true;
 	}
 }

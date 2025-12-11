@@ -62,6 +62,10 @@ namespace impl
 	private slots:
 
 		void updateRemainingTime();
+
+		bool trySetPhase(Phase phase);
+		bool trySetRemainingTime(quint16 remainingTime);
+		bool trySetState(State state);
 		
 	signals:
 
