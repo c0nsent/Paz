@@ -7,13 +7,13 @@
 #pragma once
 
 
+#include <QMetaEnum>
+
 #include "../core/constants.hpp"
 
-#include "afk-timer.hpp"
-
+#include <QHash>
 #include <QObject>
 #include <QTimer>
-
 
 namespace impl
 {
@@ -23,15 +23,17 @@ namespace impl
 
 		static constexpr quint16 c_timeIsOut{0};
 
+		struct Initializer;
+
 	public:
 
 		enum class Phase : quint8 { Work, ShortBreak, LongBreak };
 		Q_ENUM(Phase)
 
-		enum class State : quint8 { Idle, Running, Paused };
+		enum class State : quint8 { Idle, Running, Paused, AfkTimerRunning };
 		Q_ENUM(State)
 
-		explicit PomodoroTimer(QObject *parent = nullptr);
+		PomodoroTimer(Initializer &&data);
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
@@ -40,6 +42,8 @@ namespace impl
 		[[nodiscard]] quint16 sessionLength() const;
 		[[nodiscard]] quint16 remainingTime() const;
 		[[nodiscard]] quint16 currentSessionCount() const;
+
+		//void setPhaseDuration(PhaseDurations &&seconds) noexcept;
 
 	public slots:
 
@@ -50,13 +54,9 @@ namespace impl
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(quint16 seconds);
+		void setPhaseDuration(quint16 current);
 		void setPhaseDuration(quint16 seconds, Phase phase);
-		void setPhaseDuration(
-			quint16 workSec,
-			quint16 shortBreakSec,
-			quint16 longBreakSec
-		);
+
 		void setSessionLength(quint16 pomodoros);
 
 	private slots:
@@ -78,18 +78,14 @@ namespace impl
 	
 	private:
 
-		State m_state{State::Idle};
-		Phase m_phase{Phase::Work};
-		quint16 m_phaseDurations[defaults::c_phaseCount]
-		{
-			defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration
-		};
-		quint16 m_sessionLength{defaults::c_sessionLength};
+		State m_state;
+		Phase m_phase;
+		QHash<Phase, quint16> m_phaseDurations;
+		quint16 m_sessionLength;
 
-		quint16 m_remainingTime{defaults::c_workDuration};
-		quint16 m_currentSessionCount{0};
+		quint16 m_remainingTime;
+		quint16 m_currentSessionCount;
 
-		AfkTimer m_afkTimer;
 		QTimer m_timer;
-};
+	};
 }
