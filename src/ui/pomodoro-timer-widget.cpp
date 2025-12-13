@@ -108,7 +108,7 @@ namespace ui
 
 		connect(m_startPauseButton, &QPushButton::clicked, [this]
 		{
-			m_timer->isActive() ? m_timer->pause() : m_timer->start();
+			m_timer->state() == impl::PomodoroTimer::State::Idle ? m_timer->start() : m_timer->pause();
 		});
 
 		connect(m_resetButton, &QPushButton::clicked, m_timer, &impl::PomodoroTimer::reset);
@@ -155,9 +155,7 @@ namespace ui
 		m_settings->beginGroup(settings::groups::c_style);
 
 		m_font.setFamily(m_settings->value(settings::keys::c_fontFamily).toString());
-
-		if (not m_font.exactMatch())
-			m_font.setFamily(defaults::c_fontFamily);
+		if (not m_font.exactMatch()) m_font.setFamily(defaults::c_fontFamily);
 
 		m_settings->endGroup();
 	}
@@ -170,8 +168,7 @@ namespace ui
 
 		auto writeValue = [&](const QString &key, const quint16 current)
 		{
-			if (not m_settings->contains(key))
-				m_settings->setValue(key, current);
+			if (not m_settings->contains(key)) m_settings->setValue(key, current);
 		};
 
 		writeValue(settings::keys::c_workDuration, m_timer->phaseDuration(Work));
@@ -192,8 +189,6 @@ namespace ui
 		setObjectName("PomodoroTimerWidget");
 	    setLayout(m_mainLayout);
         setFont(m_font);
-
-
 
         setupWidget();
         setupConnections();
@@ -219,8 +214,8 @@ namespace ui
 
 	void PomodoroTimerWidget::updateRemainingTimeText(const quint16 current)
 	{
-		const auto minutes { current / 60 };
-		const auto seconds { current % 60 };
+		const auto minutes {current / 60};
+		const auto seconds {current % 60};
 
 		m_remainingTimeLabel->setText(QString::asprintf("%d:%02d", minutes, seconds));
 	}

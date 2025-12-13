@@ -10,22 +10,14 @@
 
 namespace impl
 {
-	PomodoroTimer::PomodoroTimer(QObject *parent)
-		: QObject{parent}
-		, m_state{State::Idle}
-		, m_phase{Phase::Work}
-		, m_phaseDurations{defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration}
-		, m_sessionLength{defaults::c_sessionLength}
-		, m_remainingTime{defaults::c_workDuration}
-		, m_currentSessionCount{0}
+	PomodoroTimer::PomodoroTimer(QObject *parent) : QObject{parent}
 	{
 		m_timer.setTimerType(Qt::PreciseTimer);
 		m_timer.setInterval(defaults::c_timerInterval);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::updateRemainingTime);
+		connect(&m_afkTimer, &AfkTimer::finished, this, &PomodoroTimer::reset);
 	}
-
-	bool PomodoroTimer::isActive() const {return m_timer.isActive();}
 
 	PomodoroTimer::State PomodoroTimer::state() const {return m_state;}
 
@@ -44,8 +36,7 @@ namespace impl
 
 	void PomodoroTimer::start()
 	{
-		if (trySetState(State::Running)) [[likely]]
-			m_timer.start();
+		if (trySetState(State::Running)) [[likely]] m_timer.start();
 	}
 
 
@@ -57,24 +48,29 @@ namespace impl
 
 	void PomodoroTimer::start(const Phase phase, const quint16 seconds)
 	{
-		if (trySetPhase(phase)) [[likely]]
-			if (trySetRemainingTime(seconds)) [[unlikely]]
-				start();
+		trySetPhase(phase);
+		trySetRemainingTime(seconds);
+
+		start();
 	}
 
 
 	void PomodoroTimer::pause()
 	{
-		if (trySetState(State::Paused)) [[likely]]
-			m_timer.stop();
+		if ( not trySetState(State::Paused)) [[unlikely]] return;
+
+		if (m_phase == Phase::Work) m_afkTimer.start(3);
+
+		m_timer.stop();
 	}
 
 
 	void PomodoroTimer::reset()
 	{
-		if (trySetState(State::Idle)) [[likely]]
-			if (trySetRemainingTime(phaseDuration())) [[likely]]
-				m_timer.stop();
+		trySetState(State::Idle);
+		trySetRemainingTime(phaseDuration());
+
+		m_timer.stop();
 	}
 
 
@@ -116,17 +112,12 @@ namespace impl
 	{
 		auto &currentPhaseDuration{m_phaseDurations[qToUnderlying(phase)]};
 
-		if (currentPhaseDuration != seconds) [[likely]]
-		{
-			currentPhaseDuration = seconds;
-			emit phaseDurationChanged(seconds, phase);
-		};
+		if (currentPhaseDuration == seconds) [[unlikely]] return;
 
-		if (m_phase == phase )
-		{
-			m_remainingTime = qMin(seconds, m_remainingTime );
-			emit remainingTimeChanged(m_remainingTime);
-		}
+		currentPhaseDuration = seconds;
+		emit phaseDurationChanged(seconds, phase);
+
+		if (m_phase == phase ) trySetRemainingTime(qMin(seconds, m_remainingTime));
 	}
 
 

@@ -1,5 +1,6 @@
 qt_add_library(PazImplementation SHARED
 		pomodoro-timer.cpp pomodoro-timer.hpp
+		afk-timer.cpp afk-timer.hpp
 )
 
 target_link_libraries(PazImplementation PRIVATE

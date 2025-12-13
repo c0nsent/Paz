@@ -47,6 +47,7 @@ namespace defaults
 	/// Длительности фазы `PhaseManager::Phase::LongBreak` по-умолчанию
 	constexpr quint16 c_longBreakDuration{45 * 60};
 
+	constexpr  quint16 c_AfkDuration{3 * 60};
 	constexpr qint64 c_sessionLength{6};
 
 	constexpr auto c_fontFamily{"Adwaita Sans"};

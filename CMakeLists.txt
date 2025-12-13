@@ -5,13 +5,17 @@ project(Paz
 		LANGUAGES CXX
 )
 
-find_package(Qt6 6.10 REQUIRED COMPONENTS
+find_package(Qt6 6.10.1 REQUIRED COMPONENTS
 		Core
 		Widgets
-		LinguistTools
+		Quick
+		#LinguistTools
 )
 
-qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES ru)
+qt_standard_project_setup(
+		REQUIRES 6.10.1,
+		I18N_TRANSLATED_LANGUAGES ru
+)
 
 #qt_add_translations(Paz)
 

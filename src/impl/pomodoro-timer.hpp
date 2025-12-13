@@ -9,6 +9,8 @@
 
 #include "../core/constants.hpp"
 
+#include "afk-timer.hpp"
+
 #include <QObject>
 #include <QTimer>
 
@@ -30,8 +32,6 @@ namespace impl
 		Q_ENUM(State)
 
 		explicit PomodoroTimer(QObject *parent = nullptr);
-
-		[[nodiscard]] bool isActive() const;
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
@@ -78,14 +78,18 @@ namespace impl
 	
 	private:
 
-		State m_state;
-		Phase m_phase;
-		quint16 m_phaseDurations[defaults::c_phaseCount];
-		quint16 m_sessionLength;
+		State m_state{State::Idle};
+		Phase m_phase{Phase::Work};
+		quint16 m_phaseDurations[defaults::c_phaseCount]
+		{
+			defaults::c_workDuration, defaults::c_shortBreakDuration, defaults::c_longBreakDuration
+		};
+		quint16 m_sessionLength{defaults::c_sessionLength};
 
-		quint16 m_remainingTime;
-		quint16 m_currentSessionCount;
+		quint16 m_remainingTime{defaults::c_workDuration};
+		quint16 m_currentSessionCount{0};
 
+		AfkTimer m_afkTimer;
 		QTimer m_timer;
 };
 }
