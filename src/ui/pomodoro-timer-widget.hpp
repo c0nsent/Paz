@@ -30,13 +30,11 @@ namespace ui
 		void setupConnections();
 
 		void readSettings();
-		void writeSettings();
+		void writeDefaultSettings();
 
 	public:
 
 		explicit PomodoroTimerWidget(QWidget *parent = nullptr);
-
-	public slots:
 
 	private slots:
 
@@ -50,8 +48,9 @@ namespace ui
 	private:
 
 		QSettings *m_settings{new QSettings{QSettings::UserScope, "consent_", "Paz"}};
+		QMetaEnum phaseMeta{ QMetaEnum::fromType<impl::PomodoroTimer::Phase>() };
 
-		impl::PomodoroTimer *m_timer{new impl::PomodoroTimer{this}};
+		impl::PomodoroTimer *m_timer{new impl::PomodoroTimer{{.parent{this} }}};
 		quint16 m_completedPomodoros{0};
 
 		QFont m_font;

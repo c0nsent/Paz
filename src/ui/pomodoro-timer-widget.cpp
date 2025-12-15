@@ -26,15 +26,13 @@ namespace ui
 		m_skipBreakButton->setText(tr("Skip Break"));
 		updateSkipBreakButtonVisibility(m_timer->phase());
 
-		const auto labels{this->findChildren<QLabel *>()};
-		for (const auto label : labels)
+		for (const auto label : findChildren<QLabel *>())
 		{
 			label->setAlignment(Qt::AlignCenter);
 			label->setFont(m_font);
 		}
 
-		const auto buttons{this->findChildren<QPushButton *>()};
-		for (const auto button : buttons)
+		for (const auto button : findChildren<QPushButton *>())
 		{
 			button->setFont(m_font);
 		}
@@ -127,28 +125,23 @@ namespace ui
 	{
 		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
 
-		auto validate = [&](const QString &key, const quint16 defaultDuration)
+		auto toQuint16 = [&](const QAnyStringView key)
 		{
-			const quint16 configValue{static_cast<quint16>(m_settings->value(key).toUInt())};
-
-			if (limits::c_minPhaseDuration < configValue and configValue > limits::c_maxPhaseDuration)
-				return configValue;
-
-			return defaultDuration;
+			return static_cast<quint16>(m_settings->value(key).toUInt());
 		};
 
-		m_timer->setPhaseDuration(
-			validate(settings::keys::c_workDuration, defaults::c_workDuration),
-			validate(settings::keys::c_shortBreakDuration, defaults::c_shortBreakDuration),
-			validate(settings::keys::c_longBreakDuration, defaults::c_longBreakDuration)
-		);
+		for (auto i{0}; i != phaseMeta.keyCount(); ++i)
+		{
+			const auto configValue{ toQuint16(settings::keys::c_phaseDurations.at(i)) };
 
-		auto sessionLength{static_cast<quint16>(m_settings->value(settings::keys::c_sessionLength).toUInt())};
+			const quint16 clamped{ qBound(limits::c_minPhaseDuration, configValue, limits::c_maxPhaseDuration) };
 
-		if (limits::c_minSessionLength > sessionLength or sessionLength < limits::c_maxSessionLength)
-			sessionLength = defaults::c_sessionLength;
+			m_timer->setPhaseDuration(static_cast<impl::PomodoroTimer::Phase>(i), clamped);
+		}
 
-		m_timer->setSessionLength(sessionLength);
+		const auto sessionLength{ toQuint16(settings::keys::c_sessionLength) };
+
+		m_timer->setSessionLength(qBound(limits::c_minSessionLength, sessionLength, limits::c_maxSessionLength));
 
 		m_settings->endGroup();
 
@@ -161,7 +154,7 @@ namespace ui
 	}
 
 
-	void PomodoroTimerWidget::writeSettings()
+	void PomodoroTimerWidget::writeDefaultSettings()
 	{
 		using enum impl::PomodoroTimer::Phase;
 		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
@@ -171,9 +164,11 @@ namespace ui
 			if (not m_settings->contains(key)) m_settings->setValue(key, current);
 		};
 
-		writeValue(settings::keys::c_workDuration, m_timer->phaseDuration(Work));
-		writeValue(settings::keys::c_shortBreakDuration, m_timer->phaseDuration(ShortBreak));
-		writeValue(settings::keys::c_longBreakDuration, m_timer->phaseDuration(LongBreak));
+		for (auto i{0}; i != phaseMeta.keyCount(); ++i)
+		{
+			writeValue( settings::keys::c_phaseDurations.at(i), defaults::c_phaseDurations.at(i) );
+		}
+
 		writeValue(settings::keys::c_sessionLength, m_timer->sessionLength());
 
 		m_settings->endGroup();
@@ -193,10 +188,8 @@ namespace ui
         setupWidget();
         setupConnections();
 
+		writeDefaultSettings();
         readSettings();
-        writeSettings();
-
-		m_timer->setPhaseDuration(3, 3, 3);
 	}
 
 

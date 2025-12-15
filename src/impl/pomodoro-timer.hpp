@@ -15,6 +15,9 @@
 #include <QObject>
 #include <QTimer>
 
+#include <initializer_list>
+
+
 namespace impl
 {
 	class PomodoroTimer final : public QObject
@@ -23,8 +26,6 @@ namespace impl
 
 		static constexpr quint16 c_timeIsOut{0};
 
-		struct Initializer;
-
 	public:
 
 		enum class Phase : quint8 { Work, ShortBreak, LongBreak };
@@ -32,6 +33,19 @@ namespace impl
 
 		enum class State : quint8 { Idle, Running, Paused, AfkTimerRunning };
 		Q_ENUM(State)
+
+		struct Initializer
+		{
+			QObject *parent{nullptr};
+
+			State state{ State::Idle };
+			Phase phase{ Phase::Work };
+
+			QHash<Phase,quint16> phaseDurations{ initializePhaseDurations() };
+
+			quint16 sessionLength{ defaults::c_sessionLength };
+			quint16 currentSessionCount{};
+		};
 
 		PomodoroTimer(Initializer &&data);
 
@@ -43,8 +57,6 @@ namespace impl
 		[[nodiscard]] quint16 remainingTime() const;
 		[[nodiscard]] quint16 currentSessionCount() const;
 
-		//void setPhaseDuration(PhaseDurations &&seconds) noexcept;
-
 	public slots:
 
 		void start();
@@ -55,7 +67,8 @@ namespace impl
 		void toNextPhase();
 
 		void setPhaseDuration(quint16 current);
-		void setPhaseDuration(quint16 seconds, Phase phase);
+		void setPhaseDuration(Phase phase, quint16 seconds);
+		void setPhaseDuration(const std::initializer_list<std::pair<Phase, quint16>> &phaseDurations);
 
 		void setSessionLength(quint16 pomodoros);
 
@@ -77,6 +90,8 @@ namespace impl
 		void pomodoroFinished(quint16 currentSessionCount);
 	
 	private:
+
+		static QHash<Phase, quint16> initializePhaseDurations();
 
 		State m_state;
 		Phase m_phase;

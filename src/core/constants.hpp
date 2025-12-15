@@ -14,6 +14,7 @@
 #include <QHash>
 
 
+
 ///Неймспейс с константами, задающими ограничения для значений
 namespace limits
 {
@@ -62,6 +63,7 @@ namespace defaults
 	constexpr bool c_isBold{false};
 }
 
+
 namespace settings
 {
 	namespace groups
@@ -71,9 +73,10 @@ namespace settings
 	}
 	namespace keys
 	{
-		constexpr auto c_workDuration{"WorkDuration"};
-		constexpr auto c_shortBreakDuration{"ShortBreakDuration"};
-		constexpr auto  c_longBreakDuration{"LongBreakDuration"};
+		static const QVarLengthArray c_phaseDurations
+		{
+			"WorkDuration", "ShortBreakDuration", "LongBreakDuration"
+		};
 
 		constexpr auto c_sessionLength{"SessionLength"};
 
