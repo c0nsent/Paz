@@ -66,6 +66,9 @@ namespace defaults
 
 namespace settings
 {
+	static constexpr auto c_org{"consent_"};
+	static constexpr auto c_app{"Paz"};
+
 	namespace groups
 	{
 		constexpr auto c_pomodoroTimer{"PomodoroTimer"};

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 4.2)
 
 project(Paz
-		VERSION 0.2.0
+		VERSION 0.2.2
 		LANGUAGES CXX
 )
 
