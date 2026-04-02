@@ -1,9 +1,3 @@
-/**
- * @date 12/2/25
- * 
- * @author amitayus_
- */
-
 #include "pomodoro-timer-widget.hpp"
 
 #include <QString>
@@ -154,7 +148,7 @@ namespace ui
 	}
 
 
-	void PomodoroTimerWidget::writeDefaultSettings()
+	void PomodoroTimerWidget::writeDefaultSettings() const
 	{
 		using enum impl::PomodoroTimer::Phase;
 		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
@@ -193,20 +187,20 @@ namespace ui
 	}
 
 
-	void PomodoroTimerWidget::updatePhaseLabelText(const impl::PomodoroTimer::Phase current)
-	{
+	void PomodoroTimerWidget::updatePhaseLabelText(const impl::PomodoroTimer::Phase current) const
+    {
 		m_phaseLabel->setText(c_phaseStrings[qToUnderlying(current)]);
 	}
 
 
-	void PomodoroTimerWidget::updateStartPauseButtonText(const impl::PomodoroTimer::State current)
-	{
+	void PomodoroTimerWidget::updateStartPauseButtonText(const impl::PomodoroTimer::State current) const
+    {
 		m_startPauseButton->setText(c_timerStateStrings[qToUnderlying(current)]);
 	}
 
 
-	void PomodoroTimerWidget::updateRemainingTimeText(const quint16 current)
-	{
+	void PomodoroTimerWidget::updateRemainingTimeText(const quint16 current) const
+    {
 		const auto minutes {current / 60};
 		const auto seconds {current % 60};
 
@@ -214,8 +208,8 @@ namespace ui
 	}
 
 
-	void PomodoroTimerWidget::updatePhaseProgress()
-	{
+	void PomodoroTimerWidget::updatePhaseProgress() const
+    {
 		const auto currentPhaseDuration{m_timer->phaseDuration()};
 
 		m_phaseProgress->setMaximum(currentPhaseDuration);
@@ -234,8 +228,8 @@ namespace ui
 	}
 
 
-	void PomodoroTimerWidget::updateSkipBreakButtonVisibility(const impl::PomodoroTimer::Phase current)
-	{
+	void PomodoroTimerWidget::updateSkipBreakButtonVisibility(const impl::PomodoroTimer::Phase current) const
+    {
 		m_skipBreakButton->setHidden(current == impl::PomodoroTimer::Phase::Work);
 	}
 }

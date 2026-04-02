@@ -1,9 +1,3 @@
-/**
- * @date 12/2/25
- * 
- * @author amitayus_
- */
-
 #pragma once
 
 #include "../impl/pomodoro-timer.hpp"
@@ -30,7 +24,7 @@ namespace ui
 		void setupConnections();
 
 		void readSettings();
-		void writeDefaultSettings();
+		void writeDefaultSettings() const;
 
 	public:
 
@@ -38,19 +32,19 @@ namespace ui
 
 	private slots:
 
-		void updatePhaseLabelText(impl::PomodoroTimer::Phase current);
-		void updateStartPauseButtonText(impl::PomodoroTimer::State current);
-		void updateRemainingTimeText(quint16 current);
-		void updatePhaseProgress();
+		void updatePhaseLabelText(impl::PomodoroTimer::Phase current) const;
+		void updateStartPauseButtonText(impl::PomodoroTimer::State current) const;
+		void updateRemainingTimeText(quint16 current) const;
+		void updatePhaseProgress() const;
 		void updatePomodoroCountText();
-		void updateSkipBreakButtonVisibility(impl::PomodoroTimer::Phase current);
+		void updateSkipBreakButtonVisibility(impl::PomodoroTimer::Phase current) const;
 
 	private:
 
 		QSettings *m_settings{new QSettings{QSettings::UserScope, "consent_", "Paz"}};
 		QMetaEnum phaseMeta{ QMetaEnum::fromType<impl::PomodoroTimer::Phase>() };
 
-		impl::PomodoroTimer *m_timer{new impl::PomodoroTimer{{.parent{this} }}};
+		impl::PomodoroTimer *m_timer{new impl::PomodoroTimer{{.parent = this }}};
 		quint16 m_completedPomodoros{0};
 
 		QFont m_font;
