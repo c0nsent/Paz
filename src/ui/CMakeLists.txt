@@ -1,5 +1,4 @@
 qt_add_library(PazUI SHARED
-		main-window.cpp main-window.hpp
 		pomodoro-timer-widget.cpp pomodoro-timer-widget.hpp
 )
 

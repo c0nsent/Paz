@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/constants.hpp"
+#include "../core/core"
 
 #include <QSettings>
 #include <QString>
@@ -15,16 +15,16 @@ namespace impl
 
 	public:
 
-		[[nodiscard]] QTime calculate(quint16 repeatCount);
+		[[nodiscard]] QTime calculate(u16 repeatCount);
 
 	private:
 
-		QSettings m_settings{ QSettings::UserScope, settings::c_org, settings::c_app };
+		QSettings m_settings{ QSettings::UserScope, settings::ORG, settings::APP_NAME };
 
-		quint16 m_workDuration{};
-		quint16 m_shortBreakDuration{};
-		quint16 m_longBreakDuration{};
+		u16 m_workDuration{};
+		u16 m_shortBreakDuration{};
+		u16 m_longBreakDuration{};
 
-		quint16 m_session_count{};
+		u16 m_session_count{};
 	};
 }

@@ -1,15 +1,9 @@
-/**
- * @date 12/4/25
- * 
- * @author amitayus_
- */
-
 #pragma once
 
 
 #include <QMetaEnum>
 
-#include "../core/constants.hpp"
+#include "../core/core"
 
 #include <QHash>
 #include <QObject>
@@ -24,82 +18,82 @@ namespace impl
 	{
 		Q_OBJECT
 
-		static constexpr quint16 c_timeIsOut{0};
+		static constexpr u16 c_timeIsOut{0};
 
 	public:
 
-		enum class Phase : quint8 { Work, ShortBreak, LongBreak };
+		enum class Phase : u8 { Work, ShortBreak, LongBreak };
 		Q_ENUM(Phase)
 
-		enum class State : quint8 { Idle, Running, Paused, AfkTimerRunning };
+		enum class State : u8 { Idle, Running, Paused, AfkTimerRunning };
 		Q_ENUM(State)
 
-		struct Initializer
+		struct CreateInfo
 		{
 			QObject *parent{nullptr};
 
 			State state{ State::Idle };
 			Phase phase{ Phase::Work };
 
-			QHash<Phase,quint16> phaseDurations{ initializePhaseDurations() };
+			QHash<Phase,u16> phaseDurations{ initializePhaseDurations() };
 
-			quint16 sessionLength{ defaults::c_sessionLength };
-			quint16 currentSessionCount{};
+			u16 sessionLength{ defaults::SESSION_LENGTH };
+			u16 currentSessionCount{};
 		};
 
-		PomodoroTimer(Initializer &&data);
+		explicit PomodoroTimer(const CreateInfo &data);
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
-		[[nodiscard]] quint16 phaseDuration() const;
-		[[nodiscard]] quint16 phaseDuration(Phase phase) const;
-		[[nodiscard]] quint16 sessionLength() const;
-		[[nodiscard]] quint16 remainingTime() const;
-		[[nodiscard]] quint16 currentSessionCount() const;
+		[[nodiscard]] u16 phaseDuration() const;
+		[[nodiscard]] u16 phaseDuration(Phase phase) const;
+		[[nodiscard]] u16 sessionLength() const;
+		[[nodiscard]] u16 remainingTime() const;
+		[[nodiscard]] u16 currentSessionCount() const;
 
 	public slots:
 
 		void start();
 		void start(Phase phase);
-		void start(Phase phase, quint16 seconds);
+		void start(Phase phase, u16 seconds);
 		void pause();
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(quint16 current);
-		void setPhaseDuration(Phase phase, quint16 seconds);
-		void setPhaseDuration(const std::initializer_list<std::pair<Phase, quint16>> &phaseDurations);
+		void setPhaseDuration(u16 current);
+		void setPhaseDuration(Phase phase, u16 seconds);
+		void setPhaseDuration(const std::initializer_list<std::pair<Phase, u16>> &phaseDurations);
 
-		void setSessionLength(quint16 pomodoros);
+		void setSessionLength(u16 pomodoros);
 
 	private slots:
 
 		void updateRemainingTime();
 
 		bool trySetPhase(Phase phase);
-		bool trySetRemainingTime(quint16 remainingTime);
+		bool trySetRemainingTime(u16 remainingTime);
 		bool trySetState(State state);
 		
 	signals:
 
 		void stateChanged(State);
 		void phaseChanged(Phase);
-		void phaseDurationChanged(quint16 seconds, Phase);
-		void sessionLengthChanged(quint16 pomodoros);
-		void remainingTimeChanged(quint16 seconds);
-		void pomodoroFinished(quint16 currentSessionCount);
+		void phaseDurationChanged(u16 seconds, Phase);
+		void sessionLengthChanged(u16 pomodoros);
+		void remainingTimeChanged(u16 seconds);
+		void pomodoroFinished(u16 currentSessionCount);
 	
 	private:
 
-		static QHash<Phase, quint16> initializePhaseDurations();
+		static QHash<Phase, u16> initializePhaseDurations();
 
 		State m_state;
 		Phase m_phase;
-		QHash<Phase, quint16> m_phaseDurations;
-		quint16 m_sessionLength;
+		QHash<Phase, u16> m_phaseDurations;
+		u16 m_sessionLength;
 
-		quint16 m_remainingTime;
-		quint16 m_currentSessionCount;
+		u16 m_remainingTime;
+		u16 m_currentSessionCount;
 
 		QTimer m_timer;
 	};

@@ -16,8 +16,8 @@ namespace ui
 	{
 		Q_OBJECT
 
-		static constexpr const char *c_phaseStrings[defaults::c_phaseCount] { "Working", "Short Break", "Long Break" };
-		static constexpr const char *c_timerStateStrings[defaults::c_timerStateCount] { "Start", "Pause", "Resume" };
+		static constexpr const char *c_phaseStrings[defaults::PHASE_COUNT] { "Working", "Short Break", "Long Break" };
+		static constexpr const char *c_timerStateStrings[defaults::TIMER_STATE_COUNT] { "Start", "Pause", "Resume" };
 
 		void setupWidget();
 

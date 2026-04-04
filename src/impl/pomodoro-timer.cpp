@@ -1,9 +1,3 @@
-/**
- * @date 12/4/25
- * 
- * @author amitayus_
- */
-
 #include "pomodoro-timer.hpp"
 
 #include <QMetaEnum>
@@ -11,17 +5,17 @@
 
 namespace impl
 {
-	PomodoroTimer::PomodoroTimer(Initializer &&data)
+	PomodoroTimer::PomodoroTimer(const CreateInfo &data)
 		: QObject{data.parent}
 		  , m_state{data.state}
 		  , m_phase{data.phase}
-		  , m_phaseDurations{std::move(data.phaseDurations)}
+		  , m_phaseDurations{data.phaseDurations}
 		  , m_sessionLength{data.sessionLength}
 		  , m_remainingTime{data.phaseDurations.value(data.phase)}
 		  , m_currentSessionCount{data.currentSessionCount}
 	{
 		m_timer.setTimerType(Qt::CoarseTimer);
-		m_timer.setInterval(defaults::c_timerInterval);
+		m_timer.setInterval(defaults::TIMER_INTERVAL);
 
 		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::updateRemainingTime);
 	}
@@ -31,15 +25,15 @@ namespace impl
 
 	PomodoroTimer::Phase PomodoroTimer::phase() const {return m_phase;}
 
-	quint16 PomodoroTimer::phaseDuration() const{ return m_phaseDurations.value(m_phase); }
+	u16 PomodoroTimer::phaseDuration() const{ return m_phaseDurations.value(m_phase); }
 
-	quint16 PomodoroTimer::phaseDuration(const Phase phase) const {return m_phaseDurations.value(phase);}
+	u16 PomodoroTimer::phaseDuration(const Phase phase) const {return m_phaseDurations.value(phase);}
 
-	quint16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
+	u16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
 
-	quint16 PomodoroTimer::remainingTime() const {return m_remainingTime;}
+	u16 PomodoroTimer::remainingTime() const {return m_remainingTime;}
 
-	quint16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
+	u16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
 
 	void PomodoroTimer::start()
 	{
@@ -53,7 +47,7 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::start(const Phase phase, const quint16 seconds)
+	void PomodoroTimer::start(const Phase phase, const u16 seconds)
 	{
 		trySetPhase(phase);
 		trySetRemainingTime(seconds);
@@ -107,19 +101,19 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const quint16 current)
+	void PomodoroTimer::setPhaseDuration(const u16 current)
 	{
 		setPhaseDuration({{m_phase, current}});
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const Phase phase, const quint16 seconds)
+	void PomodoroTimer::setPhaseDuration(const Phase phase, const u16 seconds)
 	{
 		setPhaseDuration({{phase, seconds}});
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const std::initializer_list<std::pair<Phase, quint16>> &phaseDurations)
+	void PomodoroTimer::setPhaseDuration(const std::initializer_list<std::pair<Phase, u16>> &phaseDurations)
 	{
 		if (phaseDurations.size() > m_phaseDurations.size()) [[unlikely]]
 				qWarning() << Q_FUNC_INFO << "\n" << "количество переданных параметров =  " << phaseDurations.size()
@@ -137,7 +131,7 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::setSessionLength(const quint16 pomodoros)
+	void PomodoroTimer::setSessionLength(const u16 pomodoros)
 	{
 		if (m_sessionLength == pomodoros) [[unlikely]] return;
 
@@ -166,7 +160,7 @@ namespace impl
 	}
 
 
-	bool PomodoroTimer::trySetRemainingTime(const quint16 remainingTime)
+	bool PomodoroTimer::trySetRemainingTime(const u16 remainingTime)
 	{
 		if (m_remainingTime == remainingTime) [[unlikely]] return false;
 
@@ -188,17 +182,17 @@ namespace impl
 	}
 
 
-	QHash<PomodoroTimer::Phase, quint16> PomodoroTimer::initializePhaseDurations()
+	QHash<PomodoroTimer::Phase, u16> PomodoroTimer::initializePhaseDurations()
 	{
 		const auto metaPhase{QMetaEnum::fromType<Phase>()};
 		const auto enumSize{ metaPhase.keyCount() };
 
-		QHash<Phase, quint16> durations;
+		QHash<Phase, u16> durations;
 		durations.reserve(enumSize);
 
 		for (auto i{0}; i != enumSize; ++i)
 		{
-			durations.emplace(static_cast<Phase>(i), defaults::c_phaseDurations.at(i));
+			durations.emplace(static_cast<Phase>(i), defaults::PHASE_DURATIONS.at(i));
 		}
 
 		return durations;

@@ -117,7 +117,7 @@ namespace ui
 
 	void PomodoroTimerWidget::readSettings()
 	{
-		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
+		m_settings->beginGroup(settings::groups::POMODORO_TIMER);
 
 		auto toQuint16 = [&](const QAnyStringView key)
 		{
@@ -126,23 +126,23 @@ namespace ui
 
 		for (auto i{0}; i != phaseMeta.keyCount(); ++i)
 		{
-			const auto configValue{ toQuint16(settings::keys::c_phaseDurations.at(i)) };
+			const auto configValue{ toQuint16(settings::keys::PHASE_DURATIONS.at(i)) };
 
-			const quint16 clamped{ qBound(limits::c_minPhaseDuration, configValue, limits::c_maxPhaseDuration) };
+			const quint16 clamped{ qBound(limits::MIN_PHASE_DURATION, configValue, limits::MAX_PHASE_DURATION) };
 
 			m_timer->setPhaseDuration(static_cast<impl::PomodoroTimer::Phase>(i), clamped);
 		}
 
-		const auto sessionLength{ toQuint16(settings::keys::c_sessionLength) };
+		const auto sessionLength{ toQuint16(settings::keys::SESSION_LENGTH) };
 
-		m_timer->setSessionLength(qBound(limits::c_minSessionLength, sessionLength, limits::c_maxSessionLength));
+		m_timer->setSessionLength(qBound(limits::MIN_SESSION_LENGTH, sessionLength, limits::MAX_SESSION_LENGTH));
 
 		m_settings->endGroup();
 
-		m_settings->beginGroup(settings::groups::c_style);
+		m_settings->beginGroup(settings::groups::STYLE);
 
-		m_font.setFamily(m_settings->value(settings::keys::c_fontFamily).toString());
-		if (not m_font.exactMatch()) m_font.setFamily(defaults::c_fontFamily);
+		m_font.setFamily(m_settings->value(settings::keys::FONT_FAMILY).toString());
+		if (not m_font.exactMatch()) m_font.setFamily(defaults::FONT_FAMILY);
 
 		m_settings->endGroup();
 	}
@@ -151,7 +151,7 @@ namespace ui
 	void PomodoroTimerWidget::writeDefaultSettings() const
 	{
 		using enum impl::PomodoroTimer::Phase;
-		m_settings->beginGroup(settings::groups::c_pomodoroTimer);
+		m_settings->beginGroup(settings::groups::POMODORO_TIMER);
 
 		auto writeValue = [&](const QString &key, const quint16 current)
 		{
@@ -160,15 +160,15 @@ namespace ui
 
 		for (auto i{0}; i != phaseMeta.keyCount(); ++i)
 		{
-			writeValue( settings::keys::c_phaseDurations.at(i), defaults::c_phaseDurations.at(i) );
+			writeValue( settings::keys::PHASE_DURATIONS.at(i), defaults::PHASE_DURATIONS.at(i) );
 		}
 
-		writeValue(settings::keys::c_sessionLength, m_timer->sessionLength());
+		writeValue(settings::keys::SESSION_LENGTH, m_timer->sessionLength());
 
 		m_settings->endGroup();
 
-		m_settings->beginGroup(settings::groups::c_style);
-		m_settings->setValue(settings::keys::c_fontFamily, m_font.family());
+		m_settings->beginGroup(settings::groups::STYLE);
+		m_settings->setValue(settings::keys::FONT_FAMILY, m_font.family());
 		m_settings->endGroup();
 	}
 

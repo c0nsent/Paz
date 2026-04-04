@@ -1,33 +1,26 @@
-/**
- * @date 11/19/25
- * 
- * @author amitayus_
- */
-
 #pragma once
+
+#include "basic-types-aliases.hpp"
 
 #include <chrono>
 #include <limits>
-#include <qstring.h>
 #include <QtTypes>
 #include <QVarLengthArray>
-#include <QHash>
-
 
 
 ///Неймспейс с константами, задающими ограничения для значений
 namespace limits
 {
 	/// Максимальная длительность фазы - 99 минут
-	constexpr quint16 c_maxPhaseDuration{99 * 60};
+	constexpr u16 MAX_PHASE_DURATION{99 * 60};
 	/// Минимальная длительность фазы - 1 минута
-	constexpr quint16 c_minPhaseDuration{1 * 60};
+	constexpr u16 MIN_PHASE_DURATION{1 * 60};
 
 	/// Максимальное количество помодоро за сессию
-	constexpr quint16 c_maxPomodoro{std::numeric_limits<quint16>::max() - 1};
+	constexpr u16 MAX_POMODORO{std::numeric_limits<u16>::max() - 1};
 
-	constexpr quint16 c_maxSessionLength{99};
-	constexpr quint16 c_minSessionLength{1};
+	constexpr u16 MAX_SESSION_LENGTH{99};
+	constexpr u16 MIN_SESSION_LENGTH{1};
 }
 
 /// Неймспейс с константами, задающими значение по-умолчанию
@@ -36,14 +29,14 @@ namespace defaults
 	using namespace std::chrono_literals;
 
 	///Количество фаз в помодоро таймере
-	constexpr std::size_t c_phaseCount{3};
+	constexpr std::size_t PHASE_COUNT{3};
 
-	constexpr std::size_t c_timerStateCount{3};
+	constexpr std::size_t TIMER_STATE_COUNT{3};
 
 	/// Интервал тика QTimer в миллисекундах
-	constexpr auto c_timerInterval{1000ms};
+	constexpr auto TIMER_INTERVAL{1000ms};
 
-	static const QVarLengthArray<quint16> c_phaseDurations
+	static const QVarLengthArray<u16> PHASE_DURATIONS
 	{
 		/// Длительности фазы `PhaseManager::Phase::Work` по-умолчанию
 		25 * 60,
@@ -53,38 +46,37 @@ namespace defaults
 		45 * 60
 	};
 
+	static constexpr u16 INVALID_PHASE_DURATION{0};
 
-	static constexpr quint16 c_invalidPhaseDuration{0};
+	constexpr u16 SESSION_LENGTH{6};
 
-	constexpr quint16 c_sessionLength{6};
-
-	constexpr auto c_fontFamily{"Adwaita Sans"};
-	constexpr quint8 c_fontSize{14};
-	constexpr bool c_isBold{false};
+	constexpr auto FONT_FAMILY{"Adwaita Sans"};
+	constexpr quint8 FONT_SIZE{14};
+	constexpr bool IS_BOLD{false};
 }
 
 
 namespace settings
 {
-	static constexpr auto c_org{"consent_"};
-	static constexpr auto c_app{"Paz"};
+	static constexpr auto ORG{"consent_"};
+	static constexpr auto APP_NAME{"Paz"};
 
 	namespace groups
 	{
-		constexpr auto c_pomodoroTimer{"PomodoroTimer"};
-		constexpr auto c_style{"Style"};
+		constexpr auto POMODORO_TIMER{"PomodoroTimer"};
+		constexpr auto STYLE{"Style"};
 	}
 	namespace keys
 	{
-		static const QVarLengthArray c_phaseDurations
+		static const QVarLengthArray PHASE_DURATIONS
 		{
 			"WorkDuration", "ShortBreakDuration", "LongBreakDuration"
 		};
 
-		constexpr auto c_sessionLength{"SessionLength"};
+		constexpr auto SESSION_LENGTH{"SessionLength"};
 
-		constexpr auto c_fontFamily{"FontFamily"};
-		constexpr auto c_fontSize{"FontSize"};
-		constexpr auto c_isBold{"IsBold"};
+		constexpr auto FONT_FAMILY{"FontFamily"};
+		constexpr auto FONT_SIZE{"FontSize"};
+		constexpr auto IS_BOLD{"IsBold"};
 	}
 }

@@ -1,21 +1,21 @@
 #include "impl/pomodoro-calculator.hpp"
-#include "ui/pomodoro-timer-widget.hpp"
 
 #include <QApplication>
 #include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QString>
 
+void processCliInput(const int argc, char **argv)
+{
+    if (argc != 2)  return;
+
+    impl::PomodoroCalculator calculator;
+    qInfo() << calculator.calculate(QString{argv[1]}.toUShort());
+}
 
 int main(int argc, char *argv[])
 {
-    if (argc == 2)
-    {
-        impl::PomodoroCalculator calculator;
-        qInfo() << calculator.calculate(QString{argv[1]}.toUShort());
-
-        return 0;
-    }
+    processCliInput(argc, argv);
 
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;

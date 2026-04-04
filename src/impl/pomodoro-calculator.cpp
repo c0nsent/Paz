@@ -6,20 +6,20 @@ namespace impl
 {
 	void PomodoroCalculator::readSettings()
 	{
-		m_settings.beginGroup(settings::groups::c_pomodoroTimer);
+		m_settings.beginGroup(settings::groups::POMODORO_TIMER);
 
 		auto i{0};
 
-		m_workDuration = m_settings.value(settings::keys::c_phaseDurations.at(i++)).toUInt();
-		m_shortBreakDuration = m_settings.value(settings::keys::c_phaseDurations.at(i++)).toUInt();
-		m_longBreakDuration = m_settings.value(settings::keys::c_phaseDurations.at(i)).toUInt();
-		m_session_count = m_settings.value(settings::keys::c_sessionLength).toUInt();
+		m_workDuration = m_settings.value(settings::keys::PHASE_DURATIONS.at(i++)).toUInt();
+		m_shortBreakDuration = m_settings.value(settings::keys::PHASE_DURATIONS.at(i++)).toUInt();
+		m_longBreakDuration = m_settings.value(settings::keys::PHASE_DURATIONS.at(i)).toUInt();
+		m_session_count = m_settings.value(settings::keys::SESSION_LENGTH).toUInt();
 
 		m_settings.endGroup();
 	}
 
 
-	QTime PomodoroCalculator::calculate(const quint16 repeatCount)
+	QTime PomodoroCalculator::calculate(const u16 repeatCount)
 	{
 		readSettings();
 

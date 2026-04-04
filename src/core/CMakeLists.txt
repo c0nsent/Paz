@@ -1,6 +1,8 @@
 qt_add_library(PazCore SHARED
 		enums.hpp
 		constants.hpp
+        basic-types-aliases.hpp
+        core
 )
 
 target_link_libraries(PazCore PRIVATE
