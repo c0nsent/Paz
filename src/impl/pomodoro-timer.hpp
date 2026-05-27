@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <QMetaEnum>
 
 #include "../core/core"

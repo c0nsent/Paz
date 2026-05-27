@@ -150,6 +150,7 @@ namespace ui
 
 	void PomodoroTimerWidget::writeDefaultSettings() const
 	{
+	    //TODO: Добавить дефолтный конфиг, который будет парситься при необходимости
 		using enum impl::PomodoroTimer::Phase;
 		m_settings->beginGroup(settings::groups::POMODORO_TIMER);
 
