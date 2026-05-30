@@ -1,9 +1,11 @@
 #include "impl/pomodoro-calculator.hpp"
+#include "impl/test.hpp"
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QString>
+#include <QQuickView>
 
 void processCliInput(const int argc, char **argv)
 {
@@ -17,14 +19,22 @@ int main(int argc, char *argv[])
 {
     processCliInput(argc, argv);
 
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
+    QGuiApplication::setOrganizationName("amitayus_");
+    QGuiApplication::setApplicationName("Paz");
+
+    QQuickView view;
+    paz::impl::Test test;
+    view.setInitialProperties({{"test", &test}});
+
+    /*
     QQmlApplicationEngine engine;
     engine.loadFromModule("PazQml", "Main");
     if (engine.rootObjects().isEmpty())
     {
         qWarning() << "Paz couldn't load module";
         return -1;
-    }
+    }*/
 
-    return QApplication::exec();
+    return QGuiApplication::exec();
 }

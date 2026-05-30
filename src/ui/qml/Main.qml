@@ -26,6 +26,8 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter
         }
 
+
+
         // Таймер
         Label {
             id: timeLabel
@@ -44,8 +46,9 @@ ApplicationWindow {
 
             Button {
                 text: "Start"
+
                 font.pixelSize: 16
-                onClicked:
+                //onClicked:
             }
 
             Button {

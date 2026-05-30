@@ -58,8 +58,8 @@ namespace defaults
 
 namespace settings
 {
-	static constexpr auto ORG{"consent_"};
-	static constexpr auto APP_NAME{"Paz"};
+	//static constexpr auto ORG_NAME{"amitayus_"};
+	//static constexpr auto APP_NAME{"Paz"};
 
 	namespace groups
 	{

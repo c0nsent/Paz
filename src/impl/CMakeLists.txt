@@ -1,6 +1,8 @@
 qt_add_library(PazImplementation SHARED
 		pomodoro-timer.cpp pomodoro-timer.hpp
-		pomodoro-calculator.cpp pomodoro-timer.cpp
+		pomodoro-calculator.cpp pomodoro-calculator.hpp
+        settings-manager.cpp settings-manager.hpp
+        test.cc test.hpp
 )
 
 target_link_libraries(PazImplementation PRIVATE

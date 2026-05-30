@@ -3,7 +3,6 @@
 #include "../core/core"
 
 #include <QSettings>
-#include <QString>
 #include <QTime>
 
 
@@ -19,7 +18,7 @@ namespace impl
 
 	private:
 
-		QSettings m_settings{ QSettings::UserScope, settings::ORG, settings::APP_NAME };
+		QSettings m_settings{QSettings::UserScope};
 
 		u16 m_workDuration{};
 		u16 m_shortBreakDuration{};
