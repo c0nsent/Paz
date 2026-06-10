@@ -12,6 +12,10 @@ ApplicationWindow {
     // Задаем базовый фон окна
     color: "#f4f4f5"
 
+    PomodoroTimer {
+        id: pomodoroTimer
+    }
+
     ColumnLayout {
         anchors.centerIn: parent
         spacing: 20
@@ -19,7 +23,12 @@ ApplicationWindow {
         // Индикатор текущей фазы
         Label {
             id: phaseLabel
-            text: "Work Phase" // В будущем здесь будет привязка к переменной из C++
+            text: {
+                if (pomodoroTimer.phase === PomodoroTimer.Work) return "Work Phase";
+                if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return "Short Break";
+                if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return "Long Break";
+                return "Unknown";
+            }
             font.pixelSize: 24
             font.weight: Font.Bold
             color: "#e74c3c" // Красный оттенок, ассоциирующийся с "pomodoro"
@@ -31,7 +40,7 @@ ApplicationWindow {
         // Таймер
         Label {
             id: timeLabel
-            text: "25:00" // В будущем: pomodoroTimer.timeRemainingString
+            text: pomodoroTimer.timeRemainingString
             font.pixelSize: 72
             font.family: "Monospace" // Моноширный шрифт, чтобы цифры не "прыгали"
             font.weight: Font.DemiBold
@@ -45,23 +54,35 @@ ApplicationWindow {
             spacing: 15
 
             Button {
-                text: "Start"
-
+                text: pomodoroTimer.state === PomodoroTimer.Running ? "Running..." : "Start"
+                enabled: pomodoroTimer.state !== PomodoroTimer.Running
                 font.pixelSize: 16
-                //onClicked:
+                onClicked: pomodoroTimer.start()
             }
 
             Button {
                 text: "Pause"
+                enabled: pomodoroTimer.state === PomodoroTimer.Running
                 font.pixelSize: 16
-                // onClicked: myCplusplusTimer.pause()
+                onClicked: pomodoroTimer.pause()
             }
 
             Button {
                 text: "Reset"
                 font.pixelSize: 16
-                // onClicked: myCplusplusTimer.reset()
+                onClicked: pomodoroTimer.reset()
             }
+
+
+        }
+
+
+        Label {
+            text: pomodoroTimer.currentSessionCount + Text {if (pomodoroTimer.currentSessionCount === 0) return " pomodoro";}
+            font.pixelSize: 42
+            font.weight: timeLabel.font.weight
+            color: timeLabel.color
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 }

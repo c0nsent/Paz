@@ -2,9 +2,15 @@
 
 #include <QMetaEnum>
 #include <QtMinMax>
+#include <QString>
 
 namespace impl
 {
+    PomodoroTimer::PomodoroTimer(QObject *parent)
+        : PomodoroTimer(CreateInfo{parent})
+    {
+    }
+
 	PomodoroTimer::PomodoroTimer(const CreateInfo &data)
 		: QObject{data.parent}
 		  , m_state{data.state}
@@ -32,6 +38,13 @@ namespace impl
 	u16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
 
 	u16 PomodoroTimer::remainingTime() const {return m_remainingTime;}
+
+    QString PomodoroTimer::timeRemainingString() const
+    {
+        int minutes = m_remainingTime / 60;
+        int seconds = m_remainingTime % 60;
+        return QString::asprintf("%02d:%02d", minutes, seconds);
+    }
 
 	u16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
 

@@ -9,13 +9,21 @@
 #include <QTimer>
 
 #include <initializer_list>
+#include <QtQmlIntegration/qqmlintegration.h>
 
 
 namespace impl
 {
-	class PomodoroTimer final : public QObject
+	class PomodoroTimer : public QObject
 	{
 		Q_OBJECT
+        QML_ELEMENT
+
+        Q_PROPERTY(State state READ state NOTIFY stateChanged)
+        Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
+        Q_PROPERTY(int remainingTime READ remainingTime NOTIFY remainingTimeChanged)
+        Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
+        Q_PROPERTY(int currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
 
 		static constexpr u16 c_timeIsOut{0};
 
@@ -40,6 +48,7 @@ namespace impl
 			u16 currentSessionCount{};
 		};
 
+		explicit PomodoroTimer(QObject *parent = nullptr);
 		explicit PomodoroTimer(const CreateInfo &data);
 
 		[[nodiscard]] State state() const;
@@ -48,6 +57,7 @@ namespace impl
 		[[nodiscard]] u16 phaseDuration(Phase phase) const;
 		[[nodiscard]] u16 sessionLength() const;
 		[[nodiscard]] u16 remainingTime() const;
+        [[nodiscard]] QString timeRemainingString() const;
 		[[nodiscard]] u16 currentSessionCount() const;
 
 	public slots:

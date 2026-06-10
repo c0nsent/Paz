@@ -6,6 +6,9 @@
 #include <QQmlApplicationEngine>
 #include <QString>
 #include <QQuickView>
+#include <QQmlContext>
+
+#include "impl/pomodoro-timer.hpp"
 
 void processCliInput(const int argc, char **argv)
 {
@@ -23,18 +26,15 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
 
-    QQuickView view;
-    paz::impl::Test test;
-    view.setInitialProperties({{"test", &test}});
+    qmlRegisterType<impl::PomodoroTimer>("PazQml", 1, 0, "PomodoroTimer");
 
-    /*
     QQmlApplicationEngine engine;
     engine.loadFromModule("PazQml", "Main");
     if (engine.rootObjects().isEmpty())
     {
         qWarning() << "Paz couldn't load module";
         return -1;
-    }*/
+    }
 
     return QGuiApplication::exec();
 }
