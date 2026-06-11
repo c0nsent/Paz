@@ -1,12 +1,6 @@
-qt_add_library(PazUI SHARED
-		pomodoro-timer-widget.cpp pomodoro-timer-widget.hpp
+qt_add_qml_module(Paz
+        URI PazQml
+        VERSION 1.0
+        QML_FILES
+        qml/Main.qml
 )
-
-target_link_libraries(PazUI PRIVATE
-		PazImplementation
-		PazCore
-		Qt6::Core
-		Qt6::Widgets
-)
-
-target_compile_features(PazUI PUBLIC cxx_std_23)
