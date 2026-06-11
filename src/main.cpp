@@ -1,14 +1,14 @@
 #include "impl/pomodoro-calculator.hpp"
-#include "impl/test.hpp"
+#include "impl/pomodoro-timer.hpp"
 
 #include <QGuiApplication>
 #include <QDebug>
 #include <QQmlApplicationEngine>
 #include <QString>
-#include <QQuickView>
 #include <QQmlContext>
 
-#include "impl/pomodoro-timer.hpp"
+#include <expected>
+
 
 void processCliInput(const int argc, char **argv)
 {
@@ -20,7 +20,14 @@ void processCliInput(const int argc, char **argv)
 
 int main(int argc, char *argv[])
 {
-    processCliInput(argc, argv);
+    if (argc == 2)
+        processCliInput(argc, argv);
+    else if (argc > 2)
+    {
+        qWarning() << "Too many arguments. Usage: Paz [repeatCount]";
+        return EXIT_FAILURE;
+    }
+
 
     QGuiApplication app(argc, argv);
     QGuiApplication::setOrganizationName("amitayus_");

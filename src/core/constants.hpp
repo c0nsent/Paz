@@ -4,7 +4,6 @@
 
 #include <chrono>
 #include <limits>
-#include <QtTypes>
 #include <QVarLengthArray>
 
 

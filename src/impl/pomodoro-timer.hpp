@@ -9,7 +9,7 @@
 #include <QTimer>
 
 #include <initializer_list>
-#include <QtQmlIntegration/qqmlintegration.h>
+#include <QtQml/QQmlComponent>
 
 
 namespace impl
