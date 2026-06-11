@@ -77,8 +77,16 @@ ApplicationWindow {
         }
 
 
+
         Label {
-            text: pomodoroTimer.currentSessionCount + Text {if (pomodoroTimer.currentSessionCount === 0) return " pomodoro";}
+
+           property int pomodoroCount: pomodoroTimer.currentSessionCount
+
+            text: pomodoroCount + " pomodoro";
+
+        /*    if (pomodoroCount !== 0)
+                text += "s"*/
+
             font.pixelSize: 42
             font.weight: timeLabel.font.weight
             color: timeLabel.color

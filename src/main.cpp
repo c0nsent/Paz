@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
     {
         qWarning() << "Paz couldn't load module";
-        return -1;
+        return EXIT_FAILURE;
     }
 
     return QGuiApplication::exec();
