@@ -1,13 +1,11 @@
 #include "impl/pomodoro-calculator.hpp"
 #include "impl/pomodoro-timer.hpp"
 
-#include <QGuiApplication>
 #include <QDebug>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QString>
 #include <QQmlContext>
-
-#include <expected>
+#include <QString>
 
 
 void processCliInput(const int argc, char **argv)

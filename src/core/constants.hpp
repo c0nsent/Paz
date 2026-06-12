@@ -7,7 +7,6 @@
 #include <QVarLengthArray>
 
 
-///Неймспейс с константами, задающими ограничения для значений
 namespace limits
 {
 	/// Максимальная длительность фазы - 99 минут
@@ -32,20 +31,16 @@ namespace defaults
 
 	constexpr std::size_t TIMER_STATE_COUNT{3};
 
-	/// Интервал тика QTimer в миллисекундах
+    /// Интервал тика QTimer в миллисекундах
 	constexpr auto TIMER_INTERVAL{1000ms};
+    static const QVarLengthArray<u16> PHASE_DURATIONS
+    {
+        25 * 60,
+        5 * 60,
+        45 * 60
+    };
 
-	static const QVarLengthArray<u16> PHASE_DURATIONS
-	{
-		/// Длительности фазы `PhaseManager::Phase::Work` по-умолчанию
-		25 * 60,
-		/// Длительности фазы `PhaseManager::Phase::ShortBreak` по-умолчанию
-		5 * 60,
-		/// Длительности фазы `PhaseManager::Phase::LongBreak` по-умолчанию
-		45 * 60
-	};
-
-	static constexpr u16 INVALID_PHASE_DURATION{0};
+    static constexpr u16 INVALID_PHASE_DURATION{0};
 
 	constexpr u16 SESSION_LENGTH{6};
 
@@ -57,9 +52,6 @@ namespace defaults
 
 namespace settings
 {
-	//static constexpr auto ORG_NAME{"amitayus_"};
-	//static constexpr auto APP_NAME{"Paz"};
-
 	namespace groups
 	{
 		constexpr auto POMODORO_TIMER{"PomodoroTimer"};
