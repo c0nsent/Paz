@@ -41,9 +41,7 @@ namespace impl
 
     QString PomodoroTimer::timeRemainingString() const
     {
-        int minutes = m_remainingTime / 60;
-        int seconds = m_remainingTime % 60;
-        return QString::asprintf("%02d:%02d", minutes, seconds);
+	    return QString::asprintf("%02d:%02d", m_remainingTime / 60, m_remainingTime % 60);
     }
 
 	u16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
@@ -205,7 +203,7 @@ namespace impl
 
 		for (auto i{0}; i != enumSize; ++i)
 		{
-			durations.emplace(static_cast<Phase>(i), defaults::PHASE_DURATIONS.at(i));
+			durations.emplace(static_cast<Phase>(i), defaults::PHASE_DURATIONS[i]);
 		}
 
 		return durations;

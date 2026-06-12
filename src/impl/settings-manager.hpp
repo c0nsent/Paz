@@ -12,14 +12,14 @@ namespace paz::impl
     {
         Q_OBJECT
 
-        auto generateConfigFile() -> void;
+        auto generateDefaultConfig() -> void;
 
     public:
 
         explicit SettingsManager(QObject *parent = nullptr);
 
-        auto setScope(QStringView scope) -> bool;
-        auto value(QStringView name) -> QString;
+        auto fromScope(QStringView scope) -> QSettings;
+        auto value(QStringView name) -> QVariant;
 
         auto setValue(QStringView name) -> bool;
 

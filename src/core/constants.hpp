@@ -33,7 +33,7 @@ namespace defaults
 
     /// Интервал тика QTimer в миллисекундах
 	constexpr auto TIMER_INTERVAL{1000ms};
-    static const QVarLengthArray<u16> PHASE_DURATIONS
+    static constexpr u16 PHASE_DURATIONS[]
     {
         25 * 60,
         5 * 60,

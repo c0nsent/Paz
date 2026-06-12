@@ -21,9 +21,9 @@ namespace impl
 
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
-        Q_PROPERTY(int remainingTime READ remainingTime NOTIFY remainingTimeChanged)
+        Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
-        Q_PROPERTY(int currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
+        Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
 
 		static constexpr u16 c_timeIsOut{0};
 

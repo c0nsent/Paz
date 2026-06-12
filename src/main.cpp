@@ -1,5 +1,6 @@
 #include "impl/pomodoro-calculator.hpp"
 #include "impl/pomodoro-timer.hpp"
+#include "impl/settings-manager.hpp"
 
 #include <QDebug>
 #include <QGuiApplication>
@@ -30,6 +31,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
+
+    //paz::impl::SettingsManager settingsManager;
 
     qmlRegisterType<impl::PomodoroTimer>("PazQml", 1, 0, "PomodoroTimer");
 
