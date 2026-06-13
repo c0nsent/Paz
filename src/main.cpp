@@ -1,6 +1,5 @@
 #include "impl/pomodoro-calculator.hpp"
 #include "impl/pomodoro-timer.hpp"
-#include "impl/settings-manager.hpp"
 
 #include <QDebug>
 #include <QGuiApplication>
@@ -8,11 +7,11 @@
 #include <QQmlContext>
 #include <QString>
 
+#include <cstdlib>
+
 
 void processCliInput(const int argc, char **argv)
 {
-    if (argc != 2)  return;
-
     impl::PomodoroCalculator calculator;
     qInfo() << calculator.calculate(QString{argv[1]}.toUShort());
 }
@@ -20,21 +19,21 @@ void processCliInput(const int argc, char **argv)
 int main(int argc, char *argv[])
 {
     if (argc == 2)
+    {
         processCliInput(argc, argv);
-    else if (argc > 2)
+        return EXIT_SUCCESS;
+    }
+    if (argc > 2)
     {
         qWarning() << "Too many arguments. Usage: Paz [repeatCount]";
         return EXIT_FAILURE;
     }
 
-
     QGuiApplication app(argc, argv);
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
 
-    //paz::impl::SettingsManager settingsManager;
-
-    qmlRegisterType<impl::PomodoroTimer>("PazQml", 1, 0, "PomodoroTimer");
+    //qmlRegisterType<impl::PomodoroTimer>("PazQml", 1, 0, "PomodoroTimer");
 
     QQmlApplicationEngine engine;
     engine.loadFromModule("PazQml", "Main");

@@ -7,7 +7,6 @@ project(Paz
 
 find_package(Qt6 6.10.1 REQUIRED COMPONENTS
 		Core
-		Widgets
 		Quick
 )
 

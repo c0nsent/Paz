@@ -1,8 +1,8 @@
 #include "pomodoro-timer.hpp"
 
 #include <QMetaEnum>
-#include <QtMinMax>
 #include <QString>
+#include <QtMinMax>
 
 namespace impl
 {
@@ -134,7 +134,7 @@ namespace impl
 		{
 			if (m_phaseDurations.value(phase) == seconds) [[unlikely]] continue;
 
-			m_phaseDurations.insertOrAssign(phase, seconds);
+			m_phaseDurations.insert(phase, seconds);
 			emit phaseDurationChanged(seconds, phase);
 
 			if (m_phase == phase) [[unlikely]] trySetRemainingTime(qMin(seconds, m_remainingTime));
