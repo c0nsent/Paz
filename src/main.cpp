@@ -4,13 +4,19 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
+//#include <QQmlContext>
 #include <QString>
+#include <QObject>
 
 #include <cstdlib>
 
 
-void processCliInput(const int argc, char **argv)
+class Dummy : public QObject
+{
+    Q_OBJECT
+};
+
+auto processCliInput(char **argv)
 {
     impl::PomodoroCalculator calculator;
     qInfo() << calculator.calculate(QString{argv[1]}.toUShort());
@@ -20,7 +26,7 @@ int main(int argc, char *argv[])
 {
     if (argc == 2)
     {
-        processCliInput(argc, argv);
+        processCliInput(argv);
         return EXIT_SUCCESS;
     }
     if (argc > 2)

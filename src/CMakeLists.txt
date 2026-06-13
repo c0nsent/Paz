@@ -1,13 +1,14 @@
 add_subdirectory(core)
-add_subdirectory(impl)
+#add_subdirectory(impl)
 
 qt_add_executable(Paz
 	main.cpp
+    impl/pomodoro-timer.cpp
+    impl/pomodoro-timer.hpp
+    impl/pomodoro-calculator.cpp
+    impl/pomodoro-calculator.hpp
 )
 
-set_target_properties(Paz PROPERTIES
-        AUTOMOC ON
-)
 
 add_subdirectory(ui)
 
