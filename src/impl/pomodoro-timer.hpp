@@ -1,15 +1,17 @@
 #pragma once
 
-#include <QMetaEnum>
 
-#include "../core/core"
+
+#include "../core/basic-types-aliases.hpp"
+#include "../core/constants.hpp"
 
 #include <QHash>
 #include <QObject>
 #include <QTimer>
+#include <QMetaEnum>
 
 #include <initializer_list>
-#include <QtQml/QQmlComponent>
+#include <QtQml/qqmlregistration.h>
 
 
 namespace impl
@@ -17,7 +19,8 @@ namespace impl
 	class PomodoroTimer : public QObject
 	{
 		Q_OBJECT
-        QML_ELEMENT
+		QML_NAMED_ELEMENT(PomodoroTimer)
+		QML_ADDED_IN_VERSION(1, 0)
 
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
@@ -26,6 +29,8 @@ namespace impl
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
 
 		static constexpr u16 c_timeIsOut{0};
+
+		QML_ELEMENT
 
 	public:
 
@@ -82,7 +87,7 @@ namespace impl
 		bool trySetPhase(Phase phase);
 		bool trySetRemainingTime(u16 remainingTime);
 		bool trySetState(State state);
-		
+
 	signals:
 
 		void stateChanged(State);
@@ -91,7 +96,7 @@ namespace impl
 		void sessionLengthChanged(u16 pomodoros);
 		void remainingTimeChanged(u16 seconds);
 		void pomodoroFinished(u16 currentSessionCount);
-	
+
 	private:
 
 		static QHash<Phase, u16> initializePhaseDurations();

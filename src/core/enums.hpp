@@ -1,6 +1,0 @@
-namespace impl
-{
-	namespace pt
-	{
-	}
-}
