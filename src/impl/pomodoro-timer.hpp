@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../core/basic-types-aliases.hpp"
 #include "../core/constants.hpp"
 
@@ -11,7 +9,6 @@
 #include <QMetaEnum>
 
 #include <initializer_list>
-#include <QtQml/qqmlregistration.h>
 
 
 namespace impl
@@ -19,8 +16,6 @@ namespace impl
 	class PomodoroTimer : public QObject
 	{
 		Q_OBJECT
-		QML_NAMED_ELEMENT(PomodoroTimer)
-		QML_ADDED_IN_VERSION(1, 0)
 
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
@@ -30,7 +25,7 @@ namespace impl
 
 		static constexpr u16 c_timeIsOut{0};
 
-		QML_ELEMENT
+		//QML_ELEMENT
 
 	public:
 

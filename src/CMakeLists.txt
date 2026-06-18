@@ -1,39 +1,42 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.16)
 
 project(Paz
         VERSION 0.2.2
         LANGUAGES CXX
 )
 
-find_package(Qt6 6.11.1 REQUIRED COMPONENTS
+find_package(Qt6 REQUIRED COMPONENTS
         Core
         Quick
-        Qml
 )
 
-qt_standard_project_setup()
+qt_standard_project_setup(REQUIRES 6.11)
 
-qt_add_executable(Paz
+qt_add_executable(PazApp
         main.cpp
         impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
+        impl/qml-registration.hpp
         core/constants.hpp
         core/basic-types-aliases.hpp
 )
 
-qt_add_qml_module(Paz
-        URI PazQml
+qt_add_qml_module(PazApp
+        URI Paz
         VERSION 1.0
         SOURCES
-        impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
+            impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
+            impl/qml-registration.hpp
         QML_FILES
-        ui/qml/Main.qml
-
+            ui/qml/Main.qml
 )
 
-target_link_libraries(Paz PRIVATE
+target_link_libraries(PazApp PRIVATE
         Qt6::Core
         Qt6::Quick
-        Qt6::Qml
 )
 
-target_compile_features(Paz PUBLIC cxx_std_23)
+target_include_directories(PazApp PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/impl
+)
+
+target_compile_features(PazApp PUBLIC cxx_std_23)

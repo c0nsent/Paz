@@ -1,23 +1,24 @@
-#include <QDebug>
+#include "core/basic-types-aliases.hpp"
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
-#include <QString>
 
 
-int main(int argc, char *argv[])
+i32 main(i32 argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
 
     QQmlApplicationEngine engine;
-    engine.loadFromModule("PazQml", "Main");
-    if (engine.rootObjects().isEmpty())
-    {
-        qWarning() << "Paz couldn't load module";
-        return EXIT_FAILURE;
-    }
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreationFailed,
+        &app,
+        [] { QCoreApplication::exit(-1); }
+    );
+    engine.loadFromModule("Paz", "Main");
 
     return QGuiApplication::exec();
 }
