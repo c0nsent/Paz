@@ -18,7 +18,9 @@ i32 main(i32 argc, char *argv[])
         &app,
         [] { QCoreApplication::exit(-1); }
     );
-    engine.loadFromModule("Paz", "Main");
+
+    engine.loadFromModule("Paz.PomodoroTimer", "Main");
+    //engine.loadFromModule("Paz.PomodoroTimer", "PomodoroTimerWidget");
 
     return QGuiApplication::exec();
 }

@@ -21,13 +21,14 @@ qt_add_executable(PazApp
 )
 
 qt_add_qml_module(PazApp
-        URI Paz
+        URI Paz.PomodoroTimer
         VERSION 1.0
         SOURCES
             impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
             impl/qml-registration.hpp
         QML_FILES
             ui/qml/Main.qml
+            ui/qml/PomodoroTimerWidget.qml
 )
 
 target_link_libraries(PazApp PRIVATE

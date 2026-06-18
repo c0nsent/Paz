@@ -5,7 +5,7 @@
 #include <QtQml/qqmlregistration.h>
 
 
-struct PomodoroTimerReg
+struct QmlPomodoroTimer
 {
     Q_GADGET
     QML_FOREIGN(impl::PomodoroTimer)

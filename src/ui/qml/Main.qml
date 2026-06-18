@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Paz
+import pomodoroTimer
 
 
 ApplicationWindow {
@@ -11,10 +11,6 @@ ApplicationWindow {
     title: "Paz"
 
     color: "#f4f4f5"
-
-    PomodoroTimer {
-        id: pomodoroTimer
-    }
 
     ColumnLayout {
         anchors.centerIn: parent
@@ -35,18 +31,13 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignHCenter
         }
 
-        Rectangle {
-            id: buttonBg
 
-            color: "#2c3e50"
-            radius: 8
-        }
 
         Label {
             id: timeLabel
             text: pomodoroTimer.timeRemainingString
             font.pixelSize: 72
-            font.family: "Monospace" // Моноширный шрифт, чтобы цифры не "прыгали"
+            font.family: "Monospace"
             font.weight: Font.DemiBold
             color: "#2c3e50"
             Layout.alignment: Qt.AlignHCenter
