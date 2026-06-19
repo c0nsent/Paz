@@ -32,7 +32,14 @@ namespace impl
 
 	PomodoroTimer::Phase PomodoroTimer::phase() const {return m_phase;}
 
-	u16 PomodoroTimer::phaseDuration() const{ return m_phaseDurations.value(m_phase); }
+    /*auto PomodoroTimer::phaseLabel() const -> const char *
+    {
+        static constexpr const char *phaseStrings[] { "Work", "Short Break", "Long Break" };
+
+        return phaseStrings[static_cast<int>(m_phase)];
+    }*/
+
+    u16 PomodoroTimer::phaseDuration() const{ return m_phaseDurations.value(m_phase); }
 
 	u16 PomodoroTimer::phaseDuration(const Phase phase) const {return m_phaseDurations.value(phase);}
 

@@ -28,7 +28,7 @@ qt_add_qml_module(PazApp
             impl/qml-registration.hpp
         QML_FILES
             ui/qml/Main.qml
-            ui/qml/PomodoroTimerWidget.qml
+            #ui/qml/PomodoroTimerWidget.qml
 )
 
 target_link_libraries(PazApp PRIVATE

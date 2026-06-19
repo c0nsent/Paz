@@ -4,9 +4,9 @@
 #include "../core/constants.hpp"
 
 #include <QHash>
+#include <QMetaEnum>
 #include <QObject>
 #include <QTimer>
-#include <QMetaEnum>
 
 #include <initializer_list>
 
@@ -22,10 +22,9 @@ namespace impl
         Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
+        Q_PROPERTY(u16 currentPhaseDuration READ phaseDuration NOTIFY phaseDurationChanged)
 
 		static constexpr u16 c_timeIsOut{0};
-
-		//QML_ELEMENT
 
 	public:
 
@@ -53,6 +52,7 @@ namespace impl
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
+	    //[[nodiscard]] auto phaseLabel() const -> const char *;
 		[[nodiscard]] u16 phaseDuration() const;
 		[[nodiscard]] u16 phaseDuration(Phase phase) const;
 		[[nodiscard]] u16 sessionLength() const;

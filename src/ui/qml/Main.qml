@@ -1,22 +1,25 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import pomodoroTimer
+
+
+import Paz.PomodoroTimer
 
 
 ApplicationWindow {
-    width: 420
-    height: 320
     visible: true
     title: "Paz"
 
     color: "#f4f4f5"
 
+    PomodoroTimer {
+        id: pomodoroTimer
+    }
+
     ColumnLayout {
         anchors.centerIn: parent
         spacing: 20
 
-        // Индикатор текущей фазы
         Label {
             id: phaseLabel
             text: {
@@ -27,26 +30,99 @@ ApplicationWindow {
             }
             font.pixelSize: 24
             font.weight: Font.Bold
-            color: "#e74c3c" // Красный оттенок, ассоциирующийся с "pomodoro"
+            color: "#e74c3c"
             Layout.alignment: Qt.AlignHCenter
         }
 
+        Item {
+            id: timerRing
 
-
-        Label {
-            id: timeLabel
-            text: pomodoroTimer.timeRemainingString
-            font.pixelSize: 72
-            font.family: "Monospace"
-            font.weight: Font.DemiBold
-            color: "#2c3e50"
+            Layout.preferredWidth: 220
+            Layout.preferredHeight: 220
             Layout.alignment: Qt.AlignHCenter
-        }
 
+            property real progress: pomodoroTimer.currentPhaseDuration > 0 ? pomodoroTimer.remainingTime / pomodoroTimer.currentPhaseDuration : 0
+
+            Canvas {
+                id: ringCanvas
+                anchors.fill: parent
+
+                property real animatedProgress: timerRing.progress
+
+                onPaint: {
+                    const ctx = getContext("2d")
+                    ctx.reset()
+
+                    const centerX = width / 2
+                    const centerY = height / 2
+                    const radius = Math.min(width, height) / 2 - 12
+                    const lineWidth = 14
+
+                    const startAngle = -Math.PI / 2
+                    const endAngle = startAngle + animatedProgress * Math.PI * 2
+
+                    ctx.lineWidth = lineWidth
+                    ctx.lineCap = "round"
+
+                    ctx.beginPath()
+                    ctx.strokeStyle = "#d1d5db"
+                    ctx.arc(centerX, centerY, radius, Math.PI * 2, Math.PI * 2)
+                    ctx.stroke()
+
+                    ctx.beginPath()
+                    ctx.strokeStyle = "#e74c3c"
+                    ctx.arc(centerX, centerY, radius, startAngle, endAngle)
+                    ctx.stroke()
+                }
+
+                Behavior on animatedProgress {
+                    NumberAnimation {
+                        duration: 350
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                onAnimatedProgressChanged: requestPaint()
+                Component.onCompleted: requestPaint()
+            }
+
+            Column {
+                anchors.centerIn: parent
+                spacing: 4
+
+                Label {
+                    id: timeLabel
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: pomodoroTimer.timeRemainingString
+                    font.pixelSize: 48
+                    font.family: "Monospace"
+                    font.weight: Font.Bold
+                    color: "#2c3e50"
+                }
+
+               /* Label {
+                    id: tillLongBreak
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    visible: pomodoroTimer.phase !== PomodoroTimer.LongBreak
+
+                    font.pixelSize: timeLabel.font.pixelSize / 3
+                    font.family: timeLabel.font.family
+                    font.weight: Font.DemiBold
+
+                    text: "Till long break"
+
+                    color: "#2c3e50"
+                }*/
+            }
+        }
 
         Button {
             id: startPauseButton
-            text: pomodoroTimer.state === PomodoroTimer.Running ? "Pause" : "Start"
+            text: {
+                if (pomodoroTimer.state === PomodoroTimer.Running) return "Pause";
+                if (pomodoroTimer.state === PomodoroTimer.Paused) return "Resume";
+                return "Start"
+            }
 
             font.pixelSize: 20
             onClicked: pomodoroTimer.state === PomodoroTimer.Running ? pomodoroTimer.pause() : pomodoroTimer.start()
@@ -118,7 +194,6 @@ ApplicationWindow {
                 }
             }
         }
-
 
         Label
         {
