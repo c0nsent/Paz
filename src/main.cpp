@@ -2,14 +2,20 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QSystemTrayIcon>
 
 
 i32 main(i32 argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QGuiApplication app{argc, argv};
 
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
+
+    QSystemTrayIcon trayIcon;
+
+    trayIcon.show();
+    trayIcon.showMessage("Test title", "Test", QSystemTrayIcon::NoIcon);
 
     QQmlApplicationEngine engine;
     QObject::connect(
