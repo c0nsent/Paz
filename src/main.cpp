@@ -4,26 +4,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QSystemTrayIcon>
-#include <QQuickView>
+#include <QVariant>
 
 
-i32 main(i32 argc, char *argv[])
+int main(int argc, char *argv[])
 {
     QGuiApplication app{argc, argv};
 
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
 
-    /*QSystemTrayIcon trayIcon;
-
+    QSystemTrayIcon trayIcon;
     trayIcon.show();
-    trayIcon.showMessage("Test title", "Test", QSystemTrayIcon::NoIcon);*/
-
-    QQuickView view;
-    impl::PomodoroTimer pt;
-    view.setInitialProperties({{"pomodoroTimer", QVariant::fromValue(&pt)}});
-    view.setSource(QUrl::fromLocalFile("ui/qml/Main.qml"));
-    view.show();
 
     QQmlApplicationEngine engine;
     QObject::connect(
@@ -33,8 +25,26 @@ i32 main(i32 argc, char *argv[])
         [] { QCoreApplication::exit(-1); }
     );
 
+    impl::PomodoroTimer::CreateInfo createInfo{
+        .parent = &app,
+        .workPhaseDuration = 5,
+        .shortBreakDuration = 5,
+        .longBreakDuration = 5,
+        .sessionLength = 2,
+    };
+
+    auto *pt { new impl::PomodoroTimer{createInfo} };
+    pt->writeSettings();
+
+    QObject::connect(pt, &impl::PomodoroTimer::timeIsOut, &trayIcon, [&]
+    {
+        QString message{ pt->phase() == impl::PomodoroTimer::Phase::Work ? "It is time to be productive" : "You can chill a bit"};
+        trayIcon.showMessage("Time is out", message, QSystemTrayIcon::NoIcon);
+    });
+
+    engine.setInitialProperties({{"pomodoroTimer", QVariant::fromValue(pt)}});
+
     engine.loadFromModule("Paz.PomodoroTimer", "Main");
-    //engine.loadFromModule("Paz.PomodoroTimer", "PomodoroTimerWidget");
 
     return QGuiApplication::exec();
 }

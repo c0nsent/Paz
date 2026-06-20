@@ -4,7 +4,7 @@
 
 #include <chrono>
 #include <limits>
-#include <QVarLengthArray>
+#include <QTime>
 
 
 namespace limits
@@ -33,6 +33,9 @@ namespace defaults
 
     /// Интервал тика QTimer в миллисекундах
     constexpr auto TIMER_INTERVAL{1000ms};
+
+    //static constexpr QTime workPhaseDuration{0, 5, 0};
+
     static constexpr u16 PHASE_DURATIONS[]
     {
         25 * 60,

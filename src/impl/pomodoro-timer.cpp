@@ -1,25 +1,25 @@
 #include "pomodoro-timer.hpp"
 
 #include <QMetaEnum>
-#include <QtMinMax>
+#include <QSettings>
 #include <QString>
 
 
 namespace impl
 {
-    PomodoroTimer::PomodoroTimer(QObject *parent)
-        : PomodoroTimer(CreateInfo{parent})
-    {
-    }
+    PomodoroTimer::PomodoroTimer(QObject *parent) : PomodoroTimer(CreateInfo{parent}) {}
+
 
 	PomodoroTimer::PomodoroTimer(const CreateInfo &data)
 		: QObject{data.parent}
-		  , m_state{data.state}
-		  , m_phase{data.phase}
-		  , m_phaseDurations{data.phaseDurations}
-		  , m_sessionLength{data.sessionLength}
-		  , m_remainingTime{data.phaseDurations.value(data.phase)}
-		  , m_currentSessionCount{data.currentSessionCount}
+        , m_workDuration{data.workPhaseDuration}
+        , m_shortBreakDuration{data.shortBreakDuration}
+        , m_longBreakDuration{data.workPhaseDuration}
+        , m_sessionLength{data.sessionLength}
+        , m_state{State::Idle}
+        , m_phase{Phase::Work}
+        , m_remainingTime{phaseDuration()}
+        , m_currentSessionCount{0}
 	{
 		m_timer.setTimerType(Qt::CoarseTimer);
 		m_timer.setInterval(defaults::TIMER_INTERVAL);
@@ -32,16 +32,22 @@ namespace impl
 
 	PomodoroTimer::Phase PomodoroTimer::phase() const {return m_phase;}
 
-    /*auto PomodoroTimer::phaseLabel() const -> const char *
+    u16 PomodoroTimer::phaseDuration() const
     {
-        static constexpr const char *phaseStrings[] { "Work", "Short Break", "Long Break" };
+        return phaseDuration(m_phase);
+    }
 
-        return phaseStrings[static_cast<int>(m_phase)];
-    }*/
+	u16 PomodoroTimer::phaseDuration(const Phase phase) const
+    {
+        switch (phase)
+        {
+            case Phase::Work: return m_workDuration;
+            case Phase::ShortBreak: return m_shortBreakDuration;
+            case Phase::LongBreak: return m_longBreakDuration;
+        }
 
-    u16 PomodoroTimer::phaseDuration() const{ return m_phaseDurations.value(m_phase); }
-
-	u16 PomodoroTimer::phaseDuration(const Phase phase) const {return m_phaseDurations.value(phase);}
+        return 0;
+    }
 
 	u16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
 
@@ -96,56 +102,56 @@ namespace impl
 	{
 		using enum Phase;
 
-		if (m_phase == ShortBreak or m_phase == LongBreak)
-		{
-			m_phase = Work;
-			reset();
-		}
-		else
-		{
-			//Метод публичный, поэтому надо обрабатывать вышло ли время,
-			//чтобы корректно помидорки считать
-			if (m_remainingTime == c_timeIsOut) [[unlikely]]
-			{
-				m_currentSessionCount = (m_phase == LongBreak) ? 0 : ++m_currentSessionCount;
-				emit pomodoroFinished(m_currentSessionCount);
-			}
+        if (m_remainingTime != c_timeIsOut)
+        {
+            m_phase = m_phase == Work ? ShortBreak : Work;
+        }
+        else
+        {
+            if (m_phase == ShortBreak or m_phase == LongBreak)
+            {
+                m_phase = Work;
+            }
+            else
+            {
+                m_currentSessionCount = m_phase == LongBreak ? 0 : ++m_currentSessionCount;
+                emit pomodoroFinished(m_currentSessionCount);
 
-			m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
+                m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
+            }
 
-			start(m_phase);
-		}
+            reset();
+            emit timeIsOut();
+        }
 
-		emit phaseChanged(m_phase);
+        emit phaseChanged(m_phase);
 	}
 
 
-	void PomodoroTimer::setPhaseDuration(const u16 current)
+	void PomodoroTimer::setPhaseDuration(const u16 seconds)
 	{
-		setPhaseDuration({{m_phase, current}});
+        setPhaseDuration(m_phase, seconds);
 	}
 
 
 	void PomodoroTimer::setPhaseDuration(const Phase phase, const u16 seconds)
 	{
-		setPhaseDuration({{phase, seconds}});
-	}
-
-
-	void PomodoroTimer::setPhaseDuration(const std::initializer_list<std::pair<Phase, u16>> &phaseDurations)
-	{
-		if (phaseDurations.size() > m_phaseDurations.size()) [[unlikely]]
-				qWarning() << Q_FUNC_INFO << "\n" << "количество переданных параметров =  " << phaseDurations.size()
-				<< "превосходит количество фаз" << m_phaseDurations.size();
-
-		for (const auto &[phase, seconds] : phaseDurations)
+		switch (phase)
 		{
-			if (m_phaseDurations.value(phase) == seconds) [[unlikely]] continue;
+		    case Phase::Work:
+		        m_workDuration = seconds;
+		        emit phaseDurationChanged(seconds, Phase::Work);
+		        break;
 
-			m_phaseDurations.insertOrAssign(phase, seconds);
-			emit phaseDurationChanged(seconds, phase);
+		    case Phase::ShortBreak:
+		        m_shortBreakDuration = seconds;
+		        emit phaseDurationChanged(seconds, Phase::ShortBreak);
+		        break;
 
-			if (m_phase == phase) [[unlikely]] trySetRemainingTime(qMin(seconds, m_remainingTime));
+		    case Phase::LongBreak:
+		        m_longBreakDuration = seconds;
+		        emit phaseDurationChanged(seconds, Phase::LongBreak);
+		        break;
 		}
 	}
 
@@ -159,12 +165,42 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::updateRemainingTime()
+    void PomodoroTimer::readSettings()
+    {
+        QSettings settings;
+
+        settings.beginGroup("PomodoroTimer");
+        m_workDuration = settings.value("WorkDuration", 25 * 60).toUInt();
+        m_shortBreakDuration = settings.value("ShorBreakDuration", 5 * 60).toUInt();
+        m_longBreakDuration = settings.value("LongBreakDuration", 40 * 60).toUInt();
+        m_sessionLength = settings.value("SessionLength",8).toUInt();
+
+        settings.endGroup();
+    }
+
+
+    void PomodoroTimer::writeSettings()
+    {
+        QSettings settings;
+
+        settings.beginGroup("PomodoroTimer");
+        settings.setValue("WorkDuration", m_workDuration);
+        settings.setValue("ShortBreakDuration", m_shortBreakDuration);
+        settings.setValue("LongBreakDuration", m_longBreakDuration);
+        settings.setValue("SessionLength", m_sessionLength);
+        settings.endGroup();
+    }
+
+
+    void PomodoroTimer::updateRemainingTime()
 	{
-		if (m_remainingTime != c_timeIsOut) [[likely]]
-				emit remainingTimeChanged(--m_remainingTime);
-		else
-			toNextPhase();
+        if (m_remainingTime == c_timeIsOut) [[unlikely]]
+        {
+            toNextPhase();
+            return;
+        }
+
+        emit remainingTimeChanged(--m_remainingTime);
 	}
 
 
@@ -201,7 +237,7 @@ namespace impl
 	}
 
 
-	QHash<PomodoroTimer::Phase, u16> PomodoroTimer::initializePhaseDurations()
+	/*QHash<PomodoroTimer::Phase, u16> PomodoroTimer::initializePhaseDurations()
 	{
 		const auto metaPhase{QMetaEnum::fromType<Phase>()};
 		const auto enumSize{ metaPhase.keyCount() };
@@ -215,5 +251,5 @@ namespace impl
 		}
 
 		return durations;
-	}
+	}*/
 }

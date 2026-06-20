@@ -3,13 +3,9 @@
 #include "../core/basic-types-aliases.hpp"
 #include "../core/constants.hpp"
 
-#include <QHash>
-#include <QMetaEnum>
 #include <QObject>
 #include <QTimer>
 #include <QtQml/qqmlregistration.h>
-
-#include <initializer_list>
 
 
 namespace impl
@@ -40,13 +36,11 @@ namespace impl
 		{
 			QObject *parent{nullptr};
 
-			State state{ State::Idle };
-			Phase phase{ Phase::Work };
+		    u16 workPhaseDuration{  25 * 60 };
+		    u16 shortBreakDuration{5 * 60};
+		    u16 longBreakDuration{ 40 * 60};
 
-			QHash<Phase,u16> phaseDurations{ initializePhaseDurations() };
-
-			u16 sessionLength{ defaults::SESSION_LENGTH };
-			u16 currentSessionCount{};
+		    u16 sessionLength{ defaults::SESSION_LENGTH };
 		};
 
 		explicit PomodoroTimer(QObject *parent = nullptr);
@@ -54,7 +48,6 @@ namespace impl
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
-	    //[[nodiscard]] auto phaseLabel() const -> const char *;
 		[[nodiscard]] u16 phaseDuration() const;
 		[[nodiscard]] u16 phaseDuration(Phase phase) const;
 		[[nodiscard]] u16 sessionLength() const;
@@ -71,11 +64,12 @@ namespace impl
 		void reset();
 		void toNextPhase();
 
-		void setPhaseDuration(u16 current);
+		void setPhaseDuration(u16 seconds);
 		void setPhaseDuration(Phase phase, u16 seconds);
-		void setPhaseDuration(const std::initializer_list<std::pair<Phase, u16>> &phaseDurations);
+	    void setSessionLength(u16 pomodoros);
 
-		void setSessionLength(u16 pomodoros);
+	    void readSettings();
+	    void writeSettings();
 
 	private slots:
 
@@ -93,16 +87,17 @@ namespace impl
 		void sessionLengthChanged(u16 pomodoros);
 		void remainingTimeChanged(u16 seconds);
 		void pomodoroFinished(u16 currentSessionCount);
+	    void timeIsOut();
 
 	private:
 
-		static QHash<Phase, u16> initializePhaseDurations();
+	    u16 m_workDuration;
+	    u16 m_shortBreakDuration;
+	    u16 m_longBreakDuration;
+	    u16 m_sessionLength;
 
 		State m_state;
 		Phase m_phase;
-		QHash<Phase, u16> m_phaseDurations;
-		u16 m_sessionLength;
-
 		u16 m_remainingTime;
 		u16 m_currentSessionCount;
 
