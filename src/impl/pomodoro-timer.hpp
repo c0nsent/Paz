@@ -7,6 +7,7 @@
 #include <QMetaEnum>
 #include <QObject>
 #include <QTimer>
+#include <QtQml/qqmlregistration.h>
 
 #include <initializer_list>
 
@@ -17,6 +18,7 @@ namespace impl
 	{
 		Q_OBJECT
 
+		QML_NAMED_ELEMENT(PomodoroTimer)
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
         Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)

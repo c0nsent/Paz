@@ -1,8 +1,10 @@
 #include "core/basic-types-aliases.hpp"
+#include "impl/pomodoro-timer.hpp"
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QSystemTrayIcon>
+#include <QQuickView>
 
 
 i32 main(i32 argc, char *argv[])
@@ -12,10 +14,16 @@ i32 main(i32 argc, char *argv[])
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
 
-    QSystemTrayIcon trayIcon;
+    /*QSystemTrayIcon trayIcon;
 
     trayIcon.show();
-    trayIcon.showMessage("Test title", "Test", QSystemTrayIcon::NoIcon);
+    trayIcon.showMessage("Test title", "Test", QSystemTrayIcon::NoIcon);*/
+
+    QQuickView view;
+    impl::PomodoroTimer pt;
+    view.setInitialProperties({{"pomodoroTimer", QVariant::fromValue(&pt)}});
+    view.setSource(QUrl::fromLocalFile("ui/qml/Main.qml"));
+    view.show();
 
     QQmlApplicationEngine engine;
     QObject::connect(

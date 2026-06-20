@@ -16,8 +16,8 @@ qt_standard_project_setup(REQUIRES 6.11)
 qt_add_executable(PazApp
         main.cpp
         impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
-        impl/main-window.hpp impl/main-window.cpp
-        impl/qml-registration.hpp
+        #impl/main-window.hpp impl/main-window.cpp
+        #impl/qml-registration.hpp
         core/constants.hpp
         core/basic-types-aliases.hpp
 )
@@ -27,7 +27,7 @@ qt_add_qml_module(PazApp
         VERSION 1.0
         SOURCES
             impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
-            impl/qml-registration.hpp
+            #impl/qml-registration.hpp
         QML_FILES
             ui/qml/Main.qml
             #ui/qml/PomodoroTimerWidget.qml

@@ -11,9 +11,7 @@ ApplicationWindow {
 
     color: "#f4f4f5"
 
-    PomodoroTimer {
-        id: pomodoroTimer
-    }
+    required property PomodoroTimer pomodoroTimer
 
     ColumnLayout {
         anchors.centerIn: parent
