@@ -39,21 +39,32 @@ int main(int argc, char *argv[])
 
     auto *settingsManager { new impl::SettingsManager{pt, &app}};
 
-    settingsManager->writeSettings(*pt);
-    settingsManager->readSettings(*pt);
 
+    /*settingsManager->readSettings(*pt);
+    settingsManager->writeSettings(*pt);*/
 
     QObject::connect(&app, &QGuiApplication::applicationStateChanged, [&] (Qt::ApplicationState state)
     {
         if (state == Qt::ApplicationState::ApplicationSuspended)
+        {
+            qDebug("Отработало");
             settingsManager->saveAllSettings();
+        }
+
     });
 
-    QObject::connect(pt, &impl::PomodoroTimer::timeIsOut, &trayIcon, [&]
-    {
-        QString message{ pt->phase() == impl::PomodoroTimer::Phase::Work ? "It is time to be productive" : "You can chill a bit"};
-        trayIcon.showMessage("Time is out", message, QSystemTrayIcon::NoIcon);
-    });
+    QObject::connect(
+        pt,
+        &impl::PomodoroTimer::timerFinished,
+        &trayIcon,
+        [&trayIcon](const impl::PomodoroTimer::Phase currentPhase)
+        {
+            using enum impl::PomodoroTimer::Phase;
+
+            QString message{ currentPhase == Work ? "It is time to be productive" : "You can chill a bit"};
+            trayIcon.showMessage("Time is out", message, QSystemTrayIcon::NoIcon);
+        }
+    );
 
     engine.setInitialProperties({
         {"pomodoroTimer", QVariant::fromValue(pt)},

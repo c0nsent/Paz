@@ -84,7 +84,7 @@ namespace impl
 		void sessionLengthChanged(u16 pomodoros);
 		void remainingTimeChanged(u16 seconds);
 		void pomodoroFinished(u16 currentSessionCount);
-	    void timeIsOut();
+	    void timerFinished(Phase nextPhase);
 
 	private:
 

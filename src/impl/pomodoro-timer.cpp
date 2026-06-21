@@ -1,7 +1,6 @@
 #include "pomodoro-timer.hpp"
 
 #include <QMetaEnum>
-#include <QSettings>
 #include <QString>
 
 
@@ -118,12 +117,12 @@ namespace impl
                 m_currentSessionCount = m_phase == LongBreak ? 0 : ++m_currentSessionCount;
                 emit pomodoroFinished(m_currentSessionCount);
 
-                m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
+                m_phase = m_currentSessionCount == m_sessionLength ? LongBreak : ShortBreak;
 
                 start(m_phase);
             }
 
-            emit timeIsOut();
+            emit timerFinished(m_phase);
         }
 
         emit phaseChanged(m_phase);
@@ -210,21 +209,4 @@ namespace impl
 
 		return true;
 	}
-
-
-	/*QHash<PomodoroTimer::Phase, u16> PomodoroTimer::initializePhaseDurations()
-	{
-		const auto metaPhase{QMetaEnum::fromType<Phase>()};
-		const auto enumSize{ metaPhase.keyCount() };
-
-		QHash<Phase, u16> durations;
-		durations.reserve(enumSize);
-
-		for (auto i{0}; i != enumSize; ++i)
-		{
-			durations.emplace(static_cast<Phase>(i), defaults::PHASE_DURATIONS[i]);
-		}
-
-		return durations;
-	}*/
 }

@@ -22,6 +22,7 @@ namespace impl
 
         void setPhaseDuration(PomodoroTimer::Phase phase, u16 seconds);
         void setSessionLength(u16 pomodoros);
+        //void togglePomodoroAutoStart();
         void autoStartNewPomodoro(bool isTrue);
         void readSettings(const PomodoroTimer &);
         void writeSettings(const PomodoroTimer &);

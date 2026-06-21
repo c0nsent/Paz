@@ -33,13 +33,13 @@ namespace impl
 
     void SettingsManager::autoStartNewPomodoro(const bool isTrue)
     {
-        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timeIsOut)};
+        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timerFinished)};
 
         if (isTrue)
         {
             if (isSignalConnected(timeIsOutSignal)) return;
 
-            connect(m_timer, &PomodoroTimer::timeIsOut, this, [&]
+            connect(m_timer, &PomodoroTimer::timerFinished, this, [&]
             {
                 if (m_timer->phase() == PomodoroTimer::Phase::Work) m_timer->start();
             });
@@ -48,7 +48,7 @@ namespace impl
         {
             if (not isSignalConnected(timeIsOutSignal)) return;
 
-            disconnect(m_timer, &PomodoroTimer::timeIsOut, this, nullptr);
+            disconnect(m_timer, &PomodoroTimer::timerFinished, this, nullptr);
         }
     }
 
@@ -77,7 +77,7 @@ namespace impl
         m_settings.setValue("LongBreakDuration", m_timer->phaseDuration(LongBreak));
         m_settings.setValue("SessionLength", m_timer->sessionLength());
 
-        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timeIsOut)};
+        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timerFinished)};
 
         qDebug() << "AutoStartNewPomodoro: " << isSignalConnected(timeIsOutSignal);
         m_settings.setValue("AutoStartNewPomodoro", isSignalConnected(timeIsOutSignal));
