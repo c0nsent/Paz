@@ -6,6 +6,8 @@
 #include <QSystemTrayIcon>
 #include <QVariant>
 
+#include "settings-manager.hpp"
+
 
 int main(int argc, char *argv[])
 {
@@ -34,7 +36,18 @@ int main(int argc, char *argv[])
     };
 
     auto *pt { new impl::PomodoroTimer{createInfo} };
-    pt->writeSettings();
+
+    auto *settingsManager { new impl::SettingsManager{pt, &app}};
+
+    settingsManager->writeSettings(*pt);
+    settingsManager->readSettings(*pt);
+
+
+    QObject::connect(&app, &QGuiApplication::applicationStateChanged, [&] (Qt::ApplicationState state)
+    {
+        if (state == Qt::ApplicationState::ApplicationSuspended)
+            settingsManager->saveAllSettings();
+    });
 
     QObject::connect(pt, &impl::PomodoroTimer::timeIsOut, &trayIcon, [&]
     {
@@ -42,7 +55,10 @@ int main(int argc, char *argv[])
         trayIcon.showMessage("Time is out", message, QSystemTrayIcon::NoIcon);
     });
 
-    engine.setInitialProperties({{"pomodoroTimer", QVariant::fromValue(pt)}});
+    engine.setInitialProperties({
+        {"pomodoroTimer", QVariant::fromValue(pt)},
+        {"settingsManager", QVariant::fromValue(settingsManager)},
+    });
 
     engine.loadFromModule("Paz.PomodoroTimer", "Main");
 

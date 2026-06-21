@@ -62,14 +62,11 @@ namespace impl
 		void start(Phase phase, u16 seconds);
 		void pause();
 		void reset();
-		void toNextPhase();
+		void goToNextPhase();
 
 		void setPhaseDuration(u16 seconds);
 		void setPhaseDuration(Phase phase, u16 seconds);
 	    void setSessionLength(u16 pomodoros);
-
-	    void readSettings();
-	    void writeSettings();
 
 	private slots:
 

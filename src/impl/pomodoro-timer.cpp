@@ -98,7 +98,7 @@ namespace impl
 	}
 
 
-	void PomodoroTimer::toNextPhase()
+	void PomodoroTimer::goToNextPhase()
 	{
 		using enum Phase;
 
@@ -111,6 +111,7 @@ namespace impl
             if (m_phase == ShortBreak or m_phase == LongBreak)
             {
                 m_phase = Work;
+                reset();
             }
             else
             {
@@ -118,9 +119,10 @@ namespace impl
                 emit pomodoroFinished(m_currentSessionCount);
 
                 m_phase = (m_currentSessionCount == m_sessionLength) ? LongBreak : ShortBreak;
+
+                start(m_phase);
             }
 
-            reset();
             emit timeIsOut();
         }
 
@@ -165,38 +167,11 @@ namespace impl
 	}
 
 
-    void PomodoroTimer::readSettings()
-    {
-        QSettings settings;
-
-        settings.beginGroup("PomodoroTimer");
-        m_workDuration = settings.value("WorkDuration", 25 * 60).toUInt();
-        m_shortBreakDuration = settings.value("ShorBreakDuration", 5 * 60).toUInt();
-        m_longBreakDuration = settings.value("LongBreakDuration", 40 * 60).toUInt();
-        m_sessionLength = settings.value("SessionLength",8).toUInt();
-
-        settings.endGroup();
-    }
-
-
-    void PomodoroTimer::writeSettings()
-    {
-        QSettings settings;
-
-        settings.beginGroup("PomodoroTimer");
-        settings.setValue("WorkDuration", m_workDuration);
-        settings.setValue("ShortBreakDuration", m_shortBreakDuration);
-        settings.setValue("LongBreakDuration", m_longBreakDuration);
-        settings.setValue("SessionLength", m_sessionLength);
-        settings.endGroup();
-    }
-
-
     void PomodoroTimer::updateRemainingTime()
 	{
         if (m_remainingTime == c_timeIsOut) [[unlikely]]
         {
-            toNextPhase();
+            goToNextPhase();
             return;
         }
 

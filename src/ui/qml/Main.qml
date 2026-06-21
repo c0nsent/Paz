@@ -11,18 +11,34 @@ ApplicationWindow {
 
     color: "#f4f4f5"
 
+    TabBar {
+        id: bar
+
+        width: parent.width
+
+        TabButton {
+            text: qsTr("Pomodoro Timer")
+        }
+
+        TabButton {
+            text: qsTr("Settings")
+        }
+    }
+
     required property PomodoroTimer pomodoroTimer
 
     ColumnLayout {
+        id: ptWindow
         anchors.centerIn: parent
+        visible: bar.currentIndex === 0
         spacing: 20
 
         Label {
             id: phaseLabel
             text: {
-                if (pomodoroTimer.phase === PomodoroTimer.Work) return "Work Phase";
-                if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return "Short Break";
-                if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return "Long Break";
+                if (pomodoroTimer.phase === PomodoroTimer.Work) return qsTr("Work");
+                if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return qsTr("Short Break");
+                if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return qsTr("Long Break");
                 return "Unknown";
             }
             font.pixelSize: 24
@@ -96,20 +112,6 @@ ApplicationWindow {
                     font.weight: Font.Bold
                     color: "#2c3e50"
                 }
-
-               /* Label {
-                    id: tillLongBreak
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    visible: pomodoroTimer.phase !== PomodoroTimer.LongBreak
-
-                    font.pixelSize: timeLabel.font.pixelSize / 3
-                    font.family: timeLabel.font.family
-                    font.weight: Font.DemiBold
-
-                    text: "Till long break"
-
-                    color: "#2c3e50"
-                }*/
             }
         }
 
@@ -202,6 +204,35 @@ ApplicationWindow {
             font.weight: timeLabel.font.weight
             color: timeLabel.color
             Layout.alignment: Qt.AlignHCenter
+        }
+    }
+
+    required property SettingsManager settingsManager
+
+    ScrollView {
+        id: settingsWindow
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height - bar.height
+        visible: bar.currentIndex === 1
+
+        GridLayout {
+            anchors.centerIn: parent
+            //spacing: 20
+            columns: 2
+            columnSpacing: parent.width / 2
+
+            Text { text: "Autostart break phase"}
+            CheckBox {
+                onCheckStateChanged: {
+                    if (checkState === Qt.Checked) {
+                        settingsManager.autoStartNewPomodoro(true)
+                    }
+                    else {
+                        settingsManager.autoStartNewPomodoro(false)
+                    }
+                }
+            }
         }
     }
 }
