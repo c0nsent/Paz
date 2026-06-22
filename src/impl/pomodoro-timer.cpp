@@ -142,17 +142,16 @@ namespace impl
 		    case Phase::Work:
 		        m_workDuration = seconds;
 		        emit phaseDurationChanged(seconds, Phase::Work);
-		        break;
+		        return;
 
 		    case Phase::ShortBreak:
 		        m_shortBreakDuration = seconds;
 		        emit phaseDurationChanged(seconds, Phase::ShortBreak);
-		        break;
+		        return;
 
 		    case Phase::LongBreak:
 		        m_longBreakDuration = seconds;
 		        emit phaseDurationChanged(seconds, Phase::LongBreak);
-		        break;
 		}
 	}
 

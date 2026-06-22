@@ -6,9 +6,9 @@
 
 namespace impl
 {
-    SettingsManager::SettingsManager(PomodoroTimer *pt, QObject *parent)
-        : QObject{parent}, m_timer{pt}
+    SettingsManager::SettingsManager(PomodoroTimer *pt, QObject *parent) : QObject{parent}, m_timer{pt}
     {
+        m_isPomodoroAutoStarEnabled = m_settings.value("AutoStartNewPomodoro", true).toBool();
     }
 
 
@@ -31,25 +31,14 @@ namespace impl
         m_timer->setSessionLength(boundedPomodoros);
     }
 
-    void SettingsManager::autoStartNewPomodoro(const bool isTrue)
+    void SettingsManager::togglePomodoroAutoStart()
     {
-        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timerFinished)};
-
-        if (isTrue)
-        {
-            if (isSignalConnected(timeIsOutSignal)) return;
-
-            connect(m_timer, &PomodoroTimer::timerFinished, this, [&]
-            {
-                if (m_timer->phase() == PomodoroTimer::Phase::Work) m_timer->start();
-            });
-        }
+        if (m_isPomodoroAutoStarEnabled)
+            connect(m_timer, &PomodoroTimer::timerFinished, this, &SettingsManager::enablePomodoroStart);
         else
-        {
-            if (not isSignalConnected(timeIsOutSignal)) return;
+            disconnect(m_timer, &PomodoroTimer::timerFinished, this, &SettingsManager::enablePomodoroStart);
 
-            disconnect(m_timer, &PomodoroTimer::timerFinished, this, nullptr);
-        }
+        m_isPomodoroAutoStarEnabled = not m_isPomodoroAutoStarEnabled;
     }
 
 
@@ -62,7 +51,7 @@ namespace impl
         m_timer->setPhaseDuration(ShortBreak, m_settings.value("ShortBreakDuration", 5 * 60).toUInt());
         m_timer->setPhaseDuration(LongBreak, m_settings.value("LongBreakDuration", 40 * 60).toUInt());
         m_timer->setSessionLength(m_settings.value("SessionLength",8).toUInt());
-        autoStartNewPomodoro(m_settings.value("AutoStartNewPomodoro", true).toBool());
+        m_isPomodoroAutoStarEnabled = m_settings.value("AutoStartNewPomodoro", true).toBool();
         m_settings.endGroup();
     }
 
@@ -89,5 +78,10 @@ namespace impl
     void SettingsManager::saveAllSettings()
     {
         writeSettings(*m_timer);
+    }
+
+    void SettingsManager::enablePomodoroStart(const PomodoroTimer::Phase phase) const
+    {
+        if (phase == PomodoroTimer::Phase::Work) m_timer->start();
     }
 }

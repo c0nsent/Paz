@@ -22,8 +22,7 @@ namespace impl
 
         void setPhaseDuration(PomodoroTimer::Phase phase, u16 seconds);
         void setSessionLength(u16 pomodoros);
-        //void togglePomodoroAutoStart();
-        void autoStartNewPomodoro(bool isTrue);
+        void togglePomodoroAutoStart();
         void readSettings(const PomodoroTimer &);
         void writeSettings(const PomodoroTimer &);
 
@@ -31,12 +30,15 @@ namespace impl
 
     private slots:
 
+        void enablePomodoroStart(PomodoroTimer::Phase phase) const;
+
     signals:
 
         void invalidValuePassed(QString propertyName);
 
     private:
 
+        bool m_isPomodoroAutoStarEnabled;
         PomodoroTimer *m_timer;
         QSettings m_settings;
     };
