@@ -43,14 +43,19 @@ int main(int argc, char *argv[])
     /*settingsManager->readSettings(*pt);
     settingsManager->writeSettings(*pt);*/
 
+    /*
+     * Сначала отладь всю хуету с настройками
+     */
+
     QObject::connect(&app, &QGuiApplication::applicationStateChanged, [&] (Qt::ApplicationState state)
     {
-        if (state == Qt::ApplicationState::ApplicationSuspended)
-        {
-            qDebug("Отработало");
-            settingsManager->saveAllSettings();
-        }
+        auto metaState{ QMetaEnum::fromType<Qt::ApplicationState>() };
 
+        qDebug() << metaState.valueToKey(state);
+        if (state != Qt::ApplicationState::ApplicationSuspended) return;
+
+        qDebug() << "Отработало";
+        settingsManager->saveAllSettings();
     });
 
     QObject::connect(
