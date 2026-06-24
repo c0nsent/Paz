@@ -7,6 +7,7 @@ project(Paz
 
 find_package(Qt6 REQUIRED COMPONENTS
         Core
+        Gui
         Widgets
         Quick
 )
@@ -44,6 +45,7 @@ qt_add_qml_module(PazApp
 
 target_link_libraries(PazApp PRIVATE
         Qt6::Core
+        Qt6::Gui
         Qt6::Widgets
         Qt6::Quick
 )

@@ -31,6 +31,7 @@ namespace impl
         m_timer->setSessionLength(boundedPomodoros);
     }
 
+
     void SettingsManager::togglePomodoroAutoStart()
     {
         if (m_isPomodoroAutoStarEnabled)

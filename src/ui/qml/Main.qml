@@ -224,14 +224,10 @@ ApplicationWindow {
 
             Text { text: "Autostart break phase"}
             CheckBox {
-                onCheckStateChanged: {
-                    if (checkState === Qt.Checked) {
-                        settingsManager.autoStartNewPomodoro(true)
-                    }
-                    else {
-                        settingsManager.autoStartNewPomodoro(false)
-                    }
-                }
+                checkState:
+
+                onCheckStateChanged: settingsManager.togglePomodoroAutoStart()
+
             }
         }
     }
