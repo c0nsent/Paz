@@ -224,9 +224,24 @@ ApplicationWindow {
 
             Text { text: "Autostart break phase"}
             CheckBox {
-                checkState:
 
+                checkState: settingsManager.isPomodoroAutoStarEnabled ? Qt.Checked : Qt.Unchecked
                 onCheckStateChanged: settingsManager.togglePomodoroAutoStart()
+
+            }
+
+            Text { text: "Work Phase Duration"}
+            SpinBox {
+                value: settingsManager.pomodoroDuration
+                minimum: 1
+                maximum: 60
+                onValueChanged: settingsManager.setPomodoroDuration(value)
+            }
+
+            Button {
+                text: "Save settings"
+                font.pixelSize: 16
+                onClicked: settingsManager.saveAllSettings()
 
             }
         }

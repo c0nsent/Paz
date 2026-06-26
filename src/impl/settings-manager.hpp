@@ -14,9 +14,13 @@ namespace impl
         QML_UNCREATABLE("Мне так по кайфу")
         QML_NAMED_ELEMENT(SettingsManager)
 
+        Q_PROPERTY(bool isPomodoroAutoStarEnabled READ isPomodoroAutoStarEnabled NOTIFY autoStartStateChanged)
+
     public:
 
         explicit SettingsManager(PomodoroTimer *pt, QObject *parent = nullptr);
+
+        bool isPomodoroAutoStarEnabled() const;
 
     public slots:
 
@@ -35,6 +39,7 @@ namespace impl
     signals:
 
         void invalidValuePassed(QString propertyName);
+        void autoStartStateChanged(bool);
 
     private:
 
