@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+  </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="gemini-3.1-pro-preview" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="Paz" targetName="all_qmltyperegistrations" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="Paz_qmlimportscan" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="PazApp_copy_qml" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="PazApp" />
+      <config projectName="Paz" targetName="generate_qmlls_build_ini_file" />
+      <config projectName="Paz" targetName="clean_qml_context_properties" />
+      <config projectName="Paz" targetName="Paz_qmllint_json" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_qmltyperegistration" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="all_qmllint" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="Paz_qmllint" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_tooling" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="module_PazApp_aotstats_target" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="dump_qml_context_properties" />
+      <config projectName="Paz" targetName="all_qmllint_module" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="Paz_qmltyperegistration" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="Paz_copy_qml" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="all_qmllint_json" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_copy_res" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="Paz_tooling" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="Paz_copy_res" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="Paz_qmllint_module" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_qmlimportscan" folderName="QtInternalTargets" />
+      <config projectName="Paz" targetName="all_aotstats" />
+      <config projectName="Paz" targetName="PazApp_qmllint_module" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_qmllint_json" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="PazApp_qmllint" folderName="QtInternalTargets/QmlLinter" />
+      <config projectName="Paz" targetName="module_Paz_aotstats_target" folderName="QtInternalTargets" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" GENERATION_DIR="../build/debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" GENERATION_DIR="../build/release" CONFIG_NAME="Release" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization.">
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="a05913a9-1696-4e98-b3ce-dc3c78dc5da0" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="a05913a9-1696-4e98-b3ce-dc3c78dc5da0" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/amitayus_/Programming/Paz" value="3BnU7suH9S1vBfmrnUisF3tteOv" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="chat-panel" value="Gemini 3.1 Pro" />
+      <entry key="agent-panel" value="Gemini 3.1 Pro" />
+    </selectedModels>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="162" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="QML" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;c0nsent&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/c0nsent/Paz.git&quot;,
+    &quot;accountId&quot;: &quot;396f19b3-c2ac-442c-baea-c4c295d2edc3&quot;
+  }
+}</component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="9taDxtzs" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0001637746856546" />
+      <entry key="S2" value="1.1131258078603632" />
+      <entry key="S5" value="1.4182391443964741" />
+      <entry key="S10" value="1.6467142563204278" />
+      <entry key="S30" value="1.8897064000640822" />
+      <entry key="S60" value="2.450979931539921" />
+      <entry key="M2" value="4.355340047546123" />
+      <entry key="M5" value="7.971207979455781" />
+      <entry key="M10" value="11.035681938832656" />
+      <entry key="M15" value="15.350850214062994" />
+      <entry key="M30" value="39.47953243939587" />
+      <entry key="H1" value="115.28071172189172" />
+      <entry key="H2" value="282.737626851183" />
+      <entry key="H4" value="598.1630850247449" />
+      <entry key="D1" value="2020.6599856238524" />
+      <entry key="W1" value="2745.1179820431084" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="6.983168762576454E-188" />
+      <entry key="S10" value="2.6425685918395704E-94" />
+      <entry key="S30" value="6.417363126445701E-32" />
+      <entry key="S60" value="2.547865672112993E-16" />
+      <entry key="M2" value="1.7151907201765876E-8" />
+      <entry key="M5" value="0.0010899455466690322" />
+      <entry key="M10" value="0.056785762483424776" />
+      <entry key="M15" value="0.28562937161110463" />
+      <entry key="M30" value="2.5559350303149553" />
+      <entry key="H1" value="11.046728307025877" />
+      <entry key="H2" value="28.559769985065707" />
+      <entry key="H4" value="58.9547118894706" />
+      <entry key="D1" value="178.38652219877204" />
+      <entry key="W1" value="233.6175469355989" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="4.992077994127077E-5" />
+      <entry key="MS500" value="0.13796432162796676" />
+      <entry key="S2" value="0.6863895009278436" />
+      <entry key="S5" value="1.1788251317370946" />
+      <entry key="S10" value="1.504477754717832" />
+      <entry key="S30" value="1.8350877245875277" />
+      <entry key="S60" value="2.420112699318494" />
+      <entry key="M2" value="4.334558776104701" />
+      <entry key="M5" value="7.9598261038837315" />
+      <entry key="M10" value="11.08366534088916" />
+      <entry key="M15" value="15.627249224823718" />
+      <entry key="M30" value="42.02000854464556" />
+      <entry key="H1" value="126.29933313426973" />
+      <entry key="H2" value="311.2540886216811" />
+      <entry key="H4" value="657.0581501512014" />
+      <entry key="D1" value="2199.0060424536505" />
+      <entry key="W1" value="2978.7277175938066" />
+    </decayedShown>
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2026" />
+    <option name="minorVersion" value="1" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3BnU7suH9S1vBfmrnUisF3tteOv" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+      </template>
+    </option>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;CMake Application.Paz.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Application.PazApp.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;SettingsManager&quot;,
+    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RunManager" selected="CMake Application.PazApp">
+    <configuration name="PazApp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Paz" RUN_TARGET_NAME="PazApp">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_copy_qml" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_copy_qml" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_copy_res" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_copy_res" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_qmlimportscan" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_qmlimportscan" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_qmllint" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_qmllint" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_qmllint_json" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_qmllint_json" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_qmllint_module" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_qmllint_module" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_qmltyperegistration" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_qmltyperegistration" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PazApp_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp_tooling" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_copy_qml" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_copy_qml" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_copy_res" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_copy_res" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_qmlimportscan" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_qmlimportscan" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_qmllint" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_qmllint" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_qmllint_json" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_qmllint_json" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_qmllint_module" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_qmllint_module" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_qmltyperegistration" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_qmltyperegistration" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Paz_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_tooling" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_aotstats" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="all_aotstats" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_qmllint" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="all_qmllint" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_qmllint_json" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="all_qmllint_json" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_qmllint_module" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets/QmlLinter" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="all_qmllint_module" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_qmltyperegistrations" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="all_qmltyperegistrations" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean_qml_context_properties" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="clean_qml_context_properties" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dump_qml_context_properties" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="dump_qml_context_properties" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generate_qmlls_build_ini_file" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="generate_qmlls_build_ini_file" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="module_PazApp_aotstats_target" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="module_PazApp_aotstats_target" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="module_Paz_aotstats_target" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="module_Paz_aotstats_target" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.PazApp_copy_qml" />
+      <item itemvalue="CMake Application.PazApp_copy_res" />
+      <item itemvalue="CMake Application.PazApp_qmlimportscan" />
+      <item itemvalue="CMake Application.PazApp_qmltyperegistration" />
+      <item itemvalue="CMake Application.PazApp_tooling" />
+      <item itemvalue="CMake Application.Paz_copy_qml" />
+      <item itemvalue="CMake Application.Paz_copy_res" />
+      <item itemvalue="CMake Application.Paz_qmlimportscan" />
+      <item itemvalue="CMake Application.Paz_qmltyperegistration" />
+      <item itemvalue="CMake Application.Paz_tooling" />
+      <item itemvalue="CMake Application.all_qmltyperegistrations" />
+      <item itemvalue="CMake Application.module_PazApp_aotstats_target" />
+      <item itemvalue="CMake Application.module_Paz_aotstats_target" />
+      <item itemvalue="CMake Application.PazApp_qmllint" />
+      <item itemvalue="CMake Application.PazApp_qmllint_json" />
+      <item itemvalue="CMake Application.PazApp_qmllint_module" />
+      <item itemvalue="CMake Application.Paz_qmllint" />
+      <item itemvalue="CMake Application.Paz_qmllint_json" />
+      <item itemvalue="CMake Application.Paz_qmllint_module" />
+      <item itemvalue="CMake Application.all_qmllint" />
+      <item itemvalue="CMake Application.all_qmllint_json" />
+      <item itemvalue="CMake Application.all_qmllint_module" />
+      <item itemvalue="CMake Application.PazApp" />
+      <item itemvalue="CMake Application.all_aotstats" />
+      <item itemvalue="CMake Application.clean_qml_context_properties" />
+      <item itemvalue="CMake Application.dump_qml_context_properties" />
+      <item itemvalue="CMake Application.generate_qmlls_build_ini_file" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="" />
+      <created>1775124163485</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1775124163485</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(qml): integrate QML module and refactor main application logic" />
+    <MESSAGE value="feat(core): add core module with basic types, constants, and enums" />
+    <MESSAGE value="feat(settings): add SettingsManager and refactor application initialization" />
+    <MESSAGE value="feat(pomodoro): implement PomodoroTimer class and integrate with QML interface" />
+    <MESSAGE value="fix(main): return EXIT_FAILURE on module load failure and improve pomodoro label display" />
+    <MESSAGE value="feat(qml): add project configuration files and update CMakeLists for QML integration" />
+    <MESSAGE value="feat(qml): integrate PomodoroTimerWidget and update CMakeLists for new implementation" />
+    <MESSAGE value="refactor(app): rename executable and QML module, update Qt version requirements, and modularize QML registration" />
+    <MESSAGE value="feat(qml): add PomodoroTimerWidget QML component and update module structure" />
+    <MESSAGE value="refactor(qml): remove PomodoroTimerWidget and integrate directly into Main.qml with enhanced timer UI" />
+    <MESSAGE value="feat(app): add system tray integration and MainWindow class with messaging support" />
+    <MESSAGE value="refactor(pomodoro): simplify PomodoroTimer phase management, remove unused QML registration code, and add settings persistence" />
+    <MESSAGE value="feat(settings): integrate SettingsManager into PomodoroTimer and QML, add settings persistence and auto-start feature" />
+    <MESSAGE value="refactor(main): improve application state handling and logging for settings persistence" />
+    <MESSAGE value="feat(settings): enhance settings management, update auto-start logic, and improve signal connections" />
+    <MESSAGE value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

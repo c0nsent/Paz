@@ -1,0 +1,493 @@
+Index: src/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>add_subdirectory(core)\n#add_subdirectory(impl)\n\nqt_add_executable(Paz\n\tmain.cpp\n    impl/pomodoro-timer.cpp\n    impl/pomodoro-timer.hpp\n    impl/pomodoro-calculator.cpp\n    impl/pomodoro-calculator.hpp\n)\n\n\nadd_subdirectory(ui)\n\ntarget_link_libraries(Paz PRIVATE\n\t\tPazImplementation\n\t\tQt6::Core\n        Qt6::Quick\n        Qt6::Qml\n)\n\ntarget_compile_features(Paz PUBLIC cxx_std_23)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/CMakeLists.txt	(date 1781696235226)
+@@ -1,22 +1,20 @@
+ add_subdirectory(core)
+ #add_subdirectory(impl)
+ 
+-qt_add_executable(Paz
+-	main.cpp
+-    impl/pomodoro-timer.cpp
+-    impl/pomodoro-timer.hpp
+-    impl/pomodoro-calculator.cpp
+-    impl/pomodoro-calculator.hpp
++qt_add_executable(PazApp
++        main.cpp
++        impl/pomodoro-timer.cpp
++        impl/pomodoro-timer.hpp
++        impl/pomodoro-calculator.cpp
++        impl/pomodoro-calculator.hpp
+ )
+ 
+-
+ add_subdirectory(ui)
+ 
+-target_link_libraries(Paz PRIVATE
+-		PazImplementation
++target_link_libraries(PazApp PRIVATE
++        PazCore
+ 		Qt6::Core
+         Qt6::Quick
+-        Qt6::Qml
+ )
+ 
+-target_compile_features(Paz PUBLIC cxx_std_23)
+\ No newline at end of file
++target_compile_features(PazApp PUBLIC cxx_std_23)
+\ No newline at end of file
+Index: src/impl/pomodoro-timer.hpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#pragma once\n\n#include <QMetaEnum>\n\n#include \"../core/core\"\n\n#include <QHash>\n#include <QObject>\n#include <QTimer>\n\n#include <initializer_list>\n#include <QtQml/QQmlEngine>\n\n\nnamespace impl\n{\n\tclass PomodoroTimer : public QObject\n\t{\n\t\tQ_OBJECT\n        QML_ELEMENT\n\n        Q_PROPERTY(State state READ state NOTIFY stateChanged)\n        Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)\n        Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)\n        Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)\n        Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)\n\n\t\tstatic constexpr u16 c_timeIsOut{0};\n\n\tpublic:\n\n\t\tenum class Phase : u8 { Work, ShortBreak, LongBreak };\n\t\tQ_ENUM(Phase)\n\n\t\tenum class State : u8 { Idle, Running, Paused, AfkTimerRunning };\n\t\tQ_ENUM(State)\n\n\t\tstruct CreateInfo\n\t\t{\n\t\t\tQObject *parent{nullptr};\n\n\t\t\tState state{ State::Idle };\n\t\t\tPhase phase{ Phase::Work };\n\n\t\t\tQHash<Phase,u16> phaseDurations{ initializePhaseDurations() };\n\n\t\t\tu16 sessionLength{ defaults::SESSION_LENGTH };\n\t\t\tu16 currentSessionCount{};\n\t\t};\n\n\t\texplicit PomodoroTimer(QObject *parent = nullptr);\n\t\texplicit PomodoroTimer(const CreateInfo &data);\n\n\t\t[[nodiscard]] State state() const;\n\t\t[[nodiscard]] Phase phase() const;\n\t\t[[nodiscard]] u16 phaseDuration() const;\n\t\t[[nodiscard]] u16 phaseDuration(Phase phase) const;\n\t\t[[nodiscard]] u16 sessionLength() const;\n\t\t[[nodiscard]] u16 remainingTime() const;\n        [[nodiscard]] QString timeRemainingString() const;\n\t\t[[nodiscard]] u16 currentSessionCount() const;\n\n\tpublic slots:\n\n\t\tvoid start();\n\t\tvoid start(Phase phase);\n\t\tvoid start(Phase phase, u16 seconds);\n\t\tvoid pause();\n\t\tvoid reset();\n\t\tvoid toNextPhase();\n\n\t\tvoid setPhaseDuration(u16 current);\n\t\tvoid setPhaseDuration(Phase phase, u16 seconds);\n\t\tvoid setPhaseDuration(const std::initializer_list<std::pair<Phase, u16>> &phaseDurations);\n\n\t\tvoid setSessionLength(u16 pomodoros);\n\n\tprivate slots:\n\n\t\tvoid updateRemainingTime();\n\n\t\tbool trySetPhase(Phase phase);\n\t\tbool trySetRemainingTime(u16 remainingTime);\n\t\tbool trySetState(State state);\n\t\t\n\tsignals:\n\n\t\tvoid stateChanged(State);\n\t\tvoid phaseChanged(Phase);\n\t\tvoid phaseDurationChanged(u16 seconds, Phase);\n\t\tvoid sessionLengthChanged(u16 pomodoros);\n\t\tvoid remainingTimeChanged(u16 seconds);\n\t\tvoid pomodoroFinished(u16 currentSessionCount);\n\t\n\tprivate:\n\n\t\tstatic QHash<Phase, u16> initializePhaseDurations();\n\n\t\tState m_state;\n\t\tPhase m_phase;\n\t\tQHash<Phase, u16> m_phaseDurations;\n\t\tu16 m_sessionLength;\n\n\t\tu16 m_remainingTime;\n\t\tu16 m_currentSessionCount;\n\n\t\tQTimer m_timer;\n\t};\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/impl/pomodoro-timer.hpp b/src/impl/pomodoro-timer.hpp
+--- a/src/impl/pomodoro-timer.hpp	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/impl/pomodoro-timer.hpp	(date 1781696578673)
+@@ -1,15 +1,15 @@
+ #pragma once
+ 
+-#include <QMetaEnum>
+-
+ #include "../core/core"
+ 
+ #include <QHash>
++#include <QtQml>
++#include <QMetaEnum>
+ #include <QObject>
+ #include <QTimer>
+ 
++
+ #include <initializer_list>
+-#include <QtQml/QQmlEngine>
+ 
+ 
+ namespace impl
+@@ -17,7 +17,6 @@
+ 	class PomodoroTimer : public QObject
+ 	{
+ 		Q_OBJECT
+-        QML_ELEMENT
+ 
+         Q_PROPERTY(State state READ state NOTIFY stateChanged)
+         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
+@@ -25,6 +24,8 @@
+         Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
+         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
+ 
++	    QML_ELEMENT
++
+ 		static constexpr u16 c_timeIsOut{0};
+ 
+ 	public:
+Index: src/main.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#include \"impl/pomodoro-calculator.hpp\"\n#include \"impl/pomodoro-timer.hpp\"\n\n#include <QDebug>\n#include <QGuiApplication>\n#include <QQmlApplicationEngine>\n//#include <QQmlContext>\n#include <QString>\n#include <QObject>\n\n#include <cstdlib>\n\n\nclass Dummy : public QObject\n{\n    Q_OBJECT\n};\n\nauto processCliInput(char **argv)\n{\n    impl::PomodoroCalculator calculator;\n    qInfo() << calculator.calculate(QString{argv[1]}.toUShort());\n}\n\nint main(int argc, char *argv[])\n{\n    if (argc == 2)\n    {\n        processCliInput(argv);\n        return EXIT_SUCCESS;\n    }\n    if (argc > 2)\n    {\n        qWarning() << \"Too many arguments. Usage: Paz [repeatCount]\";\n        return EXIT_FAILURE;\n    }\n\n    QGuiApplication app(argc, argv);\n    QGuiApplication::setOrganizationName(\"amitayus_\");\n    QGuiApplication::setApplicationName(\"Paz\");\n\n    //qmlRegisterType<impl::PomodoroTimer>(\"PazQml\", 1, 0, \"PomodoroTimer\");\n\n    QQmlApplicationEngine engine;\n    engine.loadFromModule(\"PazQml\", \"Main\");\n    if (engine.rootObjects().isEmpty())\n    {\n        qWarning() << \"Paz couldn't load module\";\n        return EXIT_FAILURE;\n    }\n\n    return QGuiApplication::exec();\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main.cpp b/src/main.cpp
+--- a/src/main.cpp	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/main.cpp	(date 1781696732742)
+@@ -4,18 +4,13 @@
+ #include <QDebug>
+ #include <QGuiApplication>
+ #include <QQmlApplicationEngine>
+-//#include <QQmlContext>
+-#include <QString>
++#include <QQmlContext>
+ #include <QObject>
++#include <QString>
+ 
+ #include <cstdlib>
+ 
+ 
+-class Dummy : public QObject
+-{
+-    Q_OBJECT
+-};
+-
+ auto processCliInput(char **argv)
+ {
+     impl::PomodoroCalculator calculator;
+@@ -42,12 +37,16 @@
+     //qmlRegisterType<impl::PomodoroTimer>("PazQml", 1, 0, "PomodoroTimer");
+ 
+     QQmlApplicationEngine engine;
+-    engine.loadFromModule("PazQml", "Main");
+-    if (engine.rootObjects().isEmpty())
+-    {
+-        qWarning() << "Paz couldn't load module";
+-        return EXIT_FAILURE;
+-    }
++
++    QObject::connect(
++        &engine,
++        &QQmlApplicationEngine::objectCreationFailed,
++        &app,
++        []{QCoreApplication::exit(-1);},
++        Qt::QueuedConnection
++    );
++
++    engine.loadFromModule("Paz", "Main");
+ 
+     return QGuiApplication::exec();
+ }
+\ No newline at end of file
+Index: src/ui/qml/Main.qml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import PomodoroTimerWidget\n\nimport QtQuick\nimport QtQuick.Controls\nimport QtQuick.Layouts\n\n\nApplicationWindow {\n    id: root\n/*    width: 420\n    height: 320*/\n    visible: true\n    title: \"Paz\"\n\n    color: \"#f4f4f5\"\n\n    menuBar: MenuBar {\n        Menu {\n            title: \"Menu1\"\n            MenuSeparator{}\n\n        }\n        Menu {\n            title: \"Menu2\"\n        }\n    }\n\n\n    RowLayout {\n        anchors.fill: parent\n        spacing: 0\n\n        PomodoroTimerWidget {}\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ui/qml/Main.qml b/src/ui/qml/Main.qml
+--- a/src/ui/qml/Main.qml	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/ui/qml/Main.qml	(date 1781696814738)
+@@ -1,4 +1,4 @@
+-import PomodoroTimerWidget
++import Paz
+ 
+ import QtQuick
+ import QtQuick.Controls
+@@ -30,7 +30,133 @@
+         anchors.fill: parent
+         spacing: 0
+ 
+-        PomodoroTimerWidget {}
++        ColumnLayout {
++
++            PomodoroTimer {
++                id: pomodoroTimer
++            }
++
++            anchors.centerIn: parent
++            spacing: 20
++
++            Label {
++                id: phaseLabel
++                text: {
++                    if (pomodoroTimer.phase === PomodoroTimer.Work) return "Work Phase";
++                    if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return "Short Break";
++                    if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return "Long Break";
++                    return "Unknown";
++                }
++                font.pixelSize: 24
++                font.weight: Font.Bold
++                color: "#e74c3c" // Красный оттенок, ассоциирующийся с "pomodoro"
++                Layout.alignment: Qt.AlignHCenter
++            }
++
++            Rectangle {
++                id: buttonBg
++
++                color: "#2c3e50"
++                radius: 8
++            }
++
++            Label {
++                id: timeLabel
++                text: pomodoroTimer.timeRemainingString
++                font.pixelSize: 72
++                font.family: "Monospace"
++                font.weight: Font.DemiBold
++                color: "#2c3e50"
++                Layout.alignment: Qt.AlignHCenter
++            }
++
++            Button {
++                id: startPauseButton
++                text: pomodoroTimer.state === PomodoroTimer.Running ? "Pause" : "Start"
++
++                font.pixelSize: 20
++                onClicked: pomodoroTimer.state === PomodoroTimer.Running ? pomodoroTimer.pause() : pomodoroTimer.start()
++
++                background: Rectangle {
++                    implicitWidth: timeLabel.width
++                    implicitHeight: parent.font.pixelSize * 3
++                    radius: 16
++                    color: "#2c3e50"
++                    border.color: "#1f2d3a"
++                }
++
++                contentItem: Text {
++                    text: parent.text
++                    color: "white"
++                    font.pixelSize: parent.font.pixelSize
++                    horizontalAlignment: Text.AlignHCenter
++                    verticalAlignment: Text.AlignVCenter
++                }
++
++                Layout.alignment: Qt.AlignHCenter
++            }
++
++            RowLayout {
++                Layout.alignment: Qt.AlignHCenter
++                spacing: 16
++
++                Button {
++                    text: "Skip"
++                    font.pixelSize: 16
++                    onClicked: pomodoroTimer.toNextPhase()
++
++                    background: Rectangle {
++                        implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2
++                        implicitHeight: parent.font.pixelSize * 2
++                        radius: 8
++                        color: "#2c3e50"
++                        border.color: "#1f2d3a"
++                    }
++
++                    contentItem: Text {
++                        text: parent.text
++                        color: "white"
++                        font.pixelSize: parent.font.pixelSize
++                        horizontalAlignment: Text.AlignHCenter
++                        verticalAlignment: Text.AlignVCenter
++                    }
++                }
++
++                Button {
++                    text: "Reset"
++                    font.pixelSize: 16
++                    onClicked: pomodoroTimer.reset()
++
++                    background: Rectangle {
++                        implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2
++                        implicitHeight: parent.font.pixelSize * 2
++                        radius: 8
++                        color: "#2c3e50"
++                        border.color: "#1f2d3a"
++                    }
++
++                    contentItem: Text {
++                        text: parent.text
++                        color: "white"
++                        font.pixelSize: parent.font.pixelSize
++                        horizontalAlignment: Text.AlignHCenter
++                        verticalAlignment: Text.AlignVCenter
++                    }
++                }
++            }
++
++            Label
++            {
++                property int pomodoroCount: pomodoroTimer.currentSessionCount
++
++                text: pomodoroCount + " pomodoro" + (pomodoroCount <= 1 ? "" : "s")
++
++                font.pixelSize: 42
++                font.weight: timeLabel.font.weight
++                color: timeLabel.color
++                Layout.alignment: Qt.AlignHCenter
++            }
++        }
+     }
+ 
+ 
+Index: src/ui/CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>qt_add_qml_module(Paz\n        URI PazQml\n        VERSION 1.0\n        QML_FILES\n        qml/Main.qml\n        qml/PomodoroTimerWidget.qml\n)
+===================================================================
+diff --git a/src/ui/CMakeLists.txt b/src/ui/CMakeLists.txt
+--- a/src/ui/CMakeLists.txt	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/ui/CMakeLists.txt	(date 1781696814744)
+@@ -1,7 +1,9 @@
+-qt_add_qml_module(Paz
+-        URI PazQml
++qt_add_qml_module(PazApp
++        URI Paz
+         VERSION 1.0
+         QML_FILES
+         qml/Main.qml
+-        qml/PomodoroTimerWidget.qml
++        #qml/PomodoroTimerWidget.qml
++        SOURCES
++        ../impl/pomodoro-timer.hpp ../impl/pomodoro-timer.cpp
+ )
+\ No newline at end of file
+Index: CMakeLists.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>cmake_minimum_required(VERSION 4.2)\n\nproject(Paz\n\t\tVERSION 0.2.2\n\t\tLANGUAGES CXX\n)\n\nfind_package(Qt6 6.10.1 REQUIRED COMPONENTS\n\t\tCore\n\t\tQuick\n)\n\nqt_standard_project_setup(\n\t\tREQUIRES 6.10.1,\n\t\tI18N_TRANSLATED_LANGUAGES ru\n)\n\nadd_subdirectory(src)
+===================================================================
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/CMakeLists.txt	(date 1781706407713)
+@@ -5,14 +5,13 @@
+ 		LANGUAGES CXX
+ )
+ 
+-find_package(Qt6 6.10.1 REQUIRED COMPONENTS
++find_package(Qt6 6.11.1 REQUIRED COMPONENTS
+ 		Core
+ 		Quick
++        Qml
++        Qml
+ )
+ 
+-qt_standard_project_setup(
+-		REQUIRES 6.10.1,
+-		I18N_TRANSLATED_LANGUAGES ru
+-)
++
+ 
+ add_subdirectory(src)
+\ No newline at end of file
+Index: src/ui/qml/PomodoroTimerWidget.qml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import PazQml\n\nimport QtQuick\nimport QtQuick.Controls\nimport QtQuick.Layouts\n\n\nColumnLayout {\n\n    PomodoroTimer {\n        id: pomodoroTimer\n    }\n\n    anchors.centerIn: parent\n    spacing: 20\n\n    Label {\n        id: phaseLabel\n        text: {\n            if (pomodoroTimer.phase === PomodoroTimer.Work) return \"Work Phase\";\n            if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return \"Short Break\";\n            if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return \"Long Break\";\n            return \"Unknown\";\n        }\n        font.pixelSize: 24\n        font.weight: Font.Bold\n        color: \"#e74c3c\" // Красный оттенок, ассоциирующийся с \"pomodoro\"\n        Layout.alignment: Qt.AlignHCenter\n    }\n\n    Rectangle {\n        id: buttonBg\n\n        color: \"#2c3e50\"\n        radius: 8\n    }\n\n    Label {\n        id: timeLabel\n        text: pomodoroTimer.timeRemainingString\n        font.pixelSize: 72\n        font.family: \"Monospace\"\n        font.weight: Font.DemiBold\n        color: \"#2c3e50\"\n        Layout.alignment: Qt.AlignHCenter\n    }\n\n\n    Button {\n        id: startPauseButton\n        text: pomodoroTimer.state === PomodoroTimer.Running ? \"Pause\" : \"Start\"\n\n        font.pixelSize: 20\n        onClicked: pomodoroTimer.state === PomodoroTimer.Running ? pomodoroTimer.pause() : pomodoroTimer.start()\n\n        background: Rectangle {\n            implicitWidth: timeLabel.width\n            implicitHeight: parent.font.pixelSize * 3\n            radius: 16\n            color: \"#2c3e50\"\n            border.color: \"#1f2d3a\"\n        }\n\n        contentItem: Text {\n            text: parent.text\n            color: \"white\"\n            font.pixelSize: parent.font.pixelSize\n            horizontalAlignment: Text.AlignHCenter\n            verticalAlignment: Text.AlignVCenter\n        }\n\n        Layout.alignment: Qt.AlignHCenter\n    }\n\n    RowLayout {\n        Layout.alignment: Qt.AlignHCenter\n        spacing: 16\n\n        Button {\n            text: \"Skip\"\n            font.pixelSize: 16\n            onClicked: pomodoroTimer.toNextPhase()\n\n            background: Rectangle {\n                implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2\n                implicitHeight: parent.font.pixelSize * 2\n                radius: 8\n                color: \"#2c3e50\"\n                border.color: \"#1f2d3a\"\n            }\n\n            contentItem: Text {\n                text: parent.text\n                color: \"white\"\n                font.pixelSize: parent.font.pixelSize\n                horizontalAlignment: Text.AlignHCenter\n                verticalAlignment: Text.AlignVCenter\n            }\n        }\n\n        Button {\n            text: \"Reset\"\n            font.pixelSize: 16\n            onClicked: pomodoroTimer.reset()\n\n            background: Rectangle {\n                implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2\n                implicitHeight: parent.font.pixelSize * 2\n                radius: 8\n                color: \"#2c3e50\"\n                border.color: \"#1f2d3a\"\n            }\n\n            contentItem: Text {\n                text: parent.text\n                color: \"white\"\n                font.pixelSize: parent.font.pixelSize\n                horizontalAlignment: Text.AlignHCenter\n                verticalAlignment: Text.AlignVCenter\n            }\n        }\n    }\n\n\n    Label\n    {\n        property int pomodoroCount: pomodoroTimer.currentSessionCount\n\n        text: pomodoroCount + \" pomodoro\" + (pomodoroCount <= 1 ? \"\" : \"s\")\n\n        font.pixelSize: 42\n        font.weight: timeLabel.font.weight\n        color: timeLabel.color\n        Layout.alignment: Qt.AlignHCenter\n    }\n}
+===================================================================
+diff --git a/src/ui/qml/PomodoroTimerWidget.qml b/src/ui/qml/PomodoroTimerWidget.qml
+--- a/src/ui/qml/PomodoroTimerWidget.qml	(revision 1fe86a93f1c9bbc5862c8dc42cf46f98920f8eca)
++++ b/src/ui/qml/PomodoroTimerWidget.qml	(date 1781696814729)
+@@ -1,136 +1,7 @@
+-import PazQml
++import Paz
+ 
+ import QtQuick
+ import QtQuick.Controls
+ import QtQuick.Layouts
+ 
+ 
+-ColumnLayout {
+-
+-    PomodoroTimer {
+-        id: pomodoroTimer
+-    }
+-
+-    anchors.centerIn: parent
+-    spacing: 20
+-
+-    Label {
+-        id: phaseLabel
+-        text: {
+-            if (pomodoroTimer.phase === PomodoroTimer.Work) return "Work Phase";
+-            if (pomodoroTimer.phase === PomodoroTimer.ShortBreak) return "Short Break";
+-            if (pomodoroTimer.phase === PomodoroTimer.LongBreak) return "Long Break";
+-            return "Unknown";
+-        }
+-        font.pixelSize: 24
+-        font.weight: Font.Bold
+-        color: "#e74c3c" // Красный оттенок, ассоциирующийся с "pomodoro"
+-        Layout.alignment: Qt.AlignHCenter
+-    }
+-
+-    Rectangle {
+-        id: buttonBg
+-
+-        color: "#2c3e50"
+-        radius: 8
+-    }
+-
+-    Label {
+-        id: timeLabel
+-        text: pomodoroTimer.timeRemainingString
+-        font.pixelSize: 72
+-        font.family: "Monospace"
+-        font.weight: Font.DemiBold
+-        color: "#2c3e50"
+-        Layout.alignment: Qt.AlignHCenter
+-    }
+-
+-
+-    Button {
+-        id: startPauseButton
+-        text: pomodoroTimer.state === PomodoroTimer.Running ? "Pause" : "Start"
+-
+-        font.pixelSize: 20
+-        onClicked: pomodoroTimer.state === PomodoroTimer.Running ? pomodoroTimer.pause() : pomodoroTimer.start()
+-
+-        background: Rectangle {
+-            implicitWidth: timeLabel.width
+-            implicitHeight: parent.font.pixelSize * 3
+-            radius: 16
+-            color: "#2c3e50"
+-            border.color: "#1f2d3a"
+-        }
+-
+-        contentItem: Text {
+-            text: parent.text
+-            color: "white"
+-            font.pixelSize: parent.font.pixelSize
+-            horizontalAlignment: Text.AlignHCenter
+-            verticalAlignment: Text.AlignVCenter
+-        }
+-
+-        Layout.alignment: Qt.AlignHCenter
+-    }
+-
+-    RowLayout {
+-        Layout.alignment: Qt.AlignHCenter
+-        spacing: 16
+-
+-        Button {
+-            text: "Skip"
+-            font.pixelSize: 16
+-            onClicked: pomodoroTimer.toNextPhase()
+-
+-            background: Rectangle {
+-                implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2
+-                implicitHeight: parent.font.pixelSize * 2
+-                radius: 8
+-                color: "#2c3e50"
+-                border.color: "#1f2d3a"
+-            }
+-
+-            contentItem: Text {
+-                text: parent.text
+-                color: "white"
+-                font.pixelSize: parent.font.pixelSize
+-                horizontalAlignment: Text.AlignHCenter
+-                verticalAlignment: Text.AlignVCenter
+-            }
+-        }
+-
+-        Button {
+-            text: "Reset"
+-            font.pixelSize: 16
+-            onClicked: pomodoroTimer.reset()
+-
+-            background: Rectangle {
+-                implicitWidth: (startPauseButton.width - parent.parent.spacing ) / 2
+-                implicitHeight: parent.font.pixelSize * 2
+-                radius: 8
+-                color: "#2c3e50"
+-                border.color: "#1f2d3a"
+-            }
+-
+-            contentItem: Text {
+-                text: parent.text
+-                color: "white"
+-                font.pixelSize: parent.font.pixelSize
+-                horizontalAlignment: Text.AlignHCenter
+-                verticalAlignment: Text.AlignVCenter
+-            }
+-        }
+-    }
+-
+-
+-    Label
+-    {
+-        property int pomodoroCount: pomodoroTimer.currentSessionCount
+-
+-        text: pomodoroCount + " pomodoro" + (pomodoroCount <= 1 ? "" : "s")
+-
+-        font.pixelSize: 42
+-        font.weight: timeLabel.font.weight
+-        color: timeLabel.color
+-        Layout.alignment: Qt.AlignHCenter
+-    }
+-}
+\ No newline at end of file
