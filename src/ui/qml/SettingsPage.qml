@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Paz.PomodoroTimer
+import Paz
 
 ScrollView {
     id: root

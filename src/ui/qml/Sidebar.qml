@@ -4,7 +4,7 @@ import QtQuick.Layouts
 
 Rectangle {
     id: root
-    
+
     property color sidebarColor: "#0f172a"
     property color sidebarTextColor: "#cbd5e1"
     property int currentIndex: 0
@@ -71,7 +71,9 @@ Rectangle {
         Item { Layout.fillHeight: true }
 
         Label {
-            text: "v" + "0.2.2"
+
+
+            text: "v" + appVersion
             color: "#94a3b8"
             font.pixelSize: 10
             Layout.alignment: Qt.AlignHCenter

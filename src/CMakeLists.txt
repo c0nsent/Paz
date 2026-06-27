@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(Paz
-        VERSION 0.3.0
+        VERSION 0.3.1
         LANGUAGES CXX
 )
+
+add_compile_definitions(APP_VERSION=\"${CMAKE_PROJECT_VERSION}\")
 
 find_package(Qt6 REQUIRED COMPONENTS
         Core
@@ -23,7 +25,7 @@ qt_add_executable(PazApp
 )
 
 qt_add_qml_module(PazApp
-        URI Paz.PomodoroTimer
+        URI Paz
         VERSION 1.0
         SOURCES
             impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp

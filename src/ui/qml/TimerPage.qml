@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Paz.PomodoroTimer
+import Paz
+
 
 Item {
     id: root

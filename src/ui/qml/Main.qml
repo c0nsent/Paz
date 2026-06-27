@@ -1,4 +1,4 @@
-import Paz.PomodoroTimer
+import Paz
 
 import QtQuick
 import QtQuick.Controls
@@ -17,6 +17,7 @@ ApplicationWindow {
 
     required property PomodoroTimer pomodoroTimer
     required property SettingsManager settingsManager
+    required property string appVersion
 
     readonly property color primaryColor: "#ef4444"
     readonly property color textColor: "#1e293b"

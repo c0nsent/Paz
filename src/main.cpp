@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
+    QGuiApplication::setApplicationVersion(APP_VERSION);
 
     QSystemTrayIcon trayIcon;
     trayIcon.show();
@@ -51,9 +52,10 @@ int main(int argc, char *argv[])
     engine.setInitialProperties({
         {"pomodoroTimer", QVariant::fromValue(pt)},
         {"settingsManager", QVariant::fromValue(settingsManager)},
+        { "appVersion", app.applicationVersion()}
     });
 
-    engine.loadFromModule("Paz.PomodoroTimer", "Main");
+    engine.loadFromModule("Paz", "Main");
 
     return QGuiApplication::exec();
 }

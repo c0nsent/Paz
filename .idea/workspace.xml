@@ -58,22 +58,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling">
-      <change afterPath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
+    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/main-window.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/main-window.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/qml/Main.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/Main.qml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/qml/SettingsManager.qml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +105,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="162" />
+    <option name="cachedIndexableFilesCount" value="181" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
@@ -154,61 +146,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000126059742758" />
-      <entry key="MS500" value="1.3412937683887232" />
-      <entry key="S2" value="3.8032929067211008" />
-      <entry key="S5" value="5.400916268877896" />
-      <entry key="S10" value="6.133356010770868" />
-      <entry key="S30" value="6.696472788696042" />
-      <entry key="S60" value="7.0022795148583175" />
-      <entry key="M2" value="8.81279217589693" />
-      <entry key="M5" value="19.930026846617572" />
-      <entry key="M10" value="40.76098129809014" />
-      <entry key="M15" value="61.00737187303742" />
-      <entry key="M30" value="113.25993491161879" />
-      <entry key="H1" value="183.64858841005417" />
-      <entry key="H2" value="288.4706066141853" />
-      <entry key="H4" value="523.448969540435" />
-      <entry key="D1" value="2095.16907105093" />
-      <entry key="W1" value="3105.9746157622103" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000060643" />
+      <entry key="S30" value="1.0011425371075737" />
+      <entry key="S60" value="1.1727876474304093" />
+      <entry key="M2" value="3.671391598244411" />
+      <entry key="M5" value="20.488156273667087" />
+      <entry key="M10" value="46.16301379615986" />
+      <entry key="M15" value="65.90714839937714" />
+      <entry key="M30" value="116.00456084683367" />
+      <entry key="H1" value="197.2245462114916" />
+      <entry key="H2" value="319.36892060608614" />
+      <entry key="H4" value="561.0919476433895" />
+      <entry key="D1" value="2160.0049807330965" />
+      <entry key="W1" value="3215.793900065481" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.1968496414171655E-122" />
-      <entry key="S2" value="3.5022483169316868E-31" />
-      <entry key="S5" value="9.057831629979227E-13" />
-      <entry key="S10" value="1.4978134015936008E-6" />
-      <entry key="S30" value="0.023693950749611763" />
-      <entry key="S60" value="0.2927072880878069" />
-      <entry key="M2" value="1.1285070730984843" />
-      <entry key="M5" value="2.69824180379292" />
-      <entry key="M10" value="3.6587517518708204" />
-      <entry key="M15" value="4.059216192344722" />
-      <entry key="M30" value="4.559520307173883" />
-      <entry key="H1" value="5.203988169874984" />
-      <entry key="H2" value="8.9650243812417" />
-      <entry key="H4" value="26.255933841409668" />
-      <entry key="D1" value="156.30306162615446" />
-      <entry key="W1" value="235.55598068220527" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.2831984063753504E-87" />
+      <entry key="S5" value="1.7511265304444968E-35" />
+      <entry key="S10" value="4.185006991595395E-18" />
+      <entry key="S30" value="1.68273499299658E-6" />
+      <entry key="S60" value="0.0015498811108764522" />
+      <entry key="M2" value="0.05721150458700386" />
+      <entry key="M5" value="0.6596055622417871" />
+      <entry key="M10" value="1.764838093392637" />
+      <entry key="M15" value="2.679841081043233" />
+      <entry key="M30" value="4.6498098516608435" />
+      <entry key="H1" value="6.828915701477138" />
+      <entry key="H2" value="11.003672912696713" />
+      <entry key="H4" value="27.0635007943281" />
+      <entry key="D1" value="157.0682887539015" />
+      <entry key="W1" value="239.63663733192982" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8888534344533415" />
-      <entry key="MS500" value="1.265105334858617" />
-      <entry key="S2" value="3.5353630485139385" />
-      <entry key="S5" value="5.195234667513522" />
-      <entry key="S10" value="6.004689649783892" />
-      <entry key="S30" value="6.669775214069475" />
-      <entry key="S60" value="7.263449781104236" />
-      <entry key="M2" value="9.907383098324038" />
-      <entry key="M5" value="22.587939644530348" />
-      <entry key="M10" value="44.38661064073629" />
-      <entry key="M15" value="65.0400527920729" />
-      <entry key="M30" value="117.80306004449713" />
-      <entry key="H1" value="188.84206633375825" />
-      <entry key="H2" value="297.42368443373255" />
-      <entry key="H4" value="549.6800077585897" />
-      <entry key="D1" value="2251.437198668377" />
-      <entry key="W1" value="3341.522797573119" />
+      <entry key="MS100" value="0.9395227492140118" />
+      <entry key="MS500" value="0.9876008614453725" />
+      <entry key="S2" value="0.9968856972203758" />
+      <entry key="S5" value="0.9987531130852756" />
+      <entry key="S10" value="0.9993763620863748" />
+      <entry key="S30" value="1.0009266356393396" />
+      <entry key="S60" value="1.1734123817287263" />
+      <entry key="M2" value="3.7204626335659805" />
+      <entry key="M5" value="21.115205263966573" />
+      <entry key="M10" value="47.88172926914574" />
+      <entry key="M15" value="68.53994365321084" />
+      <entry key="M30" value="120.61523524475437" />
+      <entry key="H1" value="204.0261861753264" />
+      <entry key="H2" value="330.35170910105256" />
+      <entry key="H4" value="588.1277915947375" />
+      <entry key="D1" value="2317.038131992452" />
+      <entry key="W1" value="3455.4226043760964" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -474,7 +466,8 @@
     <MESSAGE value="feat(settings): enhance settings management, update auto-start logic, and improve signal connections" />
     <MESSAGE value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
     <MESSAGE value="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling" />
+    <MESSAGE value="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
