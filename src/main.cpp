@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     engine.setInitialProperties({
         {"pomodoroTimer", QVariant::fromValue(pt)},
         {"settingsManager", QVariant::fromValue(settingsManager)},
-        { "appVersion", app.applicationVersion()}
+        { "appVersion", QGuiApplication::applicationVersion()}
     });
 
     engine.loadFromModule("Paz", "Main");
