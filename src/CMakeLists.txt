@@ -20,6 +20,7 @@ qt_add_executable(PazApp
         main.cpp
         impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
         impl/settings-manager.hpp impl/settings-manager.cpp
+        impl/pomodoro-stats.hpp impl/pomodoro-stats.cpp
         core/constants.hpp
         core/basic-types-aliases.hpp
 )
@@ -30,6 +31,7 @@ qt_add_qml_module(PazApp
         SOURCES
             impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
             impl/settings-manager.hpp impl/settings-manager.cpp
+            impl/pomodoro-stats.hpp impl/pomodoro-stats.cpp
         QML_FILES
             ui/qml/Main.qml
             ui/qml/TimerPage.qml

@@ -58,14 +58,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability.">
+    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="feat(app): add app versioning and update QML modules&#10;&#10;- Integrated application version definition in CMake and exposed it to QML.&#10;- Updated QML URIs and improved version display in UI.&#10;- Removed unused &quot;Paz.PomodoroTimer&quot; references and streamlined imports.">
+      <change afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/qml/Main.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/Main.qml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="181" />
+    <option name="cachedIndexableFilesCount" value="180" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
@@ -146,61 +146,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000000060643" />
-      <entry key="S30" value="1.0011425371075737" />
-      <entry key="S60" value="1.1727876474304093" />
-      <entry key="M2" value="3.671391598244411" />
-      <entry key="M5" value="20.488156273667087" />
-      <entry key="M10" value="46.16301379615986" />
-      <entry key="M15" value="65.90714839937714" />
-      <entry key="M30" value="116.00456084683367" />
-      <entry key="H1" value="197.2245462114916" />
-      <entry key="H2" value="319.36892060608614" />
-      <entry key="H4" value="561.0919476433895" />
-      <entry key="D1" value="2160.0049807330965" />
-      <entry key="W1" value="3215.793900065481" />
+      <entry key="MS100" value="1.1983109539124062" />
+      <entry key="MS500" value="3.414705744946411" />
+      <entry key="S2" value="8.78470653002459" />
+      <entry key="S5" value="13.53807470793518" />
+      <entry key="S10" value="17.597908816699693" />
+      <entry key="S30" value="24.939720339480093" />
+      <entry key="S60" value="31.61785606556871" />
+      <entry key="M2" value="41.96197298055526" />
+      <entry key="M5" value="59.80592821012616" />
+      <entry key="M10" value="72.71728520504452" />
+      <entry key="M15" value="82.09672150662698" />
+      <entry key="M30" value="115.77700716511524" />
+      <entry key="H1" value="192.29938636754235" />
+      <entry key="H2" value="324.32117192162076" />
+      <entry key="H4" value="573.1903278405124" />
+      <entry key="D1" value="2202.9503185395165" />
+      <entry key="W1" value="3308.255103213252" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.2831984063753504E-87" />
-      <entry key="S5" value="1.7511265304444968E-35" />
-      <entry key="S10" value="4.185006991595395E-18" />
-      <entry key="S30" value="1.68273499299658E-6" />
-      <entry key="S60" value="0.0015498811108764522" />
-      <entry key="M2" value="0.05721150458700386" />
-      <entry key="M5" value="0.6596055622417871" />
-      <entry key="M10" value="1.764838093392637" />
-      <entry key="M15" value="2.679841081043233" />
-      <entry key="M30" value="4.6498098516608435" />
-      <entry key="H1" value="6.828915701477138" />
-      <entry key="H2" value="11.003672912696713" />
-      <entry key="H4" value="27.0635007943281" />
-      <entry key="D1" value="157.0682887539015" />
-      <entry key="W1" value="239.63663733192982" />
+      <entry key="MS100" value="8.059465767844447E-213" />
+      <entry key="MS500" value="3.812951235113282E-43" />
+      <entry key="S2" value="2.484936617881548E-11" />
+      <entry key="S5" value="5.732789072255809E-5" />
+      <entry key="S10" value="0.007747336038579336" />
+      <entry key="S30" value="0.2546976196818287" />
+      <entry key="S60" value="0.745185522542389" />
+      <entry key="M2" value="1.5129382200099124" />
+      <entry key="M5" value="2.612098918436186" />
+      <entry key="M10" value="3.450676740342491" />
+      <entry key="M15" value="4.386463097167071" />
+      <entry key="M30" value="7.6383701116193885" />
+      <entry key="H1" value="12.511252082233064" />
+      <entry key="H2" value="18.930651414777135" />
+      <entry key="H4" value="35.18145153255937" />
+      <entry key="D1" value="166.25655334077905" />
+      <entry key="W1" value="252.59514448321602" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9395227492140118" />
-      <entry key="MS500" value="0.9876008614453725" />
-      <entry key="S2" value="0.9968856972203758" />
-      <entry key="S5" value="0.9987531130852756" />
-      <entry key="S10" value="0.9993763620863748" />
-      <entry key="S30" value="1.0009266356393396" />
-      <entry key="S60" value="1.1734123817287263" />
-      <entry key="M2" value="3.7204626335659805" />
-      <entry key="M5" value="21.115205263966573" />
-      <entry key="M10" value="47.88172926914574" />
-      <entry key="M15" value="68.53994365321084" />
-      <entry key="M30" value="120.61523524475437" />
-      <entry key="H1" value="204.0261861753264" />
-      <entry key="H2" value="330.35170910105256" />
-      <entry key="H4" value="588.1277915947375" />
-      <entry key="D1" value="2317.038131992452" />
-      <entry key="W1" value="3455.4226043760964" />
+      <entry key="MS100" value="1.1465973387626223" />
+      <entry key="MS500" value="3.3754919275373756" />
+      <entry key="S2" value="8.656260323803627" />
+      <entry key="S5" value="13.383479962799415" />
+      <entry key="S10" value="17.470098403112722" />
+      <entry key="S30" value="25.064935325812904" />
+      <entry key="S60" value="32.21476809413237" />
+      <entry key="M2" value="43.325317175326234" />
+      <entry key="M5" value="62.31453568316098" />
+      <entry key="M10" value="76.10271386943043" />
+      <entry key="M15" value="86.43228779457664" />
+      <entry key="M30" value="123.37660542285435" />
+      <entry key="H1" value="204.7799516309394" />
+      <entry key="H2" value="343.22756658585035" />
+      <entry key="H4" value="608.3435020571753" />
+      <entry key="D1" value="2369.171855396045" />
+      <entry key="W1" value="3560.8422187149554" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -252,7 +252,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "SettingsManager",
+    "git-widget-placeholder": "statistics",
     "git.auto.fetch.suggestion.counter": "1",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/home/amitayus_/Projects/Test",
@@ -265,6 +265,11 @@
   }
 }]]></component>
   <component name="RunManager" selected="CMake Application.PazApp">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PazApp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Paz" RUN_TARGET_NAME="PazApp">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -346,11 +351,6 @@
       </method>
     </configuration>
     <configuration name="Paz_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_tooling" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -467,7 +467,8 @@
     <MESSAGE value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
     <MESSAGE value="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling" />
     <MESSAGE value="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability." />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor(pomodoro): streamline PomodoroTimer logic, remove MainWindow, and update QML for improved timer handling&#10;&#10;- Simplified phase and state management in PomodoroTimer.&#10;- Removed unused MainWindow implementation and related files.&#10;- Refactored QML module to enhance and modernize timer UI. &#10;- Updated project structure to improve maintainability." />
+    <MESSAGE value="feat(app): add app versioning and update QML modules&#10;&#10;- Integrated application version definition in CMake and exposed it to QML.&#10;- Updated QML URIs and improved version display in UI.&#10;- Removed unused &quot;Paz.PomodoroTimer&quot; references and streamlined imports." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(app): add app versioning and update QML modules&#10;&#10;- Integrated application version definition in CMake and exposed it to QML.&#10;- Updated QML URIs and improved version display in UI.&#10;- Removed unused &quot;Paz.PomodoroTimer&quot; references and streamlined imports." />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
