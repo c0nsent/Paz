@@ -231,11 +231,17 @@ ApplicationWindow {
             }
 
             Text { text: "Work Phase Duration"}
-            SpinBox {
-                value: settingsManager.pomodoroDuration
-                minimum: 1
-                maximum: 60
-                onValueChanged: settingsManager.setPomodoroDuration(value)
+            TextInput {
+                text: (pomodoroTimer.workDuration / 60).toString()
+                inputMethodHints: Qt.ImhDigitsOnly
+                onEditingFinished: {
+                    const newValue = parseInt(text);
+                    if (!isNaN(newValue) && newValue > 0) {
+                        settingsManager.setPhaseDuration(PomodoroTimer.Work, newValue * 60);
+                    } else {
+                        text = (pomodoroTimer.workDuration / 60).toString();
+                    }
+                }
             }
 
             Button {

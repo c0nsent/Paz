@@ -12,11 +12,17 @@ namespace impl
 {
 	class PomodoroTimer : public QObject
 	{
+		class singleShotTimerUpdate;
+
 		Q_OBJECT
 
 		QML_NAMED_ELEMENT(PomodoroTimer)
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
+		Q_PROPERTY(u16 workDuration READ workDuration WRITE setWorkDuration NOTIFY workDurationChanged)
+		Q_PROPERTY(u16 shortBreakDuration READ shortBreakDuration WRITE setShortBreakDuration NOTIFY shortBreakDurationChanged)
+		Q_PROPERTY(u16 longBreakDuration READ longBreakDuration WRITE setLongBreakDuration NOTIFY longBreakDurationChanged)
+		Q_PROPERTY(u16 sessionLength READ sessionLength NOTIFY sessionLengthChanged)
         Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
@@ -50,6 +56,9 @@ namespace impl
 		[[nodiscard]] Phase phase() const;
 		[[nodiscard]] u16 phaseDuration() const;
 		[[nodiscard]] u16 phaseDuration(Phase phase) const;
+		[[nodiscard]] u16 workDuration() const;
+		[[nodiscard]] u16 shortBreakDuration() const;
+		[[nodiscard]] u16 longBreakDuration() const;
 		[[nodiscard]] u16 sessionLength() const;
 		[[nodiscard]] u16 remainingTime() const;
         [[nodiscard]] QString timeRemainingString() const;
@@ -66,11 +75,15 @@ namespace impl
 
 		void setPhaseDuration(u16 seconds);
 		void setPhaseDuration(Phase phase, u16 seconds);
+		void setWorkDuration(u16 seconds);
+		void setShortBreakDuration(u16 seconds);
+		void setLongBreakDuration(u16 seconds);
 	    void setSessionLength(u16 pomodoros);
 
 	private slots:
 
-		void updateRemainingTime();
+		void tick();
+		void updateRemainingTime(u16 seconds, Phase phase);
 
 		bool trySetPhase(Phase phase);
 		bool trySetRemainingTime(u16 remainingTime);
@@ -81,6 +94,9 @@ namespace impl
 		void stateChanged(State);
 		void phaseChanged(Phase);
 		void phaseDurationChanged(u16 seconds, Phase);
+		void workDurationChanged(u16 seconds);
+		void shortBreakDurationChanged(u16 seconds);
+		void longBreakDurationChanged(u16 seconds);
 		void sessionLengthChanged(u16 pomodoros);
 		void remainingTimeChanged(u16 seconds);
 		void pomodoroFinished(u16 currentSessionCount);
@@ -99,5 +115,25 @@ namespace impl
 		u16 m_currentSessionCount;
 
 		QTimer m_timer;
+	};
+
+	class PomodoroTimer::singleShotTimerUpdate : public QObject
+	{
+		Q_OBJECT
+
+	public:
+
+		explicit singleShotTimerUpdate(PomodoroTimer *parent, u16 seconds);
+
+
+
+	signals:
+
+		void updated(Phase phase, u16 seconds);
+
+	private:
+
+		PomodoroTimer *m_parent;
+		bool m_isDone;
 	};
 }

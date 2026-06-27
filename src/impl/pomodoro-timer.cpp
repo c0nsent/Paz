@@ -19,13 +19,13 @@ namespace impl
         , m_phase{Phase::Work}
         , m_remainingTime{phaseDuration()}
         , m_currentSessionCount{0}
-	{
-		m_timer.setTimerType(Qt::CoarseTimer);
-		m_timer.setInterval(defaults::TIMER_INTERVAL);
+    {
+	    m_timer.setTimerType(Qt::CoarseTimer);
+    	m_timer.setInterval(defaults::TIMER_INTERVAL);
 
-		connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::updateRemainingTime);
-	}
-
+    	connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::tick);
+    	connect(this, &PomodoroTimer::phaseDurationChanged, this, &PomodoroTimer::updateRemainingTime);
+    }
 
 	PomodoroTimer::State PomodoroTimer::state() const {return m_state;}
 
@@ -47,6 +47,36 @@ namespace impl
 
         return 0;
     }
+
+	u16 PomodoroTimer::workDuration() const
+	{
+    	return m_workDuration;
+	}
+
+	u16 PomodoroTimer::shortBreakDuration() const
+	{
+    	return m_shortBreakDuration;
+	}
+
+	u16 PomodoroTimer::longBreakDuration() const
+	{
+    	return m_longBreakDuration;
+	}
+
+	void PomodoroTimer::setWorkDuration(u16 seconds)
+	{
+    	setPhaseDuration(Phase::Work, seconds);
+	}
+
+	void PomodoroTimer::setShortBreakDuration(u16 seconds)
+	{
+    	setPhaseDuration(Phase::ShortBreak, seconds);
+	}
+
+	void PomodoroTimer::setLongBreakDuration(u16 seconds)
+	{
+    	setPhaseDuration(Phase::LongBreak, seconds);
+	}
 
 	u16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
 
@@ -153,6 +183,8 @@ namespace impl
 		        m_longBreakDuration = seconds;
 		        emit phaseDurationChanged(seconds, Phase::LongBreak);
 		}
+
+
 	}
 
 
@@ -165,7 +197,7 @@ namespace impl
 	}
 
 
-    void PomodoroTimer::updateRemainingTime()
+    void PomodoroTimer::tick()
 	{
         if (m_remainingTime == c_timeIsOut) [[unlikely]]
         {
@@ -176,8 +208,23 @@ namespace impl
         emit remainingTimeChanged(--m_remainingTime);
 	}
 
+    void PomodoroTimer::updateRemainingTime(u16 seconds, Phase phase)
+    {
+    	if (m_phase != Phase::Work or m_state == State::Idle)
+    	{
+    		if (phase != m_phase) return;
 
-	bool PomodoroTimer::trySetPhase(const Phase phase)
+    		m_remainingTime = seconds;
+    		emit remainingTimeChanged(seconds);
+    		return;
+    	}
+
+
+
+    }
+
+
+    bool PomodoroTimer::trySetPhase(const Phase phase)
 	{
 		if (m_phase == phase) [[unlikely]] return false;
 
@@ -208,4 +255,12 @@ namespace impl
 
 		return true;
 	}
+
+	PomodoroTimer::singleShotTimerUpdate::singleShotTimerUpdate(PomodoroTimer *parent, u16 seconds)
+	: QObject{parent}
+	, m_parent{parent}
+	, m_isDone{false}
+    {
+
+    }
 }
