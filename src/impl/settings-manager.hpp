@@ -20,15 +20,15 @@ namespace impl
 
         explicit SettingsManager(PomodoroTimer *pt, QObject *parent = nullptr);
 
-        bool isPomodoroAutoStarEnabled() const;
+        [[nodiscard]] bool isPomodoroAutoStarEnabled() const;
 
     public slots:
 
         void setPhaseDuration(PomodoroTimer::Phase phase, u16 seconds);
         void setSessionLength(u16 pomodoros);
         void togglePomodoroAutoStart();
-        void readSettings(const PomodoroTimer &);
-        void writeSettings(const PomodoroTimer &);
+        void readSettings(PomodoroTimer *);
+        void writeSettings(PomodoroTimer *);
 
         void saveAllSettings();
 

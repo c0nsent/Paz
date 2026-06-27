@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(Paz
-        VERSION 0.2.2
+        VERSION 0.3.0
         LANGUAGES CXX
 )
 
@@ -18,7 +18,6 @@ qt_add_executable(PazApp
         main.cpp
         impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
         impl/settings-manager.hpp impl/settings-manager.cpp
-        #impl/main-window.hpp impl/main-window.cpp
         core/constants.hpp
         core/basic-types-aliases.hpp
 )
@@ -31,17 +30,10 @@ qt_add_qml_module(PazApp
             impl/settings-manager.hpp impl/settings-manager.cpp
         QML_FILES
             ui/qml/Main.qml
-            #ui/qml/PomodoroTimerWidget.qml
+            ui/qml/TimerPage.qml
+            ui/qml/SettingsPage.qml
+            ui/qml/Sidebar.qml
 )
-
-#[[qt_add_qml_module(PazApp
-        URI Paz.SettingsManager
-        VERSION 1.0
-        SOURCES
-            impl/settings-manager.hpp impl/settings-manager.cpp
-        QML_FILES
-            ui/qml/
-)]]
 
 target_link_libraries(PazApp PRIVATE
         Qt6::Core

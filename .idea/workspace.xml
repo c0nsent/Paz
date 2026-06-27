@@ -58,9 +58,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization.">
+    <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling">
+      <change afterPath="$PROJECT_DIR$/src/ui/qml/SettingsPage.qml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/qml/Sidebar.qml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/qml/TimerPage.qml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/main-window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/main-window.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/qml/Main.qml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/qml/Main.qml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/qml/SettingsManager.qml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +116,7 @@
     <option name="cachedIndexableFilesCount" value="162" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -141,61 +154,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0001637746856546" />
-      <entry key="S2" value="1.1131258078603632" />
-      <entry key="S5" value="1.4182391443964741" />
-      <entry key="S10" value="1.6467142563204278" />
-      <entry key="S30" value="1.8897064000640822" />
-      <entry key="S60" value="2.450979931539921" />
-      <entry key="M2" value="4.355340047546123" />
-      <entry key="M5" value="7.971207979455781" />
-      <entry key="M10" value="11.035681938832656" />
-      <entry key="M15" value="15.350850214062994" />
-      <entry key="M30" value="39.47953243939587" />
-      <entry key="H1" value="115.28071172189172" />
-      <entry key="H2" value="282.737626851183" />
-      <entry key="H4" value="598.1630850247449" />
-      <entry key="D1" value="2020.6599856238524" />
-      <entry key="W1" value="2745.1179820431084" />
+      <entry key="MS100" value="1.0000126059742758" />
+      <entry key="MS500" value="1.3412937683887232" />
+      <entry key="S2" value="3.8032929067211008" />
+      <entry key="S5" value="5.400916268877896" />
+      <entry key="S10" value="6.133356010770868" />
+      <entry key="S30" value="6.696472788696042" />
+      <entry key="S60" value="7.0022795148583175" />
+      <entry key="M2" value="8.81279217589693" />
+      <entry key="M5" value="19.930026846617572" />
+      <entry key="M10" value="40.76098129809014" />
+      <entry key="M15" value="61.00737187303742" />
+      <entry key="M30" value="113.25993491161879" />
+      <entry key="H1" value="183.64858841005417" />
+      <entry key="H2" value="288.4706066141853" />
+      <entry key="H4" value="523.448969540435" />
+      <entry key="D1" value="2095.16907105093" />
+      <entry key="W1" value="3105.9746157622103" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="6.983168762576454E-188" />
-      <entry key="S10" value="2.6425685918395704E-94" />
-      <entry key="S30" value="6.417363126445701E-32" />
-      <entry key="S60" value="2.547865672112993E-16" />
-      <entry key="M2" value="1.7151907201765876E-8" />
-      <entry key="M5" value="0.0010899455466690322" />
-      <entry key="M10" value="0.056785762483424776" />
-      <entry key="M15" value="0.28562937161110463" />
-      <entry key="M30" value="2.5559350303149553" />
-      <entry key="H1" value="11.046728307025877" />
-      <entry key="H2" value="28.559769985065707" />
-      <entry key="H4" value="58.9547118894706" />
-      <entry key="D1" value="178.38652219877204" />
-      <entry key="W1" value="233.6175469355989" />
+      <entry key="MS500" value="1.1968496414171655E-122" />
+      <entry key="S2" value="3.5022483169316868E-31" />
+      <entry key="S5" value="9.057831629979227E-13" />
+      <entry key="S10" value="1.4978134015936008E-6" />
+      <entry key="S30" value="0.023693950749611763" />
+      <entry key="S60" value="0.2927072880878069" />
+      <entry key="M2" value="1.1285070730984843" />
+      <entry key="M5" value="2.69824180379292" />
+      <entry key="M10" value="3.6587517518708204" />
+      <entry key="M15" value="4.059216192344722" />
+      <entry key="M30" value="4.559520307173883" />
+      <entry key="H1" value="5.203988169874984" />
+      <entry key="H2" value="8.9650243812417" />
+      <entry key="H4" value="26.255933841409668" />
+      <entry key="D1" value="156.30306162615446" />
+      <entry key="W1" value="235.55598068220527" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.992077994127077E-5" />
-      <entry key="MS500" value="0.13796432162796676" />
-      <entry key="S2" value="0.6863895009278436" />
-      <entry key="S5" value="1.1788251317370946" />
-      <entry key="S10" value="1.504477754717832" />
-      <entry key="S30" value="1.8350877245875277" />
-      <entry key="S60" value="2.420112699318494" />
-      <entry key="M2" value="4.334558776104701" />
-      <entry key="M5" value="7.9598261038837315" />
-      <entry key="M10" value="11.08366534088916" />
-      <entry key="M15" value="15.627249224823718" />
-      <entry key="M30" value="42.02000854464556" />
-      <entry key="H1" value="126.29933313426973" />
-      <entry key="H2" value="311.2540886216811" />
-      <entry key="H4" value="657.0581501512014" />
-      <entry key="D1" value="2199.0060424536505" />
-      <entry key="W1" value="2978.7277175938066" />
+      <entry key="MS100" value="0.8888534344533415" />
+      <entry key="MS500" value="1.265105334858617" />
+      <entry key="S2" value="3.5353630485139385" />
+      <entry key="S5" value="5.195234667513522" />
+      <entry key="S10" value="6.004689649783892" />
+      <entry key="S30" value="6.669775214069475" />
+      <entry key="S60" value="7.263449781104236" />
+      <entry key="M2" value="9.907383098324038" />
+      <entry key="M5" value="22.587939644530348" />
+      <entry key="M10" value="44.38661064073629" />
+      <entry key="M15" value="65.0400527920729" />
+      <entry key="M30" value="117.80306004449713" />
+      <entry key="H1" value="188.84206633375825" />
+      <entry key="H2" value="297.42368443373255" />
+      <entry key="H4" value="549.6800077585897" />
+      <entry key="D1" value="2251.437198668377" />
+      <entry key="W1" value="3341.522797573119" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -227,35 +240,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;CMake Application.Paz.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.PazApp.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;SettingsManager&quot;,
-    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "CMake Application.Paz.executor": "Run",
+    "CMake Application.PazApp.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "SettingsManager",
+    "git.auto.fetch.suggestion.counter": "1",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/amitayus_/Projects/Test",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="CMake Application.PazApp">
     <configuration name="PazApp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Paz" RUN_TARGET_NAME="PazApp">
       <method v="2">
@@ -457,7 +473,8 @@
     <MESSAGE value="refactor(main): improve application state handling and logging for settings persistence" />
     <MESSAGE value="feat(settings): enhance settings management, update auto-start logic, and improve signal connections" />
     <MESSAGE value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(settings): add work phase duration settings, QML bindings, and constants refactor&#10;&#10;- Introduced SpinBox for work phase duration in QML.&#10;- Integrated settings persistence for phase duration and auto-start features.&#10;- Added constants for default Pomodoro settings. &#10;- Improved settings management with clear key-value mappings and namespace organization." />
+    <MESSAGE value="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(idea): add IntelliJ IDEA editor settings file for code inspections and styling" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

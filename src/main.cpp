@@ -27,17 +27,11 @@ int main(int argc, char *argv[])
         [] { QCoreApplication::exit(-1); }
     );
 
-    impl::PomodoroTimer::CreateInfo createInfo{
-        .parent = &app,
-        .workPhaseDuration = 5,
-        .shortBreakDuration = 5,
-        .longBreakDuration = 5,
-        .sessionLength = 2,
-    };
-
-    auto *pt { new impl::PomodoroTimer{createInfo} };
+    auto *pt { new impl::PomodoroTimer{&app} };
 
     auto *settingsManager { new impl::SettingsManager{pt, &app}};
+
+    settingsManager->readSettings(pt);
 
     QObject::connect(&app, &QGuiApplication::aboutToQuit, settingsManager, &impl::SettingsManager::saveAllSettings);
 

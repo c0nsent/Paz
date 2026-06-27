@@ -12,8 +12,6 @@ namespace impl
 {
 	class PomodoroTimer : public QObject
 	{
-		class singleShotTimerUpdate;
-
 		Q_OBJECT
 
 		QML_NAMED_ELEMENT(PomodoroTimer)
@@ -26,7 +24,7 @@ namespace impl
         Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
-        Q_PROPERTY(u16 currentPhaseDuration READ phaseDuration NOTIFY phaseDurationChanged)
+        Q_PROPERTY(u16 currentPhaseDuration READ currentPhaseDuration NOTIFY phaseDurationChanged)
 
 		static constexpr u16 c_timeIsOut{0};
 
@@ -54,8 +52,7 @@ namespace impl
 
 		[[nodiscard]] State state() const;
 		[[nodiscard]] Phase phase() const;
-		[[nodiscard]] u16 phaseDuration() const;
-		[[nodiscard]] u16 phaseDuration(Phase phase) const;
+		[[nodiscard]] u16 currentPhaseDuration() const;
 		[[nodiscard]] u16 workDuration() const;
 		[[nodiscard]] u16 shortBreakDuration() const;
 		[[nodiscard]] u16 longBreakDuration() const;
@@ -71,7 +68,7 @@ namespace impl
 		void start(Phase phase, u16 seconds);
 		void pause();
 		void reset();
-		void goToNextPhase();
+		void changeToNextPhase();
 
 		void setPhaseDuration(u16 seconds);
 		void setPhaseDuration(Phase phase, u16 seconds);
@@ -82,12 +79,12 @@ namespace impl
 
 	private slots:
 
-		void tick();
-		void updateRemainingTime(u16 seconds, Phase phase);
+		void onTickUpdateRemainingTime();
+		void onPhaseDurationChangeUpdateRemainingTime(u16 seconds, Phase phase);
 
-		bool trySetPhase(Phase phase);
-		bool trySetRemainingTime(u16 remainingTime);
-		bool trySetState(State state);
+		void setPhase(Phase phase);
+		void setRemainingTime(u16 remainingTime);
+		void setState(State state);
 
 	signals:
 
@@ -115,25 +112,5 @@ namespace impl
 		u16 m_currentSessionCount;
 
 		QTimer m_timer;
-	};
-
-	class PomodoroTimer::singleShotTimerUpdate : public QObject
-	{
-		Q_OBJECT
-
-	public:
-
-		explicit singleShotTimerUpdate(PomodoroTimer *parent, u16 seconds);
-
-
-
-	signals:
-
-		void updated(Phase phase, u16 seconds);
-
-	private:
-
-		PomodoroTimer *m_parent;
-		bool m_isDone;
 	};
 }

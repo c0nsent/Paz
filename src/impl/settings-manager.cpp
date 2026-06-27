@@ -52,7 +52,7 @@ namespace impl
     }
 
 
-    void SettingsManager::readSettings(const PomodoroTimer &)
+    void SettingsManager::readSettings(PomodoroTimer *)
     {
         using enum PomodoroTimer::Phase;
         using namespace settings;
@@ -66,21 +66,16 @@ namespace impl
         m_settings.endGroup();
     }
 
-    void SettingsManager::writeSettings(const PomodoroTimer &)
+    void SettingsManager::writeSettings(PomodoroTimer *)
     {
-        using enum PomodoroTimer::Phase;
         using namespace settings::keys;
 
         m_settings.beginGroup(settings::grps::POMODORO_TIMER);
-        m_settings.setValue(WORK_DURATION, m_timer->phaseDuration(Work));
-        m_settings.setValue(SHORT_BREAK_DURATION, m_timer->phaseDuration(ShortBreak));
-        m_settings.setValue(LONG_BREAK_DURATION, m_timer->phaseDuration(LongBreak));
+        m_settings.setValue(WORK_DURATION, m_timer->workDuration());
+        m_settings.setValue(SHORT_BREAK_DURATION, m_timer->shortBreakDuration());
+        m_settings.setValue(LONG_BREAK_DURATION, m_timer->longBreakDuration());
         m_settings.setValue(SESSION_LENGTH, m_timer->sessionLength());
-
-        static auto timeIsOutSignal{QMetaMethod::fromSignal(&PomodoroTimer::timerFinished)};
-
-        qDebug() << "AutoStartNewPomodoro: " << isSignalConnected(timeIsOutSignal);
-        m_settings.setValue(AUTOSTART_NEW_POMODORO, isSignalConnected(timeIsOutSignal));
+        m_settings.setValue(AUTOSTART_NEW_POMODORO, m_isPomodoroAutoStarEnabled);
 
         m_settings.endGroup();
     }
@@ -88,7 +83,7 @@ namespace impl
 
     void SettingsManager::saveAllSettings()
     {
-        writeSettings(*m_timer);
+        writeSettings(m_timer);
         m_settings.sync();
     }
 
