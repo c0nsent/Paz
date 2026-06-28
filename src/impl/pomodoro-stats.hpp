@@ -11,15 +11,17 @@ namespace impl
 {
     class PomodoroStats : public QObject
     {
-    public:
 
-        struct Entry
+        struct DataContainment
         {
-            QDate date;
             QTime workTime;
             u16 pomodoroFinished;
-
         };
+
+    public:
+
+        class Entry;
+
 
 
     public:
@@ -34,6 +36,18 @@ namespace impl
 
     private:
 
+        QHash<QDate, DataContainment> m_data;
         QSettings m_stats;
     };
+
+    class PomodoroStats::Entry
+    {
+    public:
+
+    private:
+
+
+    };
 }
+
+
