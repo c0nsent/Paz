@@ -1,5 +1,17 @@
-//
-// Created by amitayus_ on 6/27/26.
-//
-
 #include "pomodoro-stats.hpp"
+#include "core/constants.hpp"
+
+#include <QGuiApplication>
+
+namespace impl
+{
+
+
+
+    PomodoroStats::PomodoroStats(QObject *parent)
+    {
+        QSettings settings{QGuiApplication::organizationDomain(), "Statistics"};
+
+
+    }
+}
