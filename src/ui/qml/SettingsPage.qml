@@ -27,12 +27,12 @@ ScrollView {
             Layout.bottomMargin: 10
         }
 
-        // Card 1: General
+
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: generalLayout.implicitHeight + 40
             color: "white"
-            radius: 12
+            radius: 16
             border.color: "#e2e8f0"
 
             ColumnLayout {
@@ -51,6 +51,7 @@ ScrollView {
                         color: textColor
                     }
                     Switch {
+
                         checked: settingsManager.isPomodoroAutoStarEnabled
                         onToggled: settingsManager.togglePomodoroAutoStart()
                     }
@@ -78,12 +79,11 @@ ScrollView {
             }
         }
 
-        // Card 2: Durations
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: durationsLayout.implicitHeight + 40
             color: "white"
-            radius: 12
+            radius: 16
             border.color: "#e2e8f0"
 
             ColumnLayout {
@@ -115,32 +115,15 @@ ScrollView {
                             font.weight: Font.Medium
                             color: textColor
                         }
-                        SpinBox {
-                            value: modelData.duration / 60
-                            from: 1
-                            to: 60
-                            editable: true
-                            onValueModified: settingsManager.setPhaseDuration(modelData.phase, value * 60)
+
+                        TextInput {
+                            text: modelData.duration / 60
+                            maximumLength: 3
+                            validator: IntValidator{bottom: (60); top: (99);}
+                            onAccepted: settingsManager.setPhaseDuration(modelData.phase, Number(text) * 60)
                         }
                     }
                 }
-            }
-        }
-
-        Button {
-            text: qsTr("Save Settings")
-            Layout.alignment: Qt.AlignRight
-            onClicked: settingsManager.saveAllSettings()
-            
-            contentItem: Label {
-                text: parent.text
-                font.weight: Font.Bold
-                color: "white"
-                padding: 10
-            }
-            background: Rectangle {
-                radius: 8
-                color: parent.pressed ? "#1e293b" : "#334155"
             }
         }
 
