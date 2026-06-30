@@ -5,13 +5,54 @@
 
 namespace impl
 {
+    bool PomodoroStats::DataEntry::operator==(const DataEntry& rhs) const
+    {
+        return date == rhs.date;
+    }
 
-
+    bool PomodoroStats::DataEntry::operator==(const QDate otherDate) const
+    {
+        return this->date == otherDate;
+    }
 
     PomodoroStats::PomodoroStats(QObject *parent)
+        : QObject{parent}
+        , m_settings{QGuiApplication::organizationDomain(), "Statistics"}
     {
-        QSettings settings{QGuiApplication::organizationDomain(), "Statistics"};
 
 
+    }
+
+    auto PomodoroStats::at(const QDate date) -> std::optional<DataEntry &>
+    {
+        return m_stats.contains(date) ? {m_stats[m_stats.indexOf(date)]} : std::optional<DataEntry &>{};
+    }
+
+    auto PomodoroStats::checkout(QDate date) const -> std::optional<DataEntry>
+    {
+
+    }
+
+    bool PomodoroStats::contains(const QDate date) const
+    {
+        return m_stats.contains(date);
+    }
+
+    auto PomodoroStats::range(QDate begin, QDate end) const -> QVarLengthArray<DataEntry>
+    {
+    }
+
+    auto PomodoroStats::size() const -> size_t
+    {
+        return m_stats.size();
+    }
+
+    void PomodoroStats::addPomodoro(QTime pomodoroDuration, QDate date)
+    {
+    }
+
+    void PomodoroStats::sync()
+    {
+        m_settings.sync();
     }
 }
