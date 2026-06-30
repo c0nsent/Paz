@@ -1,53 +1,48 @@
 #pragma once
 
-#include "../core/basic-types-aliases.hpp"
+#include "core/basic-types-aliases.hpp"
 
-#include <QDate>
-#include <QObject>
 #include <QSettings>
+#include <QHash>
+#include <QList>
+#include <QDate>
+#include <QTime>
+#include <QVarLengthArray>
 
 
 namespace impl
 {
+
+
     class PomodoroStats : public QObject
     {
+    public:
 
-        struct DataContainment
+        struct DataEntry
         {
-            QTime workTime;
-            u16 pomodoroFinished;
+            QDate date;
+            u16 pomodoros;
+            QTime totalTime;
         };
 
-    public:
+        explicit PomodoroStats(QObject *parent = nullptr);
 
-        class Entry;
-
-
-
-    public:
-
-        explicit PomodoroStats(QObject *parent=nullptr);
-
+        [[nodiscard]] auto at(QDate date) -> DataEntry &;
+        [[nodiscard]] auto checkout(QDate date) const -> DataEntry;
+        [[nodiscard]] bool contains(QDate date) const;
+        [[nodiscard]] auto range(QDate begin, QDate end) const -> QVarLengthArray<DataEntry>;
+        [[nodiscard]] auto size() const -> size_t;
 
 
     public slots:
 
+        void addEntry(QDate date, u16 pomodoros, QTime totalTime);
 
 
-    private:
-
-        QHash<QDate, DataContainment> m_data;
-        QSettings m_stats;
-    };
-
-    class PomodoroStats::Entry
-    {
-    public:
 
     private:
 
-
+        QSettings m_settings;
+        QList<DataEntry> m_stats;
     };
 }
-
-
