@@ -34,7 +34,7 @@ namespace impl
 
         explicit PomodoroStats(QObject *parent = nullptr);
 
-    [[nodiscard]] auto at(QDate date) -> std::optional<DataEntry &>;
+    [[nodiscard]] auto at(QDate date) -> DataEntry &;
         [[nodiscard]] auto checkout(QDate date) const -> std::optional<DataEntry>;
         [[nodiscard]] bool contains(QDate date) const;
         [[nodiscard]] auto range(QDate begin, QDate end) const -> QVarLengthArray<DataEntry>;

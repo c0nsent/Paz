@@ -23,9 +23,11 @@ namespace impl
 
     }
 
-    auto PomodoroStats::at(const QDate date) -> std::optional<DataEntry &>
+    auto PomodoroStats::at(const QDate date) -> DataEntry &
     {
-        return m_stats.contains(date) ? {m_stats[m_stats.indexOf(date)]} : std::optional<DataEntry &>{};
+        if (not contains(date)) throw std::out_of_range{"error: impl::PomodoroStats::at() reached out of range"};
+
+        return m_stats[m_stats.indexOf(date)];
     }
 
     auto PomodoroStats::checkout(QDate date) const -> std::optional<DataEntry>
