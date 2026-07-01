@@ -59,8 +59,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="stuff">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-stats.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +92,6 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_/home/amitayus_/Programming/Paz" value="3BnU7suH9S1vBfmrnUisF3tteOv" />
-      <entry key="_/home/amitayus_/Projects/Paz" value="3FqODBblZuCCAXPlGdnlVvqk2MX" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedModel">
@@ -102,7 +101,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="167" />
+    <option name="cachedIndexableFilesCount" value="184" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
@@ -117,7 +116,7 @@
     <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="SettingsManager" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,7 +130,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/c0nsent/Paz.git&quot;,
-    &quot;accountId&quot;: &quot;af07761e-863d-4a19-a3dd-faa5b8f11bbe&quot;
+    &quot;accountId&quot;: &quot;396f19b3-c2ac-442c-baea-c4c295d2edc3&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -143,61 +142,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000005477073" />
-      <entry key="MS500" value="1.0405024708295127" />
-      <entry key="S2" value="1.950323073256597" />
-      <entry key="S5" value="2.8980514686256607" />
-      <entry key="S10" value="3.703213835279369" />
-      <entry key="S30" value="7.045219954721269" />
-      <entry key="S60" value="12.370905244399886" />
-      <entry key="M2" value="21.85856017972839" />
-      <entry key="M5" value="42.50960203283339" />
-      <entry key="M10" value="75.89642722104823" />
-      <entry key="M15" value="110.56919009903604" />
-      <entry key="M30" value="189.47715186443673" />
-      <entry key="H1" value="266.10115978036083" />
-      <entry key="H2" value="322.95319483733573" />
-      <entry key="H4" value="374.5906529028226" />
-      <entry key="D1" value="1602.884820156924" />
-      <entry key="W1" value="3440.7691712862224" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0" />
+      <entry key="M10" value="1.0000000000000253" />
+      <entry key="M15" value="1.0000000043782136" />
+      <entry key="M30" value="1.0007696011004052" />
+      <entry key="H1" value="1.326600787674536" />
+      <entry key="H2" value="7.876210366597753" />
+      <entry key="H4" value="36.94548669327756" />
+      <entry key="D1" value="1079.9572404535602" />
+      <entry key="W1" value="3088.429980455403" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.7334876273397177E-227" />
-      <entry key="S2" value="2.040469871357248E-57" />
-      <entry key="S5" value="2.108104205425783E-23" />
-      <entry key="S10" value="4.59140959338827E-12" />
-      <entry key="S30" value="1.6620675846783215E-4" />
-      <entry key="S60" value="0.012892833286530464" />
-      <entry key="M2" value="0.11518075719104483" />
-      <entry key="M5" value="0.6742192050827864" />
-      <entry key="M10" value="2.671763786955255" />
-      <entry key="M15" value="5.181688773714986" />
-      <entry key="M30" value="11.118327892016541" />
-      <entry key="H1" value="16.94425883810594" />
-      <entry key="H2" value="21.462928495517193" />
-      <entry key="H4" value="25.542120641562594" />
-      <entry key="D1" value="119.10423516882958" />
-      <entry key="W1" value="260.6180393344219" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="5.5733864221007E-310" />
+      <entry key="S60" value="2.5923214809882283E-155" />
+      <entry key="M2" value="8.384262861273977E-78" />
+      <entry key="M5" value="4.621591252501821E-31" />
+      <entry key="M10" value="1.9860917371964305E-15" />
+      <entry key="M15" value="3.2686495124881315E-10" />
+      <entry key="M30" value="5.417161477868332E-5" />
+      <entry key="H1" value="0.02252876390638041" />
+      <entry key="H2" value="0.4841736633674601" />
+      <entry key="H4" value="2.5808346404458495" />
+      <entry key="D1" value="81.57824688162313" />
+      <entry key="W1" value="235.88026600012176" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1135036332744623E-6" />
-      <entry key="MS500" value="0.08669577510701809" />
-      <entry key="S2" value="1.2547697901456214" />
-      <entry key="S5" value="2.4733583953189147" />
-      <entry key="S10" value="3.4118675664580205" />
-      <entry key="S30" value="6.817150138329175" />
-      <entry key="S60" value="12.178124885091805" />
-      <entry key="M2" value="21.78767998953084" />
-      <entry key="M5" value="43.02707897190102" />
-      <entry key="M10" value="78.43154038046515" />
-      <entry key="M15" value="115.62610738852756" />
-      <entry key="M30" value="200.49881797444934" />
-      <entry key="H1" value="282.98148394061474" />
-      <entry key="H2" value="344.3784953753848" />
-      <entry key="H4" value="400.11139242709874" />
-      <entry key="D1" value="1721.9661462382694" />
-      <entry key="W1" value="3701.37929982236" />
+      <entry key="MS100" value="0.002899460098884862" />
+      <entry key="MS500" value="0.3107874172259849" />
+      <entry key="S2" value="0.7466479152611682" />
+      <entry key="S5" value="0.8897056381259556" />
+      <entry key="S10" value="0.9432420888223529" />
+      <entry key="S30" value="0.9807110239244513" />
+      <entry key="S60" value="0.9903085498593109" />
+      <entry key="M2" value="0.9951424771656121" />
+      <entry key="M5" value="0.9980541520442202" />
+      <entry key="M10" value="0.9990266022705675" />
+      <entry key="M15" value="0.9993509675578145" />
+      <entry key="M30" value="1.0004988708529619" />
+      <entry key="H1" value="1.3488984702879738" />
+      <entry key="H2" value="8.35958442506814" />
+      <entry key="H4" value="39.52441594987627" />
+      <entry key="D1" value="1161.519188335009" />
+      <entry key="W1" value="3324.3029307735137" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -243,7 +242,6 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
@@ -255,9 +253,7 @@
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
@@ -346,6 +342,11 @@
       </method>
     </configuration>
     <configuration name="Paz_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_tooling" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
