@@ -9,8 +9,8 @@
 #include <QObject>
 #include <QVariant>
 #include <QTime>
-#include <QVarLengthArray>
 
+#include <chrono>
 #include <optional>
 
 
@@ -25,31 +25,32 @@ namespace impl
         struct DataEntry
         {
             QDate date;
-            u16 pomodoros;
-            QTime totalTime;
+            u16 pomodoros{0};
+            std::chrono::seconds totalTime{0};
 
-            bool operator==(const DataEntry &rhs) const;
-            bool operator==(QDate otherDate) const;
+            bool operator==(const DataEntry &rhs) const noexcept;
+            bool operator==(QDate otherDate) const noexcept;
         };
 
         explicit PomodoroStats(QObject *parent = nullptr);
 
-    [[nodiscard]] auto at(QDate date) -> DataEntry &;
-        [[nodiscard]] auto checkout(QDate date) const -> std::optional<DataEntry>;
-        [[nodiscard]] bool contains(QDate date) const;
-        [[nodiscard]] auto range(QDate begin, QDate end) const -> QVarLengthArray<DataEntry>;
-        [[nodiscard]] auto size() const -> size_t;
+        [[nodiscard]] auto contains(QDate date) const noexcept -> bool;
+        [[nodiscard]] auto get(QDate date) const -> DataEntry;
+        [[nodiscard]] auto get(QDate begin, QDate end) const -> QList<DataEntry>;
+        [[nodiscard]] auto size() const -> qsizetype;
 
     public slots:
 
         //void addEntry(QDate date, u16 pomodoros, QTime totalTime);
-        void addPomodoro(QTime pomodoroDuration, QDate date=QDate::currentDate());
+        void addPomodoro(std::chrono::seconds pomodoroDuration, QDate date=QDate::currentDate());
+        void removeEntry(QDate date);
         void sync();
 
     signals:
 
-        void entryAdded(QDate date);
+        void newEntryAdded(QDate date);
         void entryChanged(QDate date);
+        void entryRemoved(QDate date);
 
     private:
 
