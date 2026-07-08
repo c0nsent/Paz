@@ -92,6 +92,7 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_/home/amitayus_/Programming/Paz" value="3BnU7suH9S1vBfmrnUisF3tteOv" />
+      <entry key="_/home/amitayus_/Projects/Paz" value="3FqODBblZuCCAXPlGdnlVvqk2MX" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedModel">
@@ -101,7 +102,7 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="184" />
+    <option name="cachedIndexableFilesCount" value="169" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
@@ -116,7 +117,7 @@
     <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="SettingsManager" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,7 +131,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/c0nsent/Paz.git&quot;,
-    &quot;accountId&quot;: &quot;396f19b3-c2ac-442c-baea-c4c295d2edc3&quot;
+    &quot;accountId&quot;: &quot;af07761e-863d-4a19-a3dd-faa5b8f11bbe&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -142,61 +143,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0000000000000253" />
-      <entry key="M15" value="1.0000000043782136" />
-      <entry key="M30" value="1.0007696011004052" />
-      <entry key="H1" value="1.326600787674536" />
-      <entry key="H2" value="7.876210366597753" />
-      <entry key="H4" value="36.94548669327756" />
-      <entry key="D1" value="1079.9572404535602" />
-      <entry key="W1" value="3088.429980455403" />
+      <entry key="MS100" value="1.0019262357509644" />
+      <entry key="MS500" value="1.2873614672530747" />
+      <entry key="S2" value="1.9099574053180026" />
+      <entry key="S5" value="2.4555740831537696" />
+      <entry key="S10" value="2.965076420400428" />
+      <entry key="S30" value="5.125009073331682" />
+      <entry key="S60" value="8.26547114039246" />
+      <entry key="M2" value="11.724932953004672" />
+      <entry key="M5" value="15.023340880176782" />
+      <entry key="M10" value="16.419485970417306" />
+      <entry key="M15" value="16.92460081587718" />
+      <entry key="M30" value="17.45111079826774" />
+      <entry key="H1" value="17.730881805745494" />
+      <entry key="H2" value="20.09696065756395" />
+      <entry key="H4" value="56.42684798879737" />
+      <entry key="D1" value="1175.4044376256336" />
+      <entry key="W1" value="3458.550055652697" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="5.5733864221007E-310" />
-      <entry key="S60" value="2.5923214809882283E-155" />
-      <entry key="M2" value="8.384262861273977E-78" />
-      <entry key="M5" value="4.621591252501821E-31" />
-      <entry key="M10" value="1.9860917371964305E-15" />
-      <entry key="M15" value="3.2686495124881315E-10" />
-      <entry key="M30" value="5.417161477868332E-5" />
-      <entry key="H1" value="0.02252876390638041" />
-      <entry key="H2" value="0.4841736633674601" />
-      <entry key="H4" value="2.5808346404458495" />
-      <entry key="D1" value="81.57824688162313" />
-      <entry key="W1" value="235.88026600012176" />
+      <entry key="MS100" value="8.529245273186144E-22" />
+      <entry key="MS500" value="6.111982761909998E-5" />
+      <entry key="S2" value="0.0884189860676394" />
+      <entry key="S5" value="0.37906007630717986" />
+      <entry key="S10" value="0.6267191984388554" />
+      <entry key="S30" value="1.222523571799649" />
+      <entry key="S60" value="1.918918405487687" />
+      <entry key="M2" value="2.6586135031562597" />
+      <entry key="M5" value="3.361942067901221" />
+      <entry key="M10" value="3.660692668493308" />
+      <entry key="M15" value="3.768996363362616" />
+      <entry key="M30" value="3.8820208649320818" />
+      <entry key="H1" value="3.9410074767781698" />
+      <entry key="H2" value="4.13727572241018" />
+      <entry key="H4" value="6.836222405614269" />
+      <entry key="D1" value="91.02893629289949" />
+      <entry key="W1" value="265.73691490746296" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.002899460098884862" />
-      <entry key="MS500" value="0.3107874172259849" />
-      <entry key="S2" value="0.7466479152611682" />
-      <entry key="S5" value="0.8897056381259556" />
-      <entry key="S10" value="0.9432420888223529" />
-      <entry key="S30" value="0.9807110239244513" />
-      <entry key="S60" value="0.9903085498593109" />
-      <entry key="M2" value="0.9951424771656121" />
-      <entry key="M5" value="0.9980541520442202" />
-      <entry key="M10" value="0.9990266022705675" />
-      <entry key="M15" value="0.9993509675578145" />
-      <entry key="M30" value="1.0004988708529619" />
-      <entry key="H1" value="1.3488984702879738" />
-      <entry key="H2" value="8.35958442506814" />
-      <entry key="H4" value="39.52441594987627" />
-      <entry key="D1" value="1161.519188335009" />
-      <entry key="W1" value="3324.3029307735137" />
+      <entry key="MS100" value="0.005738128981190496" />
+      <entry key="MS500" value="0.49809723930801714" />
+      <entry key="S2" value="1.5045314238016783" />
+      <entry key="S5" value="2.2784670887362326" />
+      <entry key="S10" value="3.0735057204756986" />
+      <entry key="S30" value="6.010335272503924" />
+      <entry key="S60" value="9.945545649267881" />
+      <entry key="M2" value="14.230324702120882" />
+      <entry key="M5" value="18.311789464275282" />
+      <entry key="M10" value="20.04090633607293" />
+      <entry key="M15" value="20.66681071789627" />
+      <entry key="M30" value="21.31942422478538" />
+      <entry key="H1" value="21.664952762007875" />
+      <entry key="H2" value="24.230492193734413" />
+      <entry key="H4" value="63.25916649683304" />
+      <entry key="D1" value="1266.4173588138294" />
+      <entry key="W1" value="3724.27924955157" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -221,6 +222,7 @@
           </model>
         </option>
         <option name="targetType" value="BACKGROUND" />
+        <option name="worktreeMode" value="WORKSPACE" />
       </template>
     </option>
   </component>
@@ -242,6 +244,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
@@ -253,7 +256,9 @@
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
@@ -342,11 +347,6 @@
       </method>
     </configuration>
     <configuration name="Paz_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_tooling" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -443,6 +443,12 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+    <isAutomaticBootstrapAfterUpdate value="false" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(qml): integrate QML module and refactor main application logic" />
