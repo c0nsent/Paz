@@ -3,24 +3,27 @@
 
 #include <QGuiApplication>
 
+
 namespace impl
 {
-    bool PomodoroStats::DataEntry::operator==(const DataEntry& rhs) const noexcept { return date == rhs.date; }
+    auto PomodoroStatsEntry::getTotalTime() const noexcept -> i64 { return totalTime.count(); }
 
-    bool PomodoroStats::DataEntry::operator==(const QDate otherDate) const noexcept { return this->date == otherDate; }
+    void PomodoroStatsEntry::setTotalTime(const i64 seconds) noexcept { totalTime = std::chrono::seconds{seconds}; }
+
+    auto PomodoroStatsEntry::operator==(const PomodoroStatsEntry& rhs) const noexcept -> bool { return date == rhs.date; }
+
+    auto PomodoroStatsEntry::operator==(const QDate otherDate) const noexcept -> bool { return this->date == otherDate; }
 
 
     PomodoroStats::PomodoroStats(QObject *parent)
         : QObject{parent}
         , m_settings{QGuiApplication::organizationDomain(), "Statistics"}
+        , m_stats{m_settings.beginReadArray("statistics")}
     {
-        const auto size{m_settings.beginReadArray("statistics")};
-        m_stats.reserve(size);
-
-        for (i32 i{0}; i != size; i++)
+        for (i32 i{0}; i != m_stats.size(); i++)
         {
             m_settings.setArrayIndex(i);
-            m_stats.emplaceBack(
+            m_stats.emplace_back(
                 m_settings.value("date").toDate(),
                 m_settings.value("pomodoros").toUInt(),
                 std::chrono::seconds{m_settings.value("totalTime").toUInt()}
@@ -33,20 +36,21 @@ namespace impl
 
     auto PomodoroStats::contains(const QDate date) const noexcept -> bool { return m_stats.contains(date); }
 
-    auto PomodoroStats::get(const QDate date) const -> DataEntry
+
+    auto PomodoroStats::get(const QDate date) const noexcept -> PomodoroStatsEntry
     {
         if (not contains(date)) return {};
 
         return m_stats[m_stats.indexOf(date)];
     }
 
-    auto PomodoroStats::get(QDate begin, const QDate end) const -> QList<DataEntry>
+    auto PomodoroStats::get(QDate begin, const QDate end) const -> QList<PomodoroStatsEntry>
     {
-        QList<DataEntry> result{begin.daysTo(end)};
+        QList<PomodoroStatsEntry> result{begin.daysTo(end)};
 
         for (; begin < end; begin = begin.addDays(1))
         {
-            DataEntry entry{ contains(begin) ? m_stats[m_stats.indexOf(begin)] : DataEntry{} };
+            PomodoroStatsEntry entry{ contains(begin) ? m_stats[m_stats.indexOf(begin)] : PomodoroStatsEntry{} };
             result.emplace_back(entry);
         }
 
@@ -62,6 +66,13 @@ namespace impl
         {
             m_stats.emplaceBack(date, 1, pomodoroDuration);
             emit newEntryAdded(date);
+
+            m_settings.beginWriteArray("statistics");
+            m_settings.setArrayIndex(static_cast<i32>(m_stats.size()));
+            m_settings.setValue("date", date);
+            m_settings.setValue("pomodoros", 1);
+            m_settings.setValue("totalTime",static_cast<qint64>(pomodoroDuration.count()));
+            m_settings.endArray();
             return;
         }
 
@@ -69,6 +80,30 @@ namespace impl
 
         entry.pomodoros++;
         entry.totalTime += pomodoroDuration;
+
+        const i32 settingsIndex{std::invoke([&]
+        {
+            const auto size{m_settings.beginReadArray("statistics")};
+            for (i32 i{0}; i != size; i++)
+            {
+                m_settings.setArrayIndex(i);
+                if (m_settings.value("date").toDate() == date)
+                {
+                    m_settings.endArray();
+                    return i;
+                };
+            }
+            m_settings.endArray();
+
+            return -1;
+        })};
+
+
+        m_settings.beginWriteArray("statistics");
+        m_settings.setArrayIndex(settingsIndex);
+        m_settings.setValue("pomodoros", entry.pomodoros);
+        m_settings.setValue("totalTime", static_cast<qint64>(entry.totalTime.count()));
+        m_settings.endArray();
 
         emit entryChanged(date);
     }
@@ -81,8 +116,5 @@ namespace impl
     }
 
 
-    void PomodoroStats::sync()
-    {
-        m_settings.sync();
-    }
+    void PomodoroStats::sync() { m_settings.sync(); }
 }

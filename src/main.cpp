@@ -7,11 +7,21 @@
 #include <QVariant>
 
 #include "settings-manager.hpp"
+#include "pomodoro-stats.hpp"
 
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app{argc, argv};
+
+    impl::PomodoroStats stats;
+
+    stats.addPomodoro(std::chrono::seconds{10}, QDate{2021, 1, 1});
+    stats.addPomodoro(std::chrono::seconds{10}, QDate{2021, 1, 2});
+    stats.addPomodoro(std::chrono::seconds{10}, QDate{2021, 1, 3});
+    stats.addPomodoro(std::chrono::seconds{60}, QDate{2021, 1, 1});
+    stats.sync();
+
 
     QGuiApplication::setOrganizationName("amitayus_");
     QGuiApplication::setApplicationName("Paz");
