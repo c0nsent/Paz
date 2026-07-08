@@ -3,45 +3,55 @@
 #include "core/basic-types-aliases.hpp"
 
 #include <QSettings>
-#include <QHash>
 #include <QList>
 #include <QDate>
 #include <QObject>
-#include <QVariant>
-#include <QTime>
+#include <qqmlintegration.h>
 
 #include <chrono>
-#include <optional>
 
 
 namespace impl
 {
 
+    struct PomodoroStatsEntry
+    {
+        Q_GADGET
+        QML_NAMED_ELEMENT(pomodoroStatsEntry)
+
+        Q_PROPERTY(QDate date READ date)
+        Q_PROPERTY(u16 pomodoros MEMBER pomodoros)
+        Q_PROPERTY(i64 totalTime READ getTotalTime WRITE setTotalTime)
+
+    public:
+
+        QDate date;
+        u16 pomodoros{0};
+        std::chrono::seconds totalTime{0};
+
+        [[nodiscard]] auto getTotalTime() const noexcept -> i64;
+        void setTotalTime(i64 seconds) noexcept;
+
+        auto operator==(const PomodoroStatsEntry &rhs) const noexcept -> bool;
+        auto operator==(QDate otherDate) const noexcept -> bool;
+    };
 
     class PomodoroStats : public QObject
     {
+        Q_OBJECT
+        QML_NAMED_ELEMENT(PomodoroStats)
+
     public:
-
-        struct DataEntry
-        {
-            QDate date;
-            u16 pomodoros{0};
-            std::chrono::seconds totalTime{0};
-
-            bool operator==(const DataEntry &rhs) const noexcept;
-            bool operator==(QDate otherDate) const noexcept;
-        };
 
         explicit PomodoroStats(QObject *parent = nullptr);
 
         [[nodiscard]] auto contains(QDate date) const noexcept -> bool;
-        [[nodiscard]] auto get(QDate date) const -> DataEntry;
-        [[nodiscard]] auto get(QDate begin, QDate end) const -> QList<DataEntry>;
+        [[nodiscard]] auto get(QDate date) const noexcept -> PomodoroStatsEntry;
+        [[nodiscard]] auto get(QDate begin, QDate end) const -> QList<PomodoroStatsEntry>;
         [[nodiscard]] auto size() const -> qsizetype;
 
     public slots:
 
-        //void addEntry(QDate date, u16 pomodoros, QTime totalTime);
         void addPomodoro(std::chrono::seconds pomodoroDuration, QDate date=QDate::currentDate());
         void removeEntry(QDate date);
         void sync();
@@ -55,6 +65,6 @@ namespace impl
     private:
 
         QSettings m_settings;
-        QList<DataEntry> m_stats;
+        QList<PomodoroStatsEntry> m_stats;
     };
 }
