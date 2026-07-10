@@ -2,13 +2,11 @@
 
 #include "core/basic-types-aliases.hpp"
 
-#include <QDate>
+#include <QDateTime>
 #include <QList>
 #include <QObject>
 #include <qqmlintegration.h>
 #include <QSettings>
-
-#include <chrono>
 
 
 namespace impl
@@ -21,22 +19,19 @@ namespace impl
 
         Q_PROPERTY(QDate date READ date)
         Q_PROPERTY(u16 pomodoros READ pomodoros)
-        Q_PROPERTY(i64 totalTime READ totalTime)
+        Q_PROPERTY(QTime totalTime READ totalTime)
 
     public:
 
         PomodoroStatsEntry() = default;
-        PomodoroStatsEntry(QDate date, u16 pomodoros, std::chrono::seconds totalTime);
-        PomodoroStatsEntry(QDate date, u16 pomodoros, i64 totalTimeInSeconds);
-
+        PomodoroStatsEntry(QDate date, u16 pomodoros, QTime totalTime);
         PomodoroStatsEntry(const PomodoroStatsEntry &) = default;
 
         [[nodiscard]] auto date() const noexcept -> QDate;
         [[nodiscard]] auto pomodoros() const noexcept -> u16;
-        [[nodiscard]] auto totalTime() const noexcept -> i64;
+        [[nodiscard]] auto totalTime() const noexcept -> QTime;
 
-        void addPomodoro(std::chrono::seconds duration);
-        void addPomodoro(i64 duration);
+        void addPomodoro(QTime duration);
 
         auto operator==(const PomodoroStatsEntry &rhs) const noexcept -> bool;
         auto operator==(QDate otherDate) const noexcept -> bool;
@@ -45,7 +40,7 @@ namespace impl
 
         QDate m_date;
         u16 m_pomodoros;
-        std::chrono::seconds m_totalTime;
+        QTime m_totalTime;
     };
 
     class PomodoroStats : public QObject
@@ -64,8 +59,8 @@ namespace impl
 
     public slots:
 
-        void addPomodoro(std::chrono::seconds pomodoroDuration);
-        void addPomodoro(std::chrono::seconds pomodoroDuration, QDate date);
+        void addPomodoro(QTime pomodoroDuration);
+        void addPomodoro(QDate date, QTime pomodoroDuration);
         void removeEntry(QDate date);
         void sync();
 
