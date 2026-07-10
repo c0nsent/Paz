@@ -10,16 +10,14 @@
 namespace limits
 {
     /// Максимальная длительность фазы - 99 минут
-    constexpr u16 MAX_PHASE_DURATION{99 * 60};
+    const QTime MAX_PHASE_DURATION{0, 99};
     /// Минимальная длительность фазы - 1 минута
-    constexpr u16 MIN_PHASE_DURATION{1 * 60};
+    const QTime MIN_PHASE_DURATION{0, 1};
 
-    constexpr u16 MAX_POMODORO{std::numeric_limits<u16>::max() - 1};
+    constexpr u16 MAX_POMODORO{std::numeric_limits<decltype(MAX_POMODORO)>::max() - 1};
 
     constexpr u16 MAX_SESSION_LENGTH{99};
     constexpr u16 MIN_SESSION_LENGTH{1};
-
-    static constexpr u16 INVALID_PHASE_DURATION{0};
 }
 
 /// Неймспейс с константами, задающими значение по-умолчанию
@@ -27,15 +25,13 @@ namespace defaults
 {
     using namespace std::chrono_literals;
 
-    /// Интервал тика QTimer в миллисекундах
     constexpr auto TIMER_INTERVAL{1000ms};
 
     constexpr bool AUTOSTART_NEW_POMODORO{true};
 
-    ///Это в секундах
-    constexpr u16 WORK_DURATION{25 * 60};
-    constexpr u16 SHORT_BREAK_DURATION{5 * 60};
-    constexpr u16 LONG_BREAK_DURATION{45 * 60};
+    const QTime WORK_DURATION{0, 25};
+    const QTime SHORT_BREAK_DURATION{0, 5};
+    const QTime LONG_BREAK_DURATION{0, 45};
 
     constexpr u16 SESSION_LENGTH{6};
 

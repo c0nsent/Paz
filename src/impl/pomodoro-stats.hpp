@@ -2,11 +2,11 @@
 
 #include "core/basic-types-aliases.hpp"
 
-#include <QSettings>
-#include <QList>
 #include <QDate>
+#include <QList>
 #include <QObject>
 #include <qqmlintegration.h>
+#include <QSettings>
 
 #include <chrono>
 
@@ -14,26 +14,38 @@
 namespace impl
 {
 
-    struct PomodoroStatsEntry
+    class PomodoroStatsEntry
     {
         Q_GADGET
         QML_NAMED_ELEMENT(pomodoroStatsEntry)
 
         Q_PROPERTY(QDate date READ date)
-        Q_PROPERTY(u16 pomodoros MEMBER pomodoros)
-        Q_PROPERTY(i64 totalTime READ getTotalTime WRITE setTotalTime)
+        Q_PROPERTY(u16 pomodoros READ pomodoros)
+        Q_PROPERTY(i64 totalTime READ totalTime)
 
     public:
 
-        QDate date;
-        u16 pomodoros{0};
-        std::chrono::seconds totalTime{0};
+        PomodoroStatsEntry() = default;
+        PomodoroStatsEntry(QDate date, u16 pomodoros, std::chrono::seconds totalTime);
+        PomodoroStatsEntry(QDate date, u16 pomodoros, i64 totalTimeInSeconds);
 
-        [[nodiscard]] auto getTotalTime() const noexcept -> i64;
-        void setTotalTime(i64 seconds) noexcept;
+        PomodoroStatsEntry(const PomodoroStatsEntry &) = default;
+
+        [[nodiscard]] auto date() const noexcept -> QDate;
+        [[nodiscard]] auto pomodoros() const noexcept -> u16;
+        [[nodiscard]] auto totalTime() const noexcept -> i64;
+
+        void addPomodoro(std::chrono::seconds duration);
+        void addPomodoro(i64 duration);
 
         auto operator==(const PomodoroStatsEntry &rhs) const noexcept -> bool;
         auto operator==(QDate otherDate) const noexcept -> bool;
+
+    private:
+
+        QDate m_date;
+        u16 m_pomodoros;
+        std::chrono::seconds m_totalTime;
     };
 
     class PomodoroStats : public QObject
@@ -52,7 +64,8 @@ namespace impl
 
     public slots:
 
-        void addPomodoro(std::chrono::seconds pomodoroDuration, QDate date=QDate::currentDate());
+        void addPomodoro(std::chrono::seconds pomodoroDuration);
+        void addPomodoro(std::chrono::seconds pomodoroDuration, QDate date);
         void removeEntry(QDate date);
         void sync();
 

@@ -9,7 +9,7 @@
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="BackgroundAgentGlobalSettings">
-    <option name="selectedModelId" value="gemini-3.1-pro-preview" />
+    <option name="selectedModelId" value="auto" />
   </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
@@ -59,10 +59,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="stuff">
+      <change beforePath="$PROJECT_DIR$/.idea/QtSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QtSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/constants.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-stats.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +100,6 @@
   <component name="CopilotPersistence">
     <persistenceIdMap>
       <entry key="_/home/amitayus_/Programming/Paz" value="3BnU7suH9S1vBfmrnUisF3tteOv" />
-      <entry key="_/home/amitayus_/Projects/Paz" value="3FqODBblZuCCAXPlGdnlVvqk2MX" />
     </persistenceIdMap>
   </component>
   <component name="CopilotUserSelectedModel">
@@ -104,10 +109,10 @@
     </selectedModels>
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="169" />
+    <option name="cachedIndexableFilesCount" value="183" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -119,7 +124,7 @@
     <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="SettingsManager" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -133,7 +138,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/c0nsent/Paz.git&quot;,
-    &quot;accountId&quot;: &quot;af07761e-863d-4a19-a3dd-faa5b8f11bbe&quot;
+    &quot;accountId&quot;: &quot;396f19b3-c2ac-442c-baea-c4c295d2edc3&quot;
   }
 }</component>
   <component name="MacroExpansionManager">
@@ -145,61 +150,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000000000081" />
-      <entry key="MS500" value="1.002493079087609" />
-      <entry key="S2" value="1.4492569587811304" />
-      <entry key="S5" value="3.6035465766712034" />
-      <entry key="S10" value="7.6849566105752505" />
-      <entry key="S30" value="19.801226349325315" />
-      <entry key="S60" value="28.89417076471939" />
-      <entry key="M2" value="37.013361863324306" />
-      <entry key="M5" value="46.71716764279837" />
-      <entry key="M10" value="57.86432600945966" />
-      <entry key="M15" value="67.53350876716085" />
-      <entry key="M30" value="90.99413462754904" />
-      <entry key="H1" value="119.32649943364686" />
-      <entry key="H2" value="143.93917983636288" />
-      <entry key="H4" value="166.80495868017135" />
-      <entry key="D1" value="997.0915489360124" />
-      <entry key="W1" value="3467.2431215290762" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000000893" />
+      <entry key="S2" value="1.0005464965466935" />
+      <entry key="S5" value="1.0495490085381427" />
+      <entry key="S10" value="1.2225960658640282" />
+      <entry key="S30" value="1.6060465628630256" />
+      <entry key="S60" value="1.781271596051487" />
+      <entry key="M2" value="2.194192031037618" />
+      <entry key="M5" value="7.45191469349415" />
+      <entry key="M10" value="16.822653341616615" />
+      <entry key="M15" value="23.641420511529272" />
+      <entry key="M30" value="43.61180007785248" />
+      <entry key="H1" value="82.82257396800237" />
+      <entry key="H2" value="132.23321913888824" />
+      <entry key="H4" value="190.54288544802026" />
+      <entry key="D1" value="1222.2858986882297" />
+      <entry key="W1" value="3275.5712827759057" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.9799542311764194E-66" />
-      <entry key="S2" value="4.448264425392155E-17" />
-      <entry key="S5" value="3.772253647999203E-7" />
-      <entry key="S10" value="8.408487452942611E-4" />
-      <entry key="S30" value="0.14897921211147394" />
-      <entry key="S60" value="0.562013369426442" />
-      <entry key="M2" value="1.1783096432920281" />
-      <entry key="M5" value="2.2301967004095697" />
-      <entry key="M10" value="3.5581883504482255" />
-      <entry key="M15" value="4.855684656500502" />
-      <entry key="M30" value="9.28314051358428" />
-      <entry key="H1" value="16.296719854934437" />
-      <entry key="H2" value="23.13754576079742" />
-      <entry key="H4" value="28.666542771321485" />
-      <entry key="D1" value="96.22241082299385" />
-      <entry key="W1" value="286.1600391398357" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.935999993825009E-284" />
+      <entry key="S5" value="3.271614622726557E-114" />
+      <entry key="S10" value="1.8087605211101226E-57" />
+      <entry key="S30" value="1.2184106602081038E-19" />
+      <entry key="S60" value="3.490573964562425E-10" />
+      <entry key="M2" value="1.8683077858697703E-5" />
+      <entry key="M5" value="0.012859811084880372" />
+      <entry key="M10" value="0.1301940694412711" />
+      <entry key="M15" value="0.4031716697833468" />
+      <entry key="M30" value="2.2369853036332956" />
+      <entry key="H1" value="6.437607579655951" />
+      <entry key="H2" value="11.492777398219495" />
+      <entry key="H4" value="16.778654955201926" />
+      <entry key="D1" value="95.8645019767107" />
+      <entry key="W1" value="253.72116422658868" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="6.213580302284199E-8" />
-      <entry key="MS500" value="0.037323216194040415" />
-      <entry key="S2" value="0.8153481282889298" />
-      <entry key="S5" value="3.209539851495652" />
-      <entry key="S10" value="7.397489791826567" />
-      <entry key="S30" value="19.706363270875688" />
-      <entry key="S60" value="29.24575679123642" />
-      <entry key="M2" value="38.03730762483836" />
-      <entry key="M5" value="48.85882246177464" />
-      <entry key="M10" value="61.36225449098062" />
-      <entry key="M15" value="72.33967924910529" />
-      <entry key="M30" value="100.24034894605632" />
-      <entry key="H1" value="135.59673253043414" />
-      <entry key="H2" value="167.0598070612775" />
-      <entry key="H4" value="195.46134874267082" />
-      <entry key="D1" value="1093.3009575329665" />
-      <entry key="W1" value="3753.3955565549813" />
+      <entry key="MS100" value="1.3136920557482191E-33" />
+      <entry key="MS500" value="2.652764928518829E-7" />
+      <entry key="S2" value="0.02311787482331841" />
+      <entry key="S5" value="0.264703666498098" />
+      <entry key="S10" value="0.6805087248753289" />
+      <entry key="S30" value="1.3727536285886754" />
+      <entry key="S60" value="1.6561030209328043" />
+      <entry key="M2" value="2.128757234107125" />
+      <entry key="M5" value="7.433435191322262" />
+      <entry key="M10" value="16.93190743149768" />
+      <entry key="M15" value="24.0273154716836" />
+      <entry key="M30" value="45.833476512523184" />
+      <entry key="H1" value="89.24554187163787" />
+      <entry key="H2" value="143.71431592303958" />
+      <entry key="H4" value="207.31301110032206" />
+      <entry key="D1" value="1318.1335685256536" />
+      <entry key="W1" value="3529.2849736083235" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -219,7 +224,7 @@
         <option name="modeId" value="Agent" />
         <option name="model">
           <model>
-            <option name="modelType" value="builtin_family" />
+            <option name="modelType" value="builtin_id" />
             <option name="modelValue" value="auto" />
           </model>
         </option>
@@ -246,7 +251,6 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
@@ -258,9 +262,7 @@
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
@@ -441,25 +443,10 @@
       <option name="presentableId" value="Default" />
       <updated>1775124163485</updated>
     </task>
-    <task id="LOCAL-00001" summary="stuff">
-      <option name="closed" value="true" />
-      <created>1783485617084</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1783485617084</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VCPKGProject">
-    <isAutomaticCheckingOnLaunch value="false" />
-    <isAutomaticFoundErrors value="true" />
-    <isAutomaticReloadCMake value="true" />
-    <isAutomaticBootstrapAfterUpdate value="false" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(qml): integrate QML module and refactor main application logic" />

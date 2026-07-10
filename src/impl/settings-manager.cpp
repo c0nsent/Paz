@@ -8,7 +8,7 @@
 
 namespace impl
 {
-    SettingsManager::SettingsManager(PomodoroTimer *pt, QObject *parent) : QObject{parent}, m_timer{pt}
+    SettingsManager::SettingsManager(PomodoroTimer *pt, QObject *parent) : QObject{parent}
     {
         using namespace settings;
         m_settings.beginGroup(grps::POMODORO_TIMER);

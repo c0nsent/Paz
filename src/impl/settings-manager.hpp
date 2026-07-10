@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pomodoro-timer.hpp"
+#include "impl/pomodoro-timer.hpp"
 
 #include <QObject>
 #include <QSettings>
@@ -27,8 +27,18 @@ namespace impl
         void setPhaseDuration(PomodoroTimer::Phase phase, u16 seconds);
         void setSessionLength(u16 pomodoros);
         void togglePomodoroAutoStart();
-        void readSettings(PomodoroTimer *);
-        void writeSettings(PomodoroTimer *);
+
+        template<class T>
+        void readSettings();
+
+        template<>
+        void readSettings<PomodoroTimer>();
+
+        template<class T>
+        void writeSettings();
+
+        template<>
+        void writeSettings<PomodoroTimer>();
 
         void saveAllSettings();
 
@@ -44,7 +54,8 @@ namespace impl
     private:
 
         bool m_isPomodoroAutoStarEnabled;
-        PomodoroTimer *m_timer;
         QSettings m_settings;
     };
 }
+
+
