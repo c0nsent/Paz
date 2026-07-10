@@ -27,12 +27,12 @@ namespace impl
         connect(this, &PomodoroTimer::phaseDurationChanged, this, &PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime);
     }
 
-	PomodoroTimer::State PomodoroTimer::state() const {return m_state;}
+	auto PomodoroTimer::state() const noexcept -> State {return m_state;}
 
-	PomodoroTimer::Phase PomodoroTimer::phase() const {return m_phase;}
+	auto PomodoroTimer::phase() const noexcept -> Phase {return m_phase;}
 
 
-    u16 PomodoroTimer::currentPhaseDuration() const
+    auto PomodoroTimer::currentPhaseDuration() const -> QTime
     {
         switch (m_phase)
         {
@@ -41,25 +41,21 @@ namespace impl
             case Phase::LongBreak: return m_longBreakDuration;
         }
 
-        return 0;
+        return QTime{};
     }
 
 
-	u16 PomodoroTimer::workDuration() const { return m_workDuration; }
+	auto PomodoroTimer::workDuration() const noexcept -> QTime { return m_workDuration; }
 
-	u16 PomodoroTimer::shortBreakDuration() const { return m_shortBreakDuration; }
+    auto PomodoroTimer::shortBreakDuration() const noexcept-> QTime { return m_shortBreakDuration; }
 
-	u16 PomodoroTimer::longBreakDuration() const { return m_longBreakDuration; }
-	u16 PomodoroTimer::sessionLength() const {return m_sessionLength;}
+	auto PomodoroTimer::longBreakDuration() const noexcept -> QTime { return m_longBreakDuration; }
+	auto PomodoroTimer::sessionLength() const noexcept -> u16 {return m_sessionLength;}
 
-	u16 PomodoroTimer::remainingTime() const {return m_remainingTime;}
+	auto PomodoroTimer::remainingTime() const noexcept -> QTime {return m_remainingTime;}
 
-	QString PomodoroTimer::timeRemainingString() const
-    {
-        return QString::asprintf("%02d:%02d", m_remainingTime / 60, m_remainingTime % 60);
-    }
+	auto PomodoroTimer::currentSessionCount() const noexcept -> u16 {return m_currentSessionCount;}
 
-	u16 PomodoroTimer::currentSessionCount() const {return m_currentSessionCount;}
 
 	void PomodoroTimer::start()
     {
@@ -74,10 +70,10 @@ namespace impl
         start(phase, currentPhaseDuration());
     }
 
-	void PomodoroTimer::start(const Phase phase, const u16 seconds)
+	void PomodoroTimer::start(const Phase phase, QTime duration)
     {
         setPhase(phase);
-        setRemainingTime(seconds);
+        setRemainingTime(duration);
 
         start();
     }
@@ -104,7 +100,7 @@ namespace impl
     {
         using enum Phase;
 
-        if (m_remainingTime != c_timeIsOut)
+        if (m_remainingTime == QTime{0, 0})
         {
             m_phase = m_phase == Work ? ShortBreak : Work;
             start(m_phase);
@@ -133,48 +129,48 @@ namespace impl
     }
 
 
-	void PomodoroTimer::setPhaseDuration(const u16 seconds)
+	void PomodoroTimer::setPhaseDuration(const QTime duration) noexcept
     {
-        setPhaseDuration(m_phase, seconds);
+        setPhaseDuration(m_phase, duration);
     }
 
 
-	void PomodoroTimer::setPhaseDuration(const Phase phase, const u16 seconds)
+	void PomodoroTimer::setPhaseDuration(const Phase phase, const QTime duration) noexcept
     {
         switch (phase)
         {
             case Phase::Work:
-                m_workDuration = seconds;
-                emit phaseDurationChanged(seconds, Phase::Work);
+                m_workDuration = duration;
+                emit phaseDurationChanged(Phase::Work, duration);
                 return;
 
             case Phase::ShortBreak:
-                m_shortBreakDuration = seconds;
-                emit phaseDurationChanged(seconds, Phase::ShortBreak);
+                m_shortBreakDuration = duration;
+                emit phaseDurationChanged(Phase::ShortBreak, duration);
                 return;
 
             case Phase::LongBreak:
-                m_longBreakDuration = seconds;
-                emit phaseDurationChanged(seconds, Phase::LongBreak);
+                m_longBreakDuration = duration;
+                emit phaseDurationChanged(Phase::LongBreak, duration);
         }
     }
 
 
-	void PomodoroTimer::setWorkDuration(const u16 seconds)
+	void PomodoroTimer::setWorkDuration(const QTime duration)
     {
-        setPhaseDuration(Phase::Work, seconds);
+        setPhaseDuration(Phase::Work, duration);
     }
 
 
-	void PomodoroTimer::setShortBreakDuration(const u16 seconds)
+	void PomodoroTimer::setShortBreakDuration(const QTime duration)
     {
-        setPhaseDuration(Phase::ShortBreak, seconds);
+        setPhaseDuration(Phase::ShortBreak, duration);
     }
 
 
-	void PomodoroTimer::setLongBreakDuration(const u16 seconds)
+	void PomodoroTimer::setLongBreakDuration(const QTime duration)
     {
-        setPhaseDuration(Phase::LongBreak, seconds);
+        setPhaseDuration(Phase::LongBreak, duration);
     }
 
 
@@ -189,23 +185,24 @@ namespace impl
 
     void PomodoroTimer::onTickUpdateRemainingTime()
     {
-        if (m_remainingTime == c_timeIsOut) [[unlikely]]
+        if (m_remainingTime == QTime{0, 0}) [[unlikely]]
         {
             changeToNextPhase();
             return;
         }
 
-        emit remainingTimeChanged(--m_remainingTime);
+        m_remainingTime = m_remainingTime.addSecs(-1);
+        emit remainingTimeChanged(m_remainingTime);
     }
 
-    void PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime(const u16 seconds, const Phase phase)
+    void PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime(const Phase phase, const QTime duration)
     {
         if (m_phase != Phase::Work or m_state == State::Idle)
         {
             if (phase != m_phase) return;
 
-            m_remainingTime = seconds;
-            emit remainingTimeChanged(seconds);
+            m_remainingTime = duration;
+            emit remainingTimeChanged(duration);
         }
     }
 
@@ -219,7 +216,7 @@ namespace impl
     }
 
 
-	void PomodoroTimer::setRemainingTime(const u16 remainingTime)
+	void PomodoroTimer::setRemainingTime(const QTime remainingTime)
     {
         if (m_remainingTime == remainingTime) [[unlikely]] return;
 

@@ -4,6 +4,7 @@
 #include "../core/constants.hpp"
 
 #include <QObject>
+#include <QTime>
 #include <QTimer>
 #include <QtQml/qqmlregistration.h>
 
@@ -17,16 +18,13 @@ namespace impl
 		QML_NAMED_ELEMENT(PomodoroTimer)
         Q_PROPERTY(State state READ state NOTIFY stateChanged)
         Q_PROPERTY(Phase phase READ phase NOTIFY phaseChanged)
-		Q_PROPERTY(u16 workDuration READ workDuration WRITE setWorkDuration NOTIFY workDurationChanged)
-		Q_PROPERTY(u16 shortBreakDuration READ shortBreakDuration WRITE setShortBreakDuration NOTIFY shortBreakDurationChanged)
-		Q_PROPERTY(u16 longBreakDuration READ longBreakDuration WRITE setLongBreakDuration NOTIFY longBreakDurationChanged)
+		Q_PROPERTY(QTime workDuration READ workDuration WRITE setWorkDuration NOTIFY workDurationChanged)
+		Q_PROPERTY(QTime shortBreakDuration READ shortBreakDuration WRITE setShortBreakDuration NOTIFY shortBreakDurationChanged)
+		Q_PROPERTY(QTime longBreakDuration READ longBreakDuration WRITE setLongBreakDuration NOTIFY longBreakDurationChanged)
 		Q_PROPERTY(u16 sessionLength READ sessionLength NOTIFY sessionLengthChanged)
-        Q_PROPERTY(u32 remainingTime READ remainingTime NOTIFY remainingTimeChanged)
-        Q_PROPERTY(QString timeRemainingString READ timeRemainingString NOTIFY remainingTimeChanged)
+        Q_PROPERTY(QTime remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
-        Q_PROPERTY(u16 currentPhaseDuration READ currentPhaseDuration NOTIFY phaseDurationChanged)
-
-		static constexpr u16 c_timeIsOut{0};
+        Q_PROPERTY(QTime currentPhaseDuration READ currentPhaseDuration NOTIFY phaseDurationChanged)
 
 	public:
 
@@ -40,76 +38,79 @@ namespace impl
 		{
 			QObject *parent{nullptr};
 
-		    u16 workPhaseDuration{  25 * 60 };
-		    u16 shortBreakDuration{5 * 60};
-		    u16 longBreakDuration{ 40 * 60};
+		    QTime workPhaseDuration{ defaults::WORK_DURATION};
+		    QTime shortBreakDuration{defaults::SHORT_BREAK_DURATION};
+		    QTime longBreakDuration{defaults::LONG_BREAK_DURATION};
 
-		    u16 sessionLength{ defaults::SESSION_LENGTH };
+		    u16 sessionLength{defaults::SESSION_LENGTH};
 		};
 
 		explicit PomodoroTimer(QObject *parent = nullptr);
 		explicit PomodoroTimer(const CreateInfo &data);
 
-		[[nodiscard]] State state() const;
-		[[nodiscard]] Phase phase() const;
-		[[nodiscard]] u16 currentPhaseDuration() const;
-		[[nodiscard]] u16 workDuration() const;
-		[[nodiscard]] u16 shortBreakDuration() const;
-		[[nodiscard]] u16 longBreakDuration() const;
-		[[nodiscard]] u16 sessionLength() const;
-		[[nodiscard]] u16 remainingTime() const;
-        [[nodiscard]] QString timeRemainingString() const;
-		[[nodiscard]] u16 currentSessionCount() const;
+		[[nodiscard]] auto state() const noexcept -> State;
+		[[nodiscard]] auto phase() const noexcept -> Phase;
+		[[nodiscard]] auto currentPhaseDuration() const -> QTime;
+		[[nodiscard]] auto workDuration() const noexcept -> QTime;
+		[[nodiscard]] auto shortBreakDuration() const noexcept -> QTime;
+		[[nodiscard]] auto longBreakDuration() const noexcept -> QTime;
+		[[nodiscard]] auto sessionLength() const noexcept -> u16;
+		[[nodiscard]] auto remainingTime() const noexcept -> QTime;
+		[[nodiscard]] auto currentSessionCount() const noexcept -> u16;
 
 	public slots:
 
 		void start();
 		void start(Phase phase);
-		void start(Phase phase, u16 seconds);
+		void start(Phase phase, QTime duration);
 		void pause();
 		void reset();
 		void changeToNextPhase();
 
-		void setPhaseDuration(u16 seconds);
-		void setPhaseDuration(Phase phase, u16 seconds);
-		void setWorkDuration(u16 seconds);
-		void setShortBreakDuration(u16 seconds);
-		void setLongBreakDuration(u16 seconds);
+	    void toggleWorkPhaseAutoStart(bool )
+
+		void setPhaseDuration(QTime duration) noexcept;
+		void setPhaseDuration(Phase phase, QTime duration) noexcept;
+		void setWorkDuration(QTime duration);
+		void setShortBreakDuration(QTime duration);
+		void setLongBreakDuration(QTime duration);
 	    void setSessionLength(u16 pomodoros);
 
 	private slots:
 
 		void onTickUpdateRemainingTime();
-		void onPhaseDurationChangeUpdateRemainingTime(u16 seconds, Phase phase);
+		void onPhaseDurationChangeUpdateRemainingTime(Phase phase, QTime duration);
 
 		void setPhase(Phase phase);
-		void setRemainingTime(u16 remainingTime);
+		void setRemainingTime(QTime remainingTime);
 		void setState(State state);
 
 	signals:
 
 		void stateChanged(State);
 		void phaseChanged(Phase);
-		void phaseDurationChanged(u16 seconds, Phase);
-		void workDurationChanged(u16 seconds);
-		void shortBreakDurationChanged(u16 seconds);
-		void longBreakDurationChanged(u16 seconds);
+		void phaseDurationChanged(Phase, QTime);
+		void workDurationChanged(QTime);
+		void shortBreakDurationChanged(QTime);
+		void longBreakDurationChanged(QTime);
 		void sessionLengthChanged(u16 pomodoros);
-		void remainingTimeChanged(u16 seconds);
+		void remainingTimeChanged(QTime);
 		void pomodoroFinished(u16 currentSessionCount);
 	    void timerFinished(Phase nextPhase);
 
 	private:
 
-	    u16 m_workDuration;
-	    u16 m_shortBreakDuration;
-	    u16 m_longBreakDuration;
+	    QTime m_workDuration;
+	    QTime m_shortBreakDuration;
+	    QTime m_longBreakDuration;
 	    u16 m_sessionLength;
 
 		State m_state;
 		Phase m_phase;
-		u16 m_remainingTime;
+		QTime m_remainingTime;
 		u16 m_currentSessionCount;
+
+	    bool m_isWorkPhaseAutoStartEnabled;
 
 		QTimer m_timer;
 	};

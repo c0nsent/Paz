@@ -6,18 +6,46 @@
 
 namespace impl
 {
-    auto PomodoroStatsEntry::getTotalTime() const noexcept -> i64 { return totalTime.count(); }
+    PomodoroStatsEntry::PomodoroStatsEntry(const QDate date, const u16 pomodoros, const std::chrono::seconds totalTime) 
+        : m_date{date}
+        , m_pomodoros{pomodoros}
+        , m_totalTime{totalTime}
+    {
+    }
+    
+    
+    PomodoroStatsEntry::PomodoroStatsEntry(const QDate date, const u16 pomodoros, const i64 totalTimeInSeconds) 
+        : m_date{date}
+        , m_pomodoros{pomodoros}
+        , m_totalTime{std::chrono::seconds{totalTimeInSeconds}}
+    {
+    }
+    
+    
+    auto PomodoroStatsEntry::date() const noexcept -> QDate { return m_date; }
+    
+    auto PomodoroStatsEntry::pomodoros() const noexcept -> u16 { return m_pomodoros; }
+    
+    auto PomodoroStatsEntry::totalTime() const noexcept -> i64 { return m_totalTime.count(); }
+    
+    
+    void PomodoroStatsEntry::addPomodoro(const std::chrono::seconds duration)
+    {
+        m_pomodoros++;
+        m_totalTime += duration;
+    }
+    
+    
+    void PomodoroStatsEntry::addPomodoro(const i64 duration) { addPomodoro(std::chrono::seconds{duration}); }
 
-    void PomodoroStatsEntry::setTotalTime(const i64 seconds) noexcept { totalTime = std::chrono::seconds{seconds}; }
+    auto PomodoroStatsEntry::operator==(const PomodoroStatsEntry& rhs) const noexcept -> bool { return m_date == rhs.m_date; }
 
-    auto PomodoroStatsEntry::operator==(const PomodoroStatsEntry& rhs) const noexcept -> bool { return date == rhs.date; }
-
-    auto PomodoroStatsEntry::operator==(const QDate otherDate) const noexcept -> bool { return this->date == otherDate; }
+    auto PomodoroStatsEntry::operator==(const QDate otherDate) const noexcept -> bool { return this->m_date == otherDate; }
 
 
     PomodoroStats::PomodoroStats(QObject *parent)
         : QObject{parent}
-        , m_settings{QGuiApplication::organizationDomain(), "Statistics"}
+        //, m_settings{QGuiApplication::organizationDomain(), "Statistics"}
         , m_stats{m_settings.beginReadArray("statistics")}
     {
         for (i32 i{0}; i != m_stats.size(); i++)
@@ -60,6 +88,12 @@ namespace impl
     auto PomodoroStats::size() const -> qsizetype { return m_stats.size(); }
 
 
+    void PomodoroStats::addPomodoro(const std::chrono::seconds pomodoroDuration)
+    {
+        addPomodoro(pomodoroDuration, QDate::currentDate());
+    }
+
+
     void PomodoroStats::addPomodoro(std::chrono::seconds pomodoroDuration, const QDate date)
     {
         if (not contains(date))
@@ -78,8 +112,7 @@ namespace impl
 
         auto &entry{ m_stats[m_stats.indexOf(date)] };
 
-        entry.pomodoros++;
-        entry.totalTime += pomodoroDuration;
+        entry.addPomodoro(pomodoroDuration);
 
         const i32 settingsIndex{std::invoke([&]
         {
@@ -101,8 +134,8 @@ namespace impl
 
         m_settings.beginWriteArray("statistics");
         m_settings.setArrayIndex(settingsIndex);
-        m_settings.setValue("pomodoros", entry.pomodoros);
-        m_settings.setValue("totalTime", static_cast<qint64>(entry.totalTime.count()));
+        m_settings.setValue("pomodoros", entry.pomodoros());
+        m_settings.setValue("totalTime", static_cast<qint64>(entry.totalTime()));
         m_settings.endArray();
 
         emit entryChanged(date);
