@@ -67,7 +67,7 @@ namespace impl
 		void reset();
 		void changeToNextPhase();
 
-	    void toggleWorkPhaseAutoStart(bool )
+	    void toggleWorkPhaseAutoStart();
 
 		void setPhaseDuration(QTime duration) noexcept;
 		void setPhaseDuration(Phase phase, QTime duration) noexcept;
@@ -80,10 +80,11 @@ namespace impl
 
 		void onTickUpdateRemainingTime();
 		void onPhaseDurationChangeUpdateRemainingTime(Phase phase, QTime duration);
+		void enablePomodoroAutoStart();
 
-		void setPhase(Phase phase);
-		void setRemainingTime(QTime remainingTime);
-		void setState(State state);
+		void setPhase(Phase phase) noexcept;
+		void setRemainingTime(QTime remainingTime) noexcept;
+		void setState(State state) noexcept;
 
 	signals:
 

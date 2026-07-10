@@ -1,7 +1,6 @@
 #include "pomodoro-timer.hpp"
 
 #include <QMetaEnum>
-#include <QString>
 
 
 namespace impl
@@ -11,20 +10,27 @@ namespace impl
 
 	PomodoroTimer::PomodoroTimer(const CreateInfo &data)
         : QObject{data.parent}
-          , m_workDuration{data.workPhaseDuration}
-          , m_shortBreakDuration{data.shortBreakDuration}
-          , m_longBreakDuration{data.workPhaseDuration}
-          , m_sessionLength{data.sessionLength}
-          , m_state{State::Idle}
-          , m_phase{Phase::Work}
-          , m_remainingTime{currentPhaseDuration()}
-          , m_currentSessionCount{0}
+        , m_workDuration{data.workPhaseDuration}
+        , m_shortBreakDuration{data.shortBreakDuration}
+        , m_longBreakDuration{data.workPhaseDuration}
+        , m_sessionLength{data.sessionLength}
+        , m_state{State::Idle}
+        , m_phase{Phase::Work}
+        ,  m_remainingTime{currentPhaseDuration()}
+        , m_currentSessionCount{0}
+        , m_isWorkPhaseAutoStartEnabled(defaults::AUTOSTART_NEW_POMODORO)
     {
         m_timer.setTimerType(Qt::CoarseTimer);
         m_timer.setInterval(defaults::TIMER_INTERVAL);
 
         connect(&m_timer, &QTimer::timeout, this, &PomodoroTimer::onTickUpdateRemainingTime);
-        connect(this, &PomodoroTimer::phaseDurationChanged, this, &PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime);
+        connect(this,
+            &PomodoroTimer::phaseDurationChanged,
+            this,
+            &PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime
+        );
+
+        if (m_isWorkPhaseAutoStartEnabled) enablePomodoroAutoStart();
     }
 
 	auto PomodoroTimer::state() const noexcept -> State {return m_state;}
@@ -70,7 +76,7 @@ namespace impl
         start(phase, currentPhaseDuration());
     }
 
-	void PomodoroTimer::start(const Phase phase, QTime duration)
+	void PomodoroTimer::start(const Phase phase, const QTime duration)
     {
         setPhase(phase);
         setRemainingTime(duration);
@@ -128,8 +134,26 @@ namespace impl
         emit phaseChanged(m_phase);
     }
 
+    void PomodoroTimer::toggleWorkPhaseAutoStart()
+    {
+        m_isWorkPhaseAutoStartEnabled = not m_isWorkPhaseAutoStartEnabled;
 
-	void PomodoroTimer::setPhaseDuration(const QTime duration) noexcept
+        if (m_isWorkPhaseAutoStartEnabled)
+            connect(this,
+                &PomodoroTimer::timerFinished,
+                this,
+                &PomodoroTimer::enablePomodoroAutoStart
+            );
+
+        else
+            disconnect(this,
+                &PomodoroTimer::timerFinished,
+                this,
+                &PomodoroTimer::enablePomodoroAutoStart);
+    }
+
+
+    void PomodoroTimer::setPhaseDuration(const QTime duration) noexcept
     {
         setPhaseDuration(m_phase, duration);
     }
@@ -185,7 +209,7 @@ namespace impl
 
     void PomodoroTimer::onTickUpdateRemainingTime()
     {
-        if (m_remainingTime == QTime{0, 0}) [[unlikely]]
+        if (m_remainingTime.msecsSinceStartOfDay() == 0) [[unlikely]]
         {
             changeToNextPhase();
             return;
@@ -194,6 +218,7 @@ namespace impl
         m_remainingTime = m_remainingTime.addSecs(-1);
         emit remainingTimeChanged(m_remainingTime);
     }
+
 
     void PomodoroTimer::onPhaseDurationChangeUpdateRemainingTime(const Phase phase, const QTime duration)
     {
@@ -206,8 +231,13 @@ namespace impl
         }
     }
 
+    void PomodoroTimer::enablePomodoroAutoStart()
+    {
+        if (m_phase == Phase::Work) start();
+    }
 
-    void PomodoroTimer::setPhase(const Phase phase)
+
+    void PomodoroTimer::setPhase(const Phase phase) noexcept
     {
         if (m_phase == phase) [[unlikely]] return;
 
@@ -216,7 +246,7 @@ namespace impl
     }
 
 
-	void PomodoroTimer::setRemainingTime(const QTime remainingTime)
+	void PomodoroTimer::setRemainingTime(const QTime remainingTime) noexcept
     {
         if (m_remainingTime == remainingTime) [[unlikely]] return;
 
@@ -225,7 +255,7 @@ namespace impl
     }
 
 
-    void PomodoroTimer::setState(const State state)
+    void PomodoroTimer::setState(const State state) noexcept
     {
         if (m_state == state) [[unlikely]] return;
 

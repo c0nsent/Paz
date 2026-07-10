@@ -41,17 +41,6 @@ namespace impl
     }
 
 
-    void SettingsManager::togglePomodoroAutoStart()
-    {
-        m_isPomodoroAutoStarEnabled = not m_isPomodoroAutoStarEnabled;
-
-        if (m_isPomodoroAutoStarEnabled)
-            connect(m_timer, &PomodoroTimer::timerFinished, this, &SettingsManager::enablePomodoroStart);
-        else
-            disconnect(m_timer, &PomodoroTimer::timerFinished, this, &SettingsManager::enablePomodoroStart);
-    }
-
-
     void SettingsManager::readSettings(PomodoroTimer *)
     {
         using enum PomodoroTimer::Phase;
@@ -85,10 +74,5 @@ namespace impl
     {
         writeSettings(m_timer);
         m_settings.sync();
-    }
-
-    void SettingsManager::enablePomodoroStart(const PomodoroTimer::Phase phase) const
-    {
-        if (phase == PomodoroTimer::Phase::Work) m_timer->start();
     }
 }
