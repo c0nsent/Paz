@@ -62,8 +62,10 @@ namespace impl
 
 	auto PomodoroTimer::currentSessionCount() const noexcept -> u16 {return m_currentSessionCount;}
 
+    auto PomodoroTimer::isPomodoroAutoStartEnabled() const noexcept -> bool { return m_isWorkPhaseAutoStartEnabled; }
 
-	void PomodoroTimer::start()
+
+    void PomodoroTimer::start()
     {
         if (m_state == State::Running) return;
 
@@ -71,10 +73,8 @@ namespace impl
         m_timer.start();
     }
 
-    void PomodoroTimer::start(const Phase phase)
-    {
-        start(phase, currentPhaseDuration());
-    }
+
+    void PomodoroTimer::start(const Phase phase) { start(phase, currentPhaseDuration()); }
 
 	void PomodoroTimer::start(const Phase phase, const QTime duration)
     {
@@ -139,17 +139,15 @@ namespace impl
         m_isWorkPhaseAutoStartEnabled = not m_isWorkPhaseAutoStartEnabled;
 
         if (m_isWorkPhaseAutoStartEnabled)
-            connect(this,
-                &PomodoroTimer::timerFinished,
-                this,
-                &PomodoroTimer::enablePomodoroAutoStart
-            );
+        {
+            connect(this, &PomodoroTimer::timerFinished,
+                this,&PomodoroTimer::enablePomodoroAutoStart);
 
-        else
-            disconnect(this,
-                &PomodoroTimer::timerFinished,
-                this,
-                &PomodoroTimer::enablePomodoroAutoStart);
+            return;
+        }
+
+        disconnect(this, &PomodoroTimer::timerFinished,
+            this, &PomodoroTimer::enablePomodoroAutoStart);
     }
 
 

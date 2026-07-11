@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../core/basic-types-aliases.hpp"
-#include "../core/constants.hpp"
+#include "core/basic-types-aliases.hpp"
+#include "core/constants.hpp"
 
 #include <QObject>
 #include <QTime>
@@ -25,6 +25,7 @@ namespace impl
         Q_PROPERTY(QTime remainingTime READ remainingTime NOTIFY remainingTimeChanged)
         Q_PROPERTY(u32 currentSessionCount READ currentSessionCount NOTIFY pomodoroFinished)
         Q_PROPERTY(QTime currentPhaseDuration READ currentPhaseDuration NOTIFY phaseDurationChanged)
+	    Q_PROPERTY(bool isAutoStartEnabled READ isPomodoroAutoStartEnabled NOTIFY pomodoroAutoStartChanged)
 
 	public:
 
@@ -57,6 +58,7 @@ namespace impl
 		[[nodiscard]] auto sessionLength() const noexcept -> u16;
 		[[nodiscard]] auto remainingTime() const noexcept -> QTime;
 		[[nodiscard]] auto currentSessionCount() const noexcept -> u16;
+        [[nodiscard]] auto isPomodoroAutoStartEnabled() const noexcept -> bool;
 
 	public slots:
 
@@ -98,6 +100,7 @@ namespace impl
 		void remainingTimeChanged(QTime);
 		void pomodoroFinished(u16 currentSessionCount);
 	    void timerFinished(Phase nextPhase);
+	    void pomodoroAutoStartChanged(bool isEnabled);
 
 	private:
 
