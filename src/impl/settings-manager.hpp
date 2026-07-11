@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QTime>
 
 
 namespace impl
@@ -18,21 +19,19 @@ namespace impl
 
     public:
 
-        explicit SettingsManager(PomodoroTimer *pt, QObject *parent = nullptr);
+        explicit SettingsManager(QObject *parent = nullptr);
 
         [[nodiscard]] bool isPomodoroAutoStarEnabled() const;
 
-    public slots:
-
-        void setPhaseDuration(PomodoroTimer::Phase phase, u16 seconds);
-        void setSessionLength(u16 pomodoros);
-        void togglePomodoroAutoStart();
-
         template<class T>
-        void readSettings();
+        auto readSettings() const -> T;
 
         template<>
-        void readSettings<PomodoroTimer>();
+        auto readSettings<PomodoroTimer>() const -> PomodoroTimer;
+
+
+
+    public slots:
 
         template<class T>
         void writeSettings();
@@ -44,18 +43,16 @@ namespace impl
 
     private slots:
 
-        void enablePomodoroStart(PomodoroTimer::Phase phase) const;
 
     signals:
 
         void invalidValuePassed(QString propertyName);
-        void autoStartStateChanged(bool);
 
     private:
 
-        bool m_isPomodoroAutoStarEnabled;
         QSettings m_settings;
     };
+
+
+
 }
-
-
