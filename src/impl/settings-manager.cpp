@@ -1,78 +1,57 @@
 #include "settings-manager.hpp"
 
-#include "core/constants.hpp"
-
-#include <QMetaMethod>
-#include <QtMinMax>
-
 
 namespace impl
 {
-    SettingsManager::SettingsManager(PomodoroTimer *pt, QObject *parent) : QObject{parent}
-    {
-        using namespace settings;
-        m_settings.beginGroup(grps::POMODORO_TIMER);
-        m_isPomodoroAutoStarEnabled
-                = m_settings.value(keys::AUTOSTART_NEW_POMODORO, defaults::AUTOSTART_NEW_POMODORO).toBool();
-        m_settings.endGroup();
-    }
-
-
-    bool SettingsManager::isPomodoroAutoStarEnabled() const { return m_isPomodoroAutoStarEnabled; }
-
-
-    void SettingsManager::setPhaseDuration(const PomodoroTimer::Phase phase, const u16 seconds)
-    {
-        const u16 boundedSeconds{qBound(limits::MIN_PHASE_DURATION, seconds, limits::MAX_PHASE_DURATION)};
-
-        if (seconds != boundedSeconds) emit invalidValuePassed("phaseDuration");
-
-        m_timer->setPhaseDuration(phase, boundedSeconds);
-    }
-
-
-    void SettingsManager::setSessionLength(const u16 pomodoros)
-    {
-        const u16 boundedPomodoros{qBound(limits::MIN_SESSION_LENGTH, pomodoros, limits::MAX_SESSION_LENGTH)};
-
-        if (pomodoros != boundedPomodoros) emit invalidValuePassed("sessionLength");
-
-        m_timer->setSessionLength(boundedPomodoros);
-    }
-
-
-    void SettingsManager::readSettings(PomodoroTimer *)
+    auto SettingsManager::getInfoForPomodoroTimer() -> PomodoroTimer::CreateInfo
     {
         using enum PomodoroTimer::Phase;
         using namespace settings;
 
         m_settings.beginGroup(grps::POMODORO_TIMER);
-        m_timer->setPhaseDuration(Work,m_settings.value(keys::WORK_DURATION, defaults::WORK_DURATION).toUInt());
-        m_timer->setPhaseDuration(ShortBreak, m_settings.value(keys::SHORT_BREAK_DURATION, defaults::SHORT_BREAK_DURATION).toUInt());
-        m_timer->setPhaseDuration(LongBreak, m_settings.value(keys::LONG_BREAK_DURATION, defaults::LONG_BREAK_DURATION).toUInt());
-        m_timer->setSessionLength(m_settings.value(keys::SESSION_LENGTH,defaults::SESSION_LENGTH).toUInt());
-        m_isPomodoroAutoStarEnabled = m_settings.value(keys::AUTOSTART_NEW_POMODORO, defaults::AUTOSTART_NEW_POMODORO).toBool();
+        const PomodoroTimer::CreateInfo createInfo {
+            .workPhaseDuration = m_settings.value(keys::WORK_DURATION, defaults::WORK_DURATION).toTime(),
+            .shortBreakDuration = m_settings.value(keys::SHORT_BREAK_DURATION, defaults::SHORT_BREAK_DURATION).toTime(),
+            .longBreakDuration = m_settings.value(keys::LONG_BREAK_DURATION, defaults::LONG_BREAK_DURATION).toTime(),
+            .sessionLength = static_cast<u16>(m_settings.value(keys::SESSION_LENGTH, defaults::SESSION_LENGTH).toUInt()),
+            .isAutoStartEnabled = m_settings.value(keys::AUTOSTART_NEW_POMODORO, defaults::AUTOSTART_NEW_POMODORO).toBool()
+        };
         m_settings.endGroup();
+
+        return createInfo;
     }
 
-    void SettingsManager::writeSettings(PomodoroTimer *)
+
+    void SettingsManager::setupConnections(const PomodoroTimer *const pt)
     {
         using namespace settings::keys;
 
         m_settings.beginGroup(settings::grps::POMODORO_TIMER);
-        m_settings.setValue(WORK_DURATION, m_timer->workDuration());
-        m_settings.setValue(SHORT_BREAK_DURATION, m_timer->shortBreakDuration());
-        m_settings.setValue(LONG_BREAK_DURATION, m_timer->longBreakDuration());
-        m_settings.setValue(SESSION_LENGTH, m_timer->sessionLength());
-        m_settings.setValue(AUTOSTART_NEW_POMODORO, m_isPomodoroAutoStarEnabled);
+
+        connect(pt, &PomodoroTimer::workDurationChanged, [&] (const QTime duration)
+        {
+            m_settings.setValue(WORK_DURATION, duration);
+        });
+        connect(pt, &PomodoroTimer::shortBreakDurationChanged, [&] (const QTime duration)
+        {
+           m_settings.setValue(SHORT_BREAK_DURATION, duration);
+        });
+        connect(pt, &PomodoroTimer::longBreakDurationChanged, [&] (const QTime duration)
+        {
+           m_settings.setValue(LONG_BREAK_DURATION, duration);
+        });
+        connect(pt, &PomodoroTimer::sessionLengthChanged, [&] (const u16 pomodoros)
+        {
+            m_settings.setValue(SESSION_LENGTH, pomodoros);
+        });
+        connect(pt, &PomodoroTimer::pomodoroAutoStartChanged, [&] (const bool isEnabled)
+        {
+           m_settings.setValue(AUTOSTART_NEW_POMODORO, isEnabled);
+        });
 
         m_settings.endGroup();
     }
 
 
-    void SettingsManager::saveAllSettings()
-    {
-        writeSettings(m_timer);
-        m_settings.sync();
-    }
+    void SettingsManager::sync() { m_settings.sync(); }
 }

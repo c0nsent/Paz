@@ -21,6 +21,7 @@ qt_add_executable(PazApp
         impl/pomodoro-timer.hpp impl/pomodoro-timer.cpp
         impl/settings-manager.hpp impl/settings-manager.cpp
         impl/pomodoro-stats.hpp impl/pomodoro-stats.cpp
+        impl/initializer.hpp impl/initializer.cpp
         core/constants.hpp
         core/basic-types-aliases.hpp
 )
@@ -46,8 +47,5 @@ target_link_libraries(PazApp PRIVATE
         Qt6::Quick
 )
 
-target_include_directories(PazApp PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/impl
-)
 
 target_compile_features(PazApp PUBLIC cxx_std_23)
