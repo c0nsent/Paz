@@ -6,6 +6,7 @@
   <component name="BackendCodeEditorMiscSettings">
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/RefactoringsMru/CppRenameRefactoring/DoRenameRelatedFiles/@EntryValue" value="false" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="BackgroundAgentGlobalSettings">
@@ -59,11 +60,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="stuff">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/impl/initializer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/impl/initializer.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,6 +269,11 @@
   }
 }</component>
   <component name="RunManager" selected="CMake Application.PazApp">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PazApp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Paz" RUN_TARGET_NAME="PazApp">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />

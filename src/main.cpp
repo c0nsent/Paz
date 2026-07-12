@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     auto *settingsManager { new impl::SettingsManager{pt, &app}};
     settingsManager->readSettings(pt);
 
-    QObject::connect(&app, &QGuiApplication::aboutToQuit, settingsManager, &impl::SettingsManager::saveAllSettings);
+    QObject::connect(&app, &QGuiApplication::aboutToQuit, settingsManager, &impl::SettingsManager::sync);
 
     QObject::connect(
         pt,

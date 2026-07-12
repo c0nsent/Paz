@@ -37,17 +37,16 @@ namespace impl
 
 		struct CreateInfo
 		{
-			QObject *parent{nullptr};
-
 		    QTime workPhaseDuration{ defaults::WORK_DURATION};
 		    QTime shortBreakDuration{defaults::SHORT_BREAK_DURATION};
 		    QTime longBreakDuration{defaults::LONG_BREAK_DURATION};
 
 		    u16 sessionLength{defaults::SESSION_LENGTH};
+		    bool isAutoStartEnabled{defaults::AUTOSTART_NEW_POMODORO};
 		};
 
-		explicit PomodoroTimer(QObject *parent = nullptr);
-		explicit PomodoroTimer(const CreateInfo &data);
+		explicit PomodoroTimer(QObject *parent = nullptr) noexcept;
+		explicit PomodoroTimer(QObject *parent, const CreateInfo &data) noexcept;
 
 		[[nodiscard]] auto state() const noexcept -> State;
 		[[nodiscard]] auto phase() const noexcept -> Phase;
@@ -62,27 +61,27 @@ namespace impl
 
 	public slots:
 
-		void start();
-		void start(Phase phase);
-		void start(Phase phase, QTime duration);
-		void pause();
-		void reset();
-		void changeToNextPhase();
+		void start() noexcept;
+		void start(Phase phase) noexcept;
+		void start(Phase phase, QTime duration) noexcept;
+		void pause() noexcept;
+		void reset() noexcept;
+		void changeToNextPhase() noexcept;
 
-	    void toggleWorkPhaseAutoStart();
+	    void toggleWorkPhaseAutoStart() noexcept;
 
 		void setPhaseDuration(QTime duration) noexcept;
 		void setPhaseDuration(Phase phase, QTime duration) noexcept;
-		void setWorkDuration(QTime duration);
-		void setShortBreakDuration(QTime duration);
-		void setLongBreakDuration(QTime duration);
-	    void setSessionLength(u16 pomodoros);
+		void setWorkDuration(QTime duration) noexcept;
+		void setShortBreakDuration(QTime duration) noexcept;
+		void setLongBreakDuration(QTime duration) noexcept;
+	    void setSessionLength(u16 pomodoros) noexcept;
 
 	private slots:
 
-		void onTickUpdateRemainingTime();
-		void onPhaseDurationChangeUpdateRemainingTime(Phase phase, QTime duration);
-		void enablePomodoroAutoStart();
+		void onTickUpdateRemainingTime() noexcept;
+		void onPhaseDurationChangeUpdateRemainingTime(Phase phase, QTime duration) noexcept;
+		void enablePomodoroAutoStart() noexcept;
 
 		void setPhase(Phase phase) noexcept;
 		void setRemainingTime(QTime remainingTime) noexcept;
