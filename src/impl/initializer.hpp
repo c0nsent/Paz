@@ -4,6 +4,7 @@
 #include "impl/pomodoro-timer.hpp"
 #include "impl/settings-manager.hpp"
 
+#include <QSystemTrayIcon>
 #include <QGuiApplication>
 #include <QObject>
 
@@ -18,13 +19,14 @@ namespace impl
 
         explicit Initializer(QGuiApplication *app);
 
-        auto createPomodoroTimer() -> PomodoroTimer *;
-        auto createPomodoroStats() -> PomodoroStats *;
+        [[nodiscard]] auto createPomodoroTimer() -> PomodoroTimer *;
+        [[nodiscard]] auto createPomodoroStats() -> PomodoroStats *;
+        [[nodiscard]] auto createSystemTrayIcon() -> QSystemTrayIcon *;
 
 
     private:
 
-        SettingsManager m_settingsManager;
+        SettingsManager *m_settingsManager;
     };
 
 

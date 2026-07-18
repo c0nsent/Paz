@@ -47,5 +47,6 @@ target_link_libraries(PazApp PRIVATE
         Qt6::Quick
 )
 
+target_include_directories(PazApp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/impl)
 
 target_compile_features(PazApp PUBLIC cxx_std_23)

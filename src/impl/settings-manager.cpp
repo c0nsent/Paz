@@ -3,6 +3,9 @@
 
 namespace impl
 {
+    SettingsManager::SettingsManager(QGuiApplication *app) : QObject{app} {}
+
+
     auto SettingsManager::getInfoForPomodoroTimer() -> PomodoroTimer::CreateInfo
     {
         using enum PomodoroTimer::Phase;

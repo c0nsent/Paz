@@ -5,13 +5,12 @@
 #include <QDateTime>
 #include <QList>
 #include <QObject>
-#include <qqmlintegration.h>
 #include <QSettings>
+#include <QtQml/qqmlregistration.h>
 
 
 namespace impl
 {
-
     class PomodoroStatsEntry
     {
         Q_GADGET
@@ -42,6 +41,7 @@ namespace impl
         u16 m_pomodoros;
         QTime m_totalTime;
     };
+
 
     class PomodoroStats : public QObject
     {

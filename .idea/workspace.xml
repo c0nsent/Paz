@@ -60,12 +60,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cee2cdb-3c7b-4861-abf3-b850ac206474" name="Changes" comment="stuff">
-      <change afterPath="$PROJECT_DIR$/src/impl/initializer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/initializer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-timer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/initializer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/initializer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/initializer.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/initializer.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/pomodoro-stats.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/settings-manager.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/settings-manager.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
@@ -107,6 +107,9 @@
       <entry key="agent-panel" value="Gemini 3.1 Pro" />
     </selectedModels>
   </component>
+  <component name="CurrentDebugProfile">
+    <option name="debugProfileId" value="954aadb9-6a21-434b-8228-c67881b8deb1" />
+  </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="183" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
@@ -123,10 +126,11 @@
     <option name="INCOMING_COMMITS_CHECK_STRATEGY" value="FETCH" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="statistics" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -134,12 +138,23 @@
     &quot;assignee&quot;: &quot;c0nsent&quot;
   }
 }</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="396f19b3-c2ac-442c-baea-c4c295d2edc3" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/c0nsent/Paz.git&quot;,
     &quot;accountId&quot;: &quot;396f19b3-c2ac-442c-baea-c4c295d2edc3&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file:///usr/include/qt6/QtCore/QTimer" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///usr/include/qt6/QtCore/qdatetime.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///usr/include/qt6/QtCore/qobject.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///usr/include/qt6/QtCore/qtimer.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///usr/include/qt6/QtCore/qvariantlist.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:///usr/include/qt6/QtCore/qvarlengtharray.h" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="9taDxtzs" />
   </component>
@@ -220,7 +235,7 @@
   <component name="ProjectSessionTemplates">
     <option name="panelTemplate">
       <template>
-        <option name="modeId" value="Agent" />
+        <option name="modeId" value="Ask" />
         <option name="model">
           <model>
             <option name="modelType" value="builtin_id" />
@@ -241,6 +256,7 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;CMake Application.Paz.executor&quot;: &quot;Run&quot;,
     &quot;CMake Application.PazApp.executor&quot;: &quot;Run&quot;,
+    &quot;CidrDebugProfileConversion&quot;: &quot;true&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
@@ -256,7 +272,7 @@
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
     &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;statistics&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;git.auto.fetch.suggestion.counter&quot;: &quot;1&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/amitayus_/Projects/Test&quot;,
@@ -269,11 +285,6 @@
   }
 }</component>
   <component name="RunManager" selected="CMake Application.PazApp">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PazApp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="PazApp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Paz" RUN_TARGET_NAME="PazApp">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -355,6 +366,11 @@
       </method>
     </configuration>
     <configuration name="Paz_tooling" type="CMakeRunConfiguration" factoryName="Application" folderName="QtInternalTargets" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Paz" TARGET_NAME="Paz_tooling" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
