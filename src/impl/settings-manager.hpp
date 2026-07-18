@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QGuiApplication>
+
 #include "impl/pomodoro-timer.hpp"
 
 #include <QObject>
@@ -14,7 +16,7 @@ namespace impl
 
     public:
 
-        SettingsManager() = default;
+        explicit SettingsManager(QGuiApplication *app);
 
         [[nodiscard]] auto getInfoForPomodoroTimer() -> PomodoroTimer::CreateInfo;
 
