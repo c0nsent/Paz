@@ -6,6 +6,11 @@
 
 namespace impl
 {
+    PomodoroStatsEntry::PomodoroStatsEntry() : PomodoroStatsEntry{QDate::currentDate()} {}
+
+    PomodoroStatsEntry::PomodoroStatsEntry(const QDate date) : m_date{date}, m_pomodoros{0}, m_totalTime{0, 0} {}
+
+
     PomodoroStatsEntry::PomodoroStatsEntry(const QDate date, const u16 pomodoros, const QTime totalTime)
         : m_date{date}
         , m_pomodoros{pomodoros}
@@ -36,9 +41,11 @@ namespace impl
     PomodoroStats::PomodoroStats(QObject *parent)
         : QObject{parent}
         , m_settings{QGuiApplication::organizationDomain(), "Statistics"}
-        , m_stats{m_settings.beginReadArray("statistics")}
     {
-        for (i32 i{0}; i != m_stats.size(); i++)
+        const auto entryCount{ m_settings.beginReadArray("Entries") };
+        m_stats.reserve(entryCount);
+
+        for (i32 i{0}; i != entryCount; i++)
         {
             m_settings.setArrayIndex(i);
             m_stats.emplace_back(
@@ -55,16 +62,25 @@ namespace impl
     auto PomodoroStats::contains(const QDate date) const noexcept -> bool { return m_stats.contains(date); }
 
 
-    auto PomodoroStats::get(const QDate date) const noexcept -> PomodoroStatsEntry
+    auto PomodoroStats::get(const QDate date) const -> PomodoroStatsEntry
     {
         if (not contains(date)) return {};
+
+
 
         return m_stats[m_stats.indexOf(date)];
     }
 
     auto PomodoroStats::get(QDate begin, const QDate end) const -> QList<PomodoroStatsEntry>
     {
-        QList<PomodoroStatsEntry> result{begin.daysTo(end)};
+        QList<PomodoroStatsEntry> result;
+        const auto size{begin.daysTo(end)};
+
+        if (size <= 0) return result;
+
+        result.reserve(size);
+
+        //Если гарантировать хронологическое расположение объектов, то можно будет упростить эту хуйню
 
         for (; begin < end; begin = begin.addDays(1))
         {
@@ -75,7 +91,7 @@ namespace impl
         return result;
     }
 
-    auto PomodoroStats::size() const -> qsizetype { return m_stats.size(); }
+    auto PomodoroStats::size() const noexcept -> qsizetype { return m_stats.size(); }
 
 
     void PomodoroStats::addPomodoro(const QTime pomodoroDuration)

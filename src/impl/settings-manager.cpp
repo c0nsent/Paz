@@ -20,7 +20,7 @@ namespace impl
             .isAutoStartEnabled = m_settings.value(keys::AUTOSTART_NEW_POMODORO, defaults::AUTOSTART_NEW_POMODORO).toBool()
         };
         m_settings.endGroup();
-
+        
         return createInfo;
     }
 

@@ -8,7 +8,6 @@ ScrollView {
     id: root
     
     required property PomodoroTimer pomodoroTimer
-    required property SettingsManager settingsManager
     property color textColor: "#1e293b"
 
     contentWidth: availableWidth
@@ -52,9 +51,8 @@ ScrollView {
                         color: textColor
                     }
                     Switch {
-
-                        checked: settingsManager.isPomodoroAutoStarEnabled
-                        onToggled: settingsManager.togglePomodoroAutoStart()
+                        checked: pomodoroTimer.isAutoStartEnabled
+                        onToggled: pomodoroTimer.toggleWorkPhaseAutoStart()
                     }
                 }
 
@@ -74,7 +72,7 @@ ScrollView {
                         from: 1
                         to: 10
                         editable: true
-                        onValueModified: settingsManager.setSessionLength(value)
+                        onValueModified: pomodoroTimer.setSessionLength(value)
                     }
                 }
             }
@@ -118,10 +116,18 @@ ScrollView {
                         }
 
                         TextInput {
-                            text: modelData.duration / 60
+                            id: durationInput
+                            text: String(modelData.duration.hour * 60 + modelData.duration.minute)
                             maximumLength: 3
-                            validator: IntValidator{bottom: (60); top: (99);}
-                            onAccepted: settingsManager.setPhaseDuration(modelData.phase, Number(text) * 60)
+                            validator: IntValidator { bottom: 1; top: 999 }
+                            onAccepted: {
+                                var mins = parseInt(text)
+                                if (isNaN(mins)) return
+                                var hrs = Math.floor(mins / 60)
+                                var minsOnly = mins % 60
+                                var q = QTime(hrs, minsOnly)
+                                pomodoroTimer.setPhaseDuration(modelData.phase, q)
+                            }
                         }
                     }
                 }

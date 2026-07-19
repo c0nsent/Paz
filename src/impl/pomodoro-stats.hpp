@@ -22,7 +22,8 @@ namespace impl
 
     public:
 
-        PomodoroStatsEntry() = default;
+        PomodoroStatsEntry();
+        explicit PomodoroStatsEntry(QDate date);
         PomodoroStatsEntry(QDate date, u16 pomodoros, QTime totalTime);
         PomodoroStatsEntry(const PomodoroStatsEntry &) = default;
 
@@ -53,9 +54,9 @@ namespace impl
         explicit PomodoroStats(QObject *parent = nullptr);
 
         [[nodiscard]] auto contains(QDate date) const noexcept -> bool;
-        [[nodiscard]] auto get(QDate date) const noexcept -> PomodoroStatsEntry;
+        [[nodiscard]] auto get(QDate date) const -> PomodoroStatsEntry;
         [[nodiscard]] auto get(QDate begin, QDate end) const -> QList<PomodoroStatsEntry>;
-        [[nodiscard]] auto size() const -> qsizetype;
+        [[nodiscard]] auto size() const noexcept -> qsizetype;
 
     public slots:
 

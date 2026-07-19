@@ -68,7 +68,7 @@ namespace impl
 		void reset() noexcept;
 		void changeToNextPhase() noexcept;
 
-	    void toggleWorkPhaseAutoStart() noexcept;
+	    void togglePomodoroAutoStart() noexcept;
 
 		void setPhaseDuration(QTime duration) noexcept;
 		void setPhaseDuration(Phase phase, QTime duration) noexcept;
