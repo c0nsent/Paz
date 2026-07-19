@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+
 ApplicationWindow {
     id: window
     visible: true
@@ -16,7 +17,6 @@ ApplicationWindow {
     color: "#f8fafc"
 
     required property PomodoroTimer pomodoroTimer
-    required property SettingsManager settingsManager
     required property string appVersion
 
     readonly property color primaryColor: "#ef4444"
@@ -50,7 +50,6 @@ ApplicationWindow {
 
             SettingsPage {
                 pomodoroTimer: window.pomodoroTimer
-                settingsManager: window.settingsManager
                 textColor: window.textColor
             }
         }

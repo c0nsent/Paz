@@ -90,7 +90,16 @@ Item {
                 Label {
                     id: timeLabel
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: pomodoroTimer.timeRemainingString
+                    text: {
+                        var rt = pomodoroTimer.remainingTime
+                        if (!rt) return ""
+                        var h = (typeof rt.hour === 'function') ? rt.hour() : rt.hour
+                        var m = (typeof rt.minute === 'function') ? rt.minute() : rt.minute
+                        var s = (typeof rt.second === 'function') ? rt.second() : rt.second
+                        var mins = h * 60 + m
+                        function pad(n) { return n < 10 ? "0" + n : String(n) }
+                        return pad(mins) + ":" + pad(s)
+                    }
                     font.pixelSize: 56
                     font.family: "Monospace"
                     font.weight: Font.Bold

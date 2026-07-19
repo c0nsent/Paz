@@ -136,7 +136,7 @@ namespace impl
         emit phaseChanged(m_phase);
     }
 
-    void PomodoroTimer::toggleWorkPhaseAutoStart() noexcept
+    void PomodoroTimer::togglePomodoroAutoStart() noexcept
     {
         m_isWorkPhaseAutoStartEnabled = not m_isWorkPhaseAutoStartEnabled;
 
