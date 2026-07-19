@@ -36,7 +36,7 @@ namespace impl
 
     auto Initializer::createSystemTrayIcon() -> QSystemTrayIcon *
     {
-        auto systemTray{  new(std::nothrow) QSystemTrayIcon{this->parent()} };
+        auto systemTray{new(std::nothrow) QSystemTrayIcon{this->parent()}};
 
         if (systemTray == nullptr) return systemTray;
 
